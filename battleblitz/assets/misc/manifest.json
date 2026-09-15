@@ -1,0 +1,19 @@
+{
+ "cast": "misc",
+ "palettes": {},
+ "members": [
+  {
+   "num": 1,
+   "type": "bitmap",
+   "name": "missing_member",
+   "file": "001_missing_member.png",
+   "width": 5,
+   "height": 5,
+   "regX": 2,
+   "regY": 2,
+   "bpp": 8,
+   "palette": "rainbow",
+   "bitd": 11673
+  }
+ ]
+}

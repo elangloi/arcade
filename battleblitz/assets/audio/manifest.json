@@ -1,0 +1,279 @@
+{
+ "cast": "audio",
+ "palettes": {},
+ "members": [
+  {
+   "num": 1,
+   "type": "sound",
+   "name": "sfx_summon_titan",
+   "file": "snd/001_sfx_summon_titan.wav",
+   "bytes": 95314
+  },
+  {
+   "num": 2,
+   "type": "sound",
+   "name": "sfx_blocked_attack",
+   "file": "snd/002_sfx_blocked_attack.wav",
+   "bytes": 9017
+  },
+  {
+   "num": 41,
+   "type": "sound",
+   "name": "sfx_titles_round",
+   "file": "snd/041_sfx_titles_round.wav",
+   "bytes": 39331
+  },
+  {
+   "num": 42,
+   "type": "sound",
+   "name": "sfx_walking_big_person_1",
+   "file": "snd/042_sfx_walking_big_person_1.wav",
+   "bytes": 22354
+  },
+  {
+   "num": 43,
+   "type": "sound",
+   "name": "sfx_walking_big_person_2",
+   "file": "snd/043_sfx_walking_big_person_2.wav",
+   "bytes": 15831
+  },
+  {
+   "num": 44,
+   "type": "sound",
+   "name": "sfx_walking_medium_person_1",
+   "file": "snd/044_sfx_walking_medium_person_1.wav",
+   "bytes": 12346
+  },
+  {
+   "num": 45,
+   "type": "sound",
+   "name": "sfx_walking_medium_person_2",
+   "file": "snd/045_sfx_walking_medium_person_2.wav",
+   "bytes": 11890
+  },
+  {
+   "num": 46,
+   "type": "sound",
+   "name": "sfx_walking_small_person_1",
+   "file": "snd/046_sfx_walking_small_person_1.wav",
+   "bytes": 8050
+  },
+  {
+   "num": 47,
+   "type": "sound",
+   "name": "sfx_walking_small_person_2",
+   "file": "snd/047_sfx_walking_small_person_2.wav",
+   "bytes": 6218
+  },
+  {
+   "num": 48,
+   "type": "sound",
+   "name": "sfx_wall_slam",
+   "file": "snd/048_sfx_wall_slam.wav",
+   "bytes": 17922
+  },
+  {
+   "num": 49,
+   "type": "sound",
+   "name": "music_keyboard_loop",
+   "file": "snd/049_music_keyboard_loop.wav",
+   "bytes": 129363
+  },
+  {
+   "num": 50,
+   "type": "sound",
+   "name": "music_loop2",
+   "file": "snd/050_music_loop2.wav",
+   "bytes": 250771
+  },
+  {
+   "num": 51,
+   "type": "sound",
+   "name": "music_loop3",
+   "file": "snd/051_music_loop3.wav",
+   "bytes": 500119
+  },
+  {
+   "num": 52,
+   "type": "sound",
+   "name": "music_loop4",
+   "file": "snd/052_music_loop4.wav",
+   "bytes": 192507
+  },
+  {
+   "num": 53,
+   "type": "sound",
+   "name": "music_loop5",
+   "file": "snd/053_music_loop5.wav",
+   "bytes": 162862
+  },
+  {
+   "num": 55,
+   "type": "sound",
+   "name": "music_teen_loop",
+   "file": "snd/055_music_teen_loop.wav",
+   "bytes": 256529
+  },
+  {
+   "num": 56,
+   "type": "sound",
+   "name": "music_whole_song",
+   "file": "snd/056_music_whole_song.wav",
+   "bytes": 1412458
+  },
+  {
+   "num": 57,
+   "type": "sound",
+   "name": "sfx_characterswitch2",
+   "file": "snd/057_sfx_characterswitch2.wav",
+   "bytes": 41426
+  },
+  {
+   "num": 58,
+   "type": "sound",
+   "name": "sfx_characterswitch3",
+   "file": "snd/058_sfx_characterswitch3.wav",
+   "bytes": 30610
+  },
+  {
+   "num": 60,
+   "type": "sound",
+   "name": "sfx_time_warning",
+   "file": "snd/060_sfx_time_warning.wav",
+   "bytes": 6321
+  },
+  {
+   "num": 61,
+   "type": "sound",
+   "name": "sfx_interface_misclick",
+   "file": "snd/061_sfx_interface_misclick.wav",
+   "bytes": 9042
+  },
+  {
+   "num": 62,
+   "type": "sound",
+   "name": "sfx_interface_mousedowncharacterswitch",
+   "file": "snd/062_sfx_interface_mousedowncharacterswitch.wav",
+   "bytes": 15225
+  },
+  {
+   "num": 63,
+   "type": "sound",
+   "name": "sfx_interface_mousedownfight",
+   "file": "snd/063_sfx_interface_mousedownfight.wav",
+   "bytes": 38433
+  },
+  {
+   "num": 64,
+   "type": "sound",
+   "name": "sfx_interface_mouseover",
+   "file": "snd/064_sfx_interface_mouseover.wav",
+   "bytes": 7558
+  },
+  {
+   "num": 65,
+   "type": "sound",
+   "name": "sfx_interface_mouseovercharacters",
+   "file": "snd/065_sfx_interface_mouseovercharacters.wav",
+   "bytes": 5308
+  },
+  {
+   "num": 66,
+   "type": "sound",
+   "name": "sfx_jump_0",
+   "file": "snd/066_sfx_jump_0.wav",
+   "bytes": 9852
+  },
+  {
+   "num": 67,
+   "type": "sound",
+   "name": "sfx_jump_1",
+   "file": "snd/067_sfx_jump_1.wav",
+   "bytes": 21458
+  },
+  {
+   "num": 68,
+   "type": "sound",
+   "name": "sfx_jump_2",
+   "file": "snd/068_sfx_jump_2.wav",
+   "bytes": 15890
+  },
+  {
+   "num": 69,
+   "type": "sound",
+   "name": "sfx_kick_block",
+   "file": "snd/069_sfx_kick_block.wav",
+   "bytes": 9017
+  },
+  {
+   "num": 70,
+   "type": "sound",
+   "name": "sfx_kick_landing",
+   "file": "snd/070_sfx_kick_landing.wav",
+   "bytes": 10816
+  },
+  {
+   "num": 71,
+   "type": "sound",
+   "name": "sfx_kick_woosh",
+   "file": "snd/071_sfx_kick_woosh.wav",
+   "bytes": 10129
+  },
+  {
+   "num": 72,
+   "type": "sound",
+   "name": "sfx_landing_big_person",
+   "file": "snd/072_sfx_landing_big_person.wav",
+   "bytes": 19346
+  },
+  {
+   "num": 73,
+   "type": "sound",
+   "name": "sfx_landing_small_person",
+   "file": "snd/073_sfx_landing_small_person.wav",
+   "bytes": 21714
+  },
+  {
+   "num": 74,
+   "type": "sound",
+   "name": "sfx_punch_block",
+   "file": "snd/074_sfx_punch_block.wav",
+   "bytes": 8014
+  },
+  {
+   "num": 75,
+   "type": "sound",
+   "name": "sfx_punch_landing",
+   "file": "snd/075_sfx_punch_landing.wav",
+   "bytes": 15307
+  },
+  {
+   "num": 76,
+   "type": "sound",
+   "name": "sfx_punch_woosh",
+   "file": "snd/076_sfx_punch_woosh.wav",
+   "bytes": 10600
+  },
+  {
+   "num": 77,
+   "type": "sound",
+   "name": "sfx_slump_to_floor",
+   "file": "snd/077_sfx_slump_to_floor.wav",
+   "bytes": 14936
+  },
+  {
+   "num": 78,
+   "type": "sound",
+   "name": "sfx_titles_fight",
+   "file": "snd/078_sfx_titles_fight.wav",
+   "bytes": 82534
+  },
+  {
+   "num": 79,
+   "type": "sound",
+   "name": "sfx_titles_ko",
+   "file": "snd/079_sfx_titles_ko.wav",
+   "bytes": 130545
+  }
+ ]
+}

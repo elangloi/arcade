@@ -1,0 +1,1901 @@
+{
+ "cast": "Lingo",
+ "palettes": {},
+ "members": [
+  {
+   "num": 1,
+   "type": "bitmap",
+   "name": ">> audio event"
+  },
+  {
+   "num": 2,
+   "type": "bitmap",
+   "name": ">> reserved for sprite manager"
+  },
+  {
+   "num": 3,
+   "type": "bitmap",
+   "name": ">> Screen_Controls"
+  },
+  {
+   "num": 4,
+   "type": "bitmap",
+   "name": ">> Screen_Game"
+  },
+  {
+   "num": 5,
+   "type": "bitmap",
+   "name": ">> Screen_Intro"
+  },
+  {
+   "num": 6,
+   "type": "bitmap",
+   "name": ">> Screen_SelectFighter"
+  },
+  {
+   "num": 7,
+   "type": "bitmap",
+   "name": ">> Screen_Title"
+  },
+  {
+   "num": 8,
+   "type": "bitmap",
+   "name": ">> Screen_Versus"
+  },
+  {
+   "num": 9,
+   "type": "script",
+   "name": "Behavior_AudioEvent"
+  },
+  {
+   "num": 10,
+   "type": "script",
+   "name": "Behavior_ChangeRoundNumMember"
+  },
+  {
+   "num": 11,
+   "type": "script",
+   "name": "Behavior_ChangeWinBGLoop"
+  },
+  {
+   "num": 12,
+   "type": "script",
+   "name": "Behavior_ChangeWinnerName"
+  },
+  {
+   "num": 13,
+   "type": "script",
+   "name": "Behavior_ControlsScreen"
+  },
+  {
+   "num": 14,
+   "type": "script",
+   "name": "Behavior_ControlsScreenBackButton"
+  },
+  {
+   "num": 15,
+   "type": "script",
+   "name": "Behavior_GameScreen"
+  },
+  {
+   "num": 16,
+   "type": "script",
+   "name": "Behavior_IntroScreen"
+  },
+  {
+   "num": 17,
+   "type": "script",
+   "name": "Behavior_IntroScreenDiffEasyButton"
+  },
+  {
+   "num": 18,
+   "type": "script",
+   "name": "Behavior_IntroScreenDiffExperButton"
+  },
+  {
+   "num": 19,
+   "type": "script",
+   "name": "Behavior_IntroScreenDiffInterButton"
+  },
+  {
+   "num": 20,
+   "type": "script",
+   "name": "Behavior_IntroScreenNextStepButton"
+  },
+  {
+   "num": 21,
+   "type": "script",
+   "name": "Behavior_SelectFighterScreen"
+  },
+  {
+   "num": 22,
+   "type": "script",
+   "name": "Behavior_SelectScreenChangeEnemyBG"
+  },
+  {
+   "num": 23,
+   "type": "script",
+   "name": "Behavior_SelectScreenChangeEnemyFace"
+  },
+  {
+   "num": 24,
+   "type": "script",
+   "name": "Behavior_SelectScreenChangeEnemyFigure"
+  },
+  {
+   "num": 25,
+   "type": "script",
+   "name": "Behavior_SelectScreenControlButton"
+  },
+  {
+   "num": 26,
+   "type": "script",
+   "name": "Behavior_SelectScreenEnemyButton"
+  },
+  {
+   "num": 27,
+   "type": "script",
+   "name": "Behavior_SelectScreenFightButton"
+  },
+  {
+   "num": 28,
+   "type": "script",
+   "name": "Behavior_SelectScreenPlayerButton"
+  },
+  {
+   "num": 29,
+   "type": "script",
+   "name": "Behavior_SetLocZ"
+  },
+  {
+   "num": 30,
+   "type": "script",
+   "name": "Behavior_TitleScreen"
+  },
+  {
+   "num": 31,
+   "type": "script",
+   "name": "Behavior_TitleScreenStartButton"
+  },
+  {
+   "num": 32,
+   "type": "script",
+   "name": "Behavior_VersusScreen"
+  },
+  {
+   "num": 33,
+   "type": "script",
+   "name": "Behavior_WinScreenBackButton"
+  },
+  {
+   "num": 34,
+   "type": "script",
+   "name": "Class_Actor"
+  },
+  {
+   "num": 35,
+   "type": "script",
+   "name": "Class_AIAdapter"
+  },
+  {
+   "num": 36,
+   "type": "bitmap",
+   "name": ">> Screen_Win"
+  },
+  {
+   "num": 37,
+   "type": "script",
+   "name": "Class_AnimatedActor"
+  },
+  {
+   "num": 38,
+   "type": "script",
+   "name": "Class_Animation"
+  },
+  {
+   "num": 39,
+   "type": "script",
+   "name": "Class_AssetsAudio"
+  },
+  {
+   "num": 40,
+   "type": "script",
+   "name": "Class_AssetsBeastboy"
+  },
+  {
+   "num": 41,
+   "type": "script",
+   "name": "Class_AssetsCinderblock"
+  },
+  {
+   "num": 42,
+   "type": "script",
+   "name": "Class_AssetsCyborg"
+  },
+  {
+   "num": 43,
+   "type": "script",
+   "name": "_ClassDefinitions"
+  },
+  {
+   "num": 44,
+   "type": "script",
+   "name": "Class_AssetsGameMessages"
+  },
+  {
+   "num": 45,
+   "type": "script",
+   "name": "Class_AssetsGizmo"
+  },
+  {
+   "num": 46,
+   "type": "script",
+   "name": "Class_AssetsHUD"
+  },
+  {
+   "num": 47,
+   "type": "script",
+   "name": "Class_AssetsJinx"
+  },
+  {
+   "num": 48,
+   "type": "script",
+   "name": "Class_AssetsMammoth"
+  },
+  {
+   "num": 49,
+   "type": "script",
+   "name": "Class_AssetsPlasmus"
+  },
+  {
+   "num": 50,
+   "type": "script",
+   "name": "Class_AssetsRaven"
+  },
+  {
+   "num": 51,
+   "type": "script",
+   "name": "Class_AssetsRobin"
+  },
+  {
+   "num": 52,
+   "type": "script",
+   "name": "Class_AssetsStarfire"
+  },
+  {
+   "num": 53,
+   "type": "script",
+   "name": "Class_AudioManager"
+  },
+  {
+   "num": 54,
+   "type": "script",
+   "name": "Class_BlockedAttackEffect"
+  },
+  {
+   "num": 55,
+   "type": "script",
+   "name": "Class_Cinderblock"
+  },
+  {
+   "num": 56,
+   "type": "script",
+   "name": "Class_CinderblockAI"
+  },
+  {
+   "num": 57,
+   "type": "script",
+   "name": "Behavior_WinScreen"
+  },
+  {
+   "num": 58,
+   "type": "script",
+   "name": "Class_CinderblockBackhand"
+  },
+  {
+   "num": 59,
+   "type": "script",
+   "name": "Class_CinderblockBlock"
+  },
+  {
+   "num": 60,
+   "type": "script",
+   "name": "Class_CinderblockDefeat"
+  },
+  {
+   "num": 61,
+   "type": "script",
+   "name": "Class_CinderblockDoublePunch"
+  },
+  {
+   "num": 62,
+   "type": "script",
+   "name": "Class_CinderblockEnergyEffect"
+  },
+  {
+   "num": 63,
+   "type": "script",
+   "name": "Class_CinderblockKeyAdapter"
+  },
+  {
+   "num": 64,
+   "type": "script",
+   "name": "Class_CinderblockKick"
+  },
+  {
+   "num": 65,
+   "type": "script",
+   "name": "Class_CinderblockKnockDown"
+  },
+  {
+   "num": 66,
+   "type": "script",
+   "name": "Class_CinderblockPunch"
+  },
+  {
+   "num": 67,
+   "type": "script",
+   "name": "Class_CinderblockStand"
+  },
+  {
+   "num": 68,
+   "type": "script",
+   "name": "Class_CinderblockStomp"
+  },
+  {
+   "num": 69,
+   "type": "script",
+   "name": "Class_CinderblockStun"
+  },
+  {
+   "num": 70,
+   "type": "script",
+   "name": "Class_CinderblockWalkBackward"
+  },
+  {
+   "num": 71,
+   "type": "script",
+   "name": "Class_CinderblockWalkForward"
+  },
+  {
+   "num": 72,
+   "type": "script",
+   "name": "Class_Cyborg"
+  },
+  {
+   "num": 73,
+   "type": "script",
+   "name": "Class_CyborgBlock"
+  },
+  {
+   "num": 74,
+   "type": "script",
+   "name": "Class_CyborgDefeat"
+  },
+  {
+   "num": 75,
+   "type": "script",
+   "name": "Class_CyborgExplodeEffect"
+  },
+  {
+   "num": 76,
+   "type": "script",
+   "name": "Class_CyborgFall"
+  },
+  {
+   "num": 77,
+   "type": "script",
+   "name": "Class_CyborgJump"
+  },
+  {
+   "num": 78,
+   "type": "script",
+   "name": "Class_CyborgKeyAdapter"
+  },
+  {
+   "num": 79,
+   "type": "script",
+   "name": "Class_CyborgKick"
+  },
+  {
+   "num": 80,
+   "type": "script",
+   "name": "Class_CyborgKnockDown"
+  },
+  {
+   "num": 81,
+   "type": "script",
+   "name": "Class_CyborgPunch"
+  },
+  {
+   "num": 82,
+   "type": "script",
+   "name": "Class_CyborgStand"
+  },
+  {
+   "num": 83,
+   "type": "script",
+   "name": "Class_CyborgStun"
+  },
+  {
+   "num": 84,
+   "type": "script",
+   "name": "Class_CyborgWalkBackward"
+  },
+  {
+   "num": 85,
+   "type": "script",
+   "name": "Class_CyborgWalkForward"
+  },
+  {
+   "num": 86,
+   "type": "script",
+   "name": "Class_CyborgPowerUpEffect"
+  },
+  {
+   "num": 87,
+   "type": "script",
+   "name": "Class_CinderblockWaveProjectile"
+  },
+  {
+   "num": 88,
+   "type": "script",
+   "name": "Class_CollidableActor"
+  },
+  {
+   "num": 89,
+   "type": "script",
+   "name": "Class_ControlsScreen"
+  },
+  {
+   "num": 90,
+   "type": "script",
+   "name": "Class_DustFallEffect"
+  },
+  {
+   "num": 91,
+   "type": "script",
+   "name": "Class_DustHugeFallEffect"
+  },
+  {
+   "num": 92,
+   "type": "script",
+   "name": "Class_DustJumpEffect"
+  },
+  {
+   "num": 93,
+   "type": "script",
+   "name": "Class_DustPuffEffect"
+  },
+  {
+   "num": 94,
+   "type": "script",
+   "name": "Class_DustPushEffect"
+  },
+  {
+   "num": 95,
+   "type": "script",
+   "name": "Class_DustSkidEffect"
+  },
+  {
+   "num": 96,
+   "type": "script",
+   "name": "Class_Effect"
+  },
+  {
+   "num": 97,
+   "type": "script",
+   "name": "Class_Fighter"
+  },
+  {
+   "num": 98,
+   "type": "script",
+   "name": "Class_GameScreen"
+  },
+  {
+   "num": 99,
+   "type": "script",
+   "name": "Class_GameTimer"
+  },
+  {
+   "num": 100,
+   "type": "script",
+   "name": "Class_Gizmo"
+  },
+  {
+   "num": 101,
+   "type": "script",
+   "name": "Class_GizmoAI"
+  },
+  {
+   "num": 102,
+   "type": "script",
+   "name": "Class_CyborgCannonBurstEffect"
+  },
+  {
+   "num": 103,
+   "type": "script",
+   "name": "Class_GizmoAirBlock"
+  },
+  {
+   "num": 104,
+   "type": "script",
+   "name": "Class_GizmoAirCannon"
+  },
+  {
+   "num": 105,
+   "type": "script",
+   "name": "Class_GizmoAirJump"
+  },
+  {
+   "num": 106,
+   "type": "script",
+   "name": "Class_GizmoAirMissile"
+  },
+  {
+   "num": 107,
+   "type": "script",
+   "name": "Class_GizmoAirStun"
+  },
+  {
+   "num": 108,
+   "type": "script",
+   "name": "Class_GizmoBlock"
+  },
+  {
+   "num": 109,
+   "type": "script",
+   "name": "Class_GizmoCannon"
+  },
+  {
+   "num": 110,
+   "type": "script",
+   "name": "Class_GizmoCannonBlastEffect"
+  },
+  {
+   "num": 111,
+   "type": "script",
+   "name": "Class_GizmoCannonProjectile"
+  },
+  {
+   "num": 112,
+   "type": "script",
+   "name": "Class_GizmoDefeat"
+  },
+  {
+   "num": 113,
+   "type": "script",
+   "name": "Class_GizmoExplodeEffect"
+  },
+  {
+   "num": 114,
+   "type": "script",
+   "name": "Class_GizmoFlyBackward"
+  },
+  {
+   "num": 115,
+   "type": "script",
+   "name": "Class_GizmoFlyForward"
+  },
+  {
+   "num": 116,
+   "type": "script",
+   "name": "Class_GizmoHighAirMissile"
+  },
+  {
+   "num": 117,
+   "type": "script",
+   "name": "Class_GizmoHighMissileEffect"
+  },
+  {
+   "num": 118,
+   "type": "script",
+   "name": "Class_GizmoHighMissileProjectile"
+  },
+  {
+   "num": 119,
+   "type": "script",
+   "name": "Class_CyborgCannonProjectile"
+  },
+  {
+   "num": 120,
+   "type": "script",
+   "name": "Class_GizmoHover"
+  },
+  {
+   "num": 121,
+   "type": "script",
+   "name": "Class_GizmoJump"
+  },
+  {
+   "num": 122,
+   "type": "script",
+   "name": "Class_GizmoKeyAdapter"
+  },
+  {
+   "num": 123,
+   "type": "script",
+   "name": "Class_GizmoKnockDown"
+  },
+  {
+   "num": 124,
+   "type": "script",
+   "name": "Class_GizmoLand"
+  },
+  {
+   "num": 125,
+   "type": "script",
+   "name": "Class_CyborgCannonBurstLoopEffect"
+  },
+  {
+   "num": 126,
+   "type": "script",
+   "name": "Class_GizmoMissileEffect"
+  },
+  {
+   "num": 127,
+   "type": "script",
+   "name": "Class_GizmoMissileProjectile"
+  },
+  {
+   "num": 128,
+   "type": "script",
+   "name": "Class_CyborgDiagLinesEffect"
+  },
+  {
+   "num": 129,
+   "type": "script",
+   "name": "Class_GizmoStand"
+  },
+  {
+   "num": 130,
+   "type": "script",
+   "name": "Class_GizmoStun"
+  },
+  {
+   "num": 131,
+   "type": "script",
+   "name": "Class_GizmoTakeOff"
+  },
+  {
+   "num": 132,
+   "type": "script",
+   "name": "Class_GizmoWalkBackward"
+  },
+  {
+   "num": 133,
+   "type": "script",
+   "name": "Class_GizmoWalkForward"
+  },
+  {
+   "num": 134,
+   "type": "script",
+   "name": "Class_Globals"
+  },
+  {
+   "num": 135,
+   "type": "script",
+   "name": "Class_HitHorizBurstEffect"
+  },
+  {
+   "num": 136,
+   "type": "script",
+   "name": "Class_HitStarBurstEffect"
+  },
+  {
+   "num": 137,
+   "type": "script",
+   "name": "Class_HUD"
+  },
+  {
+   "num": 138,
+   "type": "script",
+   "name": "Class_HUDClock"
+  },
+  {
+   "num": 139,
+   "type": "script",
+   "name": "Class_HUDHealthBar"
+  },
+  {
+   "num": 140,
+   "type": "script",
+   "name": "Class_IndexedAnimation"
+  },
+  {
+   "num": 141,
+   "type": "script",
+   "name": "Class_IntroScreen"
+  },
+  {
+   "num": 142,
+   "type": "script",
+   "name": "Class_Jinx"
+  },
+  {
+   "num": 143,
+   "type": "script",
+   "name": "Class_JinxAI"
+  },
+  {
+   "num": 144,
+   "type": "script",
+   "name": "Class_CyborgCyberStomp"
+  },
+  {
+   "num": 145,
+   "type": "script",
+   "name": "Class_JinxBallExplodeEffect"
+  },
+  {
+   "num": 146,
+   "type": "script",
+   "name": "Class_JinxBallProjectile"
+  },
+  {
+   "num": 147,
+   "type": "script",
+   "name": "Class_JinxBlock"
+  },
+  {
+   "num": 148,
+   "type": "script",
+   "name": "Class_JinxConjureEffect"
+  },
+  {
+   "num": 149,
+   "type": "script",
+   "name": "Class_JinxDefeat"
+  },
+  {
+   "num": 150,
+   "type": "script",
+   "name": "Class_JinxEnergyBall"
+  },
+  {
+   "num": 151,
+   "type": "script",
+   "name": "Class_JinxEnergySpin"
+  },
+  {
+   "num": 152,
+   "type": "script",
+   "name": "Class_JinxEnergySpinEffect"
+  },
+  {
+   "num": 153,
+   "type": "script",
+   "name": "Class_JinxFistEffect"
+  },
+  {
+   "num": 154,
+   "type": "script",
+   "name": "Class_JinxJump"
+  },
+  {
+   "num": 155,
+   "type": "script",
+   "name": "Class_JinxKeyAdapter"
+  },
+  {
+   "num": 156,
+   "type": "script",
+   "name": "Class_JinxKick"
+  },
+  {
+   "num": 157,
+   "type": "script",
+   "name": "Class_JinxKnockDown"
+  },
+  {
+   "num": 158,
+   "type": "script",
+   "name": "Class_JinxPowerKick"
+  },
+  {
+   "num": 159,
+   "type": "script",
+   "name": "Class_JinxPunch"
+  },
+  {
+   "num": 160,
+   "type": "script",
+   "name": "Class_JinxPunchEffect"
+  },
+  {
+   "num": 161,
+   "type": "script",
+   "name": "Class_JinxStand"
+  },
+  {
+   "num": 162,
+   "type": "script",
+   "name": "Class_JinxStun"
+  },
+  {
+   "num": 163,
+   "type": "script",
+   "name": "Class_JinxWalkBackward"
+  },
+  {
+   "num": 164,
+   "type": "script",
+   "name": "Class_JinxWalkForward"
+  },
+  {
+   "num": 165,
+   "type": "script",
+   "name": "Class_KeyAdapter"
+  },
+  {
+   "num": 166,
+   "type": "script",
+   "name": "Class_KeyCombo"
+  },
+  {
+   "num": 167,
+   "type": "script",
+   "name": "Class_KeyManager"
+  },
+  {
+   "num": 168,
+   "type": "script",
+   "name": "Class_LoopedAnimation"
+  },
+  {
+   "num": 169,
+   "type": "script",
+   "name": "Class_Main"
+  },
+  {
+   "num": 170,
+   "type": "script",
+   "name": "Class_Mammoth"
+  },
+  {
+   "num": 171,
+   "type": "script",
+   "name": "Class_MammothAI"
+  },
+  {
+   "num": 172,
+   "type": "script",
+   "name": "Class_CyborgRingEffect"
+  },
+  {
+   "num": 173,
+   "type": "script",
+   "name": "Class_MammothBlock"
+  },
+  {
+   "num": 174,
+   "type": "script",
+   "name": "Class_MammothDefeat"
+  },
+  {
+   "num": 175,
+   "type": "script",
+   "name": "Class_MammothGroundPunch"
+  },
+  {
+   "num": 176,
+   "type": "script",
+   "name": "Class_MammothJump"
+  },
+  {
+   "num": 177,
+   "type": "script",
+   "name": "Class_MammothJumpPunch"
+  },
+  {
+   "num": 178,
+   "type": "script",
+   "name": "Class_MammothKeyAdapter"
+  },
+  {
+   "num": 179,
+   "type": "script",
+   "name": "Class_MammothKnockDown"
+  },
+  {
+   "num": 180,
+   "type": "script",
+   "name": "Class_MammothPunch"
+  },
+  {
+   "num": 181,
+   "type": "script",
+   "name": "Class_MammothShoulderBarge"
+  },
+  {
+   "num": 182,
+   "type": "script",
+   "name": "Class_MammothStand"
+  },
+  {
+   "num": 183,
+   "type": "script",
+   "name": "Class_MammothStun"
+  },
+  {
+   "num": 184,
+   "type": "script",
+   "name": "Class_MammothWalkBackward"
+  },
+  {
+   "num": 185,
+   "type": "script",
+   "name": "Class_MammothWalkForward"
+  },
+  {
+   "num": 186,
+   "type": "script",
+   "name": "Class_CyborgFlareEffect"
+  },
+  {
+   "num": 187,
+   "type": "script",
+   "name": "Class_MammothWaveProjectile"
+  },
+  {
+   "num": 188,
+   "type": "script",
+   "name": "Class_ManualAnimation"
+  },
+  {
+   "num": 189,
+   "type": "script",
+   "name": "Class_MemberLoader"
+  },
+  {
+   "num": 190,
+   "type": "script",
+   "name": "Class_Move"
+  },
+  {
+   "num": 191,
+   "type": "script",
+   "name": "Class_NetPreloader"
+  },
+  {
+   "num": 192,
+   "type": "script",
+   "name": "Class_ObjectGroup"
+  },
+  {
+   "num": 193,
+   "type": "script",
+   "name": "Class_ObjectTable"
+  },
+  {
+   "num": 194,
+   "type": "script",
+   "name": "Class_Overlay"
+  },
+  {
+   "num": 195,
+   "type": "script",
+   "name": "Class_PlayOnceAnimation"
+  },
+  {
+   "num": 196,
+   "type": "script",
+   "name": "Class_Projectile"
+  },
+  {
+   "num": 197,
+   "type": "script",
+   "name": "Class_Robin"
+  },
+  {
+   "num": 198,
+   "type": "script",
+   "name": "Class_RobinBlock"
+  },
+  {
+   "num": 199,
+   "type": "script",
+   "name": "Class_LightColumnEffect"
+  },
+  {
+   "num": 200,
+   "type": "script",
+   "name": "Class_RobinBombProjectile"
+  },
+  {
+   "num": 201,
+   "type": "script",
+   "name": "Class_RobinBombThrow"
+  },
+  {
+   "num": 202,
+   "type": "script",
+   "name": "Class_RobinDefeat"
+  },
+  {
+   "num": 203,
+   "type": "script",
+   "name": "Class_RobinDiagJumpKick"
+  },
+  {
+   "num": 204,
+   "type": "script",
+   "name": "Class_RobinDiscExplodeEffect"
+  },
+  {
+   "num": 205,
+   "type": "script",
+   "name": "Class_RobinDiscProjectile"
+  },
+  {
+   "num": 206,
+   "type": "script",
+   "name": "Class_RobinDiscThrow"
+  },
+  {
+   "num": 207,
+   "type": "script",
+   "name": "Class_RobinFall"
+  },
+  {
+   "num": 208,
+   "type": "script",
+   "name": "Class_RobinFlyingKick"
+  },
+  {
+   "num": 209,
+   "type": "script",
+   "name": "Class_RobinJump"
+  },
+  {
+   "num": 210,
+   "type": "script",
+   "name": "Class_RobinKeyAdapter"
+  },
+  {
+   "num": 211,
+   "type": "script",
+   "name": "Class_RobinKick"
+  },
+  {
+   "num": 212,
+   "type": "script",
+   "name": "Class_RobinKnockDown"
+  },
+  {
+   "num": 213,
+   "type": "script",
+   "name": "Class_RobinPunch"
+  },
+  {
+   "num": 214,
+   "type": "script",
+   "name": "Class_RobinStand"
+  },
+  {
+   "num": 215,
+   "type": "script",
+   "name": "Class_RobinStun"
+  },
+  {
+   "num": 216,
+   "type": "script",
+   "name": "Class_RobinWalkBackward"
+  },
+  {
+   "num": 217,
+   "type": "script",
+   "name": "Class_RobinWalkForward"
+  },
+  {
+   "num": 218,
+   "type": "script",
+   "name": "Class_Scene"
+  },
+  {
+   "num": 219,
+   "type": "script",
+   "name": "Class_Screen"
+  },
+  {
+   "num": 220,
+   "type": "script",
+   "name": "Class_SelectFighterScreen"
+  },
+  {
+   "num": 221,
+   "type": "script",
+   "name": "Class_Sequence"
+  },
+  {
+   "num": 222,
+   "type": "script",
+   "name": "Class_Shadow"
+  },
+  {
+   "num": 223,
+   "type": "script",
+   "name": "Class_SpriteManager"
+  },
+  {
+   "num": 224,
+   "type": "script",
+   "name": "Class_StaticOverlay"
+  },
+  {
+   "num": 225,
+   "type": "script",
+   "name": "Class_TitleScreen"
+  },
+  {
+   "num": 226,
+   "type": "script",
+   "name": "Class_Utility"
+  },
+  {
+   "num": 227,
+   "type": "script",
+   "name": "Class_VersusScreen"
+  },
+  {
+   "num": 228,
+   "type": "script",
+   "name": "Class_WhiteBurstEffect"
+  },
+  {
+   "num": 229,
+   "type": "script",
+   "name": "Class_WhiteBurstReverseEffect"
+  },
+  {
+   "num": 230,
+   "type": "script",
+   "name": "DEBUG"
+  },
+  {
+   "num": 231,
+   "type": "script",
+   "name": "Frame_BackToFighterSelectScreen"
+  },
+  {
+   "num": 232,
+   "type": "script",
+   "name": "Frame_CNLink_JumpToIntroScreen"
+  },
+  {
+   "num": 233,
+   "type": "script",
+   "name": "Frame_CNLink_JumpToTitleScreen"
+  },
+  {
+   "num": 234,
+   "type": "script",
+   "name": "Frame_LoopHere"
+  },
+  {
+   "num": 235,
+   "type": "script",
+   "name": "Global_Main"
+  },
+  {
+   "num": 236,
+   "type": "script",
+   "name": "Class_ControlsPopUp"
+  },
+  {
+   "num": 237,
+   "type": "script",
+   "name": "Behavior_ControlPopupMenuButton"
+  },
+  {
+   "num": 238,
+   "type": "script",
+   "name": "Behavior_ControlPopupFightButton"
+  },
+  {
+   "num": 239,
+   "type": "script",
+   "name": "Class_Raven"
+  },
+  {
+   "num": 240,
+   "type": "script",
+   "name": "Class_RavenBlock"
+  },
+  {
+   "num": 241,
+   "type": "script",
+   "name": "Class_RavenDefeat"
+  },
+  {
+   "num": 242,
+   "type": "script",
+   "name": "Class_RavenFall"
+  },
+  {
+   "num": 243,
+   "type": "script",
+   "name": "Class_RavenJump"
+  },
+  {
+   "num": 244,
+   "type": "script",
+   "name": "Class_RavenKeyAdapter"
+  },
+  {
+   "num": 245,
+   "type": "script",
+   "name": "Class_RavenKick"
+  },
+  {
+   "num": 246,
+   "type": "script",
+   "name": "Class_RavenKnockDown"
+  },
+  {
+   "num": 247,
+   "type": "script",
+   "name": "Class_RavenPunch"
+  },
+  {
+   "num": 248,
+   "type": "script",
+   "name": "Class_RavenStand"
+  },
+  {
+   "num": 249,
+   "type": "script",
+   "name": "Class_RavenStun"
+  },
+  {
+   "num": 250,
+   "type": "script",
+   "name": "Class_RavenWalkBackward"
+  },
+  {
+   "num": 251,
+   "type": "script",
+   "name": "Class_RavenWalkForward"
+  },
+  {
+   "num": 252,
+   "type": "script",
+   "name": "Class_RavenSwirlEffect"
+  },
+  {
+   "num": 253,
+   "type": "script",
+   "name": "Class_RavenColumnEffect"
+  },
+  {
+   "num": 254,
+   "type": "script",
+   "name": "Class_GroundExplode1Effect"
+  },
+  {
+   "num": 255,
+   "type": "script",
+   "name": "Class_GroundExplode2Effect"
+  },
+  {
+   "num": 256,
+   "type": "script",
+   "name": "Class_RavenExplodeEffect"
+  },
+  {
+   "num": 257,
+   "type": "script",
+   "name": "Class_RavenTelekineticThrow"
+  },
+  {
+   "num": 258,
+   "type": "script",
+   "name": "Class_RavenTelekineticThrowProjectile"
+  },
+  {
+   "num": 259,
+   "type": "script",
+   "name": "Class_RavenExplosiveDrop"
+  },
+  {
+   "num": 260,
+   "type": "script",
+   "name": "Class_RavenFallingObjectsProjectile"
+  },
+  {
+   "num": 261,
+   "type": "script",
+   "name": "Class_StaticActor"
+  },
+  {
+   "num": 262,
+   "type": "script",
+   "name": "Class_RavenTelekineticSpin"
+  },
+  {
+   "num": 263,
+   "type": "script",
+   "name": "Class_RavenTelekineticSpinProjectile"
+  },
+  {
+   "num": 264,
+   "type": "script",
+   "name": "Class_Plasmus"
+  },
+  {
+   "num": 265,
+   "type": "script",
+   "name": "Class_PlasmusAI"
+  },
+  {
+   "num": 266,
+   "type": "script",
+   "name": "Class_PlasmusBlock"
+  },
+  {
+   "num": 267,
+   "type": "script",
+   "name": "Class_PlasmusDefeat"
+  },
+  {
+   "num": 268,
+   "type": "script",
+   "name": "Class_PlasmusKeyAdapter"
+  },
+  {
+   "num": 269,
+   "type": "script",
+   "name": "Class_PlasmusHitSplatterEffect"
+  },
+  {
+   "num": 270,
+   "type": "script",
+   "name": "Class_PlasmusKnockDown"
+  },
+  {
+   "num": 271,
+   "type": "script",
+   "name": "Class_PlasmusArmSwipe"
+  },
+  {
+   "num": 272,
+   "type": "script",
+   "name": "Class_PlasmusStand"
+  },
+  {
+   "num": 273,
+   "type": "script",
+   "name": "Class_PlasmusStun"
+  },
+  {
+   "num": 274,
+   "type": "script",
+   "name": "Class_PlasmusWalkBackward"
+  },
+  {
+   "num": 275,
+   "type": "script",
+   "name": "Class_PlasmusWalkForward"
+  },
+  {
+   "num": 276,
+   "type": "script",
+   "name": "Debug_BypassMenus"
+  },
+  {
+   "num": 277,
+   "type": "script",
+   "name": "Class_PlasmusArmSwipeTrailsEffect"
+  },
+  {
+   "num": 278,
+   "type": "script",
+   "name": "Class_PlasmusSludgeSplatEffect"
+  },
+  {
+   "num": 279,
+   "type": "script",
+   "name": "Class_PlasmusSludgeProjectile"
+  },
+  {
+   "num": 280,
+   "type": "script",
+   "name": "Class_PlasmusSludgeThrow"
+  },
+  {
+   "num": 281,
+   "type": "script",
+   "name": "Class_RobinAI"
+  },
+  {
+   "num": 282,
+   "type": "script",
+   "name": "Class_PlasmusCrabProjectile"
+  },
+  {
+   "num": 283,
+   "type": "script",
+   "name": "Class_PlasmusCrabThrow"
+  },
+  {
+   "num": 284,
+   "type": "script",
+   "name": "Class_RavenSummonTitan"
+  },
+  {
+   "num": 285,
+   "type": "script",
+   "name": "Class_AssetsCharShared"
+  },
+  {
+   "num": 286,
+   "type": "script",
+   "name": "Class_RavenMidairAttack"
+  },
+  {
+   "num": 287,
+   "type": "script",
+   "name": "Class_PlasmusSludgeSplatProjectile"
+  },
+  {
+   "num": 288,
+   "type": "script",
+   "name": "Class_SummonRobinEffect"
+  },
+  {
+   "num": 289,
+   "type": "script",
+   "name": "Class_BgBarsTitanEffect"
+  },
+  {
+   "num": 290,
+   "type": "script",
+   "name": "Class_BgBarsEnemyEffect"
+  },
+  {
+   "num": 291,
+   "type": "script",
+   "name": "Class_RobinBombColumnEffect"
+  },
+  {
+   "num": 292,
+   "type": "script",
+   "name": "Class_HUDSummonPortrait"
+  },
+  {
+   "num": 293,
+   "type": "script",
+   "name": "Class_PlasmusChestBlast"
+  },
+  {
+   "num": 294,
+   "type": "script",
+   "name": "Class_PlasmusChestBlastProjectile_1"
+  },
+  {
+   "num": 295,
+   "type": "script",
+   "name": "Class_PlasmusChestBlastProjectile_2"
+  },
+  {
+   "num": 296,
+   "type": "script",
+   "name": "Class_PlasmusChestBlastProjectile_3"
+  },
+  {
+   "num": 297,
+   "type": "script",
+   "name": "Class_SummonCyborgEffect"
+  },
+  {
+   "num": 298,
+   "type": "script",
+   "name": "Class_RobinSummonEffect"
+  },
+  {
+   "num": 299,
+   "type": "script",
+   "name": "Class_SummonRavenEffect"
+  },
+  {
+   "num": 300,
+   "type": "script",
+   "name": "Class_RavenMidairAttackProjectile"
+  },
+  {
+   "num": 301,
+   "type": "script",
+   "name": "Behavior_WinScreenChangeText"
+  },
+  {
+   "num": 302,
+   "type": "script",
+   "name": "Class_GroundWaveEffect"
+  },
+  {
+   "num": 303,
+   "type": "script",
+   "name": "Class_CyborgSonicCannon"
+  },
+  {
+   "num": 304,
+   "type": "script",
+   "name": "Class_CyborgFlyingPunch"
+  },
+  {
+   "num": 305,
+   "type": "script",
+   "name": "Class_CyborgPowerSmash"
+  },
+  {
+   "num": 306,
+   "type": "script",
+   "name": "Class_ActorTrails"
+  },
+  {
+   "num": 307,
+   "type": "script",
+   "name": "Class_CyborgSummonTitan"
+  },
+  {
+   "num": 308,
+   "type": "script",
+   "name": "Class_CyborgSummonEffect"
+  },
+  {
+   "num": 309,
+   "type": "script",
+   "name": "Class_RobinSummonTitan"
+  },
+  {
+   "num": 310,
+   "type": "script",
+   "name": "Class_PlasmusCrabMeltEffect"
+  },
+  {
+   "num": 311,
+   "type": "script",
+   "name": "Class_Starfire"
+  },
+  {
+   "num": 312,
+   "type": "script",
+   "name": "Class_StarfireBlock"
+  },
+  {
+   "num": 313,
+   "type": "script",
+   "name": "Class_StarfireDefeat"
+  },
+  {
+   "num": 314,
+   "type": "script",
+   "name": "Class_StarfireFall"
+  },
+  {
+   "num": 315,
+   "type": "script",
+   "name": "Class_StarfireJump"
+  },
+  {
+   "num": 316,
+   "type": "script",
+   "name": "Class_StarfireKeyAdapter"
+  },
+  {
+   "num": 317,
+   "type": "script",
+   "name": "Class_StarfireKick"
+  },
+  {
+   "num": 318,
+   "type": "script",
+   "name": "Class_StarfireKnockDown"
+  },
+  {
+   "num": 319,
+   "type": "script",
+   "name": "Class_StarfirePunch"
+  },
+  {
+   "num": 320,
+   "type": "script",
+   "name": "Class_StarfireStand"
+  },
+  {
+   "num": 321,
+   "type": "script",
+   "name": "Class_StarfireStun"
+  },
+  {
+   "num": 322,
+   "type": "script",
+   "name": "Class_StarfireWalkBackward"
+  },
+  {
+   "num": 323,
+   "type": "script",
+   "name": "Class_StarfireWalkForward"
+  },
+  {
+   "num": 324,
+   "type": "script",
+   "name": "Class_StarfireDiagJumpKick"
+  },
+  {
+   "num": 325,
+   "type": "script",
+   "name": "Class_StarfireEnergyBall"
+  },
+  {
+   "num": 326,
+   "type": "script",
+   "name": "Class_StarfireConjureEffect"
+  },
+  {
+   "num": 327,
+   "type": "script",
+   "name": "Class_StarfireBallProjectile"
+  },
+  {
+   "num": 328,
+   "type": "script",
+   "name": "Class_StarfireExplodeEffect"
+  },
+  {
+   "num": 329,
+   "type": "script",
+   "name": "Class_StarfireFistEffect"
+  },
+  {
+   "num": 330,
+   "type": "script",
+   "name": "Class_StarfireBoltBarrage"
+  },
+  {
+   "num": 331,
+   "type": "script",
+   "name": "Class_StarfireBoltGlowEffect"
+  },
+  {
+   "num": 332,
+   "type": "script",
+   "name": "Class_StarfireBoltRightHandEffect"
+  },
+  {
+   "num": 333,
+   "type": "script",
+   "name": "Class_StarfireBoltLeftHandEffect"
+  },
+  {
+   "num": 334,
+   "type": "script",
+   "name": "Class_StarfireBoltProjectile"
+  },
+  {
+   "num": 335,
+   "type": "script",
+   "name": "Class_StarfireColumnEffect"
+  },
+  {
+   "num": 336,
+   "type": "script",
+   "name": "Class_StarfireBoltExplosionProjectile"
+  },
+  {
+   "num": 337,
+   "type": "script",
+   "name": "Class_StarfireFlyingKnee"
+  },
+  {
+   "num": 338,
+   "type": "script",
+   "name": "Class_StarfireSummonTitan"
+  },
+  {
+   "num": 339,
+   "type": "script",
+   "name": "Class_SummonStarfireEffect"
+  },
+  {
+   "num": 340,
+   "type": "script",
+   "name": "Class_HUDScore"
+  },
+  {
+   "num": 341,
+   "type": "script",
+   "name": "Class_Beastboy"
+  },
+  {
+   "num": 342,
+   "type": "script",
+   "name": "Class_BeastboyBlock"
+  },
+  {
+   "num": 343,
+   "type": "script",
+   "name": "Class_BeastboyDefeat"
+  },
+  {
+   "num": 344,
+   "type": "script",
+   "name": "Class_BeastboyFall"
+  },
+  {
+   "num": 345,
+   "type": "script",
+   "name": "Class_BeastboyJump"
+  },
+  {
+   "num": 346,
+   "type": "script",
+   "name": "Class_BeastboyKeyAdapter"
+  },
+  {
+   "num": 347,
+   "type": "script",
+   "name": "Class_BeastboyKick"
+  },
+  {
+   "num": 348,
+   "type": "script",
+   "name": "Class_BeastboyKnockDown"
+  },
+  {
+   "num": 349,
+   "type": "script",
+   "name": "Class_BeastboyPunch"
+  },
+  {
+   "num": 350,
+   "type": "script",
+   "name": "Class_BeastboyStand"
+  },
+  {
+   "num": 351,
+   "type": "script",
+   "name": "Class_BeastboyStun"
+  },
+  {
+   "num": 352,
+   "type": "script",
+   "name": "Class_BeastboyWalkBackward"
+  },
+  {
+   "num": 353,
+   "type": "script",
+   "name": "Class_BeastboyWalkForward"
+  },
+  {
+   "num": 354,
+   "type": "script",
+   "name": "Class_BeastboySummonEffect"
+  },
+  {
+   "num": 355,
+   "type": "script",
+   "name": "Class_BeastboySummonTitan"
+  },
+  {
+   "num": 356,
+   "type": "script",
+   "name": "Class_BeastboyGorillaSmash"
+  },
+  {
+   "num": 357,
+   "type": "script",
+   "name": "Class_BeastboyRhinoCharge"
+  },
+  {
+   "num": 358,
+   "type": "script",
+   "name": "Class_BeastboyEagleStrike"
+  },
+  {
+   "num": 359,
+   "type": "script",
+   "name": "Class_BeastboyPterodactylSwoop"
+  },
+  {
+   "num": 360,
+   "type": "script",
+   "name": "Class_SummonBeastboyEffect"
+  },
+  {
+   "num": 361,
+   "type": "script",
+   "name": "Class_BeastboyWaveProjectile"
+  },
+  {
+   "num": 362,
+   "type": "script",
+   "name": "Class_WinScreen"
+  },
+  {
+   "num": 363,
+   "type": "script",
+   "name": "Class_PlasmusSplatEffect"
+  },
+  {
+   "num": 364,
+   "type": "script",
+   "name": "Behavior_SelectScreenVillainsButton"
+  },
+  {
+   "num": 365,
+   "type": "script",
+   "name": "Behavior_SelectScreenHeroesButton"
+  },
+  {
+   "num": 366,
+   "type": "script",
+   "name": "Class_RavenAI"
+  },
+  {
+   "num": 367,
+   "type": "script",
+   "name": "Class_CyborgAI"
+  },
+  {
+   "num": 368,
+   "type": "script",
+   "name": "Class_BeastboyAI"
+  },
+  {
+   "num": 369,
+   "type": "script",
+   "name": "Class_StarfireAI"
+  },
+  {
+   "num": 370,
+   "type": "script",
+   "name": "Class_JinxFall"
+  },
+  {
+   "num": 371,
+   "type": "script",
+   "name": "Class_PlasmusPunch"
+  },
+  {
+   "num": 372,
+   "type": "script",
+   "name": "Class_GizmoFall"
+  },
+  {
+   "num": 373,
+   "type": "script",
+   "name": "Class_MammothFall"
+  },
+  {
+   "num": 374,
+   "type": "script",
+   "name": "Class_PlasmusPunchTrailsEffect"
+  },
+  {
+   "num": 375,
+   "type": "script",
+   "name": "Class_GizmoPunch"
+  },
+  {
+   "num": 376,
+   "type": "script",
+   "name": "Class_GizmoElectroPunchEffect"
+  },
+  {
+   "num": 377,
+   "type": "script",
+   "name": "Class_GizmoAirPunch"
+  },
+  {
+   "num": 378,
+   "type": "script",
+   "name": "Behavior_SelectScreenChangePlayerOppText"
+  },
+  {
+   "num": 379,
+   "type": "script",
+   "name": "Behavior_WinScreenChangeGroup"
+  }
+ ]
+}

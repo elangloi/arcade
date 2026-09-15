@@ -1,0 +1,16 @@
+# Third-party tools cloned/built locally (see README "Rebuilding from the originals")
+tools/deps/
+tools/ProjectorRays/
+tools/drxtract/
+tools/.venv/
+tools/__pycache__/
+
+# ProjectorRays raw output is large and fully regenerable from original/ — keep only the Lingo sources
+decompiled/*/chunks/
+decompiled/*.dir
+decompiled/*.cst
+decompiled/pr_*.log
+decompiled/battleblitz/casts/*/*.lasm
+
+# intermediate sound dumps (WAVs are the real assets)
+assets/*/snd/*.snd

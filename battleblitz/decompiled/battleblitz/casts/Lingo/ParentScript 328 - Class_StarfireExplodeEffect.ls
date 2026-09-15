@@ -1,0 +1,15 @@
+property ancestor
+global g
+
+on new me, owner, initPos, initVel, initDir
+  ancestor = new(g.classes.Class_Effect, owner, initPos, initVel, initDir)
+  me.visSprite.blend = 100
+  vis = [g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_01, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_02, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_03, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_04, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_05, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_06, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_07, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_08, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_09, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_10, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_11, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_12, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_13, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_14, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_15, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_16, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_17, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_18, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_19, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_20, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_21, g.assets.CHAR_SHARED.FX_STARFIRE_EXPLODE_22]
+  me.animation = new(g.classes.Class_PlayOnceAnimation, vis)
+  return me
+end
+
+on destroy me
+  ancestor.destroy()
+  return VOID
+end

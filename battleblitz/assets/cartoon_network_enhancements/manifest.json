@@ -1,0 +1,39 @@
+{
+ "cast": "cartoon_network_enhancements",
+ "palettes": {},
+ "members": [
+  {
+   "num": 12,
+   "type": "button",
+   "name": ""
+  },
+  {
+   "num": 13,
+   "type": "script",
+   "name": "Billboard Script"
+  },
+  {
+   "num": 14,
+   "type": "script",
+   "name": "Launch Orbit Script"
+  },
+  {
+   "num": 16,
+   "type": "script",
+   "name": "Play-Game"
+  },
+  {
+   "num": 19,
+   "type": "bitmap",
+   "name": "Orbit Screen",
+   "file": "019_Orbit_Screen.png",
+   "width": 432,
+   "height": 330,
+   "regX": 216,
+   "regY": 165,
+   "bpp": 8,
+   "palette": "UNRESOLVED(-8)->systemMac",
+   "bitd": 12353
+  }
+ ]
+}
