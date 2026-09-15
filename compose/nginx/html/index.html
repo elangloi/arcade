@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arcade</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; min-height: 100vh; background: #0f0f12; color: #e6e6e6;
+         font: 16px/1.4 system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; padding: 48px 16px; box-sizing: border-box; }
+  h1 { font-size: 2.2rem; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 8px; }
+  p.sub { color: #888; margin: 0 0 40px; }
+  .games { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; width: min(960px, 100%); }
+  a.card { display: block; background: #17171c; border: 1px solid #2a2a33; border-radius: 12px; padding: 20px; color: inherit; text-decoration: none;
+           transition: transform .12s, border-color .12s; }
+  a.card:hover { transform: translateY(-2px); border-color: #a4d34c; }
+  a.card h2 { margin: 0 0 6px; font-size: 1.15rem; color: #a4d34c; }
+  a.card span { color: #999; font-size: .9rem; }
+</style>
+</head>
+<body>
+<h1>Arcade</h1>
+<p class="sub">Pick a game.</p>
+<div class="games">
+  <a class="card" href="/teen-titans-battle-blitz/">
+    <h2>Teen Titans: Battle Blitz</h2>
+    <span>Cartoon Network, 2003 · fighting</span>
+  </a>
+</div>
+</body>
+</html>
