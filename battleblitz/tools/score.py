@@ -5,7 +5,7 @@ uv run python score.py            -> writes ../assets/score.json
 Output:
   labels:    {name: frame}
   frames:    [ {script: [castLib, member] | null, sprites: {spriteNum: rec}} ]   (index 0 = frame 1)
-             rec = [type, ink, castLib, member, locH, locV, width, height, blend, flags, rotation]
+             rec = [type, ink, castLib, member, locH, locV, width, height, blend, flags, rotation, stretch]
   intervals: [ {start, end, ch, behaviors: [[castLib, member, paramsText]]} ]
   filmloops: { "castLib:member": {frames: [...same as frames...] } }   (filled in by members.py)
 """
@@ -45,7 +45,8 @@ def decode_sprite(rec):
     colorcode, blend, flags = rec[20], rec[21], rec[22]
     rot = struct.unpack('>i', rec[28:32])[0] / 100.0 if len(rec) >= 32 else 0.0
     blend_pct = round((255 - blend) * 100 / 255)
-    return [typ, ink & 0x3F, lib, mem, locH, locV, w, h, blend_pct, flags, rot]
+    stretch = 1 if ink & 0x80 else 0   # without it Director shows the member at natural size
+    return [typ, ink & 0x3F, lib, mem, locH, locV, w, h, blend_pct, flags, rot, stretch]
 
 
 def decode_score(data):

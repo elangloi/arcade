@@ -427,7 +427,7 @@ export const D = {
       for (const rec of Object.values(fr.sprites)) {
         const sm = this.memberRef(rec[2], rec[3], m.castLib);
         if (!sm || !sm.w) continue;
-        const w = rec[6] || sm.w, h = rec[7] || sm.h;
+        const w = rec[11] && rec[6] ? rec[6] : sm.w, h = rec[11] && rec[7] ? rec[7] : sm.h;
         const sx = sm.w ? w / sm.w : 1, sy = sm.h ? h / sm.h : 1;
         const x0 = rec[4] - sm.regX * sx, y0 = rec[5] - sm.regY * sy;
         l = Math.min(l, x0); t = Math.min(t, y0); r = Math.max(r, x0 + w); b = Math.max(b, y0 + h);
@@ -494,10 +494,10 @@ export const D = {
       const changed = (i) => !prev || prev[i] !== rec[i];
       if (changed(2) || changed(3)) s.member = this.memberRef(rec[2], rec[3], 1);
       if (changed(4) || changed(5)) s.loc = new Point(rec[4], rec[5]);
-      if (changed(6) || changed(7) || changed(2) || changed(3)) {
-        const nat = s.natural();
-        s._width = (rec[6] && rec[6] !== nat.w) ? rec[6] : 0;
-        s._height = (rec[7] && rec[7] !== nat.h) ? rec[7] : 0;
+      if (changed(6) || changed(7) || changed(2) || changed(3) || changed(11)) {
+        // only "stretched" sprites use the score's rect; others show at the member's size
+        s._width = rec[11] ? rec[6] : 0;
+        s._height = rec[11] ? rec[7] : 0;
       }
       if (changed(1)) s.ink = rec[1];
       if (changed(8)) s.blend = rec[8];
@@ -664,7 +664,7 @@ export const D = {
       if (!sm.loaded && !sm.loading) sm.load();
       const img = sm.drawable(rec[1]);
       if (!img) continue;
-      const w = rec[6] || sm.w, h = rec[7] || sm.h;
+      const w = rec[11] && rec[6] ? rec[6] : sm.w, h = rec[11] && rec[7] ? rec[7] : sm.h;
       const msx = sm.w ? w / sm.w : 1, msy = sm.h ? h / sm.h : 1;
       const x0 = rec[4] - sm.regX * msx - b.l, y0 = rec[5] - sm.regY * msy - b.t;
       const r = new Rect(sr.left + x0 * sx, sr.top + y0 * sy, sr.left + (x0 + w) * sx, sr.top + (y0 + h) * sy);
