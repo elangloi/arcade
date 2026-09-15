@@ -1116,7 +1116,7 @@ export class Class_Fighter extends Class_CollidableActor {
     }
     this.contactTable.reset();
     this.animation = this.moveRef.animation;
-    this.moveCount = _add(this.moveCount, 1);
+    this.moveCount = (this.moveCount + 1);
   }
   queueMove(newMove, arg) {
     if (_truthy(_eq(newMove, this.currMove))) {
@@ -1231,7 +1231,7 @@ export class Class_Fighter extends Class_CollidableActor {
     if (_truthy(this.isHovering())) {
       HOVER_PERIOD = 20;
       HOVER_VERT_OFFSETS = L(0, 3, 5, 6, 6, 5, 3, 0, _neg(3), _neg(5), _neg(6), _neg(6), _neg(5), _neg(3));
-      i = _add((_div(_mul(HOVER_PERIOD, (_mod(this.moveRef.age, HOVER_PERIOD))), (_div(_mul(HOVER_PERIOD, HOVER_PERIOD), HOVER_VERT_OFFSETS.count)))), 1);
+      i = _add((_div(_mul(HOVER_PERIOD, (_mod(this.moveRef.age, HOVER_PERIOD))), (_idiv((HOVER_PERIOD * HOVER_PERIOD), HOVER_VERT_OFFSETS.count)))), 1);
       p = _add(p, point(0, _getAt(HOVER_VERT_OFFSETS, i)));
     }
     this.visSprite.loc = p;
@@ -1276,7 +1276,7 @@ export class Class_Fighter extends Class_CollidableActor {
     if (_truthy(voidp(stunDuration))) {
       stunDuration = G.g.STUN_DURATION_DEFAULT;
     }
-    actualDamage = _div(_mul(_mul(damage, (_sub(100, this.naturalDefense))), (_sub(100, this.moveRef.defenseRating))), 10000);
+    actualDamage = _div(_mul(_mul(damage, ((100 - this.naturalDefense))), (_sub(100, this.moveRef.defenseRating))), 10000);
     this.health = _sub(this.health, actualDamage);
     if (_truthy((this.health <= 0))) {
       this.health = 0;
@@ -1478,7 +1478,7 @@ export class Class_AIAdapter extends LingoObject {
     return undefined;
   }
   reset() {
-    this.choiceDelay = _add(random(_sub(this.CHOICE_DELAY_INITIAL_MAX, this.CHOICE_DELAY_INITIAL_MIN)), this.CHOICE_DELAY_INITIAL_MIN);
+    this.choiceDelay = (random((this.CHOICE_DELAY_INITIAL_MAX - this.CHOICE_DELAY_INITIAL_MIN)) + this.CHOICE_DELAY_INITIAL_MIN);
     this.assessmentDelay = this.ASSESSMENT_DELAY_DEFAULT;
     this.lastChoiceAt = G.g.frameCount;
     this.lastAssessmentAt = G.g.frameCount;
@@ -1516,9 +1516,9 @@ export class Class_AIAdapter extends LingoObject {
       min = this.CHOICE_DELAY_NORMAL_MIN;
       max = this.CHOICE_DELAY_NORMAL_MAX;
     }
-    range = _sub(max, min);
+    range = (max - min);
     if (_truthy((range > 0))) {
-      this.choiceDelay = _add(random(_sub(max, min)), min);
+      this.choiceDelay = (random((max - min)) + min);
     } else {
       this.choiceDelay = min;
     }
@@ -1581,7 +1581,7 @@ export class Class_AIAdapter extends LingoObject {
           this.serviceCurrentMove();
           break; }
       }
-      if (_truthy((G.g.frameCount >= (_add(this.lastAssessmentAt, this.assessmentDelay))))) {
+      if (_truthy((G.g.frameCount >= ((this.lastAssessmentAt + this.assessmentDelay))))) {
         oppMoveNum = this.target.opponent.getMoveNumber();
         if (_truthy(!_eq(oppMoveNum, this.lastAssessmentMoveNum))) {
           canChoose = 1;
@@ -1612,7 +1612,7 @@ export class Class_AIAdapter extends LingoObject {
                 tarDefBox = this.target.getDefenseBox();
                 if (_truthy((oppAttBox.width > 0))) {
                   testBox = oppAttBox;
-                  for (i = 0; i <= _sub(this.LOOK_AHEAD_FRAMES, 1); i++) {
+                  for (i = 0; i <= (this.LOOK_AHEAD_FRAMES - 1); i++) {
                     testBox = testBox.offset(attVel.locH, attVel.locV);
                     if (_truthy(!_eq(testBox.intersect(tarDefBox), G.g.RECT_0))) {
                       if (_truthy((((random(100) - 1)) < this.COUNTER_ATTACK_PERCENT))) {
@@ -1633,7 +1633,7 @@ export class Class_AIAdapter extends LingoObject {
           }
         }
         if (_truthy(canChoose)) {
-          if (_truthy((G.g.frameCount >= (_add(this.lastChoiceAt, this.choiceDelay))))) {
+          if (_truthy((G.g.frameCount >= ((this.lastChoiceAt + this.choiceDelay))))) {
             if (_truthy(this.targetAtScreenEdge)) {
               this.moveToPlayer();
             } else {
@@ -2000,7 +2000,7 @@ export class Class_GizmoAI extends Class_AIAdapter {
     diffX = _sub(attPos.locH, x);
     diffY = _sub(attPos.locV, y);
     if (_truthy(!_eq(attVel.locH, 0.0))) {
-      slope = _div(attVel.locV, attVel.locH);
+      slope = _fdiv(attVel.locV, attVel.locH);
     } else {
       slope = 999999.0;
     }
@@ -2126,7 +2126,7 @@ export class Class_Effect extends Class_Actor {
   update() {
     if (_truthy(this.alive)) {
       if (_truthy(!_truthy(this.frozen))) {
-        this.age = _add(this.age, 1);
+        this.age = (this.age + 1);
         if (_truthy(this.animation.isDone())) {
           this.kill();
         } else if (_truthy(this.alive)) {
@@ -2187,7 +2187,7 @@ export class Class_Move extends LingoObject {
     return undefined;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(voidp(this.animation)))) {
       if (_truthy((this.age > 1))) {
         this.animation.advance();
@@ -2429,10 +2429,10 @@ export class Class_GizmoAirCannon extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -2526,11 +2526,11 @@ export class Class_GizmoAirJump extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
     let dir;
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_CROUCH): {
@@ -2540,7 +2540,7 @@ export class Class_GizmoAirJump extends Class_Move {
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_JUMP_1, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
           this.owner.moveBy(0.0, 15.0);
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -2637,10 +2637,10 @@ export class Class_GizmoAirMissile extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -2662,7 +2662,7 @@ export class Class_GizmoAirMissile extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_GizmoMissileEffect, this.owner, _add(this.owner.pos, point(_mul(50, this.owner.dir), _neg(75))), point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.GIZMO.SFX_GIZMO_MISSILEFIRE, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_GroundExplode1Effect, this.owner, point(_add(this.owner.getPosX(), (_mul(275, this.owner.dir))), 10.0), point(0, 0), this.owner.dir));
             G.g.main.screen.addProjectile(_new(G.g.classes.Class_GizmoMissileProjectile, this.owner, point(_add(this.owner.getPosX(), (_mul(275, this.owner.dir))), 0.0), point(0, 0), this.owner.dir));
@@ -2723,7 +2723,7 @@ export class Class_GizmoAirStun extends Class_Move {
     this.owner.setShowingTrails(0);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy((this.age >= this.stunDuration))) {
       this.moveDone = 1;
     }
@@ -2797,10 +2797,10 @@ export class Class_GizmoCannon extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -2959,7 +2959,7 @@ export class Class_Projectile extends Class_CollidableActor {
   update() {
     if (_truthy(this.alive)) {
       if (_truthy(!_truthy(this.frozen))) {
-        this.age = _add(this.age, 1);
+        this.age = (this.age + 1);
         this.setPos(_add(this.pos, this.vel));
         if (_truthy(!_truthy(voidp(this.animation)))) {
           if (_truthy((this.age > 1))) {
@@ -3111,10 +3111,10 @@ export class Class_GizmoDefeat extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -3125,7 +3125,7 @@ export class Class_GizmoDefeat extends Class_Move {
               this.delayFrames = 1;
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -3306,11 +3306,11 @@ export class Class_GizmoHighAirMissile extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
     let baseX, baseY;
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_CROUCH): {
@@ -3319,7 +3319,7 @@ export class Class_GizmoHighAirMissile extends Class_Move {
             this.delayFrames = 2;
           }
           this.owner.moveBy(0.0, 15.0);
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -3357,7 +3357,7 @@ export class Class_GizmoHighAirMissile extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_GizmoHighMissileEffect, this.owner, _add(this.owner.pos, point(_mul(50, this.owner.dir), _neg(75))), point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.GIZMO.SFX_GIZMO_MISSILEFIRE, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           baseX = 330;
           baseY = 10;
           if (_truthy(_eq(this.delayFrames, 16))) {
@@ -3367,16 +3367,16 @@ export class Class_GizmoHighAirMissile extends Class_Move {
             G.g.main.screen.addProjectile(_new(G.g.classes.Class_GizmoHighMissileProjectile, this.owner, point(_add(this.owner.getPosX(), (_mul(baseX, this.owner.dir))), 0.0), point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.GIZMO.SFX_GIZMO_MISSILEHIT, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           } else if (_truthy(_eq(this.delayFrames, 7))) {
-            G.g.main.screen.addEffect(_new(G.g.classes.Class_GroundExplode1Effect, this.owner, point(_add(this.owner.getPosX(), (_mul((_sub(baseX, 20)), this.owner.dir))), _add(baseY, 5)), point(0, 0), this.owner.dir));
+            G.g.main.screen.addEffect(_new(G.g.classes.Class_GroundExplode1Effect, this.owner, point(_add(this.owner.getPosX(), (_mul(((baseX - 20)), this.owner.dir))), (baseY + 5)), point(0, 0), this.owner.dir));
           } else if (_truthy(_eq(this.delayFrames, 5))) {
-            G.g.main.screen.addEffect(_new(G.g.classes.Class_GroundExplode1Effect, this.owner, point(_add(this.owner.getPosX(), (_mul((_add(baseX, 10)), this.owner.dir))), _add(baseY, 10)), point(0, 0), this.owner.dir));
+            G.g.main.screen.addEffect(_new(G.g.classes.Class_GroundExplode1Effect, this.owner, point(_add(this.owner.getPosX(), (_mul(((baseX + 10)), this.owner.dir))), (baseY + 10)), point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.GIZMO.SFX_GIZMO_MISSILEHIT, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           } else if (_truthy(_eq(this.delayFrames, 4))) {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_LightColumnEffect, this.owner, point(_add(this.owner.getPosX(), (_mul(baseX, this.owner.dir))), baseY), point(0, 0), this.owner.dir));
           } else if (_truthy(_eq(this.delayFrames, 3))) {
-            G.g.main.screen.addEffect(_new(G.g.classes.Class_GroundExplode2Effect, this.owner, point(_add(this.owner.getPosX(), (_mul((_sub(baseX, 30)), this.owner.dir))), _sub(baseY, 10)), point(0, 0), this.owner.dir));
+            G.g.main.screen.addEffect(_new(G.g.classes.Class_GroundExplode2Effect, this.owner, point(_add(this.owner.getPosX(), (_mul(((baseX - 30)), this.owner.dir))), (baseY - 10)), point(0, 0), this.owner.dir));
           } else if (_truthy(_eq(this.delayFrames, 0))) {
-            G.g.main.screen.addEffect(_new(G.g.classes.Class_GroundExplode2Effect, this.owner, point(_add(this.owner.getPosX(), (_mul((_add(baseX, 5)), this.owner.dir))), _add(baseY, 5)), point(0, 0), this.owner.dir));
+            G.g.main.screen.addEffect(_new(G.g.classes.Class_GroundExplode2Effect, this.owner, point(_add(this.owner.getPosX(), (_mul(((baseX + 5)), this.owner.dir))), (baseY + 5)), point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.GIZMO.SFX_GIZMO_MISSILEHIT, 100, G.g.SFX_EVENT_PRIORITY_LOW);
             this.advanceState();
           }
@@ -3518,7 +3518,7 @@ export class Class_CyborgCannonProjectile extends Class_Projectile {
     for (o of _iter(this.streams)) {
       o.getSprite().member = this.animation.getMember();
     }
-    this.streamCap.getSprite().member = _getAt(this.capvis, _add((_mod(this.age, 2)), 1));
+    this.streamCap.getSprite().member = _getAt(this.capvis, ((_mod(this.age, 2)) + 1));
   }
   paint() {
     let o;
@@ -3650,11 +3650,11 @@ export class Class_GizmoJump extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
     let dir;
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_CROUCH): {
@@ -3663,7 +3663,7 @@ export class Class_GizmoJump extends Class_Move {
             this.delayFrames = 2;
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_JUMP_2, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -3714,7 +3714,7 @@ export class Class_GizmoJump extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -4098,10 +4098,10 @@ export class Class_GizmoKnockDown extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -4112,7 +4112,7 @@ export class Class_GizmoKnockDown extends Class_Move {
               this.delayFrames = 1;
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -4150,7 +4150,7 @@ export class Class_GizmoKnockDown extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_SLUMP_TO_FLOOR, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -4163,7 +4163,7 @@ export class Class_GizmoKnockDown extends Class_Move {
             this.setVulnerable(1);
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustSkidEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -4336,7 +4336,7 @@ export class Class_GizmoStun extends Class_Move {
     this.owner.setVel(0.0, 0.0);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy((this.age >= this.stunDuration))) {
       this.moveDone = 1;
     }
@@ -4489,7 +4489,7 @@ export class Class_Globals extends LingoObject {
     this.util = _new(this.classes.Class_Utility);
     this.POWERS_OF_TEN = L(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000);
     this.FRAME_RATE = 30;
-    this.FRAME_DURATION_MIN = _div(1000, this.FRAME_RATE);
+    this.FRAME_DURATION_MIN = _idiv(1000, this.FRAME_RATE);
     this.SPRITE_POOL_CHANNEL_MIN = 11;
     this.SPRITE_POOL_CHANNEL_MAX = 150;
     this.SPRITE_LOCZ_BACKGROUND = 101;
@@ -4991,8 +4991,8 @@ export class Class_HUD extends LingoObject {
     x = 0;
     for (i = 1; i <= G.g.TITAN_FIGHTER_ORDER.count; i++) {
       if (_truthy(G.g.game.canSummon(G.g.game.titan, i))) {
-        _setAt(this.summonPortraits, _getAt(G.g.TITAN_FIGHTER_ORDER, i), _new(G.g.classes.Class_HUDSummonPortrait, _getAt(G.g.TITAN_FIGHTER_ORDER, i), point(_add(90, x), 10)));
-        x = _add(x, 34);
+        _setAt(this.summonPortraits, _getAt(G.g.TITAN_FIGHTER_ORDER, i), _new(G.g.classes.Class_HUDSummonPortrait, _getAt(G.g.TITAN_FIGHTER_ORDER, i), point((90 + x), 10)));
+        x = (x + 34);
       }
     }
     this.flashOverlay = _new(G.g.classes.Class_StaticOverlay, G.g.assets.hud.HUD_SCREEN_FLASH, point(300, 200), G.g.SPRITE_LOCZ_SCREEN_FLASH);
@@ -5044,7 +5044,7 @@ export class Class_HUD extends LingoObject {
       if (_truthy(_eq(this.flashDuration, 0))) {
         this.flashOverlay.setVisible(0);
       } else {
-        this.flashDuration = _sub(this.flashDuration, 1);
+        this.flashDuration = (this.flashDuration - 1);
       }
     }
     for (o of _iter(this.summonPortraits)) {
@@ -5123,8 +5123,8 @@ export class Class_HUDClock extends LingoObject {
       this.timeThresholds.append(_sub(G.g.ROUND_DURATION, (_mul(i, this.secondsPerSlice))));
     }
     this.digitMembers = L(G.g.assets.hud.HUD_CLOCK_NUM_0, G.g.assets.hud.HUD_CLOCK_NUM_1, G.g.assets.hud.HUD_CLOCK_NUM_2, G.g.assets.hud.HUD_CLOCK_NUM_3, G.g.assets.hud.HUD_CLOCK_NUM_4, G.g.assets.hud.HUD_CLOCK_NUM_5, G.g.assets.hud.HUD_CLOCK_NUM_6, G.g.assets.hud.HUD_CLOCK_NUM_7, G.g.assets.hud.HUD_CLOCK_NUM_8, G.g.assets.hud.HUD_CLOCK_NUM_9);
-    this.digit1 = _new(G.g.classes.Class_Overlay, _add(this.pos, point(_div(this.DIGIT_WIDTH, 2), 0)), G.g.SPRITE_LOCZ_HUD_FG);
-    this.digit2 = _new(G.g.classes.Class_Overlay, _add(this.pos, point(_div(_neg(this.DIGIT_WIDTH), 2), 0)), G.g.SPRITE_LOCZ_HUD_FG);
+    this.digit1 = _new(G.g.classes.Class_Overlay, _add(this.pos, point(_idiv(this.DIGIT_WIDTH, 2), 0)), G.g.SPRITE_LOCZ_HUD_FG);
+    this.digit2 = _new(G.g.classes.Class_Overlay, _add(this.pos, point(_idiv(_neg(this.DIGIT_WIDTH), 2), 0)), G.g.SPRITE_LOCZ_HUD_FG);
     this.pieOffMembers = L(G.g.assets.hud.HUD_CLOCK_PIE_OFF_1, G.g.assets.hud.HUD_CLOCK_PIE_OFF_2, G.g.assets.hud.HUD_CLOCK_PIE_OFF_3, G.g.assets.hud.HUD_CLOCK_PIE_OFF_4, G.g.assets.hud.HUD_CLOCK_PIE_OFF_5, G.g.assets.hud.HUD_CLOCK_PIE_OFF_6);
     this.pieOnMembers = L(G.g.assets.hud.HUD_CLOCK_PIE_ON_1, G.g.assets.hud.HUD_CLOCK_PIE_ON_2, G.g.assets.hud.HUD_CLOCK_PIE_ON_3, G.g.assets.hud.HUD_CLOCK_PIE_ON_4, G.g.assets.hud.HUD_CLOCK_PIE_ON_5, G.g.assets.hud.HUD_CLOCK_PIE_ON_6);
     this.pieSlices = L();
@@ -5158,8 +5158,8 @@ export class Class_HUDClock extends LingoObject {
       }
       _getAt(this.pieSlices, i).setMember(_getAt(this.pieOnMembers, i));
     }
-    this.digit1.setMember(_getAt(this.digitMembers, _add((_mod(this.time, 10)), 1)));
-    this.digit2.setMember(_getAt(this.digitMembers, _add((_mod(_div(this.time, 10), 10)), 1)));
+    this.digit1.setMember(_getAt(this.digitMembers, ((_mod(this.time, 10)) + 1)));
+    this.digit2.setMember(_getAt(this.digitMembers, _add((_mod(_idiv(this.time, 10), 10)), 1)));
   }
   update() {
     this.checkClock(G.g.game.getTime());
@@ -5237,7 +5237,7 @@ export class Class_HUDHealthBar extends LingoObject {
       this.hiliteFrames = this.HEALTHBAR_HILITE_DURATION;
     }
     if (_truthy(this.hiliteFrames)) {
-      this.hiliteFrames = _sub(this.hiliteFrames, 1);
+      this.hiliteFrames = (this.hiliteFrames - 1);
       this.buildBar();
     } else if (_truthy(!_eq(this.targetFill, this.displayFill))) {
       this.buildBar();
@@ -5275,7 +5275,7 @@ export class Class_HUDHealthBar extends LingoObject {
       this.lowOverlay.setMember(_getAt(_getAt(this.endMembers, this.barColor), index));
       this.highOverlay.setMember(_getAt(_getAt(this.endMembers, this.barColor), index));
     }
-    this.highOverlay.setPos(_add(this.pos, point(_mul(this.dir, (_add(_add((_mul(slices, this.HEALTHBAR_SLICE_WIDTH)), this.HEALTHBAR_HEIGHT), 1))), _add(this.HEALTHBAR_HEIGHT, 1))));
+    this.highOverlay.setPos(_add(this.pos, point(_mul(this.dir, (_add(_add((_mul(slices, this.HEALTHBAR_SLICE_WIDTH)), this.HEALTHBAR_HEIGHT), 1))), (this.HEALTHBAR_HEIGHT + 1))));
     for (i = 0; i <= (this.middleOverlays.count - 1); i++) {
       o = _getAt(this.middleOverlays, _add(i, 1));
       index = _sub(_sub(slices, this.HEALTHBAR_END_SLICE_COUNT), (_mul(10, i)));
@@ -5371,7 +5371,7 @@ export class Class_IndexedAnimation extends Class_Animation {
   }
   advance() {
     if (_truthy(!_truthy(this.done))) {
-      this.repeatCount = _sub(this.repeatCount, 1);
+      this.repeatCount = (this.repeatCount - 1);
       if (_truthy((this.repeatCount < 0))) {
         this.repeatCount = 0;
       }
@@ -5379,7 +5379,7 @@ export class Class_IndexedAnimation extends Class_Animation {
         if (_truthy(_eq(this.orderIndex, this.order.count))) {
           this.done = 1;
         } else {
-          this.orderIndex = _add(this.orderIndex, 1);
+          this.orderIndex = (this.orderIndex + 1);
           this.currIndex = _getAt(this.order, this.orderIndex);
           this.repeatCount = this.frameRepeat;
         }
@@ -5703,7 +5703,7 @@ export class Class_JinxAI extends Class_AIAdapter {
     diffX = _sub(attPos.locH, x);
     diffY = _sub(attPos.locV, y);
     if (_truthy(!_eq(attVel.locH, 0.0))) {
-      slope = _div(attVel.locV, attVel.locH);
+      slope = _fdiv(attVel.locV, attVel.locH);
     } else {
       slope = 999999.0;
     }
@@ -5825,11 +5825,11 @@ export class Class_CyborgCyberStomp extends Class_Move {
     this.stateAge = 0;
   }
   advanceState() {
-    this.setState(_add(this.moveState, 1));
+    this.setState((this.moveState + 1));
   }
   update() {
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_CROUCH): {
@@ -5950,7 +5950,7 @@ export class Class_JinxBallProjectile extends Class_Projectile {
     stateAge = 0;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(this.alive)) {
       if (_truthy(this.initState)) {
         this.initState = 0;
@@ -6083,10 +6083,10 @@ export class Class_JinxDefeat extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -6097,7 +6097,7 @@ export class Class_JinxDefeat extends Class_Move {
               this.delayFrames = 1;
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -6125,7 +6125,7 @@ export class Class_JinxDefeat extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_SLUMP_TO_FLOOR, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -6194,12 +6194,12 @@ export class Class_JinxEnergyBall extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
     this.stateAge = 0;
   }
   update() {
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -6207,7 +6207,7 @@ export class Class_JinxEnergyBall extends Class_Move {
             this.initState = 0;
             this.delayFrames = 2;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -6236,7 +6236,7 @@ export class Class_JinxEnergyBall extends Class_Move {
             G.g.main.screen.addProjectile(this.projectile);
             G.g.main.audioMgr.playSound(G.g.assets.JINX.SFX_JINX_RELEASE_ENERGY_BALL, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.projectile = undefined;
             this.advanceState();
@@ -6248,7 +6248,7 @@ export class Class_JinxEnergyBall extends Class_Move {
             this.animation.advance();
             this.delayFrames = 2;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -6292,7 +6292,7 @@ export class Class_JinxEnergySpin extends Class_Move {
     this.owner.setVel(0.0, 0.0);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy((this.age > 1))) {
       this.animation.advance();
     }
@@ -6404,11 +6404,11 @@ export class Class_JinxJump extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
     let dir;
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_CROUCH): {
@@ -6417,7 +6417,7 @@ export class Class_JinxJump extends Class_Move {
             this.delayFrames = 2;
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_JUMP_2, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -6484,7 +6484,7 @@ export class Class_JinxJump extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -6643,10 +6643,10 @@ export class Class_JinxKick extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_CROUCH): {
@@ -6654,7 +6654,7 @@ export class Class_JinxKick extends Class_Move {
             this.initState = 0;
             this.delayFrames = 4;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -6669,7 +6669,7 @@ export class Class_JinxKick extends Class_Move {
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_JUMP_0, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
           this.owner.moveBy(0.0, _neg(5.0));
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -6681,7 +6681,7 @@ export class Class_JinxKick extends Class_Move {
             this.delayFrames = 2;
           }
           this.owner.moveBy(0.0, _neg(5.0));
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -6692,7 +6692,7 @@ export class Class_JinxKick extends Class_Move {
             this.animation.advance();
             this.delayFrames = 4;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -6704,7 +6704,7 @@ export class Class_JinxKick extends Class_Move {
             this.delayFrames = 2;
           }
           this.owner.moveBy(0.0, 5.0);
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -6716,7 +6716,7 @@ export class Class_JinxKick extends Class_Move {
             this.delayFrames = 2;
           }
           this.owner.moveBy(0.0, 5.0);
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -6730,7 +6730,7 @@ export class Class_JinxKick extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -6802,10 +6802,10 @@ export class Class_JinxKnockDown extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -6816,7 +6816,7 @@ export class Class_JinxKnockDown extends Class_Move {
               this.delayFrames = 1;
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -6844,7 +6844,7 @@ export class Class_JinxKnockDown extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_SLUMP_TO_FLOOR, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -6855,7 +6855,7 @@ export class Class_JinxKnockDown extends Class_Move {
             this.animation.advance();
             this.delayFrames = 5;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -6868,7 +6868,7 @@ export class Class_JinxKnockDown extends Class_Move {
             this.setVulnerable(1);
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustSkidEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -6930,14 +6930,14 @@ export class Class_JinxPowerKick extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   setState(state) {
     this.initState = 1;
     this.moveState = state;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_CROUCH): {
@@ -6946,7 +6946,7 @@ export class Class_JinxPowerKick extends Class_Move {
             this.delayFrames = 4;
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_JUMP_0, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -6960,7 +6960,7 @@ export class Class_JinxPowerKick extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustJumpEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             this.owner.setVel(_mul(this.owner.dir, 5.0), _neg(5.0));
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -6971,7 +6971,7 @@ export class Class_JinxPowerKick extends Class_Move {
             this.animation.advance();
             this.delayFrames = 2;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -6990,7 +6990,7 @@ export class Class_JinxPowerKick extends Class_Move {
           if (_truthy((this.age > 30))) {
             this.owner.accelerate(G.g.gravity);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(this.hitOpponent)) {
             this.owner.setVel(0.0, 0.0);
             this.advanceState();
@@ -7017,7 +7017,7 @@ export class Class_JinxPowerKick extends Class_Move {
               G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_KICK_LANDING, 100, G.g.SFX_EVENT_PRIORITY_LOW);
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -7054,7 +7054,7 @@ export class Class_JinxPowerKick extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             this.delayFrames = 3;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -7098,7 +7098,7 @@ export class Class_JinxPunch extends Class_Move {
     this.owner.setVel(0.0, 0.0);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy((this.age > 1))) {
       this.animation.advance();
     }
@@ -7230,7 +7230,7 @@ export class Class_JinxStun extends Class_Move {
     this.owner.setVel(0.0, 0.0);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy((this.age >= this.stunDuration))) {
       this.moveDone = 1;
     }
@@ -7365,7 +7365,7 @@ export class Class_KeyCombo extends LingoObject {
         this.index = 1;
         return 1;
       } else {
-        this.index = _add(this.index, 1);
+        this.index = (this.index + 1);
       }
     } else {
       this.index = 1;
@@ -7454,7 +7454,7 @@ export class Class_LoopedAnimation extends Class_Animation {
   advance() {
     this.repeatCount = _sub(this.repeatCount, 1);
     if (_truthy(_eq(this.repeatCount, 0))) {
-      this.currIndex = _add(this.currIndex, 1);
+      this.currIndex = (this.currIndex + 1);
       if (_truthy((this.currIndex > this.animList.count))) {
         this.reset();
       }
@@ -7747,7 +7747,7 @@ export class Class_MammothAI extends Class_AIAdapter {
     diffX = _sub(attPos.locH, x);
     diffY = _sub(attPos.locV, y);
     if (_truthy(!_eq(attVel.locH, 0.0))) {
-      slope = _div(attVel.locV, attVel.locH);
+      slope = _fdiv(attVel.locV, attVel.locH);
     } else {
       slope = 999999.0;
     }
@@ -7899,10 +7899,10 @@ export class Class_MammothDefeat extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -7913,7 +7913,7 @@ export class Class_MammothDefeat extends Class_Move {
               this.delayFrames = 1;
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -7995,10 +7995,10 @@ export class Class_MammothGroundPunch extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_WIND_UP_1): {
@@ -8007,7 +8007,7 @@ export class Class_MammothGroundPunch extends Class_Move {
             this.delayFrames = 2;
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_PUNCH_WOOSH, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -8019,7 +8019,7 @@ export class Class_MammothGroundPunch extends Class_Move {
             this.animation.advance();
             this.delayFrames = 5;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -8032,7 +8032,7 @@ export class Class_MammothGroundPunch extends Class_Move {
             this.projectile = _new(G.g.classes.Class_MammothWaveProjectile, this.owner, _add(this.owner.pos, point(_mul(100, this.owner.dir), 0)), point(0, 0), this.owner.dir);
             G.g.main.screen.addProjectile(this.projectile);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
             this.projectile = undefined;
@@ -8044,7 +8044,7 @@ export class Class_MammothGroundPunch extends Class_Move {
             this.animation.advance();
             this.delayFrames = 2;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -8113,10 +8113,10 @@ export class Class_MammothJump extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_CROUCH): {
@@ -8125,7 +8125,7 @@ export class Class_MammothJump extends Class_Move {
             this.delayFrames = 3;
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_JUMP_2, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -8177,7 +8177,7 @@ export class Class_MammothJump extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustJumpEffect, this.owner, _add(this.owner.pos, point(20, 0)), point(0, 0), _neg(1)));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_BIG_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -8234,10 +8234,10 @@ export class Class_MammothJumpPunch extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_CROUCH): {
@@ -8247,7 +8247,7 @@ export class Class_MammothJumpPunch extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_WhiteBurstReverseEffect, this.owner, _add(this.owner.pos, point(_mul(_neg(66.0), this.owner.dir), _neg(41.0))), point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.MAMMOTH.SFX_MAMMOTH_JUMPSPIN, 80, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -8262,7 +8262,7 @@ export class Class_MammothJumpPunch extends Class_Move {
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_JUMP_0, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
           this.owner.moveBy(0.0, _neg(10.0));
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -8274,7 +8274,7 @@ export class Class_MammothJumpPunch extends Class_Move {
             this.delayFrames = 2;
           }
           this.owner.moveBy(0.0, _neg(10.0));
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -8285,7 +8285,7 @@ export class Class_MammothJumpPunch extends Class_Move {
             this.animation.advance();
             this.delayFrames = 2;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -8296,7 +8296,7 @@ export class Class_MammothJumpPunch extends Class_Move {
             this.animation.advance();
             this.delayFrames = 6;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -8308,7 +8308,7 @@ export class Class_MammothJumpPunch extends Class_Move {
             this.delayFrames = 4;
           }
           this.owner.moveBy(0.0, 10.0);
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -8322,7 +8322,7 @@ export class Class_MammothJumpPunch extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_BIG_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -8495,10 +8495,10 @@ export class Class_MammothKnockDown extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -8509,7 +8509,7 @@ export class Class_MammothKnockDown extends Class_Move {
               this.delayFrames = 1;
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -8538,7 +8538,7 @@ export class Class_MammothKnockDown extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_SLUMP_TO_FLOOR, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -8551,7 +8551,7 @@ export class Class_MammothKnockDown extends Class_Move {
             this.setVulnerable(1);
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustSkidEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -8679,14 +8679,14 @@ export class Class_MammothShoulderBarge extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   setState(state) {
     this.initState = 1;
     this.moveState = state;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_CROUCH): {
@@ -8698,7 +8698,7 @@ export class Class_MammothShoulderBarge extends Class_Move {
             this.owner.setShaking(1);
             this.delayFrames = 5;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -8729,11 +8729,11 @@ export class Class_MammothShoulderBarge extends Class_Move {
         case _caseKey(this.STATE_PUSH): {
           if (_truthy(this.initState)) {
             this.initState = 0;
-            this.delayFrames = _sub(this.stunDuration, 1);
+            this.delayFrames = (this.stunDuration - 1);
           }
           this.animation.advance();
           this.owner.opponent.setPos(_add(this.owner.getPos(), point(_mul(100, this.owner.dir), 0)));
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -8850,7 +8850,7 @@ export class Class_MammothStun extends Class_Move {
     this.owner.setVel(0.0, 0.0);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy((this.age >= this.stunDuration))) {
       this.moveDone = 1;
     }
@@ -8979,16 +8979,16 @@ export class Class_MammothWaveProjectile extends Class_Projectile {
     return undefined;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(this.alive)) {
       if (_truthy(this.needInit)) {
         this.needInit = 0;
         this.setVel(_mul(20.0, this.dir), 0.0);
       }
-      if (_truthy(_eq((_mod((_sub(this.age, 1)), 12)), 0))) {
+      if (_truthy(_eq((_mod(((this.age - 1)), 12)), 0))) {
         G.g.main.audioMgr.playSound(G.g.assets.MAMMOTH.SFX_MAMMOTH_SHOCKWAVEPUNCH, 100, G.g.SFX_EVENT_PRIORITY_LOW);
       }
-      if (_truthy(_eq((_mod((_sub(this.age, 1)), 4)), 0))) {
+      if (_truthy(_eq((_mod(((this.age - 1)), 4)), 0))) {
         G.g.main.screen.addEffect(_new(G.g.classes.Class_GroundWaveEffect, this, this.pos, point(0, 0), this.dir));
       }
       this.setPos(_add(this.pos, this.vel));
@@ -9284,7 +9284,7 @@ export class Class_PlayOnceAnimation extends Class_Animation {
   }
   advance() {
     if (_truthy(!_truthy(this.done))) {
-      this.repeatCount = _sub(this.repeatCount, 1);
+      this.repeatCount = (this.repeatCount - 1);
       if (_truthy((this.repeatCount < 0))) {
         this.repeatCount = 0;
       }
@@ -9292,7 +9292,7 @@ export class Class_PlayOnceAnimation extends Class_Animation {
         if (_truthy(_eq(this.currIndex, this.animList.count))) {
           this.done = 1;
         } else {
-          this.currIndex = _add(this.currIndex, 1);
+          this.currIndex = (this.currIndex + 1);
           this.repeatCount = this.frameRepeat;
         }
       }
@@ -9424,12 +9424,12 @@ export class Class_RobinBombProjectile extends Class_Projectile {
   }
   advanceState() {
     this.initState = 1;
-    this.animState = _add(this.animState, 1);
+    this.animState = (this.animState + 1);
     this.stateAge = 0;
   }
   update() {
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(this.alive)) {
       switch (_caseKey(this.animState)) {
         case _caseKey(this.STATE_FLY): {
@@ -9554,10 +9554,10 @@ export class Class_RobinBombThrow extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -9581,7 +9581,7 @@ export class Class_RobinBombThrow extends Class_Move {
             G.g.main.screen.addProjectile(this.projectile);
             G.g.main.audioMgr.playSound(G.g.assets.ROBIN.SFX_ROBIN_BOMB_FLYING, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.projectile = undefined;
             this.advanceState();
@@ -9593,7 +9593,7 @@ export class Class_RobinBombThrow extends Class_Move {
             this.animation.advance();
             this.delayFrames = 2;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -9654,10 +9654,10 @@ export class Class_RobinDefeat extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -9668,7 +9668,7 @@ export class Class_RobinDefeat extends Class_Move {
               this.delayFrames = 1;
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -9757,14 +9757,14 @@ export class Class_RobinDiagJumpKick extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   setState(state) {
     this.initState = 1;
     this.moveState = state;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -9772,7 +9772,7 @@ export class Class_RobinDiagJumpKick extends Class_Move {
             this.initState = 0;
             this.delayFrames = 2;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -9807,7 +9807,7 @@ export class Class_RobinDiagJumpKick extends Class_Move {
               G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_KICK_LANDING, 100, G.g.SFX_EVENT_PRIORITY_LOW);
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -9839,7 +9839,7 @@ export class Class_RobinDiagJumpKick extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -9851,7 +9851,7 @@ export class Class_RobinDiagJumpKick extends Class_Move {
             this.delayFrames = 6;
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustSkidEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -9898,7 +9898,7 @@ export class Class_RobinDiscProjectile extends Class_Projectile {
     return undefined;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(this.alive)) {
       if (_truthy(this.needInit)) {
         this.needInit = 0;
@@ -9982,10 +9982,10 @@ export class Class_RobinDiscThrow extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -10008,7 +10008,7 @@ export class Class_RobinDiscThrow extends Class_Move {
             this.projectile = _new(G.g.classes.Class_RobinDiscProjectile, this.owner, _add(this.owner.pos, point(_mul(80, this.owner.dir), _neg(40))), point(0, 0), this.owner.dir);
             G.g.main.screen.addProjectile(this.projectile);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.projectile = undefined;
             this.advanceState();
@@ -10020,7 +10020,7 @@ export class Class_RobinDiscThrow extends Class_Move {
             this.animation.advance();
             this.delayFrames = 2;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -10066,10 +10066,10 @@ export class Class_RobinFall extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_DESCENT_1): {
@@ -10077,7 +10077,7 @@ export class Class_RobinFall extends Class_Move {
             this.initState = 0;
             this.delayFrames = 8;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           this.owner.accelerate(G.g.gravity);
           if (_truthy(this.owner.fallCheck())) {
             this.owner.setVel(0.0, 0.0);
@@ -10106,7 +10106,7 @@ export class Class_RobinFall extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -10179,14 +10179,14 @@ export class Class_RobinFlyingKick extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   setState(state) {
     this.initState = 1;
     this.moveState = state;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -10194,7 +10194,7 @@ export class Class_RobinFlyingKick extends Class_Move {
             this.initState = 0;
             this.delayFrames = 2;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -10208,7 +10208,7 @@ export class Class_RobinFlyingKick extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustJumpEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
           }
           this.owner.moveBy(0.0, _neg(15.0));
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -10222,7 +10222,7 @@ export class Class_RobinFlyingKick extends Class_Move {
             this.owner.setShowingTrails(1);
             G.g.main.audioMgr.playSound(G.g.assets.CHAR_SHARED.SFX_ROBIN_FLYING_KICK_WOOSH, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy((this.delayFrames <= 0))) {
             this.owner.accelerate(G.g.gravity);
           }
@@ -10249,7 +10249,7 @@ export class Class_RobinFlyingKick extends Class_Move {
               G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_KICK_LANDING, 100, G.g.SFX_EVENT_PRIORITY_LOW);
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -10277,7 +10277,7 @@ export class Class_RobinFlyingKick extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -10289,7 +10289,7 @@ export class Class_RobinFlyingKick extends Class_Move {
             this.delayFrames = 3;
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustSkidEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -10358,11 +10358,11 @@ export class Class_RobinJump extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
     let dir;
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_CROUCH): {
@@ -10371,7 +10371,7 @@ export class Class_RobinJump extends Class_Move {
             this.delayFrames = 3;
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_JUMP_1, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -10429,7 +10429,7 @@ export class Class_RobinJump extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -10634,10 +10634,10 @@ export class Class_RobinKick extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_CROUCH): {
@@ -10645,7 +10645,7 @@ export class Class_RobinKick extends Class_Move {
             this.initState = 0;
             this.delayFrames = 4;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -10659,7 +10659,7 @@ export class Class_RobinKick extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustJumpEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
           }
           this.owner.moveBy(0.0, _neg(12.0));
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -10672,7 +10672,7 @@ export class Class_RobinKick extends Class_Move {
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_KICK_WOOSH, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
           this.owner.moveBy(0.0, _neg(12.0));
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -10683,7 +10683,7 @@ export class Class_RobinKick extends Class_Move {
             this.animation.advance();
             this.delayFrames = 4;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -10695,7 +10695,7 @@ export class Class_RobinKick extends Class_Move {
             this.delayFrames = 2;
           }
           this.owner.moveBy(0.0, 12.0);
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -10707,7 +10707,7 @@ export class Class_RobinKick extends Class_Move {
             this.delayFrames = 2;
           }
           this.owner.moveBy(0.0, 12.0);
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -10720,7 +10720,7 @@ export class Class_RobinKick extends Class_Move {
             this.delayFrames = 3;
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -10794,10 +10794,10 @@ export class Class_RobinKnockDown extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -10808,7 +10808,7 @@ export class Class_RobinKnockDown extends Class_Move {
               this.delayFrames = 1;
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -10837,7 +10837,7 @@ export class Class_RobinKnockDown extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_SLUMP_TO_FLOOR, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -10850,7 +10850,7 @@ export class Class_RobinKnockDown extends Class_Move {
             this.setVulnerable(1);
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustSkidEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -10899,7 +10899,7 @@ export class Class_RobinPunch extends Class_Move {
     this.owner.setVel(0.0, 0.0);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy((this.age > 1))) {
       this.animation.advance();
     }
@@ -11016,7 +11016,7 @@ export class Class_RobinStun extends Class_Move {
     }
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy((this.age >= this.stunDuration))) {
       this.moveDone = 1;
     }
@@ -11176,8 +11176,8 @@ export class Class_Scene extends LingoObject {
     this.bgSprite.locZ = G.g.SPRITE_LOCZ_BACKGROUND;
     this.sceneOrigin = point(0, 0);
     this.sceneRect = _sub(this.bgMember.rect, rect(this.bgMember.regPoint, this.bgMember.regPoint));
-    this.sceneBoundsMinX = _add(this.sceneRect.left, sceneLeftBufferX);
-    this.sceneBoundsMaxX = _sub(this.sceneRect.right, sceneRightBufferX);
+    this.sceneBoundsMinX = (this.sceneRect.left + sceneLeftBufferX);
+    this.sceneBoundsMaxX = (this.sceneRect.right - sceneRightBufferX);
     this.stageRect = (D.the("stage")).rect;
     halfViewWidth = _idiv(this.stageRect.width, 2);
     halfViewHeight = _idiv(this.stageRect.height, 2);
@@ -11419,7 +11419,7 @@ export class Class_SelectFighterScreen extends Class_Screen {
     baseRect = digitRect.offset(160, 1);
     destImg = G.g.util.findMember("playerscore_dynamic").image;
     for (i = 1; i <= 9; i++) {
-      digit = _div(_mod(totalScore, integer(power(10, i))), integer(power(10, _sub(i, 1))));
+      digit = _idiv(_mod(totalScore, integer(power(10, i))), integer(power(10, _sub(i, 1))));
       srcImg = _getAt(this.scoreNumberMembers, _add(digit, 1)).image;
       destImg.copyPixels(srcImg, baseRect.offset(_mul(_neg(((digitRect.width + 1))), (_sub(i, 1))), 0), digitRect);
     }
@@ -11803,7 +11803,7 @@ export class Class_SpriteManager extends LingoObject {
     startIndex = this.chanIndex;
     done = 0;
     while (_truthy(!_truthy(done))) {
-      this.chanIndex = _add(this.chanIndex, 1);
+      this.chanIndex = (this.chanIndex + 1);
       if (_truthy((this.chanIndex > this.channelsInUse.count))) {
         this.chanIndex = 1;
       }
@@ -11908,7 +11908,7 @@ export class Class_TitleScreen extends Class_Screen {
         this.updateProgressBar(ratio);
         if (_truthy(this.preloader.isDone())) {
           if (_truthy(_eq(D.the("frame"), (_sub(marker(1), 1))))) {
-            this.delayFrames = _sub(this.delayFrames, 1);
+            this.delayFrames = (this.delayFrames - 1);
             if (_truthy(_eq(this.delayFrames, 0))) {
               this.preloader = this.preloader.destroy();
               this.advanceStage();
@@ -12050,8 +12050,8 @@ export class Class_Utility extends LingoObject {
     if (_truthy(_eq(f, 0))) {
       return 0;
     }
-    _setAt(retList, 1, _add(x1, (_div(_mul(d, Ax), f))));
-    _setAt(retList, 2, _add(y1, (_div(_mul(d, Ay), f))));
+    _setAt(retList, 1, _add(x1, (_fdiv(_mul(d, Ax), f))));
+    _setAt(retList, 2, _add(y1, (_fdiv(_mul(d, Ay), f))));
     return 1;
   }
 }
@@ -12228,7 +12228,7 @@ export class Class_VersusScreen extends Class_Screen {
     let copyRect, destImg, fillWidth;
     destImg = this.villainNameScratchMember.image;
     fillWidth = integer(_mul(destImg.width, ratio));
-    copyRect = rect(_sub(this.villainNameSourceImage.width, fillWidth), 0, this.villainNameSourceImage.width, this.villainNameSourceImage.height);
+    copyRect = rect((this.villainNameSourceImage.width - fillWidth), 0, this.villainNameSourceImage.width, this.villainNameSourceImage.height);
     destImg.copyPixels(this.villainNameSourceImage, copyRect, copyRect);
   }
   linkCasts() {
@@ -12277,7 +12277,7 @@ export class Class_VersusScreen extends Class_Screen {
           this.delayFrames = 100;
         }
         if (_truthy(_eq(D.the("frame"), (_sub(marker(1), 1))))) {
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(!_truthy(this.titanReady))) {
             if (_truthy(this.titanPreloader.update())) {
               this.updateTitanBar(1.0);
@@ -12323,7 +12323,7 @@ export class Class_VersusScreen extends Class_Screen {
           }
         }
         if (_truthy(_eq(D.the("frame"), (_sub(marker(1), 1))))) {
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.linkCasts();
             G.g.goFrame = label("SCREEN_GAME");
@@ -12592,10 +12592,10 @@ export class Class_RavenDefeat extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -12606,7 +12606,7 @@ export class Class_RavenDefeat extends Class_Move {
               this.delayFrames = 1;
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -12634,7 +12634,7 @@ export class Class_RavenDefeat extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_SLUMP_TO_FLOOR, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -12688,10 +12688,10 @@ export class Class_RavenFall extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_DESCENT_1): {
@@ -12699,7 +12699,7 @@ export class Class_RavenFall extends Class_Move {
             this.initState = 0;
             this.delayFrames = 8;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           this.owner.accelerate(G.g.gravity);
           if (_truthy(this.owner.fallCheck())) {
             this.owner.setVel(0.0, 0.0);
@@ -12728,7 +12728,7 @@ export class Class_RavenFall extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -12808,11 +12808,11 @@ export class Class_RavenJump extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
     let dir;
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_CROUCH): {
@@ -12821,7 +12821,7 @@ export class Class_RavenJump extends Class_Move {
             this.delayFrames = 3;
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_JUMP_1, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -12877,7 +12877,7 @@ export class Class_RavenJump extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -12888,7 +12888,7 @@ export class Class_RavenJump extends Class_Move {
             this.initState = 0;
             this.delayFrames = 2;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -13152,10 +13152,10 @@ export class Class_RavenKnockDown extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -13166,7 +13166,7 @@ export class Class_RavenKnockDown extends Class_Move {
               this.delayFrames = 1;
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -13194,7 +13194,7 @@ export class Class_RavenKnockDown extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_SLUMP_TO_FLOOR, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -13205,7 +13205,7 @@ export class Class_RavenKnockDown extends Class_Move {
             this.animation.advance();
             this.delayFrames = 5;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -13218,7 +13218,7 @@ export class Class_RavenKnockDown extends Class_Move {
             this.setVulnerable(1);
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustSkidEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -13357,7 +13357,7 @@ export class Class_RavenStun extends Class_Move {
     }
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy((this.age >= this.stunDuration))) {
       this.moveDone = 1;
     }
@@ -13593,10 +13593,10 @@ export class Class_RavenTelekineticThrow extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -13611,7 +13611,7 @@ export class Class_RavenTelekineticThrow extends Class_Move {
           } else if (_truthy(_eq(this.delayFrames, 1))) {
             this.owner.moveBy(0.0, _neg(40.0));
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -13631,7 +13631,7 @@ export class Class_RavenTelekineticThrow extends Class_Move {
             this.projectile.moveBy(_mul(20.0, this.owner.dir), 0.0);
           }
           this.projectile.getSprite().blend = _add(this.projectile.getSprite().blend, 20);
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -13647,7 +13647,7 @@ export class Class_RavenTelekineticThrow extends Class_Move {
             this.projectile = undefined;
             G.g.main.audioMgr.playSound(G.g.assets.CHAR_SHARED.SFX_RAVEN_FLINGOBJECT, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -13671,7 +13671,7 @@ export class Class_RavenTelekineticThrow extends Class_Move {
             this.owner.setOnGround(1);
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -13726,7 +13726,7 @@ export class Class_RavenTelekineticThrowProjectile extends Class_Projectile {
     return undefined;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(this.alive)) {
       if (_truthy(this.needInit)) {
         this.needInit = 0;
@@ -13815,10 +13815,10 @@ export class Class_RavenExplosiveDrop extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -13826,7 +13826,7 @@ export class Class_RavenExplosiveDrop extends Class_Move {
             this.initState = 0;
             this.delayFrames = 5;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 1))) {
             this.animation.advance();
           } else if (_truthy(_eq(this.delayFrames, 0))) {
@@ -13844,7 +13844,7 @@ export class Class_RavenExplosiveDrop extends Class_Move {
             G.g.main.audioMgr.playSound(G.g.assets.RAVEN.SFX_RAVEN_FLOATHORIZONTAL, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
           this.owner.moveBy(0.0, _neg(34.0));
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -13855,7 +13855,7 @@ export class Class_RavenExplosiveDrop extends Class_Move {
             this.animation.advance();
             this.delayFrames = 15;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           switch (_caseKey(this.delayFrames)) {
             case _caseKey(12): {
               this.animation.advance();
@@ -13902,7 +13902,7 @@ export class Class_RavenExplosiveDrop extends Class_Move {
             G.g.game.addProjectile(this.projectile);
             G.g.main.audioMgr.playSound(G.g.assets.CHAR_SHARED.SFX_RAVEN_FLINGOBJECT, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 1))) {
             this.owner.accelerate(G.g.gravity);
           } else if (_truthy(_eq(this.delayFrames, 0))) {
@@ -13929,7 +13929,7 @@ export class Class_RavenExplosiveDrop extends Class_Move {
             this.delayFrames = 4;
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -13997,7 +13997,7 @@ export class Class_RavenFallingObjectsProjectile extends Class_Projectile {
     return undefined;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(this.alive)) {
       if (_truthy(this.needInit)) {
         this.needInit = 0;
@@ -14023,11 +14023,11 @@ export class Class_RavenFallingObjectsProjectile extends Class_Projectile {
       this.leftObj.moveBy(this.leftObjVel);
       this.rightObj.moveBy(this.rightObjVel);
       if (_truthy(this.explosionAt)) {
-        if (_truthy(_eq(this.age, (_add(this.explosionAt, 2))))) {
+        if (_truthy(_eq(this.age, ((this.explosionAt + 2))))) {
           G.g.main.screen.addEffect(_new(G.g.classes.Class_GroundExplode2Effect, this.owner, _add(this.pos, point(_mul(_neg(90.0), this.owner.dir), 5.0)), point(0, 0), _neg(this.owner.dir)));
-        } else if (_truthy(_eq(this.age, (_add(this.explosionAt, 3))))) {
+        } else if (_truthy(_eq(this.age, ((this.explosionAt + 3))))) {
           G.g.main.screen.addEffect(_new(G.g.classes.Class_GroundExplode2Effect, this.owner, _add(this.pos, point(_mul(90.0, this.owner.dir), 0.0)), point(0, 0), this.owner.dir));
-        } else if (_truthy((this.age >= (_add(this.explosionAt, 11))))) {
+        } else if (_truthy((this.age >= ((this.explosionAt + 11))))) {
           this.kill();
         }
       }
@@ -14123,10 +14123,10 @@ export class Class_RavenTelekineticSpin extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -14134,7 +14134,7 @@ export class Class_RavenTelekineticSpin extends Class_Move {
             this.initState = 0;
             this.delayFrames = 2;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -14158,7 +14158,7 @@ export class Class_RavenTelekineticSpin extends Class_Move {
             this.projectile = _new(G.g.classes.Class_RavenTelekineticSpinProjectile, this.owner, _add(this.owner.pos, point(0.0, _neg(20.0))), point(0, 0), this.owner.dir);
             G.g.game.addProjectile(this.projectile);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -14170,7 +14170,7 @@ export class Class_RavenTelekineticSpin extends Class_Move {
             this.animation.advance();
             this.delayFrames = 12;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -14198,7 +14198,7 @@ export class Class_RavenTelekineticSpin extends Class_Move {
             this.delayFrames = 4;
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -14275,14 +14275,14 @@ export class Class_RavenTelekineticSpinProjectile extends Class_Projectile {
     }
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(this.alive)) {
       if (_truthy(this.needInit)) {
         this.needInit = 0;
       }
       this.setPos(_add(this.centerPos, this.getLoopOffset(this.age)));
-      this.trail1.setPos(_add(this.centerPos, this.getLoopOffset(_sub(this.age, 1))));
-      this.trail2.setPos(_add(this.centerPos, this.getLoopOffset(_sub(this.age, 2))));
+      this.trail1.setPos(_add(this.centerPos, this.getLoopOffset((this.age - 1))));
+      this.trail2.setPos(_add(this.centerPos, this.getLoopOffset((this.age - 2))));
       this.visSprite.member = this.animation.getMember();
       this.updateBoundingBoxes();
       this.shadow.update();
@@ -14602,10 +14602,10 @@ export class Class_PlasmusDefeat extends Class_Move {
     this.moveState = i;
   }
   advanceState() {
-    this.setState(_add(this.moveState, 1));
+    this.setState((this.moveState + 1));
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -14618,7 +14618,7 @@ export class Class_PlasmusDefeat extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_PlasmusHitSplatterEffect, this.owner, _add(this.owner.pos, point(0.0, _neg(175.0))), point(_mul(_neg(30.0), this.owner.dir), 0.0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.PLASMUS.SFX_PLASMUS_TRANSFORM, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -14627,7 +14627,7 @@ export class Class_PlasmusDefeat extends Class_Move {
           if (_truthy(this.initState)) {
             this.initState = 0;
           }
-          if (_truthy(_eq((_mod((_sub(this.age, this.initStateAge)), 10)), 0))) {
+          if (_truthy(_eq((_mod(((this.age - this.initStateAge)), 10)), 0))) {
             if (_truthy(this.animation.isDone())) {
               this.owner.setAlive(0);
               this.moveDone = 1;
@@ -14788,10 +14788,10 @@ export class Class_PlasmusKnockDown extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_STUN): {
@@ -14828,7 +14828,7 @@ export class Class_PlasmusKnockDown extends Class_Move {
             }
           }
           this.animation.advance();
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -14872,7 +14872,7 @@ export class Class_PlasmusArmSwipe extends Class_Move {
     this.owner.setVel(0.0, 0.0);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(_eq(this.age, 1))) {
       if (_truthy(_eq(random(2), 1))) {
         G.g.main.audioMgr.playSound(G.g.assets.PLASMUS.SFX_PLASMUS_ROAR_BIG, 100, G.g.SFX_EVENT_PRIORITY_LOW);
@@ -14975,7 +14975,7 @@ export class Class_PlasmusStun extends Class_Move {
     this.needInit = 1;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(this.needInit)) {
       this.needInit = 0;
       G.g.main.screen.addEffect(_new(G.g.classes.Class_PlasmusHitSplatterEffect, this.owner, _add(this.owner.pos, point(0.0, _neg(175.0))), point(_mul(_neg(30.0), this.owner.dir), 0.0), this.owner.dir));
@@ -15169,7 +15169,7 @@ export class Class_PlasmusSludgeProjectile extends Class_Projectile {
     return undefined;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(this.alive)) {
       if (_truthy(this.needInit)) {
         this.needInit = 0;
@@ -15258,10 +15258,10 @@ export class Class_PlasmusSludgeThrow extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -15295,7 +15295,7 @@ export class Class_PlasmusSludgeThrow extends Class_Move {
               G.g.main.audioMgr.playSound(G.g.assets.PLASMUS.SFX_PLASMUS_ROAR_BIG, 100, G.g.SFX_EVENT_PRIORITY_LOW);
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.projectile = undefined;
             this.moveDone = 1;
@@ -15495,7 +15495,7 @@ export class Class_RobinAI extends Class_AIAdapter {
     diffX = _sub(attPos.locH, x);
     diffY = _sub(attPos.locV, y);
     if (_truthy(!_eq(attVel.locH, 0.0))) {
-      slope = _div(attVel.locV, attVel.locH);
+      slope = _fdiv(attVel.locV, attVel.locH);
     } else {
       slope = 999999.0;
     }
@@ -15583,11 +15583,11 @@ export class Class_PlasmusCrabProjectile extends Class_Projectile {
   }
   setState(i) {
     this.initState = 1;
-    this.animState = _add(this.animState, 1);
+    this.animState = (this.animState + 1);
     this.stateAge = 0;
   }
   advanceState() {
-    this.setState(_add(this.animState, 1));
+    this.setState((this.animState + 1));
   }
   melt() {
     G.g.main.screen.addEffect(_new(G.g.classes.Class_PlasmusCrabMeltEffect, this.owner, this.pos, point(0, 0), this.dir));
@@ -15595,8 +15595,8 @@ export class Class_PlasmusCrabProjectile extends Class_Projectile {
   }
   update() {
     let diffX, diffY, newPos, tmpPos;
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(this.alive)) {
       switch (_caseKey(this.animState)) {
         case _caseKey(this.STATE_SEEK): {
@@ -15722,10 +15722,10 @@ export class Class_PlasmusCrabThrow extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -15761,7 +15761,7 @@ export class Class_PlasmusCrabThrow extends Class_Move {
               G.g.main.audioMgr.playSound(G.g.assets.PLASMUS.SFX_PLASMUS_ROAR_BIG, 100, G.g.SFX_EVENT_PRIORITY_LOW);
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.projectile = undefined;
             this.moveDone = 1;
@@ -15832,10 +15832,10 @@ export class Class_RavenSummonTitan extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -15843,7 +15843,7 @@ export class Class_RavenSummonTitan extends Class_Move {
             this.initState = 0;
             this.delayFrames = 2;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -15869,7 +15869,7 @@ export class Class_RavenSummonTitan extends Class_Move {
             G.g.game.freezeProjectiles(this.owner.opponent, 1);
             G.g.game.freezeEffects(this.owner.opponent, 1);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -15908,7 +15908,7 @@ export class Class_RavenSummonTitan extends Class_Move {
             this.delayFrames = 4;
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -16362,12 +16362,12 @@ export class Class_RavenMidairAttack extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
     this.stateAge = 0;
   }
   update() {
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -16438,7 +16438,7 @@ export class Class_PlasmusSludgeSplatProjectile extends Class_Projectile {
     return;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(this.alive)) {
       if (_truthy(this.needInit)) {
         this.needInit = 0;
@@ -16502,13 +16502,13 @@ export class Class_SummonRobinEffect extends Class_Effect {
   }
   advanceState() {
     this.initState = 1;
-    this.animState = _add(this.animState, 1);
+    this.animState = (this.animState + 1);
     this.stateAge = 0;
   }
   update() {
     let damage, targetPos, targetRect, targetX, targetY;
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(this.alive)) {
       switch (_caseKey(this.animState)) {
         case _caseKey(this.STATE_WAIT): {
@@ -16703,7 +16703,7 @@ export class Class_HUDSummonPortrait extends LingoObject {
     this.stateAge = 0;
   }
   update() {
-    this.stateAge = _add(this.stateAge, 1);
+    this.stateAge = (this.stateAge + 1);
     switch (_caseKey(this.state)) {
       case _caseKey(this.STATE_AVAILABLE): {
         if (_truthy(this.initState)) {
@@ -16782,12 +16782,12 @@ export class Class_PlasmusChestBlast extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
     this.stateAge = 0;
   }
   update() {
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -16850,7 +16850,7 @@ export class Class_PlasmusChestBlastProjectile_1 extends Class_Projectile {
     return undefined;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(this.alive)) {
       if (_truthy(this.needInit)) {
         this.needInit = 0;
@@ -16912,7 +16912,7 @@ export class Class_PlasmusChestBlastProjectile_2 extends Class_Projectile {
     return undefined;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(this.alive)) {
       if (_truthy(this.needInit)) {
         this.needInit = 0;
@@ -16974,7 +16974,7 @@ export class Class_PlasmusChestBlastProjectile_3 extends Class_Projectile {
     return undefined;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(this.alive)) {
       if (_truthy(this.needInit)) {
         this.needInit = 0;
@@ -17048,13 +17048,13 @@ export class Class_SummonCyborgEffect extends Class_Effect {
   }
   advanceState() {
     this.initState = 1;
-    this.animState = _add(this.animState, 1);
+    this.animState = (this.animState + 1);
     this.stateAge = 0;
   }
   update() {
     let damage, targetPos, targetRect, targetX, targetY;
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(this.alive)) {
       switch (_caseKey(this.animState)) {
         case _caseKey(this.STATE_WAIT): {
@@ -17192,13 +17192,13 @@ export class Class_SummonRavenEffect extends Class_Effect {
   }
   advanceState() {
     this.initState = 1;
-    this.animState = _add(this.animState, 1);
+    this.animState = (this.animState + 1);
     this.stateAge = 0;
   }
   update() {
     let damage;
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(this.alive)) {
       switch (_caseKey(this.animState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -17363,14 +17363,14 @@ export class Class_RavenMidairAttackProjectile extends Class_Projectile {
     }
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(this.alive)) {
       if (_truthy(this.needInit)) {
         this.needInit = 0;
       }
       this.setPos(_add(this.centerPos, this.getLoopOffset(this.age)));
-      this.trail1.setPos(_add(this.centerPos, this.getLoopOffset(_sub(this.age, 1))));
-      this.trail2.setPos(_add(this.centerPos, this.getLoopOffset(_sub(this.age, 2))));
+      this.trail1.setPos(_add(this.centerPos, this.getLoopOffset((this.age - 1))));
+      this.trail2.setPos(_add(this.centerPos, this.getLoopOffset((this.age - 2))));
       this.visSprite.member = this.animation.getMember();
       this.updateBoundingBoxes();
       this.shadow.update();
@@ -17477,12 +17477,12 @@ export class Class_CyborgSonicCannon extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
     this.stateAge = 0;
   }
   update() {
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -17592,7 +17592,7 @@ export class Class_CyborgFlyingPunch extends Class_Move {
     this.animation.reset();
   }
   advanceState() {
-    this.setState(_add(this.moveState, 1));
+    this.setState((this.moveState + 1));
   }
   setState(state) {
     this.initState = 1;
@@ -17600,8 +17600,8 @@ export class Class_CyborgFlyingPunch extends Class_Move {
     this.stateAge = 0;
   }
   update() {
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -17758,7 +17758,7 @@ export class Class_CyborgPowerSmash extends Class_Move {
     this.animation.reset();
   }
   advanceState() {
-    this.setState(_add(this.moveState, 1));
+    this.setState((this.moveState + 1));
   }
   setState(state) {
     this.initState = 1;
@@ -17766,8 +17766,8 @@ export class Class_CyborgPowerSmash extends Class_Move {
     this.stateAge = 0;
   }
   update() {
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -17982,11 +17982,11 @@ export class Class_CyborgSummonTitan extends Class_Move {
     this.stateAge = 0;
   }
   advanceState() {
-    this.setState(_add(this.moveState, 1));
+    this.setState((this.moveState + 1));
   }
   update() {
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LEADIN): {
@@ -18096,11 +18096,11 @@ export class Class_RobinSummonTitan extends Class_Move {
     this.stateAge = 0;
   }
   advanceState() {
-    this.setState(_add(this.moveState, 1));
+    this.setState((this.moveState + 1));
   }
   update() {
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LEADIN): {
@@ -18272,10 +18272,10 @@ export class Class_StarfireDefeat extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -18286,7 +18286,7 @@ export class Class_StarfireDefeat extends Class_Move {
               this.delayFrames = 1;
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -18357,10 +18357,10 @@ export class Class_StarfireFall extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_DESCENT_1): {
@@ -18368,7 +18368,7 @@ export class Class_StarfireFall extends Class_Move {
             this.initState = 0;
             this.delayFrames = 8;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           this.owner.accelerate(_mul(G.g.gravity, 0.5));
           if (_truthy(this.owner.fallCheck())) {
             this.owner.setVel(0.0, 0.0);
@@ -18400,7 +18400,7 @@ export class Class_StarfireFall extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -18479,11 +18479,11 @@ export class Class_StarfireJump extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
     let dir;
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_CROUCH): {
@@ -18492,7 +18492,7 @@ export class Class_StarfireJump extends Class_Move {
             this.delayFrames = 3;
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_JUMP_1, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -18548,7 +18548,7 @@ export class Class_StarfireJump extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -18812,10 +18812,10 @@ export class Class_StarfireKnockDown extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -18826,7 +18826,7 @@ export class Class_StarfireKnockDown extends Class_Move {
               this.delayFrames = 1;
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -18854,7 +18854,7 @@ export class Class_StarfireKnockDown extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_SLUMP_TO_FLOOR, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -18867,7 +18867,7 @@ export class Class_StarfireKnockDown extends Class_Move {
             this.setVulnerable(1);
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustSkidEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -19006,7 +19006,7 @@ export class Class_StarfireStun extends Class_Move {
     }
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy((this.age >= this.stunDuration))) {
       this.moveDone = 1;
     }
@@ -19046,7 +19046,7 @@ export class Class_StarfireWalkBackward extends Class_Move {
     this.owner.setVel(_mul(_neg(this.owner.dir), this.owner.WALK_SPEED), 0.0);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(_eq(this.age, 2))) {
       this.animation.advance();
     }
@@ -19089,7 +19089,7 @@ export class Class_StarfireWalkForward extends Class_Move {
     this.owner.setVel(_mul(this.owner.dir, this.owner.WALK_SPEED), 0.0);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(_eq(this.age, 2))) {
       this.animation.advance();
     }
@@ -19146,14 +19146,14 @@ export class Class_StarfireDiagJumpKick extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   setState(state) {
     this.initState = 1;
     this.moveState = state;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -19161,7 +19161,7 @@ export class Class_StarfireDiagJumpKick extends Class_Move {
             this.initState = 0;
             this.delayFrames = 2;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -19197,7 +19197,7 @@ export class Class_StarfireDiagJumpKick extends Class_Move {
               G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_KICK_LANDING, 100, G.g.SFX_EVENT_PRIORITY_LOW);
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -19229,7 +19229,7 @@ export class Class_StarfireDiagJumpKick extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -19290,12 +19290,12 @@ export class Class_StarfireEnergyBall extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
     this.stateAge = 0;
   }
   update() {
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -19304,7 +19304,7 @@ export class Class_StarfireEnergyBall extends Class_Move {
             this.delayFrames = 4;
           }
           this.owner.moveBy(_mul(_neg(3.0), this.owner.dir), 0.0);
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -19321,7 +19321,7 @@ export class Class_StarfireEnergyBall extends Class_Move {
           if (_truthy(this.effect.isAlive())) {
             this.effect.setPos(_add(this.owner.pos, point(_mul(_neg(28), this.owner.dir), _neg(130))));
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.effect = undefined;
             this.advanceState();
@@ -19336,7 +19336,7 @@ export class Class_StarfireEnergyBall extends Class_Move {
             G.g.main.screen.addProjectile(this.projectile);
             G.g.main.screen.addEffect(_new(G.g.classes.Class_StarfireFistEffect, this.owner, _add(this.owner.pos, point(_mul(85, this.owner.dir), _neg(138))), point(0.0, 0.0), this.owner.dir));
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy((this.delayFrames >= 6))) {
             this.owner.moveBy(_mul(12.0, this.owner.dir), 0.0);
           } else if (_truthy(_eq(this.delayFrames, 0))) {
@@ -19351,7 +19351,7 @@ export class Class_StarfireEnergyBall extends Class_Move {
             this.delayFrames = 3;
           }
           this.owner.moveBy(_mul(_neg(10.0), this.owner.dir), 0.0);
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -19401,7 +19401,7 @@ export class Class_StarfireBallProjectile extends Class_Projectile {
     stateAge = 0;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(this.alive)) {
       if (_truthy(this.initState)) {
         this.initState = 0;
@@ -19524,13 +19524,13 @@ export class Class_StarfireBoltBarrage extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
     this.stateAge = 0;
   }
   update() {
     let p;
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -19566,7 +19566,7 @@ export class Class_StarfireBoltBarrage extends Class_Move {
             this.boltRightConjureOffset = point(_mul(_neg(50.0), this.owner.dir), _neg(150.0));
             this.boltLeftConjureOffset = point(0.0, _neg(180.0));
             p = _add(this.owner.pos, this.boltRightLaunchOffset);
-            this.groundHitPos = point(_add(p.locH, (_div(_mul(this.boltLaunchVel.locH, _neg(p.locV)), this.boltLaunchVel.locV))), 0.0);
+            this.groundHitPos = point(_add(p.locH, (_fdiv(_mul(this.boltLaunchVel.locH, _neg(p.locV)), this.boltLaunchVel.locV))), 0.0);
             this.effect = _new(G.g.classes.Class_StarfireBoltGlowEffect, this.owner, _add(this.owner.pos, this.boltRightConjureOffset), point(0, 0), this.owner.dir);
             G.g.main.screen.addEffect(this.effect);
             G.g.main.audioMgr.playSound(G.g.assets.CHAR_SHARED.SFX_STARFIRE_MAKINGSTARBOLT, 100, G.g.SFX_EVENT_PRIORITY_LOW);
@@ -19751,7 +19751,7 @@ export class Class_StarfireBoltProjectile extends Class_Projectile {
     stateAge = 0;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(this.alive)) {
       if (_truthy(this.initState)) {
         this.initState = 0;
@@ -19818,7 +19818,7 @@ export class Class_StarfireBoltExplosionProjectile extends Class_Projectile {
     stateAge = 0;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(this.alive)) {
       if (_truthy(this.initState)) {
         this.initState = 0;
@@ -19877,7 +19877,7 @@ export class Class_StarfireFlyingKnee extends Class_Move {
     this.owner.setVel(0.0, 0.0);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     switch (_caseKey(this.age)) {
       case _caseKey(1): {
         G.g.main.screen.addEffect(_new(G.g.classes.Class_DustJumpEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
@@ -19994,11 +19994,11 @@ export class Class_StarfireSummonTitan extends Class_Move {
     this.stateAge = 0;
   }
   advanceState() {
-    this.setState(_add(this.moveState, 1));
+    this.setState((this.moveState + 1));
   }
   update() {
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LEADIN): {
@@ -20076,13 +20076,13 @@ export class Class_SummonStarfireEffect extends Class_Effect {
   }
   advanceState() {
     this.initState = 1;
-    this.animState = _add(this.animState, 1);
+    this.animState = (this.animState + 1);
     this.stateAge = 0;
   }
   update() {
     let attackPos, boltStartX, boltStartY, damage, effect, launchHeight, p, startPos, targetPos, targetX, targetY;
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(this.alive)) {
       switch (_caseKey(this.animState)) {
         case _caseKey(this.STATE_WAIT): {
@@ -20100,7 +20100,7 @@ export class Class_SummonStarfireEffect extends Class_Effect {
             targetPos = point(targetX, 0.0);
             launchHeight = _neg(130);
             boltStartY = _add(launchHeight, this.boltRightLaunchOffset.locV);
-            boltStartX = _sub(targetX, (_mul(this.boltLaunchVel.locH, abs(_div(boltStartY, this.boltLaunchVel.locV)))));
+            boltStartX = _sub(targetX, (_mul(this.boltLaunchVel.locH, abs(_fdiv(boltStartY, this.boltLaunchVel.locV)))));
             attackPos = _sub(point(boltStartX, boltStartY), this.boltRightLaunchOffset);
             startPos = _add(attackPos, point(_mul(_neg(275.0), this.dir), 146.0));
             this.setPos(startPos);
@@ -20150,7 +20150,7 @@ export class Class_SummonStarfireEffect extends Class_Effect {
             this.boltRightConjureOffset = point(_mul(_neg(50.0), this.dir), _neg(150.0));
             this.boltLeftConjureOffset = point(0.0, _neg(180.0));
             p = _add(this.pos, this.boltRightLaunchOffset);
-            this.groundHitPos = point(_add(p.locH, (_div(_mul(this.boltLaunchVel.locH, _neg(p.locV)), this.boltLaunchVel.locV))), 0.0);
+            this.groundHitPos = point(_add(p.locH, (_fdiv(_mul(this.boltLaunchVel.locH, _neg(p.locV)), this.boltLaunchVel.locV))), 0.0);
             effect = _new(G.g.classes.Class_StarfireBoltGlowEffect, this.owner, _add(this.pos, this.boltRightConjureOffset), point(0, 0), this.dir);
             G.g.main.screen.addEffect(effect);
             G.g.main.audioMgr.playSound(G.g.assets.CHAR_SHARED.SFX_STARFIRE_MAKINGSTARBOLT, 100, G.g.SFX_EVENT_PRIORITY_LOW);
@@ -20268,9 +20268,9 @@ export class Class_HUDScore extends LingoObject {
     this.targetScore = 0;
     this.scoreDivisors = L();
     x = 1;
-    for (i = 1; i <= _add(this.SCORE_DIGIT_COUNT, 1); i++) {
+    for (i = 1; i <= (this.SCORE_DIGIT_COUNT + 1); i++) {
       this.scoreDivisors.append(x);
-      x = _mul(x, 10);
+      x = (x * 10);
     }
     this.updateOverlays();
     return;
@@ -20432,10 +20432,10 @@ export class Class_BeastboyDefeat extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -20446,7 +20446,7 @@ export class Class_BeastboyDefeat extends Class_Move {
               this.delayFrames = 1;
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -20519,10 +20519,10 @@ export class Class_BeastboyFall extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_DESCENT_1): {
@@ -20530,7 +20530,7 @@ export class Class_BeastboyFall extends Class_Move {
             this.initState = 0;
             this.delayFrames = 8;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           this.owner.accelerate(G.g.gravity);
           if (_truthy(this.owner.fallCheck())) {
             this.owner.setVel(0.0, 0.0);
@@ -20559,7 +20559,7 @@ export class Class_BeastboyFall extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -20638,11 +20638,11 @@ export class Class_BeastboyJump extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
     let dir;
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_CROUCH): {
@@ -20651,7 +20651,7 @@ export class Class_BeastboyJump extends Class_Move {
             this.delayFrames = 3;
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_JUMP_1, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -20707,7 +20707,7 @@ export class Class_BeastboyJump extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 3))) {
             this.animation.advance();
           } else if (_truthy(_eq(this.delayFrames, 0))) {
@@ -20968,10 +20968,10 @@ export class Class_BeastboyKnockDown extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -20982,7 +20982,7 @@ export class Class_BeastboyKnockDown extends Class_Move {
               this.delayFrames = 1;
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -21011,7 +21011,7 @@ export class Class_BeastboyKnockDown extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_SLUMP_TO_FLOOR, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -21024,7 +21024,7 @@ export class Class_BeastboyKnockDown extends Class_Move {
             this.setVulnerable(1);
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustSkidEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -21159,7 +21159,7 @@ export class Class_BeastboyStun extends Class_Move {
     }
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy((this.age >= this.stunDuration))) {
       this.moveDone = 1;
     }
@@ -21323,11 +21323,11 @@ export class Class_BeastboySummonTitan extends Class_Move {
     this.stateAge = 0;
   }
   advanceState() {
-    this.setState(_add(this.moveState, 1));
+    this.setState((this.moveState + 1));
   }
   update() {
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LEADIN): {
@@ -21517,7 +21517,7 @@ export class Class_BeastboyRhinoCharge extends Class_Move {
     this.owner.setShowingTrails(0);
   }
   advanceState() {
-    this.setState(_add(this.moveState, 1));
+    this.setState((this.moveState + 1));
   }
   setState(state) {
     this.initState = 1;
@@ -21525,8 +21525,8 @@ export class Class_BeastboyRhinoCharge extends Class_Move {
     this.stateAge = 0;
   }
   update() {
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_TRANSFORM): {
@@ -21706,7 +21706,7 @@ export class Class_BeastboyEagleStrike extends Class_Move {
     this.owner.setVel(0.0, 0.0);
   }
   advanceState() {
-    this.setState(_add(this.moveState, 1));
+    this.setState((this.moveState + 1));
   }
   setState(state) {
     this.initState = 1;
@@ -21714,8 +21714,8 @@ export class Class_BeastboyEagleStrike extends Class_Move {
     this.stateAge = 0;
   }
   update() {
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -21894,7 +21894,7 @@ export class Class_BeastboyPterodactylSwoop extends Class_Move {
     this.owner.setShowingTrails(0);
   }
   advanceState() {
-    this.setState(_add(this.moveState, 1));
+    this.setState((this.moveState + 1));
   }
   setState(state) {
     this.initState = 1;
@@ -21902,8 +21902,8 @@ export class Class_BeastboyPterodactylSwoop extends Class_Move {
     this.stateAge = 0;
   }
   update() {
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_TRANSFORM): {
@@ -22010,13 +22010,13 @@ export class Class_SummonBeastboyEffect extends Class_Effect {
   }
   advanceState() {
     this.initState = 1;
-    this.animState = _add(this.animState, 1);
+    this.animState = (this.animState + 1);
     this.stateAge = 0;
   }
   update() {
     let damage, targetPos, targetRect, targetX, targetY;
-    this.age = _add(this.age, 1);
-    this.stateAge = _add(this.stateAge, 1);
+    this.age = (this.age + 1);
+    this.stateAge = (this.stateAge + 1);
     if (_truthy(this.alive)) {
       switch (_caseKey(this.animState)) {
         case _caseKey(this.STATE_WAIT): {
@@ -22134,15 +22134,15 @@ export class Class_BeastboyWaveProjectile extends Class_Projectile {
     return undefined;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(this.alive)) {
       if (_truthy(this.needInit)) {
         this.needInit = 0;
         this.setVel(_mul(20.0, this.dir), 0.0);
       }
-      if (_truthy(_eq((_mod((_sub(this.age, 1)), 12)), 0))) {
+      if (_truthy(_eq((_mod(((this.age - 1)), 12)), 0))) {
       }
-      if (_truthy(_eq((_mod((_sub(this.age, 1)), 4)), 0))) {
+      if (_truthy(_eq((_mod(((this.age - 1)), 4)), 0))) {
         G.g.main.screen.addEffect(_new(G.g.classes.Class_DustJumpEffect, this.owner, _add(this.pos, point(_mul(20.0, this.owner.dir), 15.0)), point(_mul(0.0, this.owner.dir), 0.0), _neg(this.owner.dir)));
       }
       this.setPos(_add(this.pos, this.vel));
@@ -22403,7 +22403,7 @@ export class Class_RavenAI extends Class_AIAdapter {
     diffX = _sub(attPos.locH, x);
     diffY = _sub(attPos.locV, y);
     if (_truthy(!_eq(attVel.locH, 0.0))) {
-      slope = _div(attVel.locV, attVel.locH);
+      slope = _fdiv(attVel.locV, attVel.locH);
     } else {
       slope = 999999.0;
     }
@@ -22640,7 +22640,7 @@ export class Class_CyborgAI extends Class_AIAdapter {
     diffX = _sub(attPos.locH, x);
     diffY = _sub(attPos.locV, y);
     if (_truthy(!_eq(attVel.locH, 0.0))) {
-      slope = _div(attVel.locV, attVel.locH);
+      slope = _fdiv(attVel.locV, attVel.locH);
     } else {
       slope = 999999.0;
     }
@@ -22877,7 +22877,7 @@ export class Class_BeastboyAI extends Class_AIAdapter {
     diffX = _sub(attPos.locH, x);
     diffY = _sub(attPos.locV, y);
     if (_truthy(!_eq(attVel.locH, 0.0))) {
-      slope = _div(attVel.locV, attVel.locH);
+      slope = _fdiv(attVel.locV, attVel.locH);
     } else {
       slope = 999999.0;
     }
@@ -23114,7 +23114,7 @@ export class Class_StarfireAI extends Class_AIAdapter {
     diffX = _sub(attPos.locH, x);
     diffY = _sub(attPos.locV, y);
     if (_truthy(!_eq(attVel.locH, 0.0))) {
-      slope = _div(attVel.locV, attVel.locH);
+      slope = _fdiv(attVel.locV, attVel.locH);
     } else {
       slope = 999999.0;
     }
@@ -23197,10 +23197,10 @@ export class Class_JinxFall extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_DESCENT_1): {
@@ -23222,7 +23222,7 @@ export class Class_JinxFall extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -23276,7 +23276,7 @@ export class Class_PlasmusPunch extends Class_Move {
     this.owner.setVel(0.0, 0.0);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(_eq(this.age, 1))) {
       G.g.main.audioMgr.playSound(G.g.assets.PLASMUS.SFX_PLASMUS_STRETCH_1, 100, G.g.SFX_EVENT_PRIORITY_LOW);
     } else if (_truthy(_eq(this.age, 4))) {
@@ -23336,10 +23336,10 @@ export class Class_GizmoFall extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_DESCENT_1): {
@@ -23361,7 +23361,7 @@ export class Class_GizmoFall extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -23416,10 +23416,10 @@ export class Class_MammothFall extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_DESCENT_1): {
@@ -23441,7 +23441,7 @@ export class Class_MammothFall extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -23540,10 +23540,10 @@ export class Class_GizmoPunch extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -23682,10 +23682,10 @@ export class Class_GizmoAirPunch extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -27000,7 +27000,7 @@ export class Class_AudioManager extends LingoObject {
       }
     }
     if (_truthy(chan)) {
-      this.eventCounter = _add(this.eventCounter, 1);
+      this.eventCounter = (this.eventCounter + 1);
       this.clearChannel(chan);
       this.playInChannel(mem, chan, vol, pri);
       _setAt(this.channelEventIDs, chan, this.eventCounter);
@@ -27483,10 +27483,10 @@ export class Class_CinderblockDefeat extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -27497,7 +27497,7 @@ export class Class_CinderblockDefeat extends Class_Move {
               this.delayFrames = 1;
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -27582,7 +27582,7 @@ export class Class_CinderblockDoublePunch extends Class_Move {
     this.owner.setVel(0.0, 0.0);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy((this.age > 1))) {
       this.animation.advance();
     }
@@ -27806,7 +27806,7 @@ export class Class_CinderblockKnockDown extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   reset(arg) {
     super.reset();
@@ -27827,7 +27827,7 @@ export class Class_CinderblockKnockDown extends Class_Move {
     this.owner.setShowingTrails(0);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -27838,7 +27838,7 @@ export class Class_CinderblockKnockDown extends Class_Move {
               this.delayFrames = 1;
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -27877,7 +27877,7 @@ export class Class_CinderblockKnockDown extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustHugeFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_BIG_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -27890,7 +27890,7 @@ export class Class_CinderblockKnockDown extends Class_Move {
             this.setVulnerable(1);
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -27934,7 +27934,7 @@ export class Class_CinderblockPunch extends Class_Move {
     this.owner.setVel(0.0, 0.0);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy((this.age > 1))) {
       this.animation.advance();
     }
@@ -28032,10 +28032,10 @@ export class Class_CinderblockStomp extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_WIND_UP_1): {
@@ -28043,7 +28043,7 @@ export class Class_CinderblockStomp extends Class_Move {
             this.initState = 0;
             this.delayFrames = 3;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -28054,7 +28054,7 @@ export class Class_CinderblockStomp extends Class_Move {
             this.animation.advance();
             this.delayFrames = 10;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           } else if (_truthy(_eq(this.delayFrames, 8))) {
@@ -28071,7 +28071,7 @@ export class Class_CinderblockStomp extends Class_Move {
             G.g.main.screen.addProjectile(this.projectile);
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_BIG_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
             this.projectile = undefined;
@@ -28083,7 +28083,7 @@ export class Class_CinderblockStomp extends Class_Move {
             this.animation.advance();
             this.delayFrames = 2;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -28134,7 +28134,7 @@ export class Class_CinderblockStun extends Class_Move {
     this.owner.setVel(0.0, 0.0);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy((this.age >= this.stunDuration))) {
       this.moveDone = 1;
     }
@@ -28371,10 +28371,10 @@ export class Class_CyborgDefeat extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -28385,7 +28385,7 @@ export class Class_CyborgDefeat extends Class_Move {
               this.delayFrames = 1;
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -28476,10 +28476,10 @@ export class Class_CyborgFall extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_DESCENT_1): {
@@ -28487,7 +28487,7 @@ export class Class_CyborgFall extends Class_Move {
             this.initState = 0;
             this.delayFrames = 8;
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           this.owner.accelerate(G.g.gravity);
           if (_truthy(this.owner.fallCheck())) {
             this.owner.setVel(0.0, 0.0);
@@ -28516,7 +28516,7 @@ export class Class_CyborgFall extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -28617,11 +28617,11 @@ export class Class_CyborgJump extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
     let dir;
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_CROUCH): {
@@ -28630,7 +28630,7 @@ export class Class_CyborgJump extends Class_Move {
             this.delayFrames = 3;
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_JUMP_1, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -28685,7 +28685,7 @@ export class Class_CyborgJump extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_LANDING_SMALL_PERSON, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -28968,10 +28968,10 @@ export class Class_CyborgKnockDown extends Class_Move {
   }
   advanceState() {
     this.initState = 1;
-    this.moveState = _add(this.moveState, 1);
+    this.moveState = (this.moveState + 1);
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(!_truthy(this.moveDone))) {
       switch (_caseKey(this.moveState)) {
         case _caseKey(this.STATE_LAUNCH): {
@@ -28982,7 +28982,7 @@ export class Class_CyborgKnockDown extends Class_Move {
               this.delayFrames = 1;
             }
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -29011,7 +29011,7 @@ export class Class_CyborgKnockDown extends Class_Move {
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustFallEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
             G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_SLUMP_TO_FLOOR, 100, G.g.SFX_EVENT_PRIORITY_LOW);
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.advanceState();
           }
@@ -29024,7 +29024,7 @@ export class Class_CyborgKnockDown extends Class_Move {
             this.setVulnerable(1);
             G.g.main.screen.addEffect(_new(G.g.classes.Class_DustSkidEffect, this.owner, this.owner.pos, point(0, 0), this.owner.dir));
           }
-          this.delayFrames = _sub(this.delayFrames, 1);
+          this.delayFrames = (this.delayFrames - 1);
           if (_truthy(_eq(this.delayFrames, 0))) {
             this.moveDone = 1;
           }
@@ -29196,7 +29196,7 @@ export class Class_CyborgStun extends Class_Move {
     this.animation.reset();
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy((this.age >= this.stunDuration))) {
       this.moveDone = 1;
     }
@@ -29356,16 +29356,16 @@ export class Class_CinderblockWaveProjectile extends Class_Projectile {
     return undefined;
   }
   update() {
-    this.age = _add(this.age, 1);
+    this.age = (this.age + 1);
     if (_truthy(this.alive)) {
       if (_truthy(this.needInit)) {
         this.needInit = 0;
         this.setVel(_mul(20.0, this.dir), 0.0);
       }
-      if (_truthy(_eq((_mod((_sub(this.age, 1)), 12)), 0))) {
+      if (_truthy(_eq((_mod(((this.age - 1)), 12)), 0))) {
         G.g.main.audioMgr.playSound(G.g.assets.CINDERBLOCK.SFX_CINDERBLOCK_GROUNDSTOMP, 100, G.g.SFX_EVENT_PRIORITY_LOW);
       }
-      if (_truthy(_eq((_mod((_sub(this.age, 1)), 4)), 0))) {
+      if (_truthy(_eq((_mod(((this.age - 1)), 4)), 0))) {
         G.g.main.screen.addEffect(_new(G.g.classes.Class_GroundWaveEffect, this, this.pos, point(0, 0), this.dir));
       }
       this.setPos(_add(this.pos, this.vel));
@@ -29846,7 +29846,7 @@ export class Class_GameScreen extends Class_Screen {
     this.initStage = 1;
   }
   advanceStage() {
-    this.setStage(_add(this.gameStage, 1));
+    this.setStage((this.gameStage + 1));
   }
   update() {
     let b, currTime, enemyFighterOrder, enemyOrderIndex, nextEnemyID, playerFighterOrder, playerOrderIndex, prevTime;
@@ -29865,7 +29865,7 @@ export class Class_GameScreen extends Class_Screen {
           this.hud.reset();
           this.playerAdapter.reset();
           this.enemyAdapter.reset();
-          this.roundNum = _add(this.roundNum, 1);
+          this.roundNum = (this.roundNum + 1);
           this.roundState = this.ROUNDSTATE_FIGHT_IN_PROGRESS;
           this.paused = 0;
           this.controlsPopup.setVisible(this.paused);
@@ -29917,7 +29917,7 @@ export class Class_GameScreen extends Class_Screen {
           this.scene.update();
           this.hud.update();
           if (_truthy(_eq(this.enemy.getHealth(), 0))) {
-            this.playerWins = _add(this.playerWins, 1);
+            this.playerWins = (this.playerWins + 1);
             if (_truthy(_eq(G.g.playMode, G.g.PLAYMODE_AS_TITANS))) {
               this.hud.setTitanWins(this.playerWins);
               this.roundState = this.ROUNDSTATE_TITAN_WINS_BY_DAMAGE;
@@ -29931,7 +29931,7 @@ export class Class_GameScreen extends Class_Screen {
               this.setStage(this.GAMESTAGE_WIN);
             }
           } else if (_truthy(_eq(this.player.getHealth(), 0))) {
-            this.enemyWins = _add(this.enemyWins, 1);
+            this.enemyWins = (this.enemyWins + 1);
             if (_truthy(_eq(G.g.playMode, G.g.PLAYMODE_AS_TITANS))) {
               this.hud.setVillainWins(this.enemyWins);
               this.roundState = this.ROUNDSTATE_VILLAIN_WINS_BY_DAMAGE;
@@ -29950,7 +29950,7 @@ export class Class_GameScreen extends Class_Screen {
             }
             if (_truthy(_eq(currTime, 0))) {
               if (_truthy((this.player.getHealthScalar() > this.enemy.getHealthScalar()))) {
-                this.playerWins = _add(this.playerWins, 1);
+                this.playerWins = (this.playerWins + 1);
                 if (_truthy(_eq(G.g.playMode, G.g.PLAYMODE_AS_TITANS))) {
                   this.hud.setTitanWins(this.playerWins);
                   this.roundState = this.ROUNDSTATE_TITAN_WINS_BY_TIME;
@@ -29960,7 +29960,7 @@ export class Class_GameScreen extends Class_Screen {
                 }
                 this.setStage(this.GAMESTAGE_TIMEUP);
               } else {
-                this.enemyWins = _add(this.enemyWins, 1);
+                this.enemyWins = (this.enemyWins + 1);
                 if (_truthy(_eq(G.g.playMode, G.g.PLAYMODE_AS_TITANS))) {
                   this.hud.setVillainWins(this.enemyWins);
                   this.roundState = this.ROUNDSTATE_VILLAIN_WINS_BY_TIME;
@@ -30054,7 +30054,7 @@ export class Class_GameScreen extends Class_Screen {
         this.updateEffects();
         this.scene.update();
         this.hud.update();
-        this.delayFrames = _sub(this.delayFrames, 1);
+        this.delayFrames = (this.delayFrames - 1);
         if (_truthy(_eq(this.delayFrames, 0))) {
           if (_truthy(_eq(this.playerWins, 2))) {
             _setAt(_getAt(G.g.defeatedEnemies, G.g.playerID), G.g.enemyID, 1);
@@ -30165,7 +30165,7 @@ export class Class_GameScreen extends Class_Screen {
     } else {
       this.addScore(integer(_mul(_mul(_mul(points, 10), this.hitChainMultiplier), G.g.difficulty)));
       if (_truthy((this.hitChainMultiplier < 10))) {
-        this.hitChainMultiplier = _add(this.hitChainMultiplier, 1);
+        this.hitChainMultiplier = (this.hitChainMultiplier + 1);
       }
     }
     this.prevHitTimestamp = G.g.frameTimestamp;
@@ -30267,7 +30267,7 @@ export class Class_GameTimer extends LingoObject {
     this.frames = 0;
   }
   update() {
-    this.frames = _add(this.frames, 1);
+    this.frames = (this.frames + 1);
     this.currTime = _sub(this.initTime, (_div(this.frames, G.g.FRAME_RATE)));
     if (_truthy((this.currTime < 0))) {
       this.currTime = 0;

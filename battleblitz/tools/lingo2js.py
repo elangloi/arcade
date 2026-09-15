@@ -530,6 +530,9 @@ class Emitter:
         self.scripts = {s.name: s for s in scripts}
         self.out = []
         self.warnings = []
+        self.local_types = {}
+        self.prop_types = {}
+        self.cur = None
 
     # ---- scope helpers
     def all_handler_names(self, sc):
@@ -544,6 +547,9 @@ class Emitter:
         if sc.kind == 'MovieScript':
             return self.emit_movie_script(sc)
         base = sc.ancestor or ('Behavior' if sc.kind == 'BehaviorScript' else 'LingoObject')
+        self.cur = sc
+        self.local_types = {}
+        self.prop_types = self.infer_types(sc)
         self.out.append(f'export class {sc.name} extends {base} {{')
         self.out.append(f'  static lingoProps = {sc.props!r};'.replace("'", '"'))
         for h in sc.handlers:
@@ -552,12 +558,14 @@ class Emitter:
         self.out.append('')
 
     def emit_movie_script(self, sc):
+        self.cur = sc
+        self.prop_types = {}
         for h in sc.handlers:
-            self.cur = sc
             self.handler_names = {x.name for x in sc.handlers}
             self.params = [p for p in h.params if p != 'me']
             self.locals = set()
             self.collect_locals(h.body)
+            self.local_types = self.infer_locals(h)
             self.out.append(f'export function {h.name}({", ".join(self.safe(p) for p in self.params)}) {{')
             if self.locals:
                 self.out.append(f'  let {", ".join(self.safe(x) for x in sorted(self.locals))};')
@@ -572,6 +580,7 @@ class Emitter:
         self.params = [p for p in h.params if p != 'me']
         self.locals = set()
         self.collect_locals(h.body)
+        self.local_types = self.infer_locals(h)
         is_ctor = h.name == 'new'
         name = 'constructor' if is_ctor else h.name
         self.out.append(f'  {name}({", ".join(self.safe(p) for p in self.params)}) {{')
@@ -775,32 +784,128 @@ class Emitter:
     def cond(self, e):
         return f'_truthy({self.expr(e)})'
 
-    def is_float_expr(self, e):
+    # Lingo divides ints as ints and floats as floats; JS has one number type, so we infer
+    # what we can statically and fall back to a runtime check (_div) otherwise.
+    FLOAT_HANDLERS = {'getLineIntersection'}      # every operand is a float at runtime (positions)
+    FLOAT_PROPS = {'locH', 'locV'}                 # points in this game are always built from float()
+    FLOAT_METHODS = {'getPosX', 'getPosY', 'getVelX', 'getVelY', 'getRatioLoaded', 'getHealthScalar', 'calcScale'}
+
+    def infer_types(self, sc):
+        """Per-script map of property name -> 'int' | 'float', from every assignment in the class chain."""
+        types = {}
+        chain = []
+        c = sc
+        while c:
+            chain.append(c)
+            c = self.scripts.get(c.ancestor) if c.ancestor else None
+        for c in chain:
+            for h in c.handlers:
+                for lv, rhs in self.assignments(h.body):
+                    name = None
+                    if lv[0] == 'id' and lv[1] in c.props:
+                        name = lv[1]
+                    elif lv[0] == 'prop' and lv[1] == ('me',):
+                        name = lv[2]
+                    if not name:
+                        continue
+                    if self.is_float_expr(rhs, {}):
+                        types[name] = 'float'
+                    elif self.is_int_expr(rhs, {}) and types.get(name) != 'float':
+                        types[name] = 'int'
+                    elif name not in types:
+                        types[name] = 'unknown'
+        return types
+
+    def assignments(self, stmts):
+        for st in stmts:
+            k = st[0]
+            if k == 'assign':
+                yield st[1], st[2]
+            elif k == 'if':
+                yield from self.assignments(st[2])
+                if st[3]:
+                    yield from self.assignments(st[3])
+            elif k == 'case':
+                for labels, block in st[2]:
+                    yield from self.assignments(block)
+            elif k == 'repeatwith':
+                yield from self.assignments(st[5])
+            elif k == 'repeatin':
+                yield from self.assignments(st[3])
+            elif k == 'repeatwhile':
+                yield from self.assignments(st[2])
+
+    def infer_locals(self, h):
+        types = {}
+        for lv, rhs in self.assignments(h.body):
+            if lv[0] != 'id' or lv[1] in self.cur.props or lv[1] in self.cur.globals:
+                continue
+            if self.is_float_expr(rhs, types):
+                types[lv[1]] = 'float'
+            elif self.is_int_expr(rhs, types) and types.get(lv[1]) != 'float':
+                types[lv[1]] = 'int'
+            else:
+                types.setdefault(lv[1], 'unknown')
+        if h.name in self.FLOAT_HANDLERS:
+            for prm in h.params:
+                if prm != 'me':
+                    types[prm] = 'float'
+            for k in list(types):
+                if types[k] == 'unknown':
+                    types[k] = 'float'
+        return types
+
+    def var_type(self, e, local_types):
+        if e[0] == 'id':
+            n = e[1]
+            if n in local_types:
+                return local_types[n]
+            if n in self.cur.props:
+                return self.prop_types.get(n, 'unknown')
+        if e[0] == 'prop' and e[1] == ('me',):
+            return self.prop_types.get(e[2], 'unknown')
+        return 'unknown'
+
+    def is_float_expr(self, e, local_types=None):
+        if local_types is None:
+            local_types = self.local_types
         k = e[0]
+        if k in ('id',) or (k == 'prop' and e[1] == ('me',)):
+            if self.var_type(e, local_types) == 'float':
+                return True
+        if k == 'prop' and e[2] in self.FLOAT_PROPS:
+            return True
+        if k == 'mcall' and e[2] in self.FLOAT_METHODS:
+            return True
         if k == 'num':
             return e[2]
         if k == 'call' and e[1] == 'float':
             return True
         if k == 'paren':
-            return self.is_float_expr(e[1])
+            return self.is_float_expr(e[1], local_types)
         if k == 'bin' and e[1] in ('+', '-', '*', '/'):
-            return self.is_float_expr(e[2]) or self.is_float_expr(e[3])
+            return self.is_float_expr(e[2], local_types) or self.is_float_expr(e[3], local_types)
         if k == 'un' and e[1] == '-':
-            return self.is_float_expr(e[2])
+            return self.is_float_expr(e[2], local_types)
         return False
 
-    def is_int_expr(self, e):
+    def is_int_expr(self, e, local_types=None):
+        if local_types is None:
+            local_types = self.local_types
         k = e[0]
+        if k in ('id',) or (k == 'prop' and e[1] == ('me',)):
+            if self.var_type(e, local_types) == 'int':
+                return True
         if k == 'num':
             return not e[2]
         if k == 'call' and e[1] in ('integer', 'random', 'charToNum', 'length', 'offset', 'bitOr', 'bitAnd'):
             return True
         if k == 'paren':
-            return self.is_int_expr(e[1])
+            return self.is_int_expr(e[1], local_types)
         if k == 'bin' and e[1] in ('+', '-', '*', 'mod'):
-            return self.is_int_expr(e[2]) and self.is_int_expr(e[3])
+            return self.is_int_expr(e[2], local_types) and self.is_int_expr(e[3], local_types)
         if k == 'un' and e[1] == '-':
-            return self.is_int_expr(e[2])
+            return self.is_int_expr(e[2], local_types)
         if k == 'prop' and e[2] in ('count', 'spriteNum', 'number', 'width', 'height', 'left', 'right', 'top', 'bottom', 'keyCode', 'length'):
             return True
         return False
