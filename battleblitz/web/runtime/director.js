@@ -188,18 +188,25 @@ export class Sprite {
   set width(v) { this._width = v; }
   get height() { return this._height || this.natural().h; }
   set height(v) { this._height = v; }
-  get rect() {
+  // Director positions a sprite by its registration point, and flipH/flipV mirror the
+  // image around that point -- so a flipped sprite's rect moves to the other side of loc.
+  regOffset() {
     const n = this.natural();
     const w = this._width || n.w, h = this._height || n.h;
     const sx = n.w ? w / n.w : 1, sy = n.h ? h / n.h : 1;
-    const l = this.loc.locH - n.regX * sx, t = this.loc.locV - n.regY * sy;
+    const rx = this.flipH ? w - n.regX * sx : n.regX * sx;
+    const ry = this.flipV ? h - n.regY * sy : n.regY * sy;
+    return { w, h, rx, ry };
+  }
+  get rect() {
+    const { w, h, rx, ry } = this.regOffset();
+    const l = this.loc.locH - rx, t = this.loc.locV - ry;
     return new Rect(l, t, l + w, t + h);
   }
   set rect(r) {
-    const n = this.natural();
     this._width = r.width; this._height = r.height;
-    const sx = n.w ? r.width / n.w : 1, sy = n.h ? r.height / n.h : 1;
-    this.loc = new Point(r.left + n.regX * sx, r.top + n.regY * sy);
+    const { rx, ry } = this.regOffset();
+    this.loc = new Point(r.left + rx, r.top + ry);
   }
 }
 
@@ -438,6 +445,13 @@ export const D = {
     this.applyScoreFrame(this.frame, true);
     this.newIntervals = this.intervalsAt(this.frame);
     this.playing = true;
+    this.runLoop();
+  },
+
+  pause() { this.playing = false; },
+  resume() { if (!this.playing) { this.playing = true; this.runLoop(); } },
+
+  runLoop() {
     this.lastTick = performance.now();
     // A timer rather than requestAnimationFrame: the original ran frame-locked at 30fps,
     // and rAF gets throttled in embedded/background views.
