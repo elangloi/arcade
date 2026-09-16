@@ -5,31 +5,170 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Arcade</title>
 <style>
-  :root { color-scheme: dark; }
-  body { margin: 0; min-height: 100vh; background: #0f0f12; color: #e6e6e6;
-         font: 16px/1.4 system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; padding: 48px 16px; box-sizing: border-box; }
-  h1 { font-size: 2.2rem; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 8px; }
-  p.sub { color: #888; margin: 0 0 40px; }
-  .games { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; width: min(960px, 100%); }
-  a.card { display: block; background: #17171c; border: 1px solid #2a2a33; border-radius: 12px; padding: 20px; color: inherit; text-decoration: none;
-           transition: transform .12s, border-color .12s; }
-  a.card:hover { transform: translateY(-2px); border-color: #a4d34c; }
-  a.card h2 { margin: 0 0 6px; font-size: 1.15rem; color: #a4d34c; }
-  a.card span { color: #999; font-size: .9rem; }
+  :root {
+    --navy: #1e2160;
+    --navy-deep: #151747;
+    --grid: #2a2e7a;
+    --pink: #ff8fcf;
+    --pink-dark: #e86fb3;
+    --red: #ff5a72;
+    --red-dark: #d93b57;
+    --yellow: #fbf57a;
+    --yellow-dark: #e5c94d;
+    --blue: #5566ff;
+    --blue-dark: #3a46c8;
+    --cream: #fff6e8;
+    --ink: #2b2450;
+    --round: ui-rounded, "SF Pro Rounded", "Arial Rounded MT Bold", "Helvetica Rounded", "Nunito", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { color-scheme: dark; }
+  body {
+    margin: 0; min-height: 100vh; color: var(--cream); font: 16px/1.4 var(--round);
+    background-color: var(--navy);
+    background-image:
+      linear-gradient(var(--grid) 2px, transparent 2px),
+      linear-gradient(90deg, var(--grid) 2px, transparent 2px);
+    background-size: 48px 48px;
+    background-position: -1px -1px;
+    padding: 40px 16px 64px;
+    display: flex; flex-direction: column; align-items: center;
+    overflow-x: hidden;
+  }
+
+  /* ---- header: a claw hanging down over the title ---- */
+  header { text-align: center; margin-bottom: 36px; position: relative; }
+  .claw { display: block; margin: 0 auto -6px; width: 72px; height: 110px; animation: sway 4s ease-in-out infinite; transform-origin: 50% 0; }
+  @keyframes sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+  h1 {
+    margin: 0; font-size: clamp(2.6rem, 8vw, 4.4rem); letter-spacing: .06em; line-height: 1;
+    color: var(--yellow);
+    text-shadow: 0 4px 0 var(--yellow-dark), 0 8px 0 var(--red-dark), 0 12px 24px rgba(0,0,0,.45);
+  }
+  h1 .star { color: var(--pink); display: inline-block; animation: twinkle 1.6s ease-in-out infinite; }
+  h1 .star:last-child { animation-delay: .8s; }
+  @keyframes twinkle { 0%, 100% { transform: scale(1) rotate(0); } 50% { transform: scale(1.25) rotate(20deg); } }
+  p.sub {
+    margin: 14px auto 0; display: inline-block; padding: 6px 18px; border-radius: 999px;
+    background: var(--pink); color: var(--ink); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: .85rem;
+    box-shadow: 0 4px 0 var(--pink-dark);
+  }
+  p.sub .coin { display: inline-block; animation: blink 1.2s steps(2) infinite; }
+  @keyframes blink { to { opacity: 0; } }
+
+  /* ---- the cabinets ---- */
+  .games {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 32px 28px;
+    width: min(1040px, 100%); align-items: end;
+  }
+  a.cab { display: block; color: inherit; text-decoration: none; position: relative; padding-top: 26px;
+          transition: transform .18s cubic-bezier(.34,1.56,.64,1); }
+  a.cab:hover, a.cab:focus-visible { transform: translateY(-8px) rotate(-1.2deg); outline: none; }
+  a.cab:nth-child(even):hover { transform: translateY(-8px) rotate(1.2deg); }
+  .body {
+    background: var(--pink); border-radius: 26px 26px 18px 18px; padding: 14px 14px 18px;
+    box-shadow: 0 8px 0 var(--pink-dark), 0 22px 30px rgba(0,0,0,.45);
+    position: relative;
+  }
+  /* marquee: yellow sign on top */
+  .marquee {
+    background: var(--yellow); color: var(--ink); border-radius: 14px; padding: 10px 12px 9px;
+    text-align: center; font-weight: 900; font-size: 1.05rem; line-height: 1.15; letter-spacing: .02em;
+    box-shadow: inset 0 -4px 0 var(--yellow-dark);
+    position: relative;
+  }
+  .marquee::before, .marquee::after {
+    content: ""; position: absolute; top: -18px; width: 22px; height: 22px; border-radius: 50%;
+    background: var(--red); box-shadow: inset -3px -3px 0 var(--red-dark);
+  }
+  .marquee::before { left: 12px; } .marquee::after { right: 12px; }
+  a.cab:hover .marquee::before, a.cab:hover .marquee::after { background: var(--yellow); box-shadow: 0 0 14px var(--yellow); }
+  /* screen: blue window with the game's "attract mode" */
+  .screen {
+    margin: 12px 4px 0; background: var(--blue); border: 6px solid var(--navy-deep); border-radius: 16px;
+    height: 150px; display: grid; place-items: center; position: relative; overflow: hidden;
+    background-image: radial-gradient(circle at 50% 20%, rgba(255,255,255,.28), transparent 55%);
+  }
+  .screen::after { /* scanlines */
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: repeating-linear-gradient(transparent 0 3px, rgba(0,0,0,.12) 3px 4px);
+  }
+  .screen .art { font-size: 64px; line-height: 1; filter: drop-shadow(0 6px 0 rgba(0,0,0,.25)); transition: transform .3s; }
+  a.cab:hover .screen .art { transform: scale(1.12) translateY(-4px); animation: bob 1s ease-in-out infinite; }
+  @keyframes bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+  .screen .tag {
+    position: absolute; bottom: 8px; left: 8px; right: 8px; text-align: center;
+    font-size: .74rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--cream);
+    text-shadow: 0 2px 0 var(--blue-dark);
+  }
+  /* control panel: joystick + buttons */
+  .panel { margin: 12px 4px 0; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; }
+  .stick { width: 12px; height: 34px; background: var(--ink); border-radius: 6px; position: relative; margin-left: 10px; }
+  .stick::before { content: ""; position: absolute; top: -18px; left: -9px; width: 30px; height: 30px; border-radius: 50%;
+                   background: var(--red); box-shadow: inset -4px -4px 0 var(--red-dark); }
+  .btns { display: flex; gap: 8px; }
+  .btns i { width: 26px; height: 26px; border-radius: 50%; background: var(--yellow); box-shadow: inset -3px -3px 0 var(--yellow-dark); }
+  .btns i:nth-child(2) { background: var(--blue); box-shadow: inset -3px -3px 0 var(--blue-dark); }
+  .btns i:nth-child(3) { background: var(--red); box-shadow: inset -3px -3px 0 var(--red-dark); }
+  .coinslot { margin: 14px auto 0; width: 54px; height: 10px; border-radius: 5px; background: var(--ink); box-shadow: inset 0 3px 0 rgba(0,0,0,.5); }
+  /* legs */
+  .body::after {
+    content: ""; position: absolute; left: 22px; right: 22px; bottom: -22px; height: 16px;
+    background: var(--pink-dark); border-radius: 0 0 12px 12px;
+  }
+
+  /* ---- little decorations ---- */
+  .deco { position: fixed; pointer-events: none; font-size: 28px; opacity: .85; animation: float 6s ease-in-out infinite; }
+  @keyframes float { 0%, 100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-14px) rotate(6deg); } }
+  footer { margin-top: 56px; color: var(--pink); font-weight: 800; letter-spacing: .1em; text-transform: uppercase; font-size: .75rem; opacity: .9; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 </style>
 </head>
 <body>
-<h1>Arcade</h1>
-<p class="sub">Pick a game.</p>
+<span class="deco" style="left:6vw; top:14vh; animation-delay:-2s">⭐</span>
+<span class="deco" style="right:8vw; top:22vh; animation-delay:-4s">💖</span>
+<span class="deco" style="left:12vw; bottom:12vh; animation-delay:-1s">🎀</span>
+<span class="deco" style="right:14vw; bottom:16vh; animation-delay:-3s">✨</span>
+
+<header>
+  <svg class="claw" viewBox="0 0 72 110" aria-hidden="true">
+    <rect x="34" y="0" width="4" height="46" fill="#c9cdf5"/>
+    <rect x="26" y="44" width="20" height="14" rx="4" fill="#fbf57a" stroke="#e5c94d" stroke-width="3"/>
+    <path d="M36 58 C 14 66, 10 84, 20 100" fill="none" stroke="#ff5a72" stroke-width="7" stroke-linecap="round"/>
+    <path d="M36 58 C 58 66, 62 84, 52 100" fill="none" stroke="#ff5a72" stroke-width="7" stroke-linecap="round"/>
+    <path d="M36 58 L 36 96" fill="none" stroke="#ff5a72" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="36" cy="58" r="7" fill="#5566ff" stroke="#3a46c8" stroke-width="3"/>
+  </svg>
+  <h1><span class="star">✦</span> Arcade <span class="star">✦</span></h1>
+  <p class="sub"><span class="coin">●</span> insert coin · pick a game</p>
+</header>
+
 <div class="games">
-  <a class="card" href="/teen-titans-battle-blitz/">
-    <h2>Teen Titans: Battle Blitz</h2>
-    <span>Cartoon Network, 2003 · fighting</span>
+  <a class="cab" href="/teen-titans-battle-blitz/">
+    <div class="body">
+      <div class="marquee">Teen Titans<br>Battle Blitz</div>
+      <div class="screen">
+        <span class="art">🦸🥊</span>
+        <span class="tag">Cartoon Network · 2003 · fighting</span>
+      </div>
+      <div class="panel"><span class="stick"></span><span class="btns"><i></i><i></i><i></i></span></div>
+      <div class="coinslot"></div>
+    </div>
   </a>
-  <a class="card" href="/lilo-and-stitch-sandwich-stacker/">
-    <h2>Lilo &amp; Stitch: 625 Sandwich Stacker</h2>
-    <span>Disney, 2003 · catch &amp; stack</span>
+
+  <a class="cab" href="/lilo-and-stitch-sandwich-stacker/">
+    <div class="body">
+      <div class="marquee">Lilo &amp; Stitch<br>625 Sandwich Stacker</div>
+      <div class="screen">
+        <span class="art">🥪🧸</span>
+        <span class="tag">Disney · 2003 · catch &amp; stack</span>
+      </div>
+      <div class="panel"><span class="stick"></span><span class="btns"><i></i><i></i><i></i></span></div>
+      <div class="coinslot"></div>
+    </div>
   </a>
 </div>
+
+<footer>more machines coming soon</footer>
 </body>
 </html>
