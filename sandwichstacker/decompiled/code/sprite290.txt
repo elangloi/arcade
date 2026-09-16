@@ -1,0 +1,7 @@
+# sprite 290: 15 frames
+
+## sprite290 frame 1 DoAction
+stop()
+if (!(random(3) == 0)) goto L30;
+play()
+L30:

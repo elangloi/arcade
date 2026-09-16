@@ -1,0 +1,184 @@
+# sprite 373: 17 frames
+
+## sprite373 frame 1 DoAction
+stop()
+
+## frame 2 label 'meat'
+
+## sprite373 frame 2 PlaceObject2 depth 1 id 342 onClipEvent(load)
+if (random(2)) goto L82;
+goto L90;
+L82:
+L90:
+'_yscale'[100] = -100;
+L153:
+this.onEnterFrame = function() {
+  if (!_parent._parent._parent.v.pause) goto L42;
+  stop()
+  goto L43;
+L42:
+  play()
+};
+/* leftover stack: this */
+
+## frame 3 label 'cheese'
+
+## sprite373 frame 3 PlaceObject2 depth 1 id 346 name 't1' onClipEvent(load)
+if (random(2)) goto L82;
+goto L90;
+L82:
+L90:
+'_yscale'[100] = -100;
+L153:
+this.onEnterFrame = function() {
+  if (!_parent._parent._parent.v.pause) goto L42;
+  stop()
+  goto L43;
+L42:
+  play()
+};
+/* leftover stack: this */
+
+## frame 4 label 'tomatoes'
+
+## sprite373 frame 4 PlaceObject2 depth 1 id 347 name 't1' onClipEvent(load)
+if (random(2)) goto L46;
+goto L54;
+L46:
+L54:
+'_yscale'[100] = -100;
+/* leftover stack: this */
+
+## frame 5 label 'bacon'
+
+## frame 6 label 'lettuce'
+
+## frame 7 label 'mustard'
+
+## sprite373 frame 7 PlaceObject2 depth 1 id 348 onClipEvent(load)
+L101:
+this.onEnterFrame = function() {
+  if (!_parent._parent._parent.v.pause) goto L42;
+  stop()
+  goto L43;
+L42:
+  play()
+};
+
+## frame 8 label 'mayo'
+
+## sprite373 frame 8 PlaceObject2 depth 1 id 349 onClipEvent(load)
+L101:
+this.onEnterFrame = function() {
+  if (!_parent._parent._parent.v.pause) goto L42;
+  stop()
+  goto L43;
+L42:
+  play()
+};
+
+## frame 9 label 'peppers'
+
+## sprite373 frame 9 PlaceObject2 depth 1 id 350 onClipEvent(load)
+if (random(2)) goto L46;
+goto L54;
+L46:
+L54:
+'_yscale'[100] = -100;
+/* leftover stack: this */
+
+## frame 10 label 'pickles'
+
+## sprite373 frame 10 PlaceObject2 depth 1 id 351 onClipEvent(load)
+if (random(2)) goto L46;
+goto L54;
+L46:
+L54:
+'_yscale'[100] = -100;
+/* leftover stack: this */
+
+## frame 11 label 'onions'
+
+## sprite373 frame 11 PlaceObject2 depth 1 id 352 onClipEvent(load)
+if (random(2)) goto L46;
+goto L54;
+L46:
+L54:
+'_yscale'[100] = -100;
+/* leftover stack: this */
+
+## frame 12 label 'cheeseBurk'
+
+## sprite373 frame 12 PlaceObject2 depth 1 id 359 onClipEvent(load)
+L101:
+this.onEnterFrame = function() {
+  if (!_parent._parent._parent.v.pause) goto L42;
+  stop()
+  goto L43;
+L42:
+  play()
+};
+
+## frame 13 label 'hamBeurk'
+
+## sprite373 frame 13 PlaceObject2 depth 1 id 364 onClipEvent(load)
+if (random(2)) goto L82;
+goto L90;
+L82:
+L90:
+'_yscale'[100] = -100;
+L153:
+this.onEnterFrame = function() {
+  if (!_parent._parent._parent.v.pause) goto L42;
+  stop()
+  goto L43;
+L42:
+  play()
+};
+/* leftover stack: this */
+
+## frame 14 label 'mustardBurk'
+
+## sprite373 frame 14 PlaceObject2 depth 1 id 365 onClipEvent(load)
+L101:
+this.onEnterFrame = function() {
+  if (!_parent._parent._parent.v.pause) goto L42;
+  stop()
+  goto L43;
+L42:
+  play()
+};
+
+## frame 15 label 'poison'
+
+## sprite373 frame 15 PlaceObject2 depth 1 id 369 onClipEvent(load)
+L101:
+this.onEnterFrame = function() {
+  if (!_parent._parent._parent.v.pause) goto L42;
+  stop()
+  goto L43;
+L42:
+  play()
+};
+
+## frame 16 label 'deadFish'
+
+## sprite373 frame 16 PlaceObject2 depth 1 id 136 onClipEvent(load)
+if (random(2)) goto L46;
+goto L54;
+L46:
+L54:
+'_yscale'[100] = -100;
+/* leftover stack: this */
+
+## frame 17 label 'bread'
+
+## sprite373 frame 17 PlaceObject2 depth 1 id 372 onClipEvent(load)
+L101:
+this.onEnterFrame = function() {
+  if (!_parent._parent._parent.v.pause) goto L42;
+  stop()
+  goto L43;
+L42:
+  play()
+};

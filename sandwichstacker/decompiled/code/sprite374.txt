@@ -1,0 +1,143 @@
+# sprite 374: 19 frames
+
+## frame 1 label 'inactive'
+
+## sprite374 frame 1 DoAction
+stop()
+
+## frame 10 label 'fall'
+
+## sprite374 frame 10 DoAction
+stop()
+if (!(_parent.fallObjOrient == undefined)) goto L359;
+_parent.fallObjOrient = -1;
+L359:
+_parent.fallObjOrient = (_parent.fallObjOrient * -1);
+this._xscale = (100 * _parent.fallObjOrient);
+this.onEnterFrame = function() {
+  r1 = _parent;
+  _parent;
+  r2 = this;
+  this;
+  if (!((r1.v.referenceFrame - r1._currentframe) < -9)) goto L94;
+  r2.removeMovieClip();
+  goto L1457;
+  goto L218;
+L94:
+  if (!(r1.v.pause == true)) goto L130;
+  goto L1457;
+  goto L218;
+L130:
+  if (!(''._y < 410)) goto L195;
+  ''._y = (''._y + r1.v.speedDown);
+  goto L218;
+L195:
+  r2.removeMovieClip();
+  goto L1457;
+L218:
+  if (!((r1.v.gameover == true) || (r1.v.endSandwich == true))) goto L288;
+  r2.removeMovieClip();
+  goto L1457;
+L288:
+  if (!(r1.v.sandwichHeight == 1)) goto L809;
+  if (!(''._y > (r1.barre._y - 3))) goto L410;
+  (''._y > (r1.barre._y - 3));
+L410:
+  if (!(''._y < (r1.barre._y + (r1.v.speedDown * 2)))) goto L457;
+  (''._y < (r1.barre._y + (r1.v.speedDown * 2)));
+L457:
+  if (!(''._x > (r1.barre._x - 30))) goto L504;
+  (''._x > (r1.barre._x - 30));
+L504:
+  if (!(''._x < (r1.barre._x + 30))) goto L804;
+  if (!!(RandomElement > 11)) goto L645;
+  r1.v.tempFood = RandomElement;
+  r1[('food' + r1.v.sandwichHeight)].Xoffset = r2._x;
+  r1[('food' + r1.v.sandwichHeight)].gotoAndPlay('follow');
+  r1.v.sandwichHeight = ++r1.v.sandwichHeight;
+  goto L782;
+L645:
+  r1.barre.gotoAndPlay('YARK');
+  r1.barre.action = 'YARK';
+  r1.v.nbrLife = --r1.v.nbrLife;
+  r1.Life = r1.v.nbrLife;
+  r1.tete.gotoAndPlay('blink');
+  r2.play();
+  r2.onEnterFrame = null;
+  goto L1457;
+L782:
+  r2.onEnterFrame = r2.removeMovieClip();
+L804:
+  goto L1457;
+L809:
+  r3 = r1[('food' + (r1.v.sandwichHeight - 1))];
+  r1[('food' + (r1.v.sandwichHeight - 1))];
+  if (!(''._y > (r3._y - 3))) goto L924;
+  (''._y > (r3._y - 3));
+L924:
+  if (!(''._y < (r3._y + (r1.v.speedDown * 2)))) goto L971;
+  (''._y < (r3._y + (r1.v.speedDown * 2)));
+L971:
+  if (!(''._x > (r3.objectFixe._x + 125))) goto L1018;
+  (''._x > (r3.objectFixe._x + 125));
+L1018:
+  if (!(''._x < (r3.objectFixe._x + 225))) goto L1457;
+  if (!!(RandomElement > 11)) goto L1128;
+  r1.v.tempFood = RandomElement;
+  r1[('food' + r1.v.sandwichHeight)].gotoAndPlay('follow');
+  r1.v.sandwichHeight = ++r1.v.sandwichHeight;
+  goto L1435;
+L1128:
+  if (!(RandomElement == r1.v.breadSlice)) goto L1298;
+  r1.v.tempFood = RandomElement;
+  r1[('food' + r1.v.sandwichHeight)].gotoAndPlay('bread');
+  r1.v.sandwichHeight = ++r1.v.sandwichHeight;
+  r1.v.endSandwich = true;
+  r1.sfx.gotoAndStop('munche');
+  r1.v.bonus = 0;
+  goto L1435;
+L1298:
+  r1.barre.gotoAndPlay('YARK');
+  r1.barre.action = 'YARK';
+  r1.v.nbrLife = --r1.v.nbrLife;
+  r1.Life = r1.v.nbrLife;
+  r1.tete.gotoAndPlay('blink');
+  r2.play();
+  r2.onEnterFrame = null;
+  goto L1457;
+L1435:
+  r2.onEnterFrame = r2.removeMovieClip();
+L1457:
+  r3 = r3;
+  r3;
+  r2 = r2;
+  r2;
+  r1 = r1;
+  r1;
+};
+
+## sprite374 frame 10 PlaceObject2 depth 1 id 373 name 'completeObjects' onClipEvent(load)
+if (!!((_parent._parent.v.fallNumber - 100) < _parent._parent.v.RandomBread)) goto L263;
+!((_parent._parent.v.fallNumber - 100) < _parent._parent.v.RandomBread);
+L263:
+if (!(_parent._parent.v.sandwichHeight > 3)) goto L504;
+_parent.RandomElement = _parent._parent.v.breadSlice;
+_parent._parent.v.RandomBread = (_parent._parent.v.RandomBread + _parent._parent.v.RandomBread);
+_parent._parent.toaster.play();
+_parent._y = (-30 * _parent._parent.v.speedDown);
+_parent._parent.controler.intervFallObj = (_parent._parent.controler.intervFallObj + 1500);
+goto L655;
+L504:
+_parent.RandomElement = (random(16) + 1);
+if (((_parent.RandomElement == 1) || (_parent._parent.v.lastFallenElement == _parent.RandomElement))) goto L504;
+if (!(_parent.RandomElement < 12)) goto L655;
+_parent._parent.v.lastFallenElement = _parent.RandomElement;
+L655:
+this.gotoAndStop(_parent.RandomElement);
+
+## sprite374 frame 12 PlaceObject2 depth 1 id 316 onClipEvent(load)
+gotoAndStop((_parent.RandomElement - 1));
+this._xscale = (100 * _parent._parent.fallObjOrient);
+
+## sprite374 frame 19 DoAction
+this.removeMovieClip();

@@ -1,0 +1,24 @@
+# sprite 221: 34 frames
+
+## sprite221 frame 1 DoAction
+stop()
+
+## sprite221 frame 10 DoAction
+gotoAndStop(1);
+
+## sprite221 frame 12 DoAction
+trace('start ding');
+bar.gotoAndPlay(2);
+play()
+
+## frame 12 label 'ding'
+
+## sprite221 frame 34 DoAction
+trace('end ding');
+bar._xscale = 0;
+if (!(_parent.v.lifeScale == undefined)) goto L167;
+_parent.v.lifeScale = _parent.v.nbrLife;
+L167:
+var inverseScale = (_parent.v.lifeScale - _parent.v.nbrLife);
+bar._xscale = Math.floor(((inverseScale / _parent.v.lifeScale) * 100));
+gotoAndStop(1);

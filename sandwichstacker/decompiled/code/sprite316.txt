@@ -1,0 +1,33 @@
+# sprite 316: 16 frames
+
+## frame 1 label 'jambon'
+
+## frame 2 label 'cheese'
+
+## frame 3 label 'tomate'
+
+## frame 4 label 'oignon'
+
+## frame 5 label 'laitue'
+
+## frame 6 label 'bacon'
+
+## frame 7 label 'pickle'
+
+## frame 8 label 'moutarde'
+
+## frame 9 label 'mayo'
+
+## frame 10 label 'pepper'
+
+## frame 11 label 'PainTop'
+
+## frame 12 label 'BadFromage'
+
+## frame 13 label 'Badpoison'
+
+## frame 14 label 'Badfish'
+
+## frame 15 label 'badMeat'
+
+## frame 16 label 'BadJus'

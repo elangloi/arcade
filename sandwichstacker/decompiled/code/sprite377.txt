@@ -1,0 +1,76 @@
+# sprite 377: 3 frames
+
+## sprite377 frame 1 DoAction
+stop()
+
+## sprite377 frame 2 PlaceObject2 depth 185 id 150 name 't3' onClipEvent(load)
+L108:
+this.onEnterFrame = function() {
+  stop()
+  if (!(_parent._parent._parent._parent.v.pause == false)) goto L50;
+  play()
+};
+
+## sprite377 frame 2 PlaceObject2 depth 187 id 150 name 't2' onClipEvent(load)
+L108:
+this.onEnterFrame = function() {
+  stop()
+  if (!(_parent._parent._parent._parent.v.pause == false)) goto L50;
+  play()
+};
+
+## sprite377 frame 2 PlaceObject2 depth 189 id 150 name 't1' onClipEvent(load)
+L108:
+this.onEnterFrame = function() {
+  stop()
+  if (!(_parent._parent._parent._parent.v.pause == false)) goto L50;
+  play()
+};
+
+## sprite377 frame 2 PlaceObject2 depth 191 id 157 name 't2' onClipEvent(load)
+L108:
+this.onEnterFrame = function() {
+  stop()
+  if (!(_parent._parent._parent._parent.v.pause == false)) goto L50;
+  play()
+};
+
+## sprite377 frame 2 PlaceObject2 depth 209 id 157 name 't1' onClipEvent(load)
+L108:
+this.onEnterFrame = function() {
+  stop()
+  if (!(_parent._parent._parent._parent.v.pause == false)) goto L50;
+  play()
+};
+
+## sprite377 frame 2 PlaceObject2 depth 229 id 164 name 't2' onClipEvent(load)
+L108:
+this.onEnterFrame = function() {
+  stop()
+  if (!(_parent._parent._parent._parent.v.pause == false)) goto L50;
+  play()
+};
+
+## sprite377 frame 2 PlaceObject2 depth 231 id 164 name 't1' onClipEvent(load)
+L108:
+this.onEnterFrame = function() {
+  stop()
+  if (!(_parent._parent._parent._parent.v.pause == false)) goto L50;
+  play()
+};
+
+## sprite377 frame 2 PlaceObject2 depth 233 id 169 name 't1' onClipEvent(load)
+L108:
+this.onEnterFrame = function() {
+  stop()
+  if (!(_parent._parent._parent._parent.v.pause == false)) goto L50;
+  play()
+};
+
+## sprite377 frame 2 PlaceObject2 depth 235 id 169 name 't2' onClipEvent(load)
+L108:
+this.onEnterFrame = function() {
+  stop()
+  if (!(_parent._parent._parent._parent.v.pause == false)) goto L50;
+  play()
+};

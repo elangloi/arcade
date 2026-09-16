@@ -1,0 +1,16 @@
+# sprite 424: 5 frames
+
+## sprite424 frame 1 DoAction
+stop()
+
+## sprite424 frame 2 DoAction
+stop()
+
+## sprite424 frame 3 DoAction
+stop()
+
+## sprite424 frame 4 DoAction
+stop()
+
+## sprite424 frame 5 DoAction
+stop()

@@ -1,0 +1,87 @@
+# sprite 276: 12 frames
+
+## frame 2 label 'meat'
+
+## frame 3 label 'cheese'
+
+## sprite276 frame 3 PlaceObject2 depth 1 id 260 onClipEvent(load)
+if (random(2)) goto L46;
+goto L54;
+L46:
+L54:
+'_yscale'[100] = -100;
+/* leftover stack: this */
+
+## frame 4 label 'tomatoes'
+
+## sprite276 frame 4 PlaceObject2 depth 1 id 152 onClipEvent(load)
+if (random(2)) goto L46;
+goto L54;
+L46:
+L54:
+'_yscale'[100] = -100;
+/* leftover stack: this */
+
+## sprite276 frame 4 PlaceObject2 depth 18 id 152 onClipEvent(load)
+if (random(2)) goto L46;
+goto L54;
+L46:
+L54:
+'_yscale'[100] = -100;
+/* leftover stack: this */
+
+## frame 5 label 'bacon'
+
+## frame 6 label 'lettuce'
+
+## sprite276 frame 6 PlaceObject2 depth 1 id 266 onClipEvent(load)
+if (random(2)) goto L46;
+goto L54;
+L46:
+L54:
+'_yscale'[100] = -100;
+/* leftover stack: this */
+
+## frame 7 label 'mustard'
+
+## frame 8 label 'mayo'
+
+## frame 9 label 'peppers'
+
+## sprite276 frame 9 PlaceObject2 depth 1 id 166 onClipEvent(load)
+if (random(2)) goto L46;
+goto L54;
+L46:
+L54:
+'_yscale'[100] = -100;
+/* leftover stack: this */
+
+## sprite276 frame 9 PlaceObject2 depth 3 id 166 onClipEvent(load)
+if (random(2)) goto L46;
+goto L54;
+L46:
+L54:
+'_yscale'[100] = -100;
+/* leftover stack: this */
+
+## frame 10 label 'pickles'
+
+## frame 11 label 'onions'
+
+## sprite276 frame 11 PlaceObject2 depth 1 id 161 onClipEvent(load)
+if (random(2)) goto L46;
+goto L54;
+L46:
+L54:
+'_yscale'[100] = -100;
+/* leftover stack: this */
+
+## sprite276 frame 11 PlaceObject2 depth 3 id 161 onClipEvent(load)
+if (random(2)) goto L46;
+goto L54;
+L46:
+L54:
+'_yscale'[100] = -100;
+/* leftover stack: this */
+
+## frame 12 label 'bread'

@@ -1,0 +1,8 @@
+# sprite 252: 10 frames
+
+## sprite252 frame 1 DoAction
+stop()
+
+## sprite252 frame 10 DoAction
+_parent.controler.hideFallObj(false);
+stop()

@@ -1,0 +1,165 @@
+# sprite 332: 172 frames
+
+## frame 1 label 'Stop'
+
+## sprite332 frame 1 DoAction
+if (!!(action == '')) goto L64;
+gotoAndPlay(action);
+goto L105;
+L64:
+if (!_parent.v.moving) goto L104;
+gotoFrame('marche');
+play()
+goto L105;
+L104:
+play()
+L105:
+
+## sprite332 frame 2 DoAction
+call(1);
+
+## sprite332 frame 3 DoAction
+call(1);
+
+## sprite332 frame 4 DoAction
+call(1);
+
+## sprite332 frame 5 DoAction
+call(1);
+
+## sprite332 frame 6 DoAction
+call(1);
+
+## sprite332 frame 7 DoAction
+call(1);
+
+## sprite332 frame 8 DoAction
+call(1);
+
+## sprite332 frame 9 DoAction
+call(1);
+
+## sprite332 frame 10 DoAction
+call(1);
+gotoFrame('Stop');
+play()
+
+## frame 11 label 'marche'
+
+## sprite332 frame 11 DoAction
+if (!!(action == '')) goto L47;
+gotoAndPlay(action);
+goto L48;
+L47:
+play()
+L48:
+
+## sprite332 frame 15 DoAction
+if (!!(action == '')) goto L64;
+gotoAndPlay(action);
+goto L113;
+L64:
+if (!_parent.v.moving) goto L104;
+gotoFrame('marche');
+play()
+goto L113;
+L104:
+gotoFrame('stop');
+play()
+L113:
+
+## frame 16 label 'pauseAction'
+
+## sprite332 frame 16 DoAction
+L112:
+this.onEnterFrame = function() {
+  if (!_parent.v.moving) goto L53;
+  gotoFrame('retourPause');
+  play()
+  this.onEnterFrame = null;
+};
+
+## frame 46 label 'pauseLoop'
+
+## sprite332 frame 125 DoAction
+gotoFrame('pauseLoop');
+play()
+
+## frame 126 label 'retourPause'
+
+## sprite332 frame 126 DoAction
+play()
+
+## sprite332 frame 128 DoAction
+if (!(_parent.v.nbrLife == 0)) goto L388;
+_root.v.interval = setInterval(function() {
+  r1 = _parent;
+  _parent;
+  r1.v.endSandwich = false;
+  r1.v.sandwichHeight = 1;
+  r1.v.fallNumber = 100;
+  r1.v.RandomBread = (random(4) + 9);
+  r1.gotoAndStop('gameover');
+  trace('retour pause');
+  clearInterval(_root.v.interval);
+  r1 = r1;
+  r1;
+}, 250);
+L388:
+action = '';
+gotoFrame('Stop');
+play()
+
+## frame 129 label 'BoomTete'
+
+## sprite332 frame 129 DoAction
+play()
+
+## sprite332 frame 129 PlaceObject2 depth 71 id 316 onClipEvent(load)
+gotoAndStop((_parent._parent.v.tempFood - 1));
+
+## sprite332 frame 138 DoAction
+if (!!(condType == 'bad')) goto L67;
+action = '';
+gotoFrame('Stop');
+play()
+L67:
+condType = 'good';
+
+## frame 139 label 'YARK'
+
+## sprite332 frame 139 DoAction
+play()
+
+## sprite332 frame 150 DoAction
+if (!!(_parent.v.nbrLife > 0)) goto L385;
+_root.v.interval = setInterval(function() {
+  r1 = _parent;
+  _parent;
+  r1.v.endSandwich = false;
+  r1.v.sandwichHeight = 1;
+  r1.v.fallNumber = 100;
+  r1.v.RandomBread = (random(4) + 9);
+  trace('fin Yark');
+  r1.gotoAndStop('gameover');
+  clearInterval(_root.v.interval);
+  r1 = r1;
+  r1;
+}, 250);
+L385:
+action = '';
+gotoFrame('Stop');
+play()
+
+## frame 151 label 'Swallow'
+
+## sprite332 frame 151 DoAction
+play()
+
+## sprite332 frame 161 DoAction
+if (!(_parent.v.nbrSandwich == _parent.v.nbrSandLevel)) goto L133;
+_parent.gotoAndStop('nextlevel');
+L133:
+action = '';
+gotoFrame('Stop');
+play()

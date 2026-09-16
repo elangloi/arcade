@@ -1,0 +1,6 @@
+# sprite 386: 35 frames
+
+## frame 1 label 'inactive'
+
+## sprite386 frame 35 DoAction
+stop()

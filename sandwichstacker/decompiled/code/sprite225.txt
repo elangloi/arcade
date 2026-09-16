@@ -1,0 +1,13 @@
+# sprite 225: 50 frames
+
+## frame 1 label 'silence'
+
+## sprite225 frame 1 DoAction
+stop()
+
+## frame 10 label 'munche'
+
+## frame 20 label 'stopMunche'
+
+## sprite225 frame 21 DoAction
+gotoAndStop(1);

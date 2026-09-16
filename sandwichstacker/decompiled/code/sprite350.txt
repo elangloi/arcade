@@ -1,0 +1,17 @@
+# sprite 350: 1 frames
+
+## sprite350 frame 1 PlaceObject2 depth 1 id 169 name 't1' onClipEvent(load)
+L108:
+this.onEnterFrame = function() {
+  stop()
+  if (!(_parent._parent._parent._parent.v.pause == false)) goto L50;
+  play()
+};
+
+## sprite350 frame 1 PlaceObject2 depth 3 id 169 name 't2' onClipEvent(load)
+L108:
+this.onEnterFrame = function() {
+  stop()
+  if (!(_parent._parent._parent._parent.v.pause == false)) goto L50;
+  play()
+};

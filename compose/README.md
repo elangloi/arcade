@@ -11,6 +11,7 @@ Then open `http://<host>/`. The proxy publishes port 80 (override with `ARCADE_H
 |------|---------|
 | `/` | landing page (`nginx/html/index.html`) |
 | `/teen-titans-battle-blitz/` | the `battleblitz` container (built from `../battleblitz/Dockerfile`) |
+| `/lilo-and-stitch-sandwich-stacker/` | the `sandwichstacker` container (built from `../sandwichstacker/Dockerfile`) |
 
 ## Adding a game
 

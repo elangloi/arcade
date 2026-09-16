@@ -1,0 +1,7 @@
+# sprite 45: 49 frames
+
+## sprite45 frame 1 DoAction
+stop()
+
+## sprite45 frame 49 DoAction
+gotoAndStop(1);

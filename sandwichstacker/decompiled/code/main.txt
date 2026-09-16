@@ -1,0 +1,556 @@
+# main timeline: {'frame_size': (0, 11600, 0, 6400), 'rate': 24.0, 'frames': 79, 'version': 6}
+
+## frame 1 label 'Preload'
+
+## main frame 1 DoAction
+stop()
+
+## main frame 1 PlaceObject2 depth 62 id 47 onClipEvent(load)
+Btotal = _parent.getBytesTotal();
+var Bloaded = _parent.getBytesLoaded();
+if (!!(_parent._framesloaded < 70)) goto L184;
+_parent.gotoAndStop('Play');
+L184:
+
+## main frame 1 PlaceObject2 depth 62 id 47 onClipEvent(enterFrame)
+var Bloaded = _parent.getBytesLoaded();
+if (!!(_parent._framesloaded < 70)) goto L178;
+_parent.gotoAndStop('Play');
+L178:
+var pourcent = Math.floor(((Bloaded / Btotal) * 100));
+bar._xscale = pourcent;
+
+## frame 10 label 'Play'
+
+## main frame 10 DoAction
+stop()
+
+## button 116 on(overDownToOverUp cond=0x8)
+gotoFrame('init');
+play()
+
+## button 123 on(overDownToOverUp cond=0x8)
+gotoFrame('instruction');
+
+## frame 20 label 'Instruction'
+
+## main frame 20 DoAction
+stop()
+
+## button 194 on(overDownToOverUp cond=0x8)
+goToPlay();
+
+## main frame 20 PlaceObject2 depth 1 id 196 onClipEvent(load)
+function goToPlay() {
+  _parent.gotoAndPlay('init');
+}
+function goToBack() {
+  _parent.gotoAndPlay('Play');
+}
+
+## frame 30 label 'init'
+
+## main frame 30 DoAction
+score = 0;
+
+## button 201 on(overUpToOverDown cond=0x4)
+if (!((_parent.v.QuitWasPressed || _parent.v.HelpWasPressed) || (_parent.barre.action == 'Swallow'))) goto L204;
+return undefined;
+L204:
+if (!(_parent.v.PauseWasPressed == undefined)) goto L253;
+_parent.v.PauseWasPressed = false;
+L253:
+if (!(_parent.v.pause == false)) goto L414;
+_parent.v.pause = true;
+_parent.v.moving = false;
+_parent.barre.action = 'pauseAction';
+_parent.barre.gotoAndPlay('pauseAction');
+_parent.v.PauseWasPressed = true;
+_parent.gotoAndStop('pause');
+gotoAndStop(2);
+L414:
+
+## button 204 on(overUpToOverDown cond=0x4)
+if (!((!_parent.v.QuitWasPressed && !_parent.v.PauseWasPressed) && !(_parent.barre.action == 'Swallow'))) goto L398;
+_parent.v.pause = true;
+_parent.v.moving = false;
+_parent.barre.action = 'pauseAction';
+_parent.barre.gotoAndPlay('pauseAction');
+_parent.instructions.gotoAndStop(2);
+_parent.v.HelpWasPressed = true;
+_parent.controler.hideFallObj(false);
+L398:
+
+## button 207 on(overUpToOverDown cond=0x4)
+if (!((_parent.v.PauseWasPressed || _parent.v.HelpWasPressed) || (_parent.barre.action == 'Swallow'))) goto L250;
+return undefined;
+L250:
+if (_parent.v.QuitWasPressed) goto L412;
+_parent.v.pause = true;
+_parent.v.moving = false;
+_parent.barre.action = 'pauseAction';
+_parent.barre.gotoAndPlay('pauseAction');
+_parent.mcQuit.play();
+_parent.v.QuitWasPressed = true;
+goto L553;
+L412:
+_parent.v.QuitWasPressed = false;
+_parent.mcQuit.gotoAndStop(1);
+_parent.v.pause = false;
+_parent.barre.action = 'retourPause';
+_parent.barre.gotoAndPlay('retourPause');
+_parent.controler.hideFallObj(true);
+L553:
+
+## button 209 on(overUpToOverDown cond=0x4)
+_parent.v.pause = false;
+_parent.barre.action = 'retourPause';
+_parent.barre.gotoAndPlay('retourPause');
+_parent.v.PauseWasPressed = false;
+_parent.gotoAndStop('game');
+gotoAndStop(1);
+
+## main frame 30 PlaceObject2 depth 19 id 221 name 'ickmeter' onClipEvent(load)
+stop()
+if (!(_parent.v.nbrLife > _parent.v.lifeChange)) goto L280;
+var inverseScale = ((_parent.v.lifeScale - _parent.v.nbrLife) + 1);
+bar._xscale = Math.floor(((inverseScale / _parent.v.lifeScale) * 100));
+this.gotoAndPlay('ding');
+goto L401;
+L280:
+bar._xscale = 0;
+var inverseScale = (_parent.v.lifeScale - _parent.v.nbrLife);
+bar._xscale = Math.floor(((inverseScale / _parent.v.lifeScale) * 100));
+L401:
+_parent.v.lifeChange = _parent.v.nbrLife;
+
+## main frame 30 PlaceObject2 depth 19 id 221 name 'ickmeter' onClipEvent(enterFrame)
+if (!(!(_parent.v.nbrLife == _parent.v.lifeChange) && (_parent.v.nbrLife < _parent.v.lifeChange))) goto L374;
+if (!(_parent.v.nbrLife < _parent.v.lifeChange)) goto L218;
+play()
+L218:
+var inverseScale = (_parent.v.lifeScale - _parent.v.nbrLife);
+bar._xscale = Math.floor(((inverseScale / _parent.v.lifeScale) * 100));
+bar.gotoAndPlay(1);
+_parent.v.lifeChange = _parent.v.nbrLife;
+L374:
+
+## button 250 on(overDownToOverUp cond=0x8)
+_parent.v.endSandwich = false;
+_parent.v.sandwichHeight = 1;
+_parent.v.fallNumber = 100;
+_parent.v.RandomBread = (random(4) + 9);
+_parent.gotoAndStop('DOGE');
+
+## button 251 on(overDownToOverUp cond=0x8)
+_parent.v.QuitWasPressed = false;
+_parent.v.pause = false;
+_parent.barre.action = 'retourPause';
+_parent.barre.gotoAndPlay('retourPause');
+_parent.controler.hideFallObj(true);
+this.gotoAndStop(1);
+
+## main frame 30 PlaceObject2 depth 82 id 277 name 'food1' onClipEvent(load)
+limits = 1;
+
+## main frame 30 PlaceObject2 depth 88 id 277 name 'food2' onClipEvent(load)
+limits = 2;
+
+## main frame 30 PlaceObject2 depth 94 id 277 name 'food3' onClipEvent(load)
+limits = 3;
+
+## main frame 30 PlaceObject2 depth 100 id 277 name 'food4' onClipEvent(load)
+limits = 4;
+
+## main frame 30 PlaceObject2 depth 106 id 277 name 'food5' onClipEvent(load)
+limits = 5;
+
+## main frame 30 PlaceObject2 depth 112 id 277 name 'food6' onClipEvent(load)
+limits = 6;
+
+## main frame 30 PlaceObject2 depth 118 id 277 name 'food7' onClipEvent(load)
+limits = 7;
+
+## main frame 30 PlaceObject2 depth 124 id 277 name 'food8' onClipEvent(load)
+limits = 8;
+
+## main frame 30 PlaceObject2 depth 130 id 277 name 'food9' onClipEvent(load)
+limits = 1;
+
+## main frame 30 PlaceObject2 depth 136 id 277 name 'food10' onClipEvent(load)
+limits = 1;
+
+## main frame 30 PlaceObject2 depth 142 id 277 name 'food11' onClipEvent(load)
+limits = 1;
+
+## main frame 30 PlaceObject2 depth 148 id 277 name 'food12' onClipEvent(load)
+limits = 1;
+
+## main frame 30 PlaceObject2 depth 154 id 277 name 'food13' onClipEvent(load)
+limits = 1;
+
+## main frame 30 PlaceObject2 depth 160 id 277 name 'food14' onClipEvent(load)
+limits = 1;
+
+## main frame 30 PlaceObject2 depth 172 id 277 name 'food16' onClipEvent(load)
+limits = 1;
+
+## main frame 30 PlaceObject2 depth 178 id 277 name 'food17' onClipEvent(load)
+limits = 1;
+
+## main frame 30 PlaceObject2 depth 190 id 277 name 'food19' onClipEvent(load)
+limits = 1;
+
+## main frame 30 PlaceObject2 depth 196 id 277 name 'food20' onClipEvent(load)
+limits = 1;
+
+## main frame 30 PlaceObject2 depth 202 id 277 name 'food21' onClipEvent(load)
+limits = 1;
+
+## main frame 30 PlaceObject2 depth 208 id 277 name 'food22' onClipEvent(load)
+limits = 1;
+
+## main frame 30 PlaceObject2 depth 214 id 277 name 'food23' onClipEvent(load)
+limits = 1;
+
+## main frame 30 PlaceObject2 depth 220 id 277 name 'food24' onClipEvent(load)
+limits = 1;
+
+## main frame 30 PlaceObject2 depth 226 id 332 name 'barre' onClipEvent(load)
+action = '';
+
+## main frame 30 PlaceObject2 depth 298 id 277 name 'food25' onClipEvent(load)
+limits = 1;
+
+## main frame 30 PlaceObject2 depth 304 id 277 name 'food26' onClipEvent(load)
+limits = 1;
+
+## main frame 30 PlaceObject2 depth 310 id 277 name 'food27' onClipEvent(load)
+limits = 1;
+
+## main frame 30 PlaceObject2 depth 316 id 277 name 'food28' onClipEvent(load)
+limits = 1;
+
+## main frame 30 PlaceObject2 depth 334 id 377 name 'instructions' onClipEvent(load)
+function goToPlay() {
+  r1 = _parent;
+  _parent;
+  r1.v.HelpWasPressed = false;
+  r1.v.pause = false;
+  r1.barre.action = 'retourPause';
+  r1.barre.gotoAndPlay('retourPause');
+  if (!!(r1.v.nbrLife > 0)) goto L306;
+  _root.v.intervalInstructions = setInterval(function() {
+    r1 = _parent;
+    _parent;
+    r1.v.endSandwich = false;
+    r1.v.sandwichHeight = 1;
+    r1.v.fallNumber = 100;
+    r1.v.RandomBread = (random(4) + 9);
+    r1.gotoAndStop('gameover');
+    clearInterval(_root.v.intervalInstructions);
+    r1 = r1;
+    r1;
+  }, 250);
+L306:
+  this.gotoAndStop(1);
+  r1.controler.hideFallObj(true);
+  r1 = r1;
+  r1;
+}
+function goToBack() {
+  r1 = _parent;
+  _parent;
+  r2 = _root;
+  _root;
+  r1.v.HelpWasPressed = false;
+  r1.v.pause = false;
+  r1.barre.action = 'retourPause';
+  r1.barre.gotoAndPlay('retourPause');
+  if (!!(r1.v.nbrLife > 0)) goto L337;
+  r2.v.intervalInstructions = setInterval(function() {
+    r1 = _parent;
+    _parent;
+    r1.v.endSandwich = false;
+    r1.v.sandwichHeight = 1;
+    r1.v.fallNumber = 100;
+    r1.v.RandomBread = (random(4) + 9);
+    trace(('gotoPlay' + _root.v.interval));
+    r1.gotoAndStop('gameover');
+    clearInterval(_root.v.intervalInstructions);
+    r1 = r1;
+    r1;
+  }, 250);
+L337:
+  this.gotoAndStop(1);
+  r1.controler.hideFallObj(true);
+  r2 = r2;
+  r2;
+  r1 = r1;
+  r1;
+}
+
+## main frame 39 PlaceObject2 depth 331 id 381 name 'v' onClipEvent(load)
+stageWidth = 580;
+speedDown = 7;
+intervalFall = 1100;
+PlateSpeed = 9;
+move = 0;
+pause = false;
+betweenLevel = false;
+referenceFrame;
+fallNumber = 100;
+sandwichHeight = 0;
+xMinFallObject = 36;
+xMaxFallObject = 370;
+minMaxDiff = 278;
+tempFood = 0;
+lifeScale = 3;
+nbrLife = lifeScale;
+lifeChange = lifeScale;
+bonusLife = 1000;
+gameOver = false;
+nbrSandLevel = 1;
+breadSlice = 17;
+levelNumber = 0;
+var startRanBread = 9;
+RandomBread = (random(4) + startRanBread);
+endSandwich = false;
+sandwichCumul = 0;
+nbrSandwich = 0;
+ecranCumul = new Array(2, 5, 9);
+interval = null;
+intervalInstructions = null;
+startScore = 125;
+score = 0;
+moving = false;
+QuitWasPressed = false;
+HelpWasPressed = false;
+lastXofFallObj = (random((xMaxFallObject - xMinFallObject)) + xMinFallObject);
+distBetweenFallObj = 270;
+
+## frame 40 label 'game'
+
+## main frame 40 DoAction
+stop()
+
+## main frame 40 PlaceObject2 depth 322 id 386 name 'MClevel' onClipEvent(load)
+levelText = ('LEVEL ' add (_parent.v.levelNumber + 1));
+
+## main frame 40 PlaceObject2 depth 328 id 394 name 'controler' onClipEvent(load)
+function Fall() {
+}
+function FiniSandwiche() {
+  r1 = _parent;
+  _parent;
+  r1.v.sandwichCumul = ++r1.v.sandwichCumul;
+  r1.v.nbrSandwich = ++r1.v.nbrSandwich;
+  r1[('food' + (r1.v.sandwichHeight - 1))].play();
+  r1.v.endSandwich = false;
+  r1.v.fallNumber = 100;
+  r2 = 9;
+  9;
+  r1.v.RandomBread = (random(4) + r2);
+  r1.barre.gotoAndPlay('Swallow');
+  r1.barre.action = 'Swallow';
+  if (!!(r1.v.score < r1.v.bonusLife)) goto L374;
+  if (!(r1.v.lifeScale > r1.v.nbrLife)) goto L340;
+  r1.v.nbrLife = ++r1.v.nbrLife;
+  r1.Life = r1.v.nbrLife;
+L340:
+  r1.v.bonusLife = (r1.v.bonusLife + 1000);
+L374:
+  r2 = r2;
+  r2;
+  r1 = r1;
+  r1;
+}
+function fallingObjectPause(theCallingObj) {
+  if (!_parent.v.pause) goto L51;
+  theCallingObj.stop();
+  goto L73;
+L51:
+  theCallingObj.play();
+}
+L832:
+function hideFallObj(state) {
+  r2 = _parent;
+  _parent;
+  r3 = state;
+  state;
+  r1 = r2.v.fallNumber;
+  r2.v.fallNumber;
+L47:
+  if (!!(r2[('mc' add r1)] == null)) goto L105;
+  r2[('mc' add r1)]._visible = r3;
+  r1 = --r1;
+  --r1;
+  goto L47;
+L105:
+  goto L110;
+L110:
+  r3 = r3;
+  r3;
+  r2 = r2;
+  r2;
+  r1 = r1;
+  r1;
+}
+_parent.v.referenceFrame = _parent._currentframe;
+_parent.v.endSandwich = false;
+_parent.v.sandwichHeight = 1;
+_parent.v.fallNumber = 100;
+var startRanBread = 9;
+_parent.v.RandomBread = (random(4) + startRanBread);
+_parent.Life = _parent.v.nbrLife;
+_parent.score = _parent.v.score;
+intervFallObj = (getTimer() + _parent.v.intervalFall);
+pauseWasPressed = false;
+_parent.v.pause = false;
+
+## main frame 40 PlaceObject2 depth 328 id 394 name 'controler' onClipEvent(enterFrame)
+if (!_parent.v.pause) goto L358;
+if (!(pauseWasPressed == false)) goto L340;
+intervalLeft = (intervFallObj - getTimer());
+L340:
+pauseWasPressed = true;
+return undefined;
+goto L780;
+L358:
+if (!pauseWasPressed) goto L392;
+intervFallObj = (getTimer() + intervalLeft);
+pauseWasPressed = false;
+L392:
+if (!(intervFallObj < getTimer())) goto L780;
+intervFallObj = (intervFallObj + _parent.v.intervalFall);
+L434:
+if (random(2)) goto L493;
+goto L531;
+L493:
+L531:
+var [(_parent.v.lastXofFallObj - random(_parent.v.distBetweenFallObj))] = (_parent.v.lastXofFallObj + random(_parent.v.distBetweenFallObj));
+if (((Xrandom > _parent.v.xMaxFallObject) || (Xrandom < _parent.v.xMinFallObject))) goto L434;
+_parent.v.fallNumber = ++_parent.v.fallNumber;
+duplicateMovieClip(_parent.fallingObject, ('mc' + _parent.v.fallNumber), (16384 + _parent.v.fallNumber));
+_parent[('mc' + _parent.v.fallNumber)]._x = Xrandom;
+_parent[('mc' + _parent.v.fallNumber)].gotoAndPlay('fall');
+_parent.v.lastXofFallObj = Xrandom;
+L780:
+_parent.v.moving = false;
+if (!(Key.isDown(37) && !Key.isDown(39))) goto L1015;
+if (!(_parent.barre._x > _parent.v.xMinFallObject)) goto L1010;
+_parent.v.move = (0 - _parent.v.PlateSpeed);
+_parent.barre._x = (_parent.barre._x - _parent.v.PlateSpeed);
+_parent.v.moving = true;
+L1010:
+goto L1215;
+L1015:
+if (!(Key.isDown(39) && !Key.isDown(37))) goto L1215;
+if (!(_parent.barre._x < _parent.v.xMaxFallObject)) goto L1215;
+_parent.v.move = _parent.v.PlateSpeed;
+_parent.barre._x = (_parent.barre._x + _parent.v.PlateSpeed);
+_parent.v.moving = true;
+L1215:
+if (!(!(_parent.food28._currentframe == 1) && !(_parent.food28._currentframe == _parent.v.breadSlice))) goto L1328;
+_parent.v.gameOver = true;
+_parent.gotoAndPlay('gameover');
+L1328:
+/* leftover stack: 'Xrandom' */
+
+## frame 49 label 'pause'
+
+## frame 50 label 'nextlevel'
+
+## main frame 50 DoAction
+stop()
+
+## main frame 50 PlaceObject2 depth 6 id 424 onClipEvent(load)
+gotoAndStop((random(5) + 1));
+
+## button 438 on(overDownToOverUp cond=0x8)
+v.QuitWasPressed = false;
+v.HelpWasPressed = false;
+v.PauseWasPressed = false;
+gotoFrame('game');
+
+## main frame 50 PlaceObject2 depth 59 id 443 onClipEvent(load)
+_parent.v.speedDown = (_parent.v.speedDown + (_parent.v.speedDown * 0.01));
+_parent.v.intervalFall = (_parent.v.intervalFall - (_parent.v.intervalFall * 0.04));
+if (!(_parent.v.intervalFall < 700)) goto L397;
+_parent.v.intervalFall = 700;
+L397:
+_parent.v.distBetweenFallObj = (_parent.v.distBetweenFallObj - (_parent.v.distBetweenFallObj * 0.01));
+_parent.v.PlateSpeed = (_parent.v.PlateSpeed + (_parent.v.PlateSpeed * 0.01));
+trace(((((((_parent.v.speedDown + ' : ') + _parent.v.intervalFall) + ' : ') + _parent.v.distBetweenFallObj) + ' : ') + _parent.v.PlateSpeed));
+_parent.v.nbrSandwich = 0;
+_parent.v.levelNumber = ++_parent.v.levelNumber;
+r0 = _parent.v.levelNumber;
+if ((_parent.v.levelNumber === _parent.v.ecranCumul[0])) goto L816;
+if ((r0 === _parent.v.ecranCumul[1])) goto L862;
+if ((r0 === _parent.v.ecranCumul[2])) goto L908;
+goto L954;
+L816:
+_parent.comment = 'Nombre de sandwich';
+_parent.cumulatif = _parent.v.sandwichCumul;
+goto L987;
+L862:
+_parent.comment = 'Nombre de sandwich';
+_parent.cumulatif = _parent.v.sandwichCumul;
+goto L987;
+L908:
+_parent.comment = 'Nombre de sandwich';
+_parent.cumulatif = _parent.v.sandwichCumul;
+goto L987;
+L954:
+_parent.comment = '';
+_parent.cumulatif = '';
+goto L987;
+L987:
+_parent.v.sandwichHeight = 1;
+_parent.v.fallNumber = 100;
+var startRanBread = 9;
+_parent.v.RandomBread = (random(4) + startRanBread);
+
+## main frame 50 PlaceObject2 depth 59 id 443 onClipEvent(enterFrame)
+if (!(Key.isDown(32) || Key.isDown(13))) goto L112;
+_parent.gotoAndStop('game');
+L112:
+
+## main frame 50 PlaceObject2 depth 334 id 386 onClipEvent(load)
+levelText = ('LEVEL ' add _parent.v.levelNumber);
+
+## main frame 50 PlaceObject2 depth 334 id 386 onClipEvent(enterFrame)
+if (!(''._currentframe > 15)) goto L27;
+stop()
+L27:
+
+## frame 60 label 'gameover'
+
+## main frame 60 DoAction
+stop()
+
+## button 465 on(overDownToOverUp cond=0x8)
+v.QuitWasPressed = false;
+v.HelpWasPressed = false;
+v.PauseWasPressed = false;
+gotoFrame('DOGE');
+
+## button 472 on(overDownToOverUp cond=0x8)
+v.QuitWasPressed = false;
+v.HelpWasPressed = false;
+v.PauseWasPressed = false;
+gotoFrame('init');
+play()
+
+## frame 70 label 'DOGE'
+
+## main frame 70 DoAction
+function fsdPlayAgain() {
+  gotoFrame('init');
+  play()
+}
+var eventID = 'dc_ls625ss_2536';
+var subject = '625 Sandwich Stacker';
+var playerScore = score;
+DOGE.loadMovie(_level0.fsd, 1);
+stop()

@@ -1,0 +1,9 @@
+# sprite 391: 19 frames
+
+## frame 1 label 'inactive'
+
+## sprite391 frame 1 DoAction
+stop()
+
+## sprite391 frame 19 DoAction
+gotoFrame('inactive');

@@ -1,0 +1,112 @@
+# sprite 277: 29 frames
+
+## frame 1 label 'inactive'
+
+## sprite277 frame 1 DoAction
+Xoffset = 0;
+stop()
+
+## sprite277 frame 1 PlaceObject2 depth 5 id 255 onClipEvent(load)
+this._visible = false;
+
+## frame 10 label 'follow'
+
+## sprite277 frame 10 DoAction
+play()
+
+## sprite277 frame 10 PlaceObject2 depth 1 id 276 name 'objectFixe' onClipEvent(load)
+function decompte() {
+  r1 = _parent;
+  _parent;
+  this.onEnterFrame = function() {
+    r1 = _parent;
+    _parent;
+    if (!(waitAframe == undefined)) goto L43;
+    waitAframe = 'defined';
+    goto L468;
+  L43:
+    r1._parent.v.score = (r1._parent.v.score + (5 * positionNum));
+    r1._parent.score = r1._parent.v.score;
+    r1._parent.v.bonus = (r1._parent.v.bonus + (5 * positionNum));
+    r1._parent.bonus = ('+' add r1._parent.v.bonus);
+    r1._parent.MCbonus.play();
+    if (!!(r1._parent[('food' + (positionNum - 1))].objectFixe == undefined)) goto L337;
+    r1._parent[('food' + (positionNum - 1))].objectFixe.decompte();
+    goto L452;
+  L337:
+    r1._parent.v.sandwichHeight = 1;
+    if (!(r1._parent.v.endSandwich == true)) goto L424;
+    r1._parent.controler.FiniSandwiche();
+  L424:
+    r1._parent.sfx.gotoAndStop('stopMunche');
+  L452:
+    r1.gotoAndStop('inactive');
+  L468:
+    r1 = r1;
+    r1;
+  };
+  r1 = r1;
+  r1;
+}
+positionNum = _parent._name.slice(4, 6);
+if (!!(_parent._parent.v.tempFood == 0)) goto L1026;
+this._x = (_parent._parent.barre._x - 175);
+this.gotoAndStop(_parent._parent.v.tempFood);
+_parent._parent.v.tempFood = 0;
+L1026:
+if (!(_parent._parent.folowObjOrient == undefined)) goto L1078;
+_parent._parent.folowObjOrient = -1;
+L1078:
+_parent._parent.folowObjOrient = (_parent._parent.folowObjOrient * -1);
+this._xscale = (100 * _parent._parent.folowObjOrient);
+this._x = _parent._parent[('food' add (positionNum - 1))].objectFixe._x;
+this.onEnterFrame = function() {
+  r1 = _parent;
+  _parent;
+  r3 = this;
+  this;
+  if (!r1._parent.v.pause) goto L59;
+  goto L616;
+L59:
+  r2 = (r1._parent.v.sandwichHeight / 2);
+  (r1._parent.v.sandwichHeight / 2);
+  r2 = (r2 - Math.abs((r2 - positionNum)));
+  (r2 - Math.abs((r2 - positionNum)));
+  r2 = (r2 * 2);
+  (r2 * 2);
+  var plateauX = (r1._parent.barre._x - 175);
+  if (!(positionNum == 1)) goto L212;
+  r3._x = plateauX;
+  goto L616;
+L212:
+  r3._x = (r3._x + (((2 * positionNum) / 100) * r1._parent.v.move));
+  if (!(r3._x > (plateauX + ((2 * positionNum) + r2)))) goto L418;
+  r3._x = (plateauX + ((2 * positionNum) + r2));
+  if (r1._parent.v.moving) goto L413;
+  r1._parent.v.move = (r1._parent.v.move * -0.7);
+L413:
+  goto L563;
+L418:
+  if (!(r3._x < (plateauX - ((2 * positionNum) + r2)))) goto L563;
+  r3._x = (plateauX - ((2 * positionNum) + r2));
+  if (r1._parent.v.moving) goto L563;
+  r1._parent.v.move = (r1._parent.v.move * -0.7);
+L563:
+  r3._rotation = (r3._x - r1._parent[('food' add (positionNum - 1))].objectFixe._x);
+L616:
+  r3 = r3;
+  r3;
+  r2 = r2;
+  r2;
+  r1 = r1;
+  r1;
+};
+
+## sprite277 frame 19 DoAction
+stop()
+
+## frame 20 label 'bread'
+
+## sprite277 frame 29 DoAction
+stop()
+objectFixe.decompte();

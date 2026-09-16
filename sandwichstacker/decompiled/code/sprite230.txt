@@ -1,0 +1,9 @@
+# sprite 230: 9 frames
+
+## frame 1 label 'start'
+
+## sprite230 frame 1 DoAction
+stop()
+
+## sprite230 frame 9 DoAction
+gotoFrame('start');

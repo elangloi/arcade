@@ -16,11 +16,20 @@ services:
       - ./nginx/html:/usr/share/nginx/html:ro
     depends_on:
       - battleblitz
+      - sandwichstacker
 
   battleblitz:
     build: ../battleblitz
     image: arcade/battleblitz:latest
     container_name: arcade-battleblitz
+    restart: unless-stopped
+    expose:
+      - "80"
+
+  sandwichstacker:
+    build: ../sandwichstacker
+    image: arcade/sandwichstacker:latest
+    container_name: arcade-sandwichstacker
     restart: unless-stopped
     expose:
       - "80"

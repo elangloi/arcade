@@ -1,0 +1,17 @@
+# sprite 352: 1 frames
+
+## sprite352 frame 1 PlaceObject2 depth 1 id 164 name 't2' onClipEvent(load)
+L108:
+this.onEnterFrame = function() {
+  stop()
+  if (!(_parent._parent._parent._parent.v.pause == false)) goto L50;
+  play()
+};
+
+## sprite352 frame 1 PlaceObject2 depth 3 id 164 name 't1' onClipEvent(load)
+L108:
+this.onEnterFrame = function() {
+  stop()
+  if (!(_parent._parent._parent._parent.v.pause == false)) goto L50;
+  play()
+};

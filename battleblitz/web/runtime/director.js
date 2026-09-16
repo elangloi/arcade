@@ -223,7 +223,7 @@ class SoundChannel {
     src.loop = mem.loop === true || /loop|ambient/i.test(mem.name);
     const gain = ctx.createGain();
     gain.gain.value = this._volume / 255;
-    src.connect(gain).connect(ctx.destination);
+    src.connect(gain).connect(D.master);
     src.onended = () => { if (this.src === src) { this.src = null; } };
     src.start();
     this.src = src; this.gain = gain; this.member = mem;
@@ -308,6 +308,9 @@ export const D = {
     for (let i = 0; i <= 160; i++) this.sprites.push(new Sprite(i));
     for (let i = 0; i < 8; i++) this.channels.push(new SoundChannel(i + 1));
     this.audio = new (window.AudioContext || window.webkitAudioContext)();
+    this.master = this.audio.createGain();
+    this.master.connect(this.audio.destination);
+    if (new URLSearchParams(location.search).has('mute')) this.master.gain.value = 0;
     this.installInput();
   },
 
