@@ -15,6 +15,8 @@ const PENGUIN_COLOURS = [0x003399, 0x009900, 0x006600, 0x8bd402, 0x663300, 0xfc9
 export async function boot(svgEl) {
   const P = await loadPlayer(svgEl, '../assets/');
   const main = P.root;
+  // belt speed multiplier (1 = the original; the page offers slower settings for trackpad players)
+  P.speedScale = Number(new URLSearchParams(location.search).get('speed')) || 1;
   const locale = (await P.loadMovie('../assets/' + LANG + 'locale/')).json.locale;
   const T = key => locale[key] !== undefined ? locale[key] : key;
   const orders = ORDERS(T);
@@ -116,7 +118,7 @@ export async function boot(svgEl) {
       for (let i = 0; i < 10; i++) {
         const mc = this['conv' + i]; if (!mc) continue;
         if (mc._x > 500) mc._x -= 1000;
-        mc._x += g.pizzaspeed + g.speedboost;
+        mc._x += (g.pizzaspeed + g.speedboost) * P.speedScale;
       }
     };
   });
@@ -148,7 +150,7 @@ export async function boot(svgEl) {
       .every(part => layer.hitTest(pizza[part]._x + pizza._x, pizza[part]._y + pizza._y, true));
     g.normalsaucePLACED = covered(pizza.sauce);
     g.hotsaucePLACED = covered(pizza.hotsauce);
-    if (pizza._x < 900) pizza._x += g.pizzaspeed + g.speedboost;
+    if (pizza._x < 900) pizza._x += (g.pizzaspeed + g.speedboost) * P.speedScale;
     else g.gameMODE = 'removepizza';
   }
   function removepizza() {

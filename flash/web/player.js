@@ -73,8 +73,9 @@ export class Player {
 
   // Fetch another SWF's extraction (a folder with movie.json + defs.svg) and register it.
   async loadMovie(base) {
-    const { json, defsDoc } = await fetchMovie(base);
-    return this.addMovie(json, base, defsDoc);
+    this.loading = this.loading || {};
+    if (!this.loading[base]) this.loading[base] = fetchMovie(base).then(({ json, defsDoc }) => this.addMovie(json, base, defsDoc));
+    return this.loading[base];
   }
 
   toStage(e) {
@@ -165,8 +166,11 @@ class SoundObj {
     if (!this.url || this.player.muted) return;
     const a = new Audio(this.url);
     a.volume = this.volume / 100;
-    if (loops > 1) { let n = loops; a.addEventListener('ended', () => { if (--n > 0) { a.currentTime = 0; a.play().catch(() => { }); } }); }
-    a.addEventListener('ended', () => { this.playing = this.playing.filter(x => x !== a); });
+    let n = loops;
+    a.addEventListener('ended', () => {
+      if (--n > 0) { a.currentTime = 0; a.play().catch(() => { }); }   // looping: keep it in `playing` so stop() still reaches it
+      else this.playing = this.playing.filter(x => x !== a);
+    });
     this.playing.push(a);
     a.play().catch(() => { });
   }
