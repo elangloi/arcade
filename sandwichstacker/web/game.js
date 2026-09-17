@@ -1,6 +1,6 @@
 // 625 Sandwich Stacker — game logic ported from the SWF's ActionScript 2
 // (see decompiled/code/*.txt). Sprite ids and frame labels are the original ones.
-import { loadPlayer, MovieClip } from './player.js';
+import { loadPlayer, MovieClip } from '../../flash/web/player.js';
 
 const random = n => Math.floor(Math.random() * n);
 const DEBUG = new URLSearchParams(location.search).has('debug');

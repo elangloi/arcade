@@ -1,0 +1,25 @@
+# sprite 295: 3 frames
+
+## sprite295 frame 1 DoAction
+stop()
+L61:
+onEnterFrame = function() {
+  if (!!(this._y < 600)) goto L32;
+  removeMovieClip(this);
+};
+
+## sprite295 frame 2 DoAction
+stop()
+L61:
+onEnterFrame = function() {
+  if (!!(this._y < 600)) goto L32;
+  removeMovieClip(this);
+};
+
+## sprite295 frame 3 DoAction
+stop()
+L61:
+onEnterFrame = function() {
+  if (!!(this._y < 600)) goto L32;
+  removeMovieClip(this);
+};

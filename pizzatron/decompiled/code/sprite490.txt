@@ -1,0 +1,820 @@
+# sprite 490: 48 frames
+
+## sprite490 frame 1 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_cheese');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_pizzasauce');
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = 'NO TOPPINGS';
+
+## sprite490 frame 2 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_hotcheese');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_hotsauce');
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = 'NO TOPPINGS';
+
+## sprite490 frame 3 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_seaweed');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_pizzasauce');
+topping3.text = ('5 ' + _root.LocaleText.getText('topping_seaweeds'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 5;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '5 TOPPINGS';
+
+## sprite490 frame 4 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_spicyseaweed');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_hotsauce');
+topping3.text = ('5 ' + _root.LocaleText.getText('topping_seaweeds'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 5;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '5 TOPPINGS';
+
+## sprite490 frame 5 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_shrimp');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_pizzasauce');
+topping3.text = ('5 ' + _root.LocaleText.getText('topping_shrimps'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 5;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '5 TOPPINGS';
+
+## sprite490 frame 6 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_hotshrimp');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_hotsauce');
+topping3.text = ('5 ' + _root.LocaleText.getText('topping_shrimps'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 5;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '5 TOPPINGS';
+
+## sprite490 frame 7 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_squid');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_pizzasauce');
+topping3.text = ('5 ' + _root.LocaleText.getText('topping_squids'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 5;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '5 TOPPINGS';
+
+## sprite490 frame 8 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_spicysquid');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_hotsauce');
+topping3.text = ('5 ' + _root.LocaleText.getText('topping_squids'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 5;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '5 TOPPINGS';
+
+## sprite490 frame 9 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_fish');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_pizzasauce');
+topping3.text = ('5 ' + _root.LocaleText.getText('topping_fishies'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 5;
+_global.pizzatron_dl.setPizzaType = '5 TOPPINGS';
+
+## sprite490 frame 10 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_flamethrowerfish');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_hotsauce');
+topping3.text = ('5 ' + _root.LocaleText.getText('topping_fishies'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 5;
+_global.pizzatron_dl.setPizzaType = '5 TOPPINGS';
+
+## sprite490 frame 11 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_seaweedshrimp');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_pizzasauce');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_seaweeds'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_shrimps'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 2;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 2;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 12 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_hotseaweedshrimp');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_hotsauce');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_seaweeds'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_shrimps'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 2;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 2;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 13 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_fishdish');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_pizzasauce');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_squids'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_fishies'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 2;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 2;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 14 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_hotfishdish');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_hotsauce');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_squids'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_fishies'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 2;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 2;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 15 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_seaweedsquid');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_pizzasauce');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_seaweeds'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_squids'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 2;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 2;
+_parent.topping4REQUESTED = false;
+
+## sprite490 frame 16 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_hotseaweedsquid');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_hotsauce');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_seaweeds'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_squids'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 2;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 2;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 17 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_fishshrimp');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_pizzasauce');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_shrimps'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_fishies'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 2;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 2;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 18 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_hotfishshrimp');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_hotsauce');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_shrimps'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_fishies'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 2;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 2;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 19 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_seaweedfish');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_pizzasauce');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_seaweeds'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_fishies'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 2;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 2;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 20 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_hotseaweedfish');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_hotsauce');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_seaweeds'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_fishies'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 2;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 2;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 21 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_shrimpsquid');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_pizzasauce');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_shrimps'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_squids'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 2;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 2;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 22 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_hotshrimpsquid');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_hotsauce');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_shrimps'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_squids'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 2;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 2;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 23 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_supreme');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_pizzasauce');
+topping3.text = (((((((((('1 ' + _root.LocaleText.getText('topping_seaweed')) + '\n\n') + '1 ') + _root.LocaleText.getText('topping_shrimp')) + '\n\n') + '1 ') + _root.LocaleText.getText('topping_squid')) + '\n\n') + '1 ') + _root.LocaleText.getText('topping_fish'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 1;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 1;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 1;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 1;
+_global.pizzatron_dl.setPizzaType = '4 TOPPINGS';
+
+## sprite490 frame 24 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_supremesizzle');
+topping1.text = _root.LocaleText.getText('topping_cheese');
+topping2.text = _root.LocaleText.getText('topping_hotsauce');
+topping3.text = (((((((((('1 ' + _root.LocaleText.getText('topping_seaweed')) + '\n\n') + '1 ') + _root.LocaleText.getText('topping_shrimp')) + '\n\n') + '1 ') + _root.LocaleText.getText('topping_squid')) + '\n\n') + '1 ') + _root.LocaleText.getText('topping_fish'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 1;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 1;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 1;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 1;
+_global.pizzatron_dl.setPizzaType = '4 TOPPINGS';
+
+## sprite490 frame 25 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_chocolatesprinkle');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_chocolatesauce');
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = 'NO TOPPINGS';
+
+## sprite490 frame 26 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_pinkicing');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_pinkicing');
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = 'NO TOPPINGS';
+
+## sprite490 frame 27 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_liquorice');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_chocolatesauce');
+topping3.text = ('5 ' + _root.LocaleText.getText('topping_liquorices'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 5;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '5 TOPPINGS';
+
+## sprite490 frame 28 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_pinkliquorice');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_pinkicing');
+topping3.text = ('5 ' + _root.LocaleText.getText('topping_liquorices'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 5;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '5 TOPPINGS';
+
+## sprite490 frame 29 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_chocolate');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_chocolatesauce');
+topping3.text = ('5 ' + _root.LocaleText.getText('topping_chocolatechips'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 5;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '5 TOPPINGS';
+
+## sprite490 frame 30 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_pinkchocolate');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_pinkicing');
+topping3.text = ('5 ' + _root.LocaleText.getText('topping_chocolatechips'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 5;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '5 TOPPINGS';
+
+## sprite490 frame 31 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_marshmallow');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_chocolatesauce');
+topping3.text = ('5 ' + _root.LocaleText.getText('topping_marshmallows'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 5;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '5 TOPPINGS';
+
+## sprite490 frame 32 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_pinkmarshmallow');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_pinkicing');
+topping3.text = ('5 ' + _root.LocaleText.getText('topping_marshmallows'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 5;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '5 TOPPINGS';
+
+## sprite490 frame 33 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_jellybean');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_chocolatesauce');
+topping3.text = ('5 ' + _root.LocaleText.getText('topping_jellybeans'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 5;
+_global.pizzatron_dl.setPizzaType = '5 TOPPINGS';
+
+## sprite490 frame 34 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_pinkjellybean');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_pinkicing');
+topping3.text = ('5 ' + _root.LocaleText.getText('topping_jellybeans'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 5;
+_global.pizzatron_dl.setPizzaType = '5 TOPPINGS';
+
+## sprite490 frame 35 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_liquoricechip');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_chocolatesauce');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_liquorices'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_chocolatechips'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 2;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 2;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 36 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_pinkliquoricechip');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_pinkicing');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_liquorices'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_chocolatechips'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 2;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 2;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 37 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_marshmallowjelly');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_chocolatesauce');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_marshmallows'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_jellybeans'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 2;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 2;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 38 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_pinkmarshmallowjelly');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_pinkicing');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_marshmallows'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_jellybeans'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 2;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 2;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 39 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_liquoricemarshmallow');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_chocolatesauce');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_liquorices'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_marshmallows'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 2;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 2;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 40 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_pinkliquoricemarshmallow');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_pinkicing');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_liquorices'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_marshmallows'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 2;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 2;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 41 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_jellychip');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_chocolatesauce');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_chocolatechips'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_jellybeans'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 2;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 2;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 42 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_pinkjellychip');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_pinkicing');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_chocolatechips'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_jellybeans'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 2;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 2;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 43 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_liquoricejelly');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_chocolatesauce');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_liquorices'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_jellybeans'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 2;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 2;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 44 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_pinkliquoricejelly');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_pinkicing');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_liquorices'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_jellybeans'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 2;
+_parent.topping2REQUESTED = false;
+_parent.topping3REQUESTED = false;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 2;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 45 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_marshmallowchip');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_chocolatesauce');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_chocolatechips'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_marshmallows'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 2;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 2;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 46 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_pinkmarshmallowchip');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_pinkicing');
+topping3.text = ('2 ' + _root.LocaleText.getText('topping_chocolatechips'));
+topping4.text = ('2 ' + _root.LocaleText.getText('topping_marshmallows'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = false;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 2;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 2;
+_parent.topping4REQUESTED = false;
+_global.pizzatron_dl.setPizzaType = '2x2 TOPPINGS';
+
+## sprite490 frame 47 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_chocolatesugar');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_chocolatesauce');
+topping3.text = (((((((((('1 ' + _root.LocaleText.getText('topping_liquorice')) + '\n\n') + '1 ') + _root.LocaleText.getText('topping_chocolatechip')) + '\n\n') + '1 ') + _root.LocaleText.getText('topping_marshmallow')) + '\n\n') + '1 ') + _root.LocaleText.getText('topping_jellybean'));
+_parent.normalsauceREQUESTED = true;
+_parent.hotsauceREQUESTED = false;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 1;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 1;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 1;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 1;
+_global.pizzatron_dl.setPizzaType = '4 TOPPINGS';
+
+## sprite490 frame 48 DoAction
+stop()
+pizza.text = _root.LocaleText.getText('pizza_pinksugar');
+topping1.text = _root.LocaleText.getText('topping_sprinkles');
+topping2.text = _root.LocaleText.getText('topping_pinkicing');
+topping3.text = (((((((((('1 ' + _root.LocaleText.getText('topping_liquorice')) + '\n\n') + '1 ') + _root.LocaleText.getText('topping_chocolatechip')) + '\n\n') + '1 ') + _root.LocaleText.getText('topping_marshmallow')) + '\n\n') + '1 ') + _root.LocaleText.getText('topping_jellybean'));
+_parent.normalsauceREQUESTED = false;
+_parent.hotsauceREQUESTED = true;
+_parent.cheeseREQUESTED = true;
+_parent.topping1REQUESTED = true;
+_parent.Ntopping1REQUESTED = 1;
+_parent.topping2REQUESTED = true;
+_parent.Ntopping2REQUESTED = 1;
+_parent.topping3REQUESTED = true;
+_parent.Ntopping3REQUESTED = 1;
+_parent.topping4REQUESTED = true;
+_parent.Ntopping4REQUESTED = 1;
+_global.pizzatron_dl.setPizzaType = '4 TOPPINGS';

@@ -1,0 +1,4 @@
+# sprite 233: 9 frames
+
+## sprite233 frame 9 DoAction
+stop()

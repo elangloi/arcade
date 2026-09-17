@@ -1,0 +1,11 @@
+# sprite 594: 2 frames
+
+## sprite594 frame 1 DoAction
+stop()
+
+## frame 1 label 'seaweed'
+
+## sprite594 frame 2 DoAction
+stop()
+
+## frame 2 label 'liquorice'

@@ -1,0 +1,13 @@
+# sprite 618: 2 frames
+
+## sprite618 frame 1 DoAction
+stop()
+coin_label.text = (('+5 ' + _root.LocaleText.getText('score_coins')) + '!');
+
+## frame 1 label 'tip5'
+
+## sprite618 frame 2 DoAction
+stop()
+coin_label.text = (('+10 ' + _root.LocaleText.getText('score_coins')) + '!');
+
+## frame 2 label 'tip10'

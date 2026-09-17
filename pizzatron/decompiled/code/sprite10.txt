@@ -1,0 +1,10 @@
+# sprite 10: 3 frames
+
+## sprite10 frame 1 DoAction
+stop()
+
+## sprite10 frame 2 DoAction
+stop()
+
+## sprite10 frame 3 DoAction
+stop()

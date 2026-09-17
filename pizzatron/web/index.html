@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pizzatron 3000</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #111; color: #ddd; font: 14px system-ui, sans-serif; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+  #stage { width: min(1140px, 100vw); aspect-ratio: 760 / 480; background: #000; display: block; }
+  #stage.playing { cursor: none; }
+  #status { min-height: 1.2em; color: #9a9; }
+  #help { color: #777; font-size: 12px; text-align: center; }
+</style>
+</head>
+<body>
+<svg id="stage" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>
+<div id="status">Loading…</div>
+<div id="help">Click an ingredient to pick it up. Hold the mouse to spread sauce; click the pizza to drop cheese and toppings. Match the order before the pizza leaves the belt.</div>
+<script type="module">
+  import { boot } from './game.js';
+  boot(document.getElementById('stage')).then(p => { document.getElementById('status').textContent = ''; window.P = p; })
+    .catch(e => { console.error(e); document.getElementById('status').textContent = 'Failed to start: ' + e.message; });
+</script>
+</body>
+</html>

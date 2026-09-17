@@ -1,0 +1,9 @@
+# sprite 310: 1 frames
+
+## sprite310 frame 1 DoAction
+stop()
+L61:
+onEnterFrame = function() {
+  if (!!(this._y < 600)) goto L32;
+  removeMovieClip(this);
+};

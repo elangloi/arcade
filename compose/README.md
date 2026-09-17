@@ -12,10 +12,11 @@ Then open `http://<host>/`. The proxy publishes port 80 (override with `ARCADE_H
 | `/` | landing page (`nginx/html/index.html`) |
 | `/teen-titans-battle-blitz/` | the `battleblitz` container (built from `../battleblitz/Dockerfile`) |
 | `/lilo-and-stitch-sandwich-stacker/` | the `sandwichstacker` container (built from `../sandwichstacker/Dockerfile`) |
+| `/club-penguin-pizzatron/` | the `pizzatron` container (built from `../pizzatron/Dockerfile`) |
 
 ## Adding a game
 
-1. Give the game a `Dockerfile` that serves it on port 80 with **relative** URLs (so it works under a path prefix).
+1. Give the game a `Dockerfile` that serves it on port 80 with **relative** URLs (so it works under a path prefix). Flash ports build from the repo root (`context: ..`) so they can copy the shared `flash/web/player.js`.
 2. Add a service to `docker-compose.yml`.
 3. Add an `upstream` + `location /<slug>/ { proxy_pass http://<service>/; ... }` block to `nginx/conf.d/arcade.conf`.
 4. Add a card to `nginx/html/index.html`.

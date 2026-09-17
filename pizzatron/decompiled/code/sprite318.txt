@@ -1,0 +1,11 @@
+# sprite 318: 2 frames
+
+## sprite318 frame 1 DoAction
+stop()
+
+## frame 1 label 'none'
+
+## sprite318 frame 2 DoAction
+stop()
+
+## frame 2 label 'check'

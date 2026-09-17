@@ -1,0 +1,24 @@
+# sprite 235: 5 frames
+
+## sprite235 frame 1 DoAction
+stop()
+
+## sprite235 frame 2 DoAction
+stop()
+
+## frame 2 label 'explode'
+
+## sprite235 frame 3 DoAction
+stop()
+
+## frame 3 label 'explodehot'
+
+## sprite235 frame 4 DoAction
+stop()
+
+## frame 4 label 'explodecandy'
+
+## sprite235 frame 5 DoAction
+stop()
+
+## frame 5 label 'explodehotcandy'

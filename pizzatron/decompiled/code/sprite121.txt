@@ -1,0 +1,18 @@
+# sprite 121: 5 frames
+
+## sprite121 frame 1 DoAction
+stop()
+
+## sprite121 frame 2 DoAction
+stop()
+
+## sprite121 frame 3 DoAction
+stop()
+
+## sprite121 frame 4 DoAction
+stop()
+
+## sprite121 frame 5 DoAction
+stop()
+
+## frame 5 label 'gone'

@@ -1,0 +1,24 @@
+# sprite 585: 2 frames
+
+## sprite585 frame 1 DoAction
+stop()
+_global.pizzatron_dl.startGame();
+
+## sprite585 frame 2 DoAction
+instructions.orders_title.text = com.clubpenguin.util.LocaleText.getText('orders_title');
+instructions.sauces_title.text = com.clubpenguin.util.LocaleText.getText('sauces_title');
+instructions.toppings_title.text = com.clubpenguin.util.LocaleText.getText('toppings_title');
+instructions.orders_title_shadow.text = com.clubpenguin.util.LocaleText.getText('orders_title');
+instructions.sauces_title_shadow.text = com.clubpenguin.util.LocaleText.getText('sauces_title');
+instructions.toppings_title_shadow.text = com.clubpenguin.util.LocaleText.getText('toppings_title');
+instructions.help_make.text = com.clubpenguin.util.LocaleText.getText('help_make');
+instructions.sauces_txt.text = com.clubpenguin.util.LocaleText.getText('help_sauce');
+instructions.toppings_txt.text = com.clubpenguin.util.LocaleText.getText('help_drag');
+instructions.cheese_pizza.cheese_pizza_mc.pizza_txt.text = com.clubpenguin.util.LocaleText.getText('pizza_shrimp');
+instructions.cheese_pizza.cheese_pizza_mc.topping1_txt.text = com.clubpenguin.util.LocaleText.getText('topping_cheese');
+instructions.cheese_pizza.cheese_pizza_mc.topping2_txt.text = com.clubpenguin.util.LocaleText.getText('topping_pizzasauce');
+instructions.cheese_pizza.cheese_pizza_mc.topping3_txt.text = ('5 ' + com.clubpenguin.util.LocaleText.getText('topping_shrimps'));
+instructions.ui_play.text = com.clubpenguin.util.LocaleText.getText('ui_play');
+_global.pizzatron_dl.startInstructionScreen1();
+
+## frame 2 label 'intructions'

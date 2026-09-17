@@ -1,0 +1,10 @@
+# sprite 32: 3 frames
+
+## sprite32 frame 1 DoAction
+stop()
+
+## sprite32 frame 2 DoAction
+stop()
+
+## sprite32 frame 3 DoAction
+stop()

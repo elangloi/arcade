@@ -40,16 +40,7 @@ L218:
   goto L1457;
 L288:
   if (!(r1.v.sandwichHeight == 1)) goto L809;
-  if (!(''._y > (r1.barre._y - 3))) goto L410;
-  (''._y > (r1.barre._y - 3));
-L410:
-  if (!(''._y < (r1.barre._y + (r1.v.speedDown * 2)))) goto L457;
-  (''._y < (r1.barre._y + (r1.v.speedDown * 2)));
-L457:
-  if (!(''._x > (r1.barre._x - 30))) goto L504;
-  (''._x > (r1.barre._x - 30));
-L504:
-  if (!(''._x < (r1.barre._x + 30))) goto L804;
+  if (!((((''._y > (r1.barre._y - 3)) && (''._y < (r1.barre._y + (r1.v.speedDown * 2)))) && (''._x > (r1.barre._x - 30))) && (''._x < (r1.barre._x + 30)))) goto L804;
   if (!!(RandomElement > 11)) goto L645;
   r1.v.tempFood = RandomElement;
   r1[('food' + r1.v.sandwichHeight)].Xoffset = r2._x;
@@ -72,16 +63,7 @@ L804:
 L809:
   r3 = r1[('food' + (r1.v.sandwichHeight - 1))];
   r1[('food' + (r1.v.sandwichHeight - 1))];
-  if (!(''._y > (r3._y - 3))) goto L924;
-  (''._y > (r3._y - 3));
-L924:
-  if (!(''._y < (r3._y + (r1.v.speedDown * 2)))) goto L971;
-  (''._y < (r3._y + (r1.v.speedDown * 2)));
-L971:
-  if (!(''._x > (r3.objectFixe._x + 125))) goto L1018;
-  (''._x > (r3.objectFixe._x + 125));
-L1018:
-  if (!(''._x < (r3.objectFixe._x + 225))) goto L1457;
+  if (!((((''._y > (r3._y - 3)) && (''._y < (r3._y + (r1.v.speedDown * 2)))) && (''._x > (r3.objectFixe._x + 125))) && (''._x < (r3.objectFixe._x + 225)))) goto L1457;
   if (!!(RandomElement > 11)) goto L1128;
   r1.v.tempFood = RandomElement;
   r1[('food' + r1.v.sandwichHeight)].gotoAndPlay('follow');
@@ -117,10 +99,7 @@ L1457:
 };
 
 ## sprite374 frame 10 PlaceObject2 depth 1 id 373 name 'completeObjects' onClipEvent(load)
-if (!!((_parent._parent.v.fallNumber - 100) < _parent._parent.v.RandomBread)) goto L263;
-!((_parent._parent.v.fallNumber - 100) < _parent._parent.v.RandomBread);
-L263:
-if (!(_parent._parent.v.sandwichHeight > 3)) goto L504;
+if (!(!((_parent._parent.v.fallNumber - 100) < _parent._parent.v.RandomBread) && (_parent._parent.v.sandwichHeight > 3))) goto L504;
 _parent.RandomElement = _parent._parent.v.breadSlice;
 _parent._parent.v.RandomBread = (_parent._parent.v.RandomBread + _parent._parent.v.RandomBread);
 _parent._parent.toaster.play();

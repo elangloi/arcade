@@ -1,0 +1,26 @@
+# sprite 210: 5 frames
+
+## sprite210 frame 1 DoAction
+stop()
+
+## frame 1 label 'empty'
+
+## sprite210 frame 2 DoAction
+stop()
+
+## frame 2 label 'normalsauce'
+
+## sprite210 frame 3 DoAction
+stop()
+
+## frame 3 label 'hotsauce'
+
+## sprite210 frame 4 DoAction
+stop()
+
+## frame 4 label 'chocolatesauce'
+
+## sprite210 frame 5 DoAction
+stop()
+
+## frame 5 label 'pinkicing'

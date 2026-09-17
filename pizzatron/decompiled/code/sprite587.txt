@@ -1,0 +1,4 @@
+# sprite 587: 10 frames
+
+## sprite587 frame 10 DoAction
+stop()

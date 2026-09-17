@@ -1,0 +1,9 @@
+# Repo-root build context for the Flash game images: only what the pages serve.
+*
+!flash/web/
+!sandwichstacker/web/
+!sandwichstacker/assets/
+!sandwichstacker/docker/
+!pizzatron/web/
+!pizzatron/assets/
+!pizzatron/docker/

@@ -1,0 +1,10 @@
+# sprite 28: 3 frames
+
+## sprite28 frame 1 DoAction
+stop()
+
+## sprite28 frame 2 DoAction
+stop()
+
+## sprite28 frame 3 DoAction
+stop()

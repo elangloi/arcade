@@ -1,0 +1,14 @@
+# sprite 559: 1 frames
+
+## sprite559 frame 1 PlaceObject2 depth 3 id 494 onClipEvent(enterFrame)
+i = 0;
+L68:
+if (!(i < 10)) goto L227;
+mc = this[('conv' + i)];
+if (!(mc._x > 500)) goto L165;
+mc._x = (mc._x - 1000);
+L165:
+mc._x = (mc._x + (_parent.pizzaspeed + _parent.speedboost));
+i = ++i;
+goto L68;
+L227:

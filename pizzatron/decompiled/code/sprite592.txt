@@ -1,0 +1,36 @@
+# sprite 592: 7 frames
+
+## sprite592 frame 1 DoAction
+stop()
+
+## frame 1 label 'normal'
+
+## sprite592 frame 2 DoAction
+stop()
+
+## frame 2 label 'usingnormalsauce'
+
+## sprite592 frame 3 DoAction
+stop()
+
+## frame 3 label 'usinghotsauce'
+
+## sprite592 frame 5 DoAction
+stop()
+_parent.mySound.stop();
+var gameDirectory = com.clubpenguin.util.LocaleText.getGameDirectory();
+var localeDirectory = (('lang/' + com.clubpenguin.util.LocaleText.getLocale(com.clubpenguin.util.LocaleText.getLocaleID())) + '/');
+var loader = new MovieClipLoader();
+loader.loadClip(((gameDirectory + localeDirectory) + 'sauce.swf'), chocolatebottle);
+
+## frame 5 label 'normalcandy'
+
+## sprite592 frame 6 DoAction
+stop()
+
+## frame 6 label 'usingchocolatesauce'
+
+## sprite592 frame 7 DoAction
+stop()
+
+## frame 7 label 'usingpinkicing'

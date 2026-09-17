@@ -1,0 +1,105 @@
+# sprite 272: 20 frames
+
+## sprite272 frame 1 DoAction
+stop()
+_parent.mySound.stop();
+
+## frame 1 label 'none'
+
+## sprite272 frame 2 DoAction
+stop()
+_parent.mySound.stop();
+
+## frame 2 label 'normalsauce'
+
+## sprite272 frame 3 DoAction
+stop()
+_parent.addSound('squirt', 99);
+
+## frame 3 label 'normalsauce_use'
+
+## sprite272 frame 4 DoAction
+stop()
+_parent.mySound.stop();
+
+## frame 4 label 'hotsauce'
+
+## sprite272 frame 5 DoAction
+stop()
+_parent.addSound('2', 99);
+
+## frame 5 label 'hotsauce_use'
+
+## sprite272 frame 6 DoAction
+stop()
+
+## frame 6 label 'cheese'
+
+## sprite272 frame 7 DoAction
+stop()
+
+## frame 7 label 'topping1'
+
+## sprite272 frame 8 DoAction
+stop()
+
+## frame 8 label 'topping2'
+
+## sprite272 frame 9 DoAction
+stop()
+
+## frame 9 label 'topping3'
+
+## sprite272 frame 10 DoAction
+stop()
+
+## frame 10 label 'topping4'
+
+## sprite272 frame 12 DoAction
+stop()
+_parent.mySound.stop();
+
+## frame 12 label 'chocolatesauce'
+
+## sprite272 frame 13 DoAction
+stop()
+_parent.addSound('squirt', 99);
+
+## frame 13 label 'chocolatesauce_use'
+
+## sprite272 frame 14 DoAction
+stop()
+_parent.mySound.stop();
+
+## frame 14 label 'pinkicing'
+
+## sprite272 frame 15 DoAction
+stop()
+_parent.addSound('squirt', 99);
+
+## frame 15 label 'pinkicing_use'
+
+## sprite272 frame 16 DoAction
+stop()
+
+## frame 16 label 'sprinkles'
+
+## sprite272 frame 17 DoAction
+stop()
+
+## frame 17 label 'topping1candy'
+
+## sprite272 frame 18 DoAction
+stop()
+
+## frame 18 label 'topping2candy'
+
+## sprite272 frame 19 DoAction
+stop()
+
+## frame 19 label 'topping3candy'
+
+## sprite272 frame 20 DoAction
+stop()
+
+## frame 20 label 'topping4candy'

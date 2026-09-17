@@ -17,6 +17,7 @@ services:
     depends_on:
       - battleblitz
       - sandwichstacker
+      - pizzatron
 
   battleblitz:
     build: ../battleblitz
@@ -27,9 +28,21 @@ services:
       - "80"
 
   sandwichstacker:
-    build: ../sandwichstacker
+    build:
+      context: ..
+      dockerfile: sandwichstacker/Dockerfile
     image: arcade/sandwichstacker:latest
     container_name: arcade-sandwichstacker
+    restart: unless-stopped
+    expose:
+      - "80"
+
+  pizzatron:
+    build:
+      context: ..
+      dockerfile: pizzatron/Dockerfile
+    image: arcade/pizzatron:latest
+    container_name: arcade-pizzatron
     restart: unless-stopped
     expose:
       - "80"

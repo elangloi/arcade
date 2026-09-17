@@ -1,5 +1,0 @@
-# Only web/ and assets/ go into the image.
-*
-!web/
-!assets/
-!docker/

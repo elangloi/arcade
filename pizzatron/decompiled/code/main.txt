@@ -1,0 +1,2422 @@
+# main timeline: {'frame_size': (0, 15200, 0, 9600), 'rate': 24.0, 'frames': 7, 'version': 9}
+
+## main frame 1 DoAction
+function playbackgroundAudio() {
+  r3 = this.createEmptyMovieClip('bgSoundClip', this.getNextHighestDepth());
+  this.createEmptyMovieClip('bgSoundClip', this.getNextHighestDepth());
+  r4 = 45;
+  45;
+  r2 = new Sound(r3);
+  new Sound(r3);
+  r2.attachSound('backgroundLoop');
+  r2.setVolume(r4);
+  r2.start(0, 99);
+}
+stop()
+var listener = new Object();
+listener.onLoadComplete = function() {
+  gotoAndStop(2);
+  play()
+  com.clubpenguin.util.Loader.removeEventListener(listener);
+};
+com.clubpenguin.util.Loader.addEventListener(listener);
+playbackgroundAudio();
+
+## main DoInitAction sprite 694
+if (!!_global.com) goto L1587;
+_global.com = new Object();
+L1587:
+pop
+if (!!_global.com.clubpenguin) goto L1643;
+_global.com.clubpenguin = new Object();
+L1643:
+pop
+if (!!_global.com.clubpenguin.util) goto L1711;
+_global.com.clubpenguin.util = new Object();
+L1711:
+pop
+if (!!_global.com.clubpenguin.util.LocaleText) goto L7337;
+r1 = function() {
+
+};
+com.clubpenguin.util.LocaleText = function() {
+
+};
+r2 = r1.prototype;
+r1.prototype;
+L3832:
+r1.init = function($parent/*r6*/, $languageID/*r4*/, $movieLocation/*r7*/, $versionNumber/*r8*/, $useLoader/*r5*/) {
+  com.clubpenguin.util.LocaleText.debugTrace('initialise locale text');
+  com.clubpenguin.util.LocaleText.ready = false;
+  if (!(com.clubpenguin.util.LocaleText.eventSource == undefined)) goto L213;
+  com.clubpenguin.util.LocaleText.eventSource = new Object();
+  mx.events.EventDispatcher.initialize(com.clubpenguin.util.LocaleText.eventSource);
+L213:
+  if (!(r5 == undefined)) goto L236;
+  r5 = false;
+  false;
+L236:
+  if (!(r4 == undefined)) goto L293;
+  r4 = com.clubpenguin.util.LocaleText.getLocaleID();
+  com.clubpenguin.util.LocaleText.getLocaleID();
+L293:
+  com.clubpenguin.util.LocaleText.localeID = r4;
+  r1 = com.clubpenguin.util.LocaleText.getLocale(com.clubpenguin.util.LocaleText.localeID);
+  com.clubpenguin.util.LocaleText.getLocale(com.clubpenguin.util.LocaleText.localeID);
+  com.clubpenguin.util.LocaleText.locale = com.clubpenguin.util.LocaleText.getLocale(com.clubpenguin.util.LocaleText.localeID);
+  if (!(r8 == undefined)) goto L812;
+  if (!(com.clubpenguin.util.LocaleText.localeVersion == undefined)) goto L661;
+  r1 = (((((com.clubpenguin.util.LocaleText.LANG_LOC_DIRECTORY + '/') + r1) + '/') + com.clubpenguin.util.LocaleText.LANG_LOC_FILENAME) + com.clubpenguin.util.LocaleText.LANG_LOC_FILETYPE);
+  (((((com.clubpenguin.util.LocaleText.LANG_LOC_DIRECTORY + '/') + r1) + '/') + com.clubpenguin.util.LocaleText.LANG_LOC_FILENAME) + com.clubpenguin.util.LocaleText.LANG_LOC_FILETYPE);
+  goto L807;
+L661:
+  r1 = ((((((com.clubpenguin.util.LocaleText.LANG_LOC_DIRECTORY + '/') + r1) + '/') + com.clubpenguin.util.LocaleText.LANG_LOC_FILENAME) + com.clubpenguin.util.LocaleText.localeVersion) + com.clubpenguin.util.LocaleText.LANG_LOC_FILETYPE);
+  ((((((com.clubpenguin.util.LocaleText.LANG_LOC_DIRECTORY + '/') + r1) + '/') + com.clubpenguin.util.LocaleText.LANG_LOC_FILENAME) + com.clubpenguin.util.LocaleText.localeVersion) + com.clubpenguin.util.LocaleText.LANG_LOC_FILETYPE);
+L807:
+  goto L933;
+L812:
+  r1 = ((((((com.clubpenguin.util.LocaleText.LANG_LOC_DIRECTORY + '/') + r1) + '/') + com.clubpenguin.util.LocaleText.LANG_LOC_FILENAME) + r8) + com.clubpenguin.util.LocaleText.LANG_LOC_FILETYPE);
+  ((((((com.clubpenguin.util.LocaleText.LANG_LOC_DIRECTORY + '/') + r1) + '/') + com.clubpenguin.util.LocaleText.LANG_LOC_FILENAME) + r8) + com.clubpenguin.util.LocaleText.LANG_LOC_FILETYPE);
+L933:
+  com.clubpenguin.util.LocaleText.localeDataMC = r6.createEmptyMovieClip('localeDataMC', r6.getNextHighestDepth());
+  r2 = new Object();
+  new Object();
+  r3 = new MovieClipLoader();
+  new MovieClipLoader();
+  if (!(r4 == com.clubpenguin.util.LocaleText.LANG_ID_LOADERROR)) goto L1233;
+  r2.onLoadError = function($targetMC/*r2*/, $errorMessage/*r1*/) {
+    com.clubpenguin.util.LocaleText.debugTrace(('load error: ' + r1), com.clubpenguin.util.Reporting.DEBUGLEVEL_ERROR);
+    com.clubpenguin.util.LocaleText.handleLoadComplete(r2);
+  };
+  goto L1331;
+L1233:
+  r2.onLoadError = function($targetMC/*r1*/) {
+    com.clubpenguin.util.LocaleText.init(r1, com.clubpenguin.util.LocaleText.LANG_ID_LOADERROR);
+  };
+L1331:
+  if (!!(r7 == undefined)) goto L1358;
+  r1 = (r7 + r1);
+  (r7 + r1);
+L1358:
+  if (!r5) goto L1770;
+  r2.onLoadProgress = function($targetMC/*r1*/, $loadProgress/*r2*/, $loadTotal/*r3*/) {
+    com.clubpenguin.util.Loader.handleLoadProgress(r1, r2, r3);
+  };
+  r2.onLoadInit = function($targetMC/*r1*/) {
+    com.clubpenguin.util.LocaleText.handleLoadComplete(r1);
+    com.clubpenguin.util.Loader.handleLoadComplete(r1);
+  };
+  com.clubpenguin.util.LocaleText.debugTrace((('load filename ' + r1) + ' using Loader class'));
+  r3.addListener(r2);
+  r3.loadClip(r1, com.clubpenguin.util.LocaleText.localeDataMC);
+  com.clubpenguin.util.Loader.addProgressObject(r3.getProgress(com.clubpenguin.util.LocaleText.localeDataMC));
+  goto L1950;
+L1770:
+  r2.onLoadInit = function($targetMC/*r1*/) {
+    com.clubpenguin.util.LocaleText.handleLoadComplete(r1);
+  };
+  com.clubpenguin.util.LocaleText.debugTrace((('load filename ' + r1) + ' standalone'));
+  r3.addListener(r2);
+  r3.loadClip(r1, com.clubpenguin.util.LocaleText.localeDataMC);
+};
+r1.handleLoadComplete = function($data/*r1*/) {
+  com.clubpenguin.util.LocaleText.debugTrace('locale text loaded OK!');
+  com.clubpenguin.util.LocaleText.dataArray = new Array();
+  enumerate2(r1.localeText);
+L89:
+  r0 = enum;
+  if ((enum == null)) goto L275;
+  r2 = r0;
+  r0;
+  com.clubpenguin.util.LocaleText.dataArray[r1.localeText[r2].id] = r1.localeText[r2].value;
+  com.clubpenguin.util.LocaleText.debugTrace(((('dataArray[' + r1.localeText[r2].id) + '] = ') + r1.localeText[r2].value));
+  goto L89;
+L275:
+  r3 = new Object();
+  new Object();
+  r3.target = com.clubpenguin.util.LocaleText;
+  r3.type = com.clubpenguin.util.LocaleText.EVENT_LOAD_COMPLETED;
+  com.clubpenguin.util.LocaleText.ready = true;
+  com.clubpenguin.util.LocaleText.eventSource.dispatchEvent(r3);
+  com.clubpenguin.util.LocaleText.debugTrace('dispatched LOAD_COMPLETED event');
+};
+r1.addEventListener = function($listener/*r1*/) {
+  if (!(com.clubpenguin.util.LocaleText.eventSource == undefined)) goto L143;
+  com.clubpenguin.util.LocaleText.eventSource = new Object();
+  mx.events.EventDispatcher.initialize(com.clubpenguin.util.LocaleText.eventSource);
+L143:
+  com.clubpenguin.util.LocaleText.eventSource.addEventListener(com.clubpenguin.util.LocaleText.EVENT_LOAD_COMPLETED, r1);
+};
+r1.removeEventListener = function($listener/*r1*/) {
+  com.clubpenguin.util.LocaleText.eventSource.removeEventListener(com.clubpenguin.util.Loader.EVENT_LOAD_COMPLETED, r1);
+};
+r1.getText = function($stringID/*r1*/) {
+  if (!!com.clubpenguin.util.LocaleText.ready) goto L125;
+  com.clubpenguin.util.LocaleText.debugTrace('getText called when not ready', com.clubpenguin.util.Reporting.DEBUGLEVEL_WARNING);
+  return (('[id:' + r1) + ' not ready]');
+  goto L261;
+L125:
+  if (!(com.clubpenguin.util.LocaleText.dataArray[r1] == undefined)) goto L261;
+  com.clubpenguin.util.LocaleText.debugTrace(('load error for string: ' + r1), com.clubpenguin.util.Reporting.DEBUGLEVEL_ERROR);
+  return (('[id:' + r1) + ' undefined]');
+L261:
+  return com.clubpenguin.util.LocaleText.dataArray[r1];
+};
+r1.localizeField = function($field/*r1*/, $stringID/*r3*/, $verticalAlign/*r4*/, $minFontSize/*r2*/) {
+  r1.text = com.clubpenguin.util.LocaleText.getText(r3);
+  com.clubpenguin.text.TextResize.scaleDown(r1, r4, r2);
+};
+r1.getTextReplaced = function($stringID/*r5*/, $replacements/*r4*/) {
+  r2 = com.clubpenguin.util.LocaleText.getText(r5);
+  com.clubpenguin.util.LocaleText.getText(r5);
+  r3 = r4.length;
+  r4.length;
+  r1 = 0;
+  0;
+L72:
+  if (!(r1 < r3)) goto L147;
+  r2 = r2.split(('%' + r1)).join(r4[r1]);
+  r2.split(('%' + r1)).join(r4[r1]);
+  r1 = ++r1;
+  ++r1;
+  goto L72;
+L147:
+  return r2;
+};
+r1.getLocale = function($localeID/*r1*/) {
+  r0 = r1;
+  if ((r1 === com.clubpenguin.util.LocaleText.LANG_ID_EN)) goto L278;
+  if ((r0 === com.clubpenguin.util.LocaleText.LANG_ID_PT)) goto L309;
+  if ((r0 === com.clubpenguin.util.LocaleText.LANG_ID_FR)) goto L340;
+  if ((r0 === com.clubpenguin.util.LocaleText.LANG_ID_ES)) goto L371;
+  if ((r0 === com.clubpenguin.util.LocaleText.LANG_ID_DE)) goto L402;
+  if ((r0 === com.clubpenguin.util.LocaleText.LANG_ID_RU)) goto L433;
+  if ((r0 === com.clubpenguin.util.LocaleText.LANG_ID_LOADERROR)) goto L464;
+  goto L563;
+L278:
+  return com.clubpenguin.util.LocaleText.LANG_LOC_EN;
+L309:
+  return com.clubpenguin.util.LocaleText.LANG_LOC_PT;
+L340:
+  return com.clubpenguin.util.LocaleText.LANG_LOC_FR;
+L371:
+  return com.clubpenguin.util.LocaleText.LANG_LOC_ES;
+L402:
+  return com.clubpenguin.util.LocaleText.LANG_LOC_DE;
+L433:
+  return com.clubpenguin.util.LocaleText.LANG_LOC_RU;
+L464:
+  com.clubpenguin.util.LocaleText.debugTrace('load error occurred! reload using default language', com.clubpenguin.util.Reporting.DEBUGLEVEL_WARNING);
+  return com.clubpenguin.util.LocaleText.LANG_LOC_EN;
+L563:
+  com.clubpenguin.util.LocaleText.debugTrace((('unknown language id: ' + r1) + ', using default language instead'), com.clubpenguin.util.Reporting.DEBUGLEVEL_WARNING);
+  return com.clubpenguin.util.LocaleText.LANG_LOC_EN;
+  return com.clubpenguin.util.LocaleText.LANG_LOC_EN;
+};
+r1.setLocaleVersion = function($localeVersion/*r1*/) {
+  com.clubpenguin.util.LocaleText.localeVersion = r1;
+};
+r1.setLocaleID = function($localeID/*r1*/) {
+  com.clubpenguin.util.LocaleText.localeID = r1;
+};
+r1.getLocaleID = function() {
+  return com.clubpenguin.util.LocaleText.localeID;
+};
+r1.isReady = function() {
+  return com.clubpenguin.util.LocaleText.ready;
+};
+r1.attachLocaleClip = function($stringID/*r3*/, $target/*r4*/) {
+  r1 = com.clubpenguin.util.LocaleText.localeDataMC.attachMovie(r3, (r3 + '_mc'), com.clubpenguin.util.LocaleText.localeDataMC.getNextHighestDepth());
+  com.clubpenguin.util.LocaleText.localeDataMC.attachMovie(r3, (r3 + '_mc'), com.clubpenguin.util.LocaleText.localeDataMC.getNextHighestDepth());
+  r2 = new flash.display.BitmapData(r1._width, r1._height, true, 0);
+  new flash.display.BitmapData(r1._width, r1._height, true, 0);
+  r2.draw(r1, new flash.geom.Matrix(), new flash.geom.ColorTransform(), 'normal');
+  r4.attachBitmap(r2, r4.getNextHighestDepth());
+  r1.removeMovieClip();
+};
+r1.getGameDirectory = function($url/*r4*/) {
+  if (!(r4 == undefined)) goto L153;
+  if (!(com.clubpenguin.util.LocaleText.localeDirectoryURL == undefined)) goto L122;
+  com.clubpenguin.util.LocaleText.debugTrace("using cached locale directory url that hasn't been set yet!", com.clubpenguin.util.Reporting.DEBUGLEVEL_WARNING);
+L122:
+  return com.clubpenguin.util.LocaleText.localeDirectoryURL;
+L153:
+  r2 = r4.split('/');
+  r4.split('/');
+  r3 = '';
+  '';
+  r1 = 0;
+  0;
+L200:
+  if (!(r1 < (r2.length - 1))) goto L264;
+  r3 = (r3 + (r2[r1] + '/'));
+  (r3 + (r2[r1] + '/'));
+  r1 = ++r1;
+  ++r1;
+  goto L200;
+L264:
+  com.clubpenguin.util.LocaleText.localeDirectoryURL = r3;
+  return com.clubpenguin.util.LocaleText.localeDirectoryURL;
+};
+r1.debugTrace = function($message, $priority) {
+
+};
+r1.EVENT_LOAD_COMPLETED = 'onLoadComplete';
+r1.LANG_ID_LOADERROR = 0;
+r1.LANG_ID_EN = 1;
+r1.LANG_ID_PT = 2;
+r1.LANG_ID_FR = 3;
+r1.LANG_ID_ES = 4;
+r1.LANG_ID_DE = 5;
+r1.LANG_ID_RU = 6;
+r1.LANG_ID_DEFAULT = com.clubpenguin.util.LocaleText.LANG_ID_EN;
+r1.LANG_LOC_FILENAME = 'locale';
+r1.LANG_LOC_FILETYPE = '.swf';
+r1.LANG_LOC_DIRECTORY = 'lang';
+r1.LANG_LOC_EN = 'en';
+r1.LANG_LOC_PT = 'pt';
+r1.LANG_LOC_FR = 'fr';
+r1.LANG_LOC_ES = 'es';
+r1.LANG_LOC_DE = 'de';
+r1.LANG_LOC_RU = 'ru';
+r1.localeVersion = undefined;
+r1.localeID = 0;
+r1.ready = false;
+L7337:
+ASSetPropFlags(com.clubpenguin.util.LocaleText.prototype, null, 1);
+
+## main DoInitAction sprite 695
+if (!!_global.mx) goto L340;
+_global.mx = new Object();
+L340:
+pop
+if (!!_global.mx.events) goto L396;
+_global.mx.events = new Object();
+L396:
+pop
+if (!!_global.mx.events.EventDispatcher) goto L1682;
+r1 = function() {
+
+};
+mx.events.EventDispatcher = function() {
+
+};
+r2 = r1.prototype;
+r1.prototype;
+L648:
+r1._removeEventListener = function(queue/*r3*/, event, handler/*r5*/) {
+  if (!!(r3 == undefined)) goto L136;
+  r4 = r3.length;
+  r3.length;
+  r1 = undefined;
+  undefined;
+  r1 = 0;
+  0;
+L53:
+  if (!(r1 < r4)) goto L136;
+  r2 = r3[r1];
+  r3[r1];
+  if (!(r2 == r5)) goto L120;
+  r3.splice(r1, 1);
+  return undefined;
+L120:
+  r1 = ++r1;
+  ++r1;
+  goto L53;
+};
+r1.initialize = function(object/*r1*/) {
+  if (!(mx.events.EventDispatcher._fEventDispatcher == undefined)) goto L83;
+  mx.events.EventDispatcher._fEventDispatcher = new mx.events.EventDispatcher();
+L83:
+  r1.addEventListener = mx.events.EventDispatcher._fEventDispatcher.addEventListener;
+  r1.removeEventListener = mx.events.EventDispatcher._fEventDispatcher.removeEventListener;
+  r1.dispatchEvent = mx.events.EventDispatcher._fEventDispatcher.dispatchEvent;
+  r1.dispatchQueue = mx.events.EventDispatcher._fEventDispatcher.dispatchQueue;
+};
+L1231:
+r2.dispatchQueue = function(queueObj/*r6*/, eventObj/*r2*/) {
+  r7 = ('__q_' + r2.type);
+  ('__q_' + r2.type);
+  r4 = r6[r7];
+  r6[r7];
+  if (!!(r4 == undefined)) goto L294;
+  r5 = undefined;
+  undefined;
+  enumerate2(r4);
+L58:
+  r0 = enum;
+  if ((enum == null)) goto L294;
+  r5 = r0;
+  r0;
+  r1 = r4[r5];
+  r4[r5];
+  r3 = typeof(r1);
+  typeof(r1);
+  if (!((r3 == 'object') || (r3 == 'movieclip'))) goto L262;
+  if (!!(r1.handleEvent == undefined)) goto L171;
+  r1.handleEvent(r2);
+L171:
+  if (!!(r1[r2.type] == undefined)) goto L257;
+  if (!(mx.events.EventDispatcher.exceptions[r2.type] == undefined)) goto L257;
+  r1[r2.type](r2);
+L257:
+  goto L289;
+L262:
+  r1.apply(r6, [r2]);
+L289:
+  goto L58;
+};
+r2.dispatchEvent = function(eventObj/*r2*/) {
+  if (!(r2.target == undefined)) goto L29;
+  r2.target = this;
+L29:
+  this[(r2.type + 'Handler')](r2);
+  this.dispatchQueue(this, r2);
+};
+r2.addEventListener = function(event/*r4*/, handler/*r5*/) {
+  r3 = ('__q_' + r4);
+  ('__q_' + r4);
+  if (!(this[r3] == undefined)) goto L52;
+  this[r3] = new Array();
+L52:
+  _global.ASSetPropFlags(this, r3, 1);
+  mx.events.EventDispatcher._removeEventListener(this[r3], r4, r5);
+  this[r3].push(r5);
+};
+r2.removeEventListener = function(event/*r3*/, handler/*r4*/) {
+  r2 = ('__q_' + r3);
+  ('__q_' + r3);
+  mx.events.EventDispatcher._removeEventListener(this[r2], r3, r4);
+};
+r1._fEventDispatcher = undefined;
+r1.exceptions = {load: 1, draw: 1, move: 1};
+L1682:
+ASSetPropFlags(mx.events.EventDispatcher.prototype, null, 1);
+
+## main DoInitAction sprite 696
+if (!!_global.com) goto L423;
+_global.com = new Object();
+L423:
+pop
+if (!!_global.com.clubpenguin) goto L479;
+_global.com.clubpenguin = new Object();
+L479:
+pop
+if (!!_global.com.clubpenguin.util) goto L547;
+_global.com.clubpenguin.util = new Object();
+L547:
+pop
+if (!!_global.com.clubpenguin.util.Reporting) goto L1963;
+r1 = function() {
+
+};
+com.clubpenguin.util.Reporting = function() {
+
+};
+r2 = r1.prototype;
+r1.prototype;
+r1.addDebugOutput = function(debugText/*r1*/) {
+  if (!(com.clubpenguin.util.Reporting.output == undefined)) goto L83;
+  com.clubpenguin.util.Reporting.output = new Array();
+L83:
+  com.clubpenguin.util.Reporting.output.push(r1);
+};
+L1062:
+r1.setDebugLevel = function(level/*r1*/) {
+  if (!((com.clubpenguin.util.Reporting.debugLevel > com.clubpenguin.util.Reporting.DEBUGLEVEL_ERROR) || (com.clubpenguin.util.Reporting.debugLevel < com.clubpenguin.util.Reporting.DEBUGLEVEL_VERBOSE))) goto L214;
+  com.clubpenguin.util.Reporting.debugTrace(('(Reporting) incorrect debug level given in setDebugLevel: ' + r1), com.clubpenguin.util.Reporting.DEBUGLEVEL_WARNING);
+  goto L246;
+L214:
+  com.clubpenguin.util.Reporting.debugLevel = r1;
+};
+L1622:
+r1.debugTrace = function(message/*r3*/, priority/*r4*/) {
+  if (!(r4 == undefined)) goto L48;
+  r4 = com.clubpenguin.util.Reporting.DEBUGLEVEL_VERBOSE;
+  com.clubpenguin.util.Reporting.DEBUGLEVEL_VERBOSE;
+L48:
+  if (!com.clubpenguin.util.Reporting.DEBUG) goto L522;
+  if (!!(com.clubpenguin.util.Reporting.debugLevel > r4)) goto L522;
+  r1 = undefined;
+  undefined;
+  r0 = r4;
+  if ((r4 === com.clubpenguin.util.Reporting.DEBUGLEVEL_ERROR)) goto L300;
+  if ((r0 === com.clubpenguin.util.Reporting.DEBUGLEVEL_WARNING)) goto L318;
+  if ((r0 === com.clubpenguin.util.Reporting.DEBUGLEVEL_MESSAGE)) goto L336;
+  if ((r0 === com.clubpenguin.util.Reporting.DEBUGLEVEL_VERBOSE)) goto L354;
+  goto L354;
+L300:
+  r1 = ('ERROR! ' + r3);
+  ('ERROR! ' + r3);
+  goto L372;
+L318:
+  r1 = ('WARNING: ' + r3);
+  ('WARNING: ' + r3);
+  goto L372;
+L336:
+  r1 = ('MESSAGE: ' + r3);
+  ('MESSAGE: ' + r3);
+  goto L372;
+L354:
+  r1 = ('VERBOSE: ' + r3);
+  ('VERBOSE: ' + r3);
+  goto L372;
+L372:
+  enumerate2(com.clubpenguin.util.Reporting.output);
+L403:
+  r0 = enum;
+  if ((enum == null)) goto L522;
+  r2 = r0;
+  r0;
+  com.clubpenguin.util.Reporting.output[r2].text = ((r1 + '\n') + com.clubpenguin.util.Reporting.output[r2].text);
+  goto L403;
+};
+r1.DEBUG = true;
+r1.DEBUG_FPS = (com.clubpenguin.util.Reporting.DEBUG && true);
+r1.DEBUG_SOUNDS = (com.clubpenguin.util.Reporting.DEBUG && true);
+r1.DEBUG_LOCALE = (com.clubpenguin.util.Reporting.DEBUG && true);
+r1.DEBUG_SECURITY = (com.clubpenguin.util.Reporting.DEBUG && true);
+r1.DEBUGLEVEL_VERBOSE = 0;
+r1.DEBUGLEVEL_MESSAGE = 1;
+r1.DEBUGLEVEL_WARNING = 2;
+r1.DEBUGLEVEL_ERROR = 3;
+r1.debugLevel = com.clubpenguin.util.Reporting.DEBUGLEVEL_MESSAGE;
+L1963:
+ASSetPropFlags(com.clubpenguin.util.Reporting.prototype, null, 1);
+
+## main DoInitAction sprite 697
+if (!!_global.com) goto L1129;
+_global.com = new Object();
+L1129:
+pop
+if (!!_global.com.clubpenguin) goto L1185;
+_global.com.clubpenguin = new Object();
+L1185:
+pop
+if (!!_global.com.clubpenguin.util) goto L1253;
+_global.com.clubpenguin.util = new Object();
+L1253:
+pop
+if (!!_global.com.clubpenguin.util.Loader) goto L4789;
+r1 = function() {
+
+};
+com.clubpenguin.util.Loader = function() {
+
+};
+r2 = r1.prototype;
+r1.prototype;
+L2283:
+r1.loadAllMovies = function($parent/*r5*/, $movieLocations/*r2*/, $initLocaleText/*r8*/) {
+  if (!(com.clubpenguin.util.Loader.eventSource == undefined)) goto L143;
+  com.clubpenguin.util.Loader.eventSource = new Object();
+  mx.events.EventDispatcher.initialize(com.clubpenguin.util.Loader.eventSource);
+L143:
+  com.clubpenguin.util.Loader.submovieProgress = new Array();
+  com.clubpenguin.util.Loader.loadedMovies = 0;
+  if (!(r8 == undefined)) goto L247;
+  r8 = true;
+  true;
+L247:
+  if (!(r2 == undefined)) goto L333;
+  com.clubpenguin.util.Loader.debugTrace('no movieLocations array given!', com.clubpenguin.util.Reporting.DEBUGLEVEL_ERROR);
+  goto L784;
+L333:
+  r3 = r2[0].split('/');
+  r2[0].split('/');
+  r4 = '';
+  '';
+  r1 = 0;
+  0;
+L393:
+  if (!(r1 < (r3.length - 1))) goto L457;
+  r4 = (r4 + (r3[r1] + '/'));
+  (r4 + (r3[r1] + '/'));
+  r1 = ++r1;
+  ++r1;
+  goto L393;
+L457:
+  com.clubpenguin.util.Loader.debugTrace((("root directory is '" + r4) + "'"));
+  if ((com.clubpenguin.util.Loader.localeOverride == undefined)) goto L582;
+  goto L612;
+L582:
+L612:
+  r7 = com.clubpenguin.util.LocaleText.LANG_ID_EN;
+  com.clubpenguin.util.LocaleText.LANG_ID_EN;
+  if ((com.clubpenguin.util.Loader.localeVersion == undefined)) goto L692;
+  goto L722;
+L692:
+L722:
+  r6 = com.clubpenguin.util.Loader.localeVersion;
+  com.clubpenguin.util.Loader.localeVersion;
+  if (!r8) goto L784;
+  com.clubpenguin.util.LocaleText.init(r5, r7, r4, r6, true);
+L784:
+  r1 = 0;
+  0;
+L801:
+  if (!(r1 < r2.length)) goto L882;
+  com.clubpenguin.util.Loader.loadSubmovie(r5, r2[r1], r1);
+  r1 = ++r1;
+  ++r1;
+  goto L801;
+  /* leftover stack: com.clubpenguin.util.Loader.localeOverride | com.clubpenguin.util.Loader.localeVersion */
+};
+r1.loadSubmovie = function($parent/*r4*/, $movieLocation/*r5*/, $movieNum/*r6*/) {
+  com.clubpenguin.util.Loader.debugTrace('load submovie');
+  if (!(r4 == undefined)) goto L124;
+  com.clubpenguin.util.Loader.debugTrace('cannot load movie, parent movie is undefined!', com.clubpenguin.util.Reporting.DEBUGLEVEL_ERROR);
+  return undefined;
+L124:
+  if (!(r5 == undefined)) goto L210;
+  com.clubpenguin.util.Loader.debugTrace('cannot load movie, movie location is undefined!', com.clubpenguin.util.Reporting.DEBUGLEVEL_ERROR);
+  return undefined;
+L210:
+  r3 = r4.createEmptyMovieClip(('loadDataMC' + r6), r4.getNextHighestDepth());
+  r4.createEmptyMovieClip(('loadDataMC' + r6), r4.getNextHighestDepth());
+  r1 = new Object();
+  new Object();
+  r2 = new MovieClipLoader();
+  new MovieClipLoader();
+  r1.onLoadInit = function($targetMC/*r1*/) {
+    com.clubpenguin.util.Loader.handleLoadComplete(r1);
+  };
+  r1.onLoadProgress = function($targetMC/*r1*/, $loadProgress/*r2*/, $loadTotal/*r3*/) {
+    com.clubpenguin.util.Loader.handleLoadProgress(r1, r2, r3);
+  };
+  r1.onLoadError = function($targetMC, $errorMessage/*r1*/) {
+    com.clubpenguin.util.Loader.debugTrace(('error loading submovie: ' + r1), com.clubpenguin.util.Reporting.DEBUGLEVEL_ERROR);
+  };
+  r2.addListener(r1);
+  r2.loadClip(r5, r3);
+  com.clubpenguin.util.Loader.addProgressObject(r2.getProgress(r3));
+};
+r1.handleLoadProgress = function($mainMovie/*r4*/, $loadProgress/*r5*/, $loadTotal/*r6*/) {
+  r3 = 0;
+  0;
+  r2 = 0;
+  0;
+  r1 = 0;
+  0;
+L51:
+  if (!(r1 < com.clubpenguin.util.Loader.submovieProgress.length)) goto L354;
+  if (!(com.clubpenguin.util.Loader.submovieProgress[r1].movieClip == r4)) goto L238;
+  com.clubpenguin.util.Loader.submovieProgress[r1].bytesLoaded = r5;
+  com.clubpenguin.util.Loader.submovieProgress[r1].bytesTotal = r6;
+L238:
+  r2 = (r2 + com.clubpenguin.util.Loader.submovieProgress[r1].bytesLoaded);
+  (r2 + com.clubpenguin.util.Loader.submovieProgress[r1].bytesLoaded);
+  r3 = (r3 + com.clubpenguin.util.Loader.submovieProgress[r1].bytesTotal);
+  (r3 + com.clubpenguin.util.Loader.submovieProgress[r1].bytesTotal);
+  r1 = ++r1;
+  ++r1;
+  goto L51;
+L354:
+  r7 = ((r2 / r3) * 100);
+  ((r2 / r3) * 100);
+  com.clubpenguin.util.Loader.debugTrace((('updated load progress. movie is now ' + Math.round(r7)) + '% loaded'));
+};
+L3944:
+r1.handleLoadComplete = function($mainMovie/*r2*/) {
+  com.clubpenguin.util.Loader.debugTrace('submovie loaded OK! are all loaded?');
+  if (!!(r2._name == 'loadDataMC0')) goto L77;
+  r2.removeMovieClip();
+L77:
+  com.clubpenguin.util.Loader.loadedMovies = ++com.clubpenguin.util.Loader.loadedMovies;
+  if (!!(com.clubpenguin.util.Loader.loadedMovies < com.clubpenguin.util.Loader.submovieProgress.length)) goto L413;
+  com.clubpenguin.util.Loader.debugTrace('all movies loaded OK!');
+  r1 = new Object();
+  new Object();
+  r1.target = com.clubpenguin.util.Loader;
+  r1.type = com.clubpenguin.util.Loader.EVENT_LOAD_COMPLETED;
+  com.clubpenguin.util.Loader.eventSource.dispatchEvent(r1);
+  com.clubpenguin.util.Loader.debugTrace('dispatched LOAD_COMPLETED event');
+};
+r1.addEventListener = function($listener/*r1*/) {
+  if (!(com.clubpenguin.util.Loader.eventSource == undefined)) goto L143;
+  com.clubpenguin.util.Loader.eventSource = new Object();
+  mx.events.EventDispatcher.initialize(com.clubpenguin.util.Loader.eventSource);
+L143:
+  com.clubpenguin.util.Loader.eventSource.addEventListener(com.clubpenguin.util.Loader.EVENT_LOAD_COMPLETED, r1);
+};
+r1.removeEventListener = function($listener/*r1*/) {
+  com.clubpenguin.util.Loader.eventSource.removeEventListener(com.clubpenguin.util.Loader.EVENT_LOAD_COMPLETED, r1);
+};
+r1.setLocale = function($locale/*r1*/) {
+  com.clubpenguin.util.Loader.localeOverride = r1;
+};
+r1.setLocaleVersion = function($localeVersion/*r1*/) {
+  com.clubpenguin.util.Loader.localeVersion = r1;
+};
+r1.addProgressObject = function($progress/*r1*/) {
+  com.clubpenguin.util.Loader.submovieProgress.push(r1);
+};
+L4666:
+r1.debugTrace = function($message/*r2*/, $priority/*r1*/) {
+  if (!(r1 == undefined)) goto L48;
+  r1 = com.clubpenguin.util.Reporting.DEBUGLEVEL_MESSAGE;
+  com.clubpenguin.util.Reporting.DEBUGLEVEL_MESSAGE;
+L48:
+  if (!com.clubpenguin.util.Reporting.DEBUG_LOCALE) goto L130;
+  com.clubpenguin.util.Reporting.debugTrace(('(Loader) ' + r2), r1);
+};
+r1.EVENT_LOAD_COMPLETED = 'onLoadComplete';
+r1.EVENT_LOAD_IN_PROGRESS = 'onLoadProgress';
+r1.loadedMovies = 0;
+r1.submovieProgress = new Array();
+r1.localeVersion = undefined;
+r1.localeOverride = undefined;
+L4789:
+ASSetPropFlags(com.clubpenguin.util.Loader.prototype, null, 1);
+
+## main DoInitAction sprite 698
+if (!!_global.com) goto L252;
+_global.com = new Object();
+L252:
+pop
+if (!!_global.com.clubpenguin) goto L308;
+_global.com.clubpenguin = new Object();
+L308:
+pop
+if (!!_global.com.clubpenguin.text) goto L376;
+_global.com.clubpenguin.text = new Object();
+L376:
+pop
+if (!!_global.com.clubpenguin.text.TextResize) goto L1205;
+r1 = function() {
+
+};
+com.clubpenguin.text.TextResize = function() {
+
+};
+r2 = r1.prototype;
+r1.prototype;
+L1157:
+r1.scaleDown = function($field/*r1*/, $verticalAlign/*r13*/, $minFontSize/*r3*/) {
+  if (!!(r1.autoSize == 'none')) goto L26;
+  return undefined;
+L26:
+  r7 = r1._width;
+  r1._width;
+  r5 = r1._height;
+  r1._height;
+  r6 = undefined;
+  undefined;
+  r10 = r1.textHeight;
+  r1.textHeight;
+  r11 = undefined;
+  undefined;
+  r9 = r1._x;
+  r1._x;
+  r8 = r1._y;
+  r1._y;
+  r2 = r1.getTextFormat();
+  r1.getTextFormat();
+  r12 = r2.size;
+  r2.size;
+  r4 = true;
+  true;
+  r6 = r2.align;
+  r2.align;
+  r11 = r2.size;
+  r2.size;
+  if ((r3 == undefined)) goto L202;
+  goto L210;
+L202:
+L210:
+  r3 = 2;
+  2;
+  if (!r1.multiline) goto L244;
+  r1.wordWrap = true;
+  goto L254;
+L244:
+  r1.wordWrap = false;
+L254:
+  if (!r4) goto L466;
+  r1.autoSize = r6;
+  if (!((r1._width > r7) || (r1._height > r5))) goto L375;
+  r2.size = --r2.size;
+  if (!(r2.size < r3)) goto L370;
+  r2.size = r3;
+  r4 = false;
+  false;
+L370:
+  goto L385;
+L375:
+  r4 = false;
+  false;
+L385:
+  r1.autoSize = 'none';
+  r2.align = r6;
+  r1.setTextFormat(r2);
+  r1._height = r5;
+  r1._width = r7;
+  r1._x = r9;
+  r1._y = r8;
+  goto L254;
+L466:
+  if (!!r1.multiline) goto L638;
+  r0 = r13;
+  if ((r13 === 'center')) goto L532;
+  if ((r0 === 'bottom')) goto L580;
+  if ((r0 === 'top')) goto L619;
+  goto L619;
+L532:
+  r1._y = (r1._y + (((r10 - r1.textHeight) - 1) / 2));
+  goto L638;
+L580:
+  r1._y = (r1._y + ((r10 - r1.textHeight) - 1));
+  goto L638;
+L619:
+  r1._y = ++r1._y;
+  goto L638;
+  /* leftover stack: r3 */
+};
+L1205:
+ASSetPropFlags(com.clubpenguin.text.TextResize.prototype, null, 1);
+
+## main DoInitAction sprite 699
+if (!!_global.com) goto L499;
+_global.com = new Object();
+L499:
+pop
+if (!!_global.com.clubpenguin) goto L555;
+_global.com.clubpenguin = new Object();
+L555:
+pop
+if (!!_global.com.clubpenguin.security) goto L623;
+_global.com.clubpenguin.security = new Object();
+L623:
+pop
+if (!!_global.com.clubpenguin.security.Security) goto L1725;
+r1 = function() {
+
+};
+com.clubpenguin.security.Security = function() {
+
+};
+r2 = r1.prototype;
+r1.prototype;
+r1.doSecurityCheck = function($stageURL/*r2*/, $stageParent/*r1*/) {
+  if (!!com.clubpenguin.security.Security.checkDomain(r2, r1)) goto L52;
+  return false;
+L52:
+  com.clubpenguin.security.Security.allowDomains();
+  return true;
+};
+r1.checkDomain = function($stageURL/*r5*/, $stageParent/*r6*/) {
+  if (!com.clubpenguin.util.Reporting.DEBUG_SECURITY) goto L190;
+  com.clubpenguin.util.Reporting.debugTrace('(Security) checking launch from within club penguin:', com.clubpenguin.util.Reporting.DEBUGLEVEL_MESSAGE);
+  com.clubpenguin.util.Reporting.debugTrace(((('(Security) stageURL = ' + r5) + ', stageParent = ') + r6), com.clubpenguin.util.Reporting.DEBUGLEVEL_MESSAGE);
+L190:
+  r2 = false;
+  false;
+  if (!(r5.substr(0, 4) == 'http')) goto L351;
+  r4 = new Array();
+  new Array();
+  r4 = r5.split('/');
+  r5.split('/');
+  r3 = 'clubpenguin.com';
+  'clubpenguin.com';
+  if (!(r4[2].substr((0 - r3.length)) == r3)) goto L351;
+  r2 = true;
+  true;
+L351:
+  if (!(r6 == undefined)) goto L374;
+  r2 = false;
+  false;
+L374:
+  if (!!r2) goto L404;
+  _root.loadMovie();
+L404:
+  return r2;
+};
+L1677:
+r1.allowDomains = function() {
+  if (!com.clubpenguin.util.Reporting.DEBUG_SECURITY) goto L104;
+  com.clubpenguin.util.Reporting.debugTrace('(Security) allowing all domains', com.clubpenguin.util.Reporting.DEBUGLEVEL_MESSAGE);
+L104:
+  r2 = com.clubpenguin.security.Domains.getAllowedDomains();
+  com.clubpenguin.security.Domains.getAllowedDomains();
+  r1 = 0;
+  0;
+  r3 = r2.length;
+  r2.length;
+L178:
+  if (!(r1 < r3)) goto L353;
+  if (!com.clubpenguin.util.Reporting.DEBUG_SECURITY) goto L305;
+  com.clubpenguin.util.Reporting.debugTrace(('(Security) allowing domain ' + r2[r1]), com.clubpenguin.util.Reporting.DEBUGLEVEL_VERBOSE);
+L305:
+  System.security.allowDomain(r2[r1]);
+  r1 = ++r1;
+  ++r1;
+  goto L178;
+};
+L1725:
+ASSetPropFlags(com.clubpenguin.security.Security.prototype, null, 1);
+
+## main DoInitAction sprite 700
+if (!!_global.com) goto L1834;
+_global.com = new Object();
+L1834:
+pop
+if (!!_global.com.clubpenguin) goto L1890;
+_global.com.clubpenguin = new Object();
+L1890:
+pop
+if (!!_global.com.clubpenguin.security) goto L1958;
+_global.com.clubpenguin.security = new Object();
+L1958:
+pop
+if (!!_global.com.clubpenguin.security.Domains) goto L4846;
+r1 = function() {
+
+};
+com.clubpenguin.security.Domains = function() {
+
+};
+r2 = r1.prototype;
+r1.prototype;
+r1.getAllowedDomains = function() {
+  if (!(com.clubpenguin.security.Domains.allowedDomains == undefined)) goto L81;
+  com.clubpenguin.security.Domains.initialiseDomainList();
+L81:
+  return com.clubpenguin.security.Domains.allowedDomains;
+};
+r1.initialiseDomainList = function() {
+  if (!com.clubpenguin.util.Reporting.DEBUG_SECURITY) goto L104;
+  com.clubpenguin.util.Reporting.debugTrace('(Domains) initialising allowed domain list', com.clubpenguin.util.Reporting.DEBUGLEVEL_MESSAGE);
+L104:
+  com.clubpenguin.security.Domains.allowedDomains = new Array();
+  com.clubpenguin.security.Domains.allowedDomains.push('play.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('play2.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('media.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('media1.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('media2.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('cdn.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('play.critteroo.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('play2.critteroo.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('media.critteroo.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('media1.critteroo.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('media2.critteroo.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('cdn.critteroo.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('play.clubpenguin.co.uk');
+  com.clubpenguin.security.Domains.allowedDomains.push('play2.clubpenguin.co.uk');
+  com.clubpenguin.security.Domains.allowedDomains.push('media.clubpenguin.co.uk');
+  com.clubpenguin.security.Domains.allowedDomains.push('media1.clubpenguin.co.uk');
+  com.clubpenguin.security.Domains.allowedDomains.push('media2.clubpenguin.co.uk');
+  com.clubpenguin.security.Domains.allowedDomains.push('cdn.clubpenguin.co.uk');
+  com.clubpenguin.security.Domains.allowedDomains.push('play.critteroo.co.uk');
+  com.clubpenguin.security.Domains.allowedDomains.push('play2.critteroo.co.uk');
+  com.clubpenguin.security.Domains.allowedDomains.push('media.critteroo.co.uk');
+  com.clubpenguin.security.Domains.allowedDomains.push('media1.critteroo.co.uk');
+  com.clubpenguin.security.Domains.allowedDomains.push('media2.critteroo.co.uk');
+  com.clubpenguin.security.Domains.allowedDomains.push('cdn.critteroo.co.uk');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox01.play.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox01.play2.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox01.media.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox01.media1.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox01.media2.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox01.cdn.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox02.play.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox02.play2.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox02.media.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox02.media1.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox02.media2.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox02.cdn.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox03.play.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox03.play2.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox03.media.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox03.media1.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox03.media2.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox03.cdn.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox04.play.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox04.play2.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox04.media.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox04.media1.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox04.media2.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox04.cdn.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox05.play.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox05.play2.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox05.media.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox05.media1.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox05.media2.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('sandbox05.cdn.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('kel-dev-clp-ib02.sandbox.play.clubpenguin.com');
+  com.clubpenguin.security.Domains.allowedDomains.push('*.online.disney.com');
+};
+L4846:
+ASSetPropFlags(com.clubpenguin.security.Domains.prototype, null, 1);
+
+## main DoInitAction sprite 701
+if (!!_global.com) goto L234;
+_global.com = new Object();
+L234:
+pop
+if (!!_global.com.clubpenguin) goto L290;
+_global.com.clubpenguin = new Object();
+L290:
+pop
+if (!!_global.com.clubpenguin.util) goto L358;
+_global.com.clubpenguin.util = new Object();
+L358:
+pop
+if (!!_global.com.clubpenguin.util.Stamp) goto L1113;
+r1 = function() {
+
+};
+com.clubpenguin.util.Stamp = function() {
+
+};
+r2 = r1.prototype;
+r1.prototype;
+L585:
+r1.sendStamp = function($id/*r3*/) {
+  if (!com.clubpenguin.util.Stamp.debug) goto L79;
+  com.clubpenguin.util.Stamp.stamps[r3] = true;
+  goto L117;
+L79:
+  r2 = _global.getCurrentShell();
+  _global.getCurrentShell();
+  r2.stampEarned(r3);
+};
+r1.checkStamp = function($id/*r4*/) {
+  r3 = undefined;
+  undefined;
+  if (!com.clubpenguin.util.Stamp.debug) goto L99;
+  if (!com.clubpenguin.util.Stamp.stamps[r4]) goto L93;
+  return true;
+L93:
+  return false;
+L99:
+  r2 = _global.getCurrentShell();
+  _global.getCurrentShell();
+  r3 = r2.stampIsOwnedByMe(r4);
+  r2.stampIsOwnedByMe(r4);
+  return r3;
+};
+r1.setDebug = function(mode/*r1*/) {
+  com.clubpenguin.util.Stamp.debug = r1;
+};
+r1.getDebug = function() {
+  return com.clubpenguin.util.Stamp.debug;
+};
+r1.clearStamps = function() {
+  com.clubpenguin.util.Stamp.stamps = new Object();
+};
+L1035:
+r1.setStamps = function(new_stamps/*r2*/) {
+  enumerate2(r2);
+L6:
+  r0 = enum;
+  if ((enum == null)) goto L86;
+  r3 = r0;
+  r0;
+  r1 = r2[r3];
+  r2[r3];
+  com.clubpenguin.util.Stamp.stamps[r1] = true;
+  goto L6;
+};
+r1.debug = false;
+r1.stamps = new Object();
+L1113:
+ASSetPropFlags(com.clubpenguin.util.Stamp.prototype, null, 1);
+
+## main frame 2 DoAction
+function getCoins() {
+  if (!(coins == undefined)) goto L32;
+  coins = 0;
+L32:
+  r3 = new Object();
+  new Object();
+  r3.score = (coins * 10);
+  r3.coins = coins;
+  _root.showWindow('Game Over', r3);
+  _global.pizzatron_dl.stopGame(candyMODE);
+  if (!quit) goto L188;
+  _global.pizzatron_dl.sendGameScore(candyMODE, 'quit', r3.score, r3.coins);
+  goto L232;
+L188:
+  _global.pizzatron_dl.sendGameScore(candyMODE, 'lose', r3.score, r3.coins);
+}
+L827:
+if (!(_global.dlearning_learner_id == undefined)) goto L904;
+var SHELL = _global.getCurrentShell();
+_global.dlearning_learner_id = SHELL.getMyPlayerId();
+L904:
+stop()
+com.clubpenguin.security.Security.doSecurityCheck(this._url, this._parent);
+_root.LocaleText = com.clubpenguin.util.LocaleText;
+var SHELL = _global.getCurrentShell();
+var gameDirectory = com.clubpenguin.util.LocaleText.getGameDirectory();
+var localeDirectory = (('lang/' + com.clubpenguin.util.LocaleText.getLocale(com.clubpenguin.util.LocaleText.getLocaleID())) + '/');
+var loader = new MovieClipLoader();
+loader.loadClip(((gameDirectory + localeDirectory) + 'title.swf'), title_mc.titlescreen_mc.titleImage);
+title_mc.ui_play.text = _root.LocaleText.getText('ui_play');
+title_mc.ui_instructions.text = _root.LocaleText.getText('title_instructions');
+L1443:
+title_mc.titlescreen_mc.switch_mc.switch_handle.onRelease = function() {
+  if (!candyMODE) goto L60;
+  candyMODE = false;
+  title_mc.titlescreen_mc.switch_mc.gotoAndStop(1);
+  goto L103;
+L60:
+  candyMODE = true;
+  title_mc.titlescreen_mc.switch_mc.gotoAndStop(2);
+};
+var penguinColor = SHELL.getMyPlayerHex();
+var colorObject = new Color(title_mc.titlescreen_mc.penguin_mc);
+colorObject.setRGB(penguinColor);
+candyMODE = false;
+
+## frame 2 label 'title'
+
+## button 525 on(overDownToOverUp cond=0x8)
+_parent.gotoAndStop('rush');
+
+## button 526 on(overDownToOverUp cond=0x8)
+gotoFrame('intructions');
+
+## button 533 on(overDownToOverUp cond=0x8)
+_parent.gameOver._visible = true;
+_parent.quit = true;
+_parent.getCoins(0);
+
+## button 579 on(overDownToOverUp cond=0x8)
+_global.pizzatron_dl.stopInstructionScreen1();
+_parent._parent.gotoAndStop('rush');
+
+## main frame 3 DoAction
+function addSound(clip/*r1*/, loops/*r3*/, volume/*r2*/) {
+  if (!(r2 == undefined)) goto L26;
+  r2 = 100;
+  100;
+L26:
+  (undefined + r1);
+  mySound = new Sound(createEmptyMovieClip((r1 + 'Sfx'), (getNextHighestDepth() + 100)));
+  mySound.setVolume(r2);
+  mySound.attachSound(r1);
+  mySound.start(0, r3);
+}
+function makeorder() {
+  orderScreenFrame = orderscreen.frame;
+  if (!(candyMODE == true)) goto L49;
+  possibleorders = 24;
+  goto L75;
+L49:
+  possibleorders = Math.round(pizzasmade);
+L75:
+  if (!(possibleorders > maxpossibleorders)) goto L103;
+  possibleorders = maxpossibleorders;
+L103:
+  if (!(perfectpizza == true)) goto L148;
+  order = (random(possibleorders) + 1);
+  perfectpizza = false;
+L148:
+  if (!(candyMODE == true)) goto L204;
+  orderscreen.gotoAndStop((order + 24));
+  goto L228;
+L204:
+  orderscreen.gotoAndStop(order);
+L228:
+  gameMODE = 'loadpizzas';
+  if (!(orderScreenFrame == orderscreen.frame)) goto L286;
+  _global.pizzatron_dl.setPizzaType = _global.pizzatron_dl.lastPizzaType;
+}
+L3660:
+function loadpizzas() {
+  _global.pizzatron_dl.startPizza(candyMODE);
+  if (!(topping1REQUESTED == true)) goto L90;
+  if (!!(topping1 < Ntopping1REQUESTED)) goto L77;
+  perfecttopping1 = true;
+  goto L85;
+L77:
+  perfecttopping1 = false;
+L85:
+  goto L154;
+L90:
+  if (!(topping1 == 0)) goto L128;
+  perfecttopping1 = true;
+  goto L154;
+L128:
+  perfecttopping1 = false;
+  speedboost = (speedboost + 1);
+L154:
+  if (!(topping2REQUESTED == true)) goto L218;
+  if (!!(topping2 < Ntopping2REQUESTED)) goto L205;
+  perfecttopping2 = true;
+  goto L213;
+L205:
+  perfecttopping2 = false;
+L213:
+  goto L282;
+L218:
+  if (!(topping2 == 0)) goto L256;
+  perfecttopping2 = true;
+  goto L282;
+L256:
+  perfecttopping2 = false;
+  speedboost = (speedboost + 1);
+L282:
+  if (!(topping3REQUESTED == true)) goto L346;
+  if (!!(topping3 < Ntopping3REQUESTED)) goto L333;
+  perfecttopping3 = true;
+  goto L341;
+L333:
+  perfecttopping3 = false;
+L341:
+  goto L410;
+L346:
+  if (!(topping3 == 0)) goto L384;
+  perfecttopping3 = true;
+  goto L410;
+L384:
+  perfecttopping3 = false;
+  speedboost = (speedboost + 1);
+L410:
+  if (!(topping4REQUESTED == true)) goto L474;
+  if (!!(topping4 < Ntopping4REQUESTED)) goto L461;
+  perfecttopping4 = true;
+  goto L469;
+L461:
+  perfecttopping4 = false;
+L469:
+  goto L538;
+L474:
+  if (!(topping4 == 0)) goto L512;
+  perfecttopping4 = true;
+  goto L538;
+L512:
+  perfecttopping4 = false;
+  speedboost = (speedboost + 1);
+L538:
+  if (!(((((((normalsaucePLACED == normalsauceREQUESTED) && (hotsaucePLACED == hotsauceREQUESTED)) && (cheesePLACED == cheeseREQUESTED)) && (perfecttopping1 == true)) && (perfecttopping2 == true)) && (perfecttopping3 == true)) && (perfecttopping4 == true))) goto L710;
+  perfectpizza = true;
+  speedboost = (speedboost + 1);
+  goto L718;
+L710:
+  perfectpizza = false;
+L718:
+  if (!(((((pizza.sauce.hitTest((pizza.toppart._x + pizza._x), (pizza.toppart._y + pizza._y), true) && pizza.sauce.hitTest((pizza.bottompart._x + pizza._x), (pizza.bottompart._y + pizza._y), true)) && pizza.sauce.hitTest((pizza.leftpart._x + pizza._x), (pizza.leftpart._y + pizza._y), true)) && pizza.sauce.hitTest((pizza.midrightpart._x + pizza._x), (pizza.midrightpart._y + pizza._y), true)) && pizza.sauce.hitTest((pizza.midleftpart._x + pizza._x), (pizza.midleftpart._y + pizza._y), true)) && pizza.sauce.hitTest((pizza.rightpart._x + pizza._x), (pizza.rightpart._y + pizza._y), true))) goto L1299;
+  normalsaucePLACED = true;
+  goto L1307;
+L1299:
+  normalsaucePLACED = false;
+L1307:
+  if (!(((((pizza.hotsauce.hitTest((pizza.toppart._x + pizza._x), (pizza.toppart._y + pizza._y), true) && pizza.hotsauce.hitTest((pizza.bottompart._x + pizza._x), (pizza.bottompart._y + pizza._y), true)) && pizza.hotsauce.hitTest((pizza.leftpart._x + pizza._x), (pizza.leftpart._y + pizza._y), true)) && pizza.hotsauce.hitTest((pizza.midrightpart._x + pizza._x), (pizza.midrightpart._y + pizza._y), true)) && pizza.hotsauce.hitTest((pizza.midleftpart._x + pizza._x), (pizza.midleftpart._y + pizza._y), true)) && pizza.hotsauce.hitTest((pizza.rightpart._x + pizza._x), (pizza.rightpart._y + pizza._y), true))) goto L1888;
+  hotsaucePLACED = true;
+  goto L1896;
+L1888:
+  hotsaucePLACED = false;
+L1896:
+  if (!(pizza._x < 900)) goto L1963;
+  pizza._x = (pizza._x + (pizzaspeed + speedboost));
+  goto L1999;
+L1963:
+  if (!!(pizza._x < 900)) goto L1999;
+  gameMODE = 'removepizza';
+}
+L5680:
+function sendStamp410() {
+  clearInterval(stampTimeoutID);
+  com.clubpenguin.util.Stamp.sendStamp(410);
+}
+function removepizza() {
+  if (!(perfectpizza == true)) goto L1140;
+  consecutivePizzas = ++consecutivePizzas;
+  if (!((order == 6) && (candyMODE == false))) goto L166;
+  numOfShrimpPizzas = ++numOfShrimpPizzas;
+  if (!(numOfShrimpPizzas == 3)) goto L166;
+  com.clubpenguin.util.Stamp.sendStamp(398);
+  _global.pizzatron_dl.sendStampOpcodes(398);
+L166:
+  if (!((order == 8) && (candyMODE == false))) goto L304;
+  numOfSquidPizzas = ++numOfSquidPizzas;
+  if (!(numOfSquidPizzas == 3)) goto L304;
+  com.clubpenguin.util.Stamp.sendStamp(402);
+  _global.pizzatron_dl.sendStampOpcodes(402);
+L304:
+  if (!((order == 9) && (candyMODE == true))) goto L442;
+  numOfJellyBeanPizzas = ++numOfJellyBeanPizzas;
+  if (!(numOfJellyBeanPizzas == 3)) goto L442;
+  com.clubpenguin.util.Stamp.sendStamp(400);
+  _global.pizzatron_dl.sendStampOpcodes(400);
+L442:
+  if (!((order == 8) && (candyMODE == true))) goto L580;
+  numOfMarshmallowPizzas = ++numOfMarshmallowPizzas;
+  if (!(numOfMarshmallowPizzas == 3)) goto L580;
+  com.clubpenguin.util.Stamp.sendStamp(404);
+  _global.pizzatron_dl.sendStampOpcodes(404);
+L580:
+  if (!(consecutivePizzas == 20)) goto L667;
+  com.clubpenguin.util.Stamp.sendStamp(396);
+  _global.pizzatron_dl.sendStampOpcodes(396);
+L667:
+  if (!(consecutivePizzas == 30)) goto L754;
+  com.clubpenguin.util.Stamp.sendStamp(406);
+  _global.pizzatron_dl.sendStampOpcodes(406);
+L754:
+  if (!(consecutivePizzas == 40)) goto L841;
+  com.clubpenguin.util.Stamp.sendStamp(408);
+  _global.pizzatron_dl.sendStampOpcodes(408);
+L841:
+  if (!((candyMODE == true) && (consecutivePizzas == 40))) goto L950;
+  clearInterval(stampTimeoutID);
+  stampTimeoutID = setInterval(sendStamp410, 1000);
+  _global.pizzatron_dl.sendStampOpcodes(410);
+L950:
+  _global.pizzatron_dl.scorePizza(candyMODE, 100);
+  handicap = (handicap + 1);
+  txt_popup.gotoAndStop('perfect');
+  if (!(candyMODE == true)) goto L1063;
+  txt_popup.earned.gotoAndStop('tip10');
+L1063:
+  pizzasmade = (pizzasmade + 1);
+  score = (score + 5);
+  if (!(candyMODE == true)) goto L1135;
+  score = (score + 5);
+L1135:
+  goto L1327;
+L1140:
+  consecutivePizzas = 0;
+  handicap = (handicap - 1);
+  failures = (failures + 1);
+  if (!((failures == 3) && messOfKitchen)) goto L1292;
+  com.clubpenguin.util.Stamp.sendStamp(392);
+  _global.pizzatron_dl.sendStampOpcodes(392);
+L1292:
+  _global.pizzatron_dl.scorePizza(candyMODE, 0);
+L1327:
+  ordersmade = (ordersmade + 1);
+  pizzasleft = (pizzasleft - 1);
+  r3 = 30;
+  30;
+L1376:
+  if (!(r3 > 0)) goto L1446;
+  this[('perfectpizzas' + r3)] = this[('perfectpizzas' + (r3 - 1))];
+  r3 = (r3 - 1);
+  (r3 - 1);
+  goto L1376;
+L1446:
+  if (!(perfectpizza == true)) goto L1477;
+  perfectpizzas1 = true;
+  goto L1485;
+L1477:
+  perfectpizzas1 = false;
+L1485:
+  if (!((((((((((((((((((((((((((((((perfectpizzas1 == true) && (perfectpizzas2 == true)) && (perfectpizzas3 == true)) && (perfectpizzas4 == true)) && (perfectpizzas5 == true)) && (perfectpizzas6 == true)) && (perfectpizzas7 == true)) && (perfectpizzas8 == true)) && (perfectpizzas9 == true)) && (perfectpizzas10 == true)) && (perfectpizzas11 == true)) && (perfectpizzas12 == true)) && (perfectpizzas13 == true)) && (perfectpizzas14 == true)) && (perfectpizzas15 == true)) && (perfectpizzas16 == true)) && (perfectpizzas17 == true)) && (perfectpizzas18 == true)) && (perfectpizzas19 == true)) && (perfectpizzas20 == true)) && (perfectpizzas21 == true)) && (perfectpizzas22 == true)) && (perfectpizzas23 == true)) && (perfectpizzas24 == true)) && (perfectpizzas25 == true)) && (perfectpizzas26 == true)) && (perfectpizzas27 == true)) && (perfectpizzas28 == true)) && (perfectpizzas29 == true)) && (perfectpizzas30 == true))) goto L2126;
+  txt_popup.gotoAndStop('combo35');
+  tips = (tips + 35);
+  goto L3826;
+L2126:
+  if (!(((((((((((((((((((((((((perfectpizzas1 == true) && (perfectpizzas2 == true)) && (perfectpizzas3 == true)) && (perfectpizzas4 == true)) && (perfectpizzas5 == true)) && (perfectpizzas6 == true)) && (perfectpizzas7 == true)) && (perfectpizzas8 == true)) && (perfectpizzas9 == true)) && (perfectpizzas10 == true)) && (perfectpizzas11 == true)) && (perfectpizzas12 == true)) && (perfectpizzas13 == true)) && (perfectpizzas14 == true)) && (perfectpizzas15 == true)) && (perfectpizzas16 == true)) && (perfectpizzas17 == true)) && (perfectpizzas18 == true)) && (perfectpizzas19 == true)) && (perfectpizzas20 == true)) && (perfectpizzas21 == true)) && (perfectpizzas22 == true)) && (perfectpizzas23 == true)) && (perfectpizzas24 == true)) && (perfectpizzas25 == true))) goto L2667;
+  txt_popup.gotoAndStop('combo30');
+  tips = (tips + 30);
+  goto L3826;
+L2667:
+  if (!((((((((((((((((((((perfectpizzas1 == true) && (perfectpizzas2 == true)) && (perfectpizzas3 == true)) && (perfectpizzas4 == true)) && (perfectpizzas5 == true)) && (perfectpizzas6 == true)) && (perfectpizzas7 == true)) && (perfectpizzas8 == true)) && (perfectpizzas9 == true)) && (perfectpizzas10 == true)) && (perfectpizzas11 == true)) && (perfectpizzas12 == true)) && (perfectpizzas13 == true)) && (perfectpizzas14 == true)) && (perfectpizzas15 == true)) && (perfectpizzas16 == true)) && (perfectpizzas17 == true)) && (perfectpizzas18 == true)) && (perfectpizzas19 == true)) && (perfectpizzas20 == true))) goto L3108;
+  txt_popup.gotoAndStop('combo25');
+  tips = (tips + 25);
+  goto L3826;
+L3108:
+  if (!(((((((((((((((perfectpizzas1 == true) && (perfectpizzas2 == true)) && (perfectpizzas3 == true)) && (perfectpizzas4 == true)) && (perfectpizzas5 == true)) && (perfectpizzas6 == true)) && (perfectpizzas7 == true)) && (perfectpizzas8 == true)) && (perfectpizzas9 == true)) && (perfectpizzas10 == true)) && (perfectpizzas11 == true)) && (perfectpizzas12 == true)) && (perfectpizzas13 == true)) && (perfectpizzas14 == true)) && (perfectpizzas15 == true))) goto L3449;
+  txt_popup.gotoAndStop('combo20');
+  tips = (tips + 20);
+  goto L3826;
+L3449:
+  if (!((((((((((perfectpizzas1 == true) && (perfectpizzas2 == true)) && (perfectpizzas3 == true)) && (perfectpizzas4 == true)) && (perfectpizzas5 == true)) && (perfectpizzas6 == true)) && (perfectpizzas7 == true)) && (perfectpizzas8 == true)) && (perfectpizzas9 == true)) && (perfectpizzas10 == true))) goto L3690;
+  txt_popup.gotoAndStop('combo15');
+  tips = (tips + 15);
+  goto L3826;
+L3690:
+  if (!(((((perfectpizzas1 == true) && (perfectpizzas2 == true)) && (perfectpizzas3 == true)) && (perfectpizzas4 == true)) && (perfectpizzas5 == true))) goto L3826;
+  txt_popup.gotoAndStop('combo10');
+  tips = (tips + 10);
+L3826:
+  removeMovieClip(pizza);
+  normalsaucePLACED = false;
+  hotsaucePLACED = false;
+  cheesePLACED = false;
+  topping1 = 0;
+  topping2 = 0;
+  topping3 = 0;
+  topping4 = 0;
+  perfecttopping1 = false;
+  perfecttopping2 = false;
+  perfecttopping3 = false;
+  perfecttopping4 = false;
+  splatN = -300;
+  speedboost = 0;
+  normalsauceFULL = false;
+  hotsauceFULL = false;
+  _global.pizzatron_dl.stopPizza(candyMODE);
+  gameMODE = 'placepizza';
+}
+function placepizza() {
+  attachMovie('pizza', 'pizza', 1);
+  pizza._x = -240;
+  pizza._y = 375;
+  gameMODE = 'makeorder';
+}
+function ingredientnone() {
+  if (!(candyMODE == true)) goto L43;
+  ingredients_sauces.gotoAndStop('normalcandy');
+  goto L63;
+L43:
+  ingredients_sauces.gotoAndStop('normal');
+L63:
+  hand.gotoAndStop('none');
+}
+function ingredientnormalsauce() {
+  if (!(candyMODE == true)) goto L43;
+  ingredients_sauces.gotoAndStop('usingchocolatesauce');
+  goto L63;
+L43:
+  ingredients_sauces.gotoAndStop('usingnormalsauce');
+L63:
+  if (!(mouseisdown == false)) goto L149;
+  if (!(candyMODE == true)) goto L124;
+  hand.gotoAndStop('chocolatesauce');
+  goto L144;
+L124:
+  hand.gotoAndStop('normalsauce');
+L144:
+  goto L253;
+L149:
+  if (!((mouseisdown == true) && (splatN < -10))) goto L253;
+  if (!(candyMODE == true)) goto L233;
+  hand.gotoAndStop('chocolatesauce_use');
+  goto L253;
+L233:
+  hand.gotoAndStop('normalsauce_use');
+L253:
+  if (!((pizza.hitTest(''._xmouse, (''._ymouse + 100), true) && (mouseisdown == true)) && (splatN < -10))) goto L780;
+  if (!(normalsaucePLACED == false)) goto L725;
+  if (!(candyMODE == true)) goto L434;
+  pizza.sauce.attachMovie('splat_chocolatesauce', ('splat' + splatN), splatN);
+  goto L475;
+L434:
+  pizza.sauce.attachMovie('splat_normalsauce', ('splat' + splatN), splatN);
+L475:
+  this.pizza.sauce[('splat' + splatN)]._x = (''._xmouse - pizza._x);
+  this.pizza.sauce[('splat' + splatN)]._y = ((''._ymouse - pizza._y) + 100);
+  this.pizza.sauce[('splat' + splatN)].gotoAndStop((random(4) + 1));
+  i = -300;
+L651:
+  if (!(i < -1)) goto L725;
+  this.pizza.hotsauce[('splat' + i)].gotoAndStop('gone');
+  i = ++i;
+  goto L651;
+L725:
+  splatN = (splatN + 1);
+  if (!(splatN > -2)) goto L775;
+  splatN = -300;
+L775:
+  goto L1225;
+L780:
+  if (!(mouseisdown == false)) goto L1225;
+  ingredient = 'none';
+  hand.gotoAndStop('none');
+  sauce0Thrown = true;
+  checkForMessOfKitchen();
+  if (!(candyMODE == true)) goto L902;
+  attachMovie('dropchocolatesauce', ('droppedtopping' + dropN), dropN);
+  goto L931;
+L902:
+  attachMovie('dropsauce', ('droppedtopping' + dropN), dropN);
+L931:
+  this[('droppedtopping' + dropN)]._x = ''._xmouse;
+  this[('droppedtopping' + dropN)]._y = ''._ymouse;
+  this[('droprotate' + dropN)] = true;
+  this[('dropspeedX' + dropN)] = (this[('dropspeedX' + dropN)] - strengthX);
+  this[('dropspeedY' + dropN)] = (this[('dropspeedY' + dropN)] - strengthY);
+  dropN = (dropN + 1);
+  if (!(dropN > 1010)) goto L1112;
+  dropN = 1001;
+L1112:
+  if (!!(strengthX < 30)) goto L1171;
+  zipSound.start(0, 1);
+  goto L1225;
+L1171:
+  if (!!(strengthX > -30)) goto L1225;
+  zipSound.start(0, 1);
+}
+L11249:
+function ingredienthotsauce() {
+  if (!(candyMODE == true)) goto L43;
+  ingredients_sauces.gotoAndStop('usingpinkicing');
+  goto L63;
+L43:
+  ingredients_sauces.gotoAndStop('usinghotsauce');
+L63:
+  if (!(mouseisdown == false)) goto L149;
+  if (!(candyMODE == true)) goto L124;
+  hand.gotoAndStop('pinkicing');
+  goto L144;
+L124:
+  hand.gotoAndStop('hotsauce');
+L144:
+  goto L253;
+L149:
+  if (!((mouseisdown == true) && (splatN < -10))) goto L253;
+  if (!(candyMODE == true)) goto L233;
+  hand.gotoAndStop('pinkicing_use');
+  goto L253;
+L233:
+  hand.gotoAndStop('hotsauce_use');
+L253:
+  if (!((pizza.hitTest(''._xmouse, (''._ymouse + 100), true) && (mouseisdown == true)) && (splatN < -10))) goto L780;
+  if (!(hotsaucePLACED == false)) goto L725;
+  if (!(candyMODE == true)) goto L434;
+  pizza.hotsauce.attachMovie('splat_pinkicing', ('splat' + splatN), splatN);
+  goto L475;
+L434:
+  pizza.hotsauce.attachMovie('splat_hotsauce', ('splat' + splatN), splatN);
+L475:
+  this.pizza.hotsauce[('splat' + splatN)]._x = (''._xmouse - pizza._x);
+  this.pizza.hotsauce[('splat' + splatN)]._y = ((''._ymouse - pizza._y) + 100);
+  this.pizza.hotsauce[('splat' + splatN)].gotoAndStop((random(4) + 1));
+  i = -300;
+L651:
+  if (!(i < -1)) goto L725;
+  this.pizza.sauce[('splat' + i)].gotoAndStop('gone');
+  i = ++i;
+  goto L651;
+L725:
+  splatN = (splatN + 1);
+  if (!(splatN > -2)) goto L775;
+  splatN = -300;
+L775:
+  goto L1225;
+L780:
+  if (!(mouseisdown == false)) goto L1225;
+  ingredient = 'none';
+  hand.gotoAndStop('none');
+  sauce1Thrown = true;
+  checkForMessOfKitchen();
+  if (!(candyMODE == true)) goto L902;
+  attachMovie('droppinkicing', ('droppedtopping' + dropN), dropN);
+  goto L931;
+L902:
+  attachMovie('drophotsauce', ('droppedtopping' + dropN), dropN);
+L931:
+  this[('droppedtopping' + dropN)]._x = ''._xmouse;
+  this[('droppedtopping' + dropN)]._y = ''._ymouse;
+  this[('droprotate' + dropN)] = true;
+  this[('dropspeedX' + dropN)] = (this[('dropspeedX' + dropN)] - strengthX);
+  this[('dropspeedY' + dropN)] = (this[('dropspeedY' + dropN)] - strengthY);
+  dropN = (dropN + 1);
+  if (!(dropN > 1010)) goto L1112;
+  dropN = 1001;
+L1112:
+  if (!!(strengthX < 30)) goto L1171;
+  zipSound.start(0, 1);
+  goto L1225;
+L1171:
+  if (!!(strengthX > -30)) goto L1225;
+  zipSound.start(0, 1);
+}
+L12503:
+function ingredientcheese() {
+  if (!(candyMODE == true)) goto L43;
+  hand.gotoAndStop('sprinkles');
+  goto L63;
+L43:
+  hand.gotoAndStop('cheese');
+L63:
+  if (!(pizza.hitTest(''._xmouse, ''._ymouse, true) && (mouseisdown == false))) goto L262;
+  if (!(candyMODE == true)) goto L181;
+  this.pizza.cheese.gotoAndStop('placedcandy');
+  goto L209;
+L181:
+  this.pizza.cheese.gotoAndStop('placed');
+L209:
+  cheesePLACED = true;
+  ingredient = 'none';
+  toppingSound.start(0, 1);
+  goto L707;
+L262:
+  if (!(mouseisdown == false)) goto L707;
+  ingredient = 'none';
+  hand.gotoAndStop('none');
+  topping0Thrown = true;
+  checkForMessOfKitchen();
+  if (!(candyMODE == true)) goto L384;
+  attachMovie('dropsprinkles', ('droppedtopping' + dropN), dropN);
+  goto L413;
+L384:
+  attachMovie('dropcheese', ('droppedtopping' + dropN), dropN);
+L413:
+  this[('droppedtopping' + dropN)]._x = ''._xmouse;
+  this[('droppedtopping' + dropN)]._y = ''._ymouse;
+  this[('droprotate' + dropN)] = false;
+  this[('dropspeedX' + dropN)] = (this[('dropspeedX' + dropN)] - strengthX);
+  this[('dropspeedY' + dropN)] = (this[('dropspeedY' + dropN)] - strengthY);
+  dropN = (dropN + 1);
+  if (!(dropN > 1010)) goto L594;
+  dropN = 1001;
+L594:
+  if (!!(strengthX < 30)) goto L653;
+  zipSound.start(0, 1);
+  goto L707;
+L653:
+  if (!!(strengthX > -30)) goto L707;
+  zipSound.start(0, 1);
+}
+L13237:
+function ingredienttopping1() {
+  if (!(candyMODE == true)) goto L43;
+  hand.gotoAndStop('topping1candy');
+  goto L63;
+L43:
+  hand.gotoAndStop('topping1');
+L63:
+  hand.topping.gotoAndStop(toppingframe);
+  if (!((pizza.hitTest(''._xmouse, ''._ymouse, true) && (mouseisdown == false)) && (perfectpizza == false))) goto L583;
+  pizza.topping.attachMovie('toppings', ('splat' + toppingsN), toppingsN);
+  this.pizza.topping[('splat' + toppingsN)]._x = (''._xmouse - pizza._x);
+  this.pizza.topping[('splat' + toppingsN)]._y = (''._ymouse - pizza._y);
+  if (!(candyMODE == true)) goto L384;
+  this.pizza.topping[('splat' + toppingsN)].gotoAndStop('topping1candy');
+  goto L422;
+L384:
+  this.pizza.topping[('splat' + toppingsN)].gotoAndStop('topping1');
+L422:
+  this.pizza.topping[('splat' + toppingsN)].topping.gotoAndStop(toppingframe);
+  toppingSound.start(0, 1);
+  toppingsN = (toppingsN + 1);
+  if (!(toppingsN > -2)) goto L552;
+  toppingsN = -300;
+L552:
+  topping1 = (topping1 + 1);
+  ingredient = 'none';
+  goto L1058;
+L583:
+  if (!(mouseisdown == false)) goto L1058;
+  ingredient = 'none';
+  hand.gotoAndStop('none');
+  topping1Thrown = true;
+  checkForMessOfKitchen();
+  if (!(candyMODE == true)) goto L705;
+  attachMovie('dropliquorice', ('droppedtopping' + dropN), dropN);
+  goto L734;
+L705:
+  attachMovie('dropseaweed', ('droppedtopping' + dropN), dropN);
+L734:
+  this[('droppedtopping' + dropN)]._x = ''._xmouse;
+  this[('droppedtopping' + dropN)]._y = ''._ymouse;
+  this[('droppedtopping' + dropN)].gotoAndStop(toppingframe);
+  this[('droprotate' + dropN)] = true;
+  this[('dropspeedX' + dropN)] = (this[('dropspeedX' + dropN)] - strengthX);
+  this[('dropspeedY' + dropN)] = (this[('dropspeedY' + dropN)] - strengthY);
+  dropN = (dropN + 1);
+  if (!(dropN > 1010)) goto L945;
+  dropN = 1001;
+L945:
+  if (!!(strengthX < 30)) goto L1004;
+  zipSound.start(0, 1);
+  goto L1058;
+L1004:
+  if (!!(strengthX > -30)) goto L1058;
+  zipSound.start(0, 1);
+}
+L14324:
+function ingredienttopping2() {
+  if (!(candyMODE == true)) goto L43;
+  hand.gotoAndStop('topping2candy');
+  goto L63;
+L43:
+  hand.gotoAndStop('topping2');
+L63:
+  hand.topping.gotoAndStop(toppingframe);
+  if (!((pizza.hitTest(''._xmouse, ''._ymouse, true) && (mouseisdown == false)) && (perfectpizza == false))) goto L583;
+  pizza.topping.attachMovie('toppings', ('splat' + toppingsN), toppingsN);
+  this.pizza.topping[('splat' + toppingsN)]._x = (''._xmouse - pizza._x);
+  this.pizza.topping[('splat' + toppingsN)]._y = (''._ymouse - pizza._y);
+  if (!(candyMODE == true)) goto L384;
+  this.pizza.topping[('splat' + toppingsN)].gotoAndStop('topping2candy');
+  goto L422;
+L384:
+  this.pizza.topping[('splat' + toppingsN)].gotoAndStop('topping2');
+L422:
+  this.pizza.topping[('splat' + toppingsN)].topping.gotoAndStop(toppingframe);
+  toppingSound.start(0, 1);
+  toppingsN = (toppingsN + 1);
+  if (!(toppingsN > -2)) goto L552;
+  toppingsN = -300;
+L552:
+  topping2 = (topping2 + 1);
+  ingredient = 'none';
+  goto L1058;
+L583:
+  if (!(mouseisdown == false)) goto L1058;
+  ingredient = 'none';
+  hand.gotoAndStop('none');
+  topping2Thrown = true;
+  checkForMessOfKitchen();
+  if (!(candyMODE == true)) goto L705;
+  attachMovie('dropchocolatechip', ('droppedtopping' + dropN), dropN);
+  goto L734;
+L705:
+  attachMovie('dropshrimp', ('droppedtopping' + dropN), dropN);
+L734:
+  this[('droppedtopping' + dropN)]._x = ''._xmouse;
+  this[('droppedtopping' + dropN)]._y = ''._ymouse;
+  this[('droppedtopping' + dropN)].gotoAndStop(toppingframe);
+  this[('droprotate' + dropN)] = true;
+  this[('dropspeedX' + dropN)] = (this[('dropspeedX' + dropN)] - strengthX);
+  this[('dropspeedY' + dropN)] = (this[('dropspeedY' + dropN)] - strengthY);
+  dropN = (dropN + 1);
+  if (!(dropN > 1010)) goto L945;
+  dropN = 1001;
+L945:
+  if (!!(strengthX < 30)) goto L1004;
+  zipSound.start(0, 1);
+  goto L1058;
+L1004:
+  if (!!(strengthX > -30)) goto L1058;
+  zipSound.start(0, 1);
+}
+L15411:
+function ingredienttopping3() {
+  if (!(candyMODE == true)) goto L43;
+  hand.gotoAndStop('topping3candy');
+  goto L63;
+L43:
+  hand.gotoAndStop('topping3');
+L63:
+  hand.topping.gotoAndStop(toppingframe);
+  if (!((pizza.hitTest(''._xmouse, ''._ymouse, true) && (mouseisdown == false)) && (perfectpizza == false))) goto L583;
+  pizza.topping.attachMovie('toppings', ('splat' + toppingsN), toppingsN);
+  this.pizza.topping[('splat' + toppingsN)]._x = (''._xmouse - pizza._x);
+  this.pizza.topping[('splat' + toppingsN)]._y = (''._ymouse - pizza._y);
+  if (!(candyMODE == true)) goto L384;
+  this.pizza.topping[('splat' + toppingsN)].gotoAndStop('topping3candy');
+  goto L422;
+L384:
+  this.pizza.topping[('splat' + toppingsN)].gotoAndStop('topping3');
+L422:
+  this.pizza.topping[('splat' + toppingsN)].topping.gotoAndStop(toppingframe);
+  toppingSound.start(0, 1);
+  toppingsN = (toppingsN + 1);
+  if (!(toppingsN > -2)) goto L552;
+  toppingsN = -300;
+L552:
+  topping3 = (topping3 + 1);
+  ingredient = 'none';
+  goto L1058;
+L583:
+  if (!(mouseisdown == false)) goto L1058;
+  ingredient = 'none';
+  hand.gotoAndStop('none');
+  topping3Thrown = true;
+  checkForMessOfKitchen();
+  if (!(candyMODE == true)) goto L705;
+  attachMovie('dropmarshmellow', ('droppedtopping' + dropN), dropN);
+  goto L734;
+L705:
+  attachMovie('dropsquid', ('droppedtopping' + dropN), dropN);
+L734:
+  this[('droppedtopping' + dropN)]._x = ''._xmouse;
+  this[('droppedtopping' + dropN)]._y = ''._ymouse;
+  this[('droppedtopping' + dropN)].gotoAndStop(toppingframe);
+  this[('droprotate' + dropN)] = true;
+  this[('dropspeedX' + dropN)] = (this[('dropspeedX' + dropN)] - strengthX);
+  this[('dropspeedY' + dropN)] = (this[('dropspeedY' + dropN)] - strengthY);
+  dropN = (dropN + 1);
+  if (!(dropN > 1010)) goto L945;
+  dropN = 1001;
+L945:
+  if (!!(strengthX < 30)) goto L1004;
+  zipSound.start(0, 1);
+  goto L1058;
+L1004:
+  if (!!(strengthX > -30)) goto L1058;
+  zipSound.start(0, 1);
+}
+L16498:
+function ingredienttopping4() {
+  if (!(candyMODE == true)) goto L43;
+  hand.gotoAndStop('topping4candy');
+  goto L63;
+L43:
+  hand.gotoAndStop('topping4');
+L63:
+  hand.topping.gotoAndStop(toppingframe);
+  if (!((pizza.hitTest(''._xmouse, ''._ymouse, true) && (mouseisdown == false)) && (perfectpizza == false))) goto L583;
+  pizza.topping.attachMovie('toppings', ('splat' + toppingsN), toppingsN);
+  this.pizza.topping[('splat' + toppingsN)]._x = (''._xmouse - pizza._x);
+  this.pizza.topping[('splat' + toppingsN)]._y = (''._ymouse - pizza._y);
+  if (!(candyMODE == true)) goto L384;
+  this.pizza.topping[('splat' + toppingsN)].gotoAndStop('topping4candy');
+  goto L422;
+L384:
+  this.pizza.topping[('splat' + toppingsN)].gotoAndStop('topping4');
+L422:
+  this.pizza.topping[('splat' + toppingsN)].topping.gotoAndStop(toppingframe);
+  toppingSound.start(0, 1);
+  toppingsN = (toppingsN + 1);
+  if (!(toppingsN > -2)) goto L552;
+  toppingsN = -300;
+L552:
+  topping4 = (topping4 + 1);
+  ingredient = 'none';
+  goto L1058;
+L583:
+  if (!(mouseisdown == false)) goto L1058;
+  ingredient = 'none';
+  hand.gotoAndStop('none');
+  topping4Thrown = true;
+  checkForMessOfKitchen();
+  if (!(candyMODE == true)) goto L705;
+  attachMovie('dropjellybean', ('droppedtopping' + dropN), dropN);
+  goto L734;
+L705:
+  attachMovie('dropfish', ('droppedtopping' + dropN), dropN);
+L734:
+  this[('droppedtopping' + dropN)]._x = ''._xmouse;
+  this[('droppedtopping' + dropN)]._y = ''._ymouse;
+  this[('droppedtopping' + dropN)].gotoAndStop(toppingframe);
+  this[('droprotate' + dropN)] = true;
+  this[('dropspeedX' + dropN)] = (this[('dropspeedX' + dropN)] - strengthX);
+  this[('dropspeedY' + dropN)] = (this[('dropspeedY' + dropN)] - strengthY);
+  dropN = (dropN + 1);
+  if (!(dropN > 1010)) goto L945;
+  dropN = 1001;
+L945:
+  if (!!(strengthX < 30)) goto L1004;
+  zipSound.start(0, 1);
+  goto L1058;
+L1004:
+  if (!!(strengthX > -30)) goto L1058;
+  zipSound.start(0, 1);
+}
+L17585:
+function checkForMessOfKitchen() {
+  if (!earnedFoodFiasco) goto L17;
+  return undefined;
+L17:
+  if (!((((((sauce0Thrown && sauce1Thrown) && topping0Thrown) && topping1Thrown) && topping2Thrown) && topping3Thrown) && topping4Thrown)) goto L216;
+  messOfKitchen = true;
+  if (!(failures == 3)) goto L216;
+  earnedFoodFiasco = true;
+  com.clubpenguin.util.Stamp.sendStamp(392);
+  _global.pizzatron_dl.sendStampOpcodes(392);
+}
+L17833:
+function getCoins() {
+  r3 = new Object();
+  new Object();
+  r3.score = (coins * 10);
+  r3.coins = coins;
+  _root.showWindow('Game Over', r3);
+  _global.pizzatron_dl.stopGame(candyMODE);
+  if (!quit) goto L149;
+  _global.pizzatron_dl.sendGameScore(candyMODE, 'quit', pizzasmade, r3.coins);
+}
+L18001:
+stop()
+status_made.text = _root.LocaleText.getText('status_made');
+status_left.text = _root.LocaleText.getText('status_left');
+status_mistakes.text = _root.LocaleText.getText('status_mistakes');
+score_coins.text = _root.LocaleText.getText('score_coins');
+var quit = false;
+var consecutivePizzas = 0;
+speedboost = 0;
+gameplay = true;
+score = 0;
+servedpizzas = 0;
+tips = 0;
+coins = 0;
+failures = 0;
+handicap = 0;
+possibleorders = 2;
+maxpossibleorders = 24;
+splatN = -300;
+toppingsN = -300;
+dropN = 1001;
+dropspeedY = 20;
+dropspeedX = 0;
+threw = 1001;
+L18366:
+if (!(threw < 1021)) goto L18454;
+this[('dropspeedY' + threw)] = dropspeedY;
+this[('dropspeedX' + threw)] = dropspeedX;
+threw = (threw + 1);
+goto L18366;
+L18454:
+ingredient = 'none';
+mouseisdown = false;
+normalsaucePLACED = false;
+hotsaucePLACED = false;
+cheesePLACED = false;
+topping1 = 0;
+topping2 = 0;
+topping3 = 0;
+topping4 = 0;
+toppingframe = 1;
+perfecttopping1 = false;
+perfecttopping2 = false;
+perfecttopping3 = false;
+perfecttopping4 = false;
+perfectpizza = false;
+order = 1;
+ordersmade = 0;
+pizzasmade = 0;
+pizzasleft = 40;
+normalsauceREQUESTED = false;
+hotsauceREQUESTED = false;
+cheeseREQUESTED = false;
+topping1REQUESTED = false;
+Ntopping1REQUESTED = 0;
+topping2REQUESTED = false;
+Ntopping2REQUESTED = 0;
+topping3REQUESTED = false;
+Ntopping3REQUESTED = 0;
+topping4REQUESTED = false;
+Ntopping4REQUESTED = 0;
+var sauce0Thrown = false;
+var sauce1Thrown = false;
+var topping0Thrown = false;
+var topping1Thrown = false;
+var topping2Thrown = false;
+var topping3Thrown = false;
+var topping4Thrown = false;
+var messOfKitchen = false;
+var stampTimeoutID;
+clearInterval(stampTimeoutID);
+this.createEmptyMovieClip('soundInstance', this.getNextHighestDepth());
+toppingSound = new Sound(this.soundInstance);
+toppingSound.attachSound('3');
+chachingSound = new Sound(this.soundInstance);
+chachingSound.attachSound('4');
+zipSound = new Sound(this.soundInstance);
+zipSound.attachSound('zip');
+attachMovie('hand', 'hand', 1000);
+hand._x = ''._xmouse;
+hand._y = ''._ymouse;
+placepizza();
+if (!(candyMODE == true)) goto L19348;
+com.clubpenguin.util.Stamp.sendStamp(394);
+_global.pizzatron_dl.sendStampOpcodes(394);
+ingredients_sauces.gotoAndStop('normalcandy');
+ingredients_cheese.gotoAndStop('sprinkles');
+ingredients_topping1.gotoAndStop('liquorice');
+ingredients_topping2.gotoAndStop('chocolatechips');
+ingredients_topping3.gotoAndStop('marshmellows');
+ingredients_topping4.gotoAndStop('jellybeans');
+orderscreen.gotoAndStop(25);
+L19348:
+var numOfShrimpPizzas = 0;
+var numOfSquidPizzas = 0;
+var numOfJellyBeanPizzas = 0;
+var numOfMarshmallowPizzas = 0;
+var earnedFoodFiasco = false;
+L22165:
+onEnterFrame = function() {
+  if (!(gameplay == true)) goto L2733;
+  hand._x = ''._xmouse;
+  hand._y = ''._ymouse;
+  this[gameMODE]();
+  this[('ingredient' + ingredient)]();
+  coins = (score + tips);
+  if (!(splatN > -111)) goto L338;
+  pizzaspeed = (pizzaspeed + 1);
+  if (!normalsaucePLACED) goto L246;
+  if (!(candyMODE == true)) goto L215;
+  pizza.overflow.gotoAndStop('explodecandy');
+  goto L241;
+L215:
+  pizza.overflow.gotoAndStop('explode');
+L241:
+  goto L333;
+L246:
+  if (!hotsaucePLACED) goto L333;
+  if (!(candyMODE == true)) goto L307;
+  pizza.overflow.gotoAndStop('explodehotcandy');
+  goto L333;
+L307:
+  pizza.overflow.gotoAndStop('explodehot');
+L333:
+  goto L909;
+L338:
+  if (!!(handicap > -2)) goto L410;
+  if (!(candyMODE == true)) goto L394;
+  pizzaspeed = 2;
+  goto L405;
+L394:
+  pizzaspeed = 1;
+L405:
+  goto L909;
+L410:
+  if (!!(handicap > -1)) goto L482;
+  if (!(candyMODE == true)) goto L466;
+  pizzaspeed = 3;
+  goto L477;
+L466:
+  pizzaspeed = 2;
+L477:
+  goto L909;
+L482:
+  if (!!(handicap > 4)) goto L554;
+  if (!(candyMODE == true)) goto L538;
+  pizzaspeed = 4;
+  goto L549;
+L538:
+  pizzaspeed = 3;
+L549:
+  goto L909;
+L554:
+  if (!!(handicap > 8)) goto L626;
+  if (!(candyMODE == true)) goto L610;
+  pizzaspeed = 5;
+  goto L621;
+L610:
+  pizzaspeed = 4;
+L621:
+  goto L909;
+L626:
+  if (!!(handicap > 13)) goto L698;
+  if (!(candyMODE == true)) goto L682;
+  pizzaspeed = 6;
+  goto L693;
+L682:
+  pizzaspeed = 5;
+L693:
+  goto L909;
+L698:
+  if (!!(handicap > 19)) goto L770;
+  if (!(candyMODE == true)) goto L754;
+  pizzaspeed = 7;
+  goto L765;
+L754:
+  pizzaspeed = 6;
+L765:
+  goto L909;
+L770:
+  if (!!(handicap > 26)) goto L842;
+  if (!(candyMODE == true)) goto L826;
+  pizzaspeed = 8;
+  goto L837;
+L826:
+  pizzaspeed = 7;
+L837:
+  goto L909;
+L842:
+  if (!!(handicap > 34)) goto L909;
+  if (!(candyMODE == true)) goto L898;
+  pizzaspeed = 9;
+  goto L909;
+L898:
+  pizzaspeed = 8;
+L909:
+  if (!(normalsaucePLACED == true)) goto L958;
+  orderscreen.sauce.gotoAndStop('check');
+  goto L984;
+L958:
+  orderscreen.sauce.gotoAndStop('none');
+L984:
+  if (!(hotsaucePLACED == true)) goto L1033;
+  orderscreen.hotsauce.gotoAndStop('check');
+  goto L1059;
+L1033:
+  orderscreen.hotsauce.gotoAndStop('none');
+L1059:
+  if (!(cheesePLACED == true)) goto L1108;
+  orderscreen.cheese.gotoAndStop('check');
+  goto L1134;
+L1108:
+  orderscreen.cheese.gotoAndStop('none');
+L1134:
+  if (!!(topping1 < Ntopping1REQUESTED)) goto L1185;
+  orderscreen.top1.gotoAndStop('check');
+  goto L1211;
+L1185:
+  orderscreen.top1.gotoAndStop('none');
+L1211:
+  if (!!(topping2 < Ntopping2REQUESTED)) goto L1262;
+  orderscreen.top2.gotoAndStop('check');
+  goto L1288;
+L1262:
+  orderscreen.top2.gotoAndStop('none');
+L1288:
+  if (!!(topping3 < Ntopping3REQUESTED)) goto L1339;
+  orderscreen.top3.gotoAndStop('check');
+  goto L1365;
+L1339:
+  orderscreen.top3.gotoAndStop('none');
+L1365:
+  if (!!(topping4 < Ntopping4REQUESTED)) goto L1416;
+  orderscreen.top4.gotoAndStop('check');
+  goto L1442;
+L1416:
+  orderscreen.top4.gotoAndStop('none');
+L1442:
+  if (!(normalsaucePLACED == true)) goto L1540;
+  if (!(candyMODE == true)) goto L1509;
+  pizza.base.gotoAndStop('chocolatesauce');
+  goto L1535;
+L1509:
+  pizza.base.gotoAndStop('normalsauce');
+L1535:
+  goto L1664;
+L1540:
+  if (!(hotsaucePLACED == true)) goto L1638;
+  if (!(candyMODE == true)) goto L1607;
+  pizza.base.gotoAndStop('pinkicing');
+  goto L1633;
+L1607:
+  pizza.base.gotoAndStop('hotsauce');
+L1633:
+  goto L1664;
+L1638:
+  pizza.base.gotoAndStop('empty');
+L1664:
+  handposY2 = handposY1;
+  handposY1 = handposY;
+  handposY = ''._ymouse;
+  handposX2 = handposX1;
+  handposX1 = handposX;
+  handposX = ''._xmouse;
+  strengthY = (((handposY2 - handposY) + 60) / 3);
+  if (!(strengthY > 40)) goto L1801;
+  strengthY = 40;
+  goto L1833;
+L1801:
+  if (!(strengthY < -20)) goto L1833;
+  strengthY = -20;
+L1833:
+  strengthX = ((handposX2 - handposX) / 3);
+  if (!(strengthX > 30)) goto L1896;
+  strengthX = 30;
+  goto L1928;
+L1896:
+  if (!(strengthX < -30)) goto L1928;
+  strengthX = -30;
+L1928:
+  threw = 1001;
+L1939:
+  if (!(threw < 1011)) goto L2535;
+  if (!(Math.round(this[('dropspeedY' + threw)]) > 20)) goto L2042;
+  this[('dropspeedY' + threw)] = (this[('dropspeedY' + threw)] - 1);
+  goto L2144;
+L2042:
+  if (!(Math.round(this[('dropspeedY' + threw)]) < 20)) goto L2124;
+  this[('dropspeedY' + threw)] = (this[('dropspeedY' + threw)] + 1);
+  goto L2144;
+L2124:
+  this[('dropspeedY' + threw)] = 20;
+L2144:
+  this[('droppedtopping' + threw)]._y = (this[('droppedtopping' + threw)]._y + this[('dropspeedY' + threw)]);
+  if (!(Math.round(this[('dropspeedX' + threw)]) > 0)) goto L2280;
+  this[('dropspeedX' + threw)] = (this[('dropspeedX' + threw)] - 0.5);
+  goto L2394;
+L2280:
+  if (!(Math.round(this[('dropspeedX' + threw)]) < 0)) goto L2370;
+  this[('dropspeedX' + threw)] = (this[('dropspeedX' + threw)] + 0.5);
+  goto L2394;
+L2370:
+  this[('dropspeedX' + threw)] = 0;
+L2394:
+  this[('droppedtopping' + threw)]._x = (this[('droppedtopping' + threw)]._x + this[('dropspeedX' + threw)]);
+  if (!(this[('droprotate' + threw)] == true)) goto L2512;
+  this[('droppedtopping' + threw)]._rotation = (this[('droppedtopping' + threw)]._rotation + this[('dropspeedX' + threw)]);
+L2512:
+  threw = (threw + 1);
+  goto L1939;
+L2535:
+  if (!!(failures < 5)) goto L2634;
+  if (!!(pizzasmade > 1)) goto L2609;
+  gameplay = false;
+  this.gotoAndStop('endlame');
+  goto L2634;
+L2609:
+  gameplay = false;
+  this.gotoAndStop('endlose');
+L2634:
+  if (!!(ordersmade < 40)) goto L2733;
+  if (!!(pizzasmade < 40)) goto L2708;
+  gameplay = false;
+  this.gotoAndStop('endperfect');
+  goto L2733;
+L2708:
+  gameplay = false;
+  this.gotoAndStop('endwin');
+};
+
+## frame 3 label 'rush'
+
+## main frame 3 PlaceObject2 depth 325 id 494 onClipEvent(enterFrame)
+if (!_parent.gameplay) goto L254;
+i = 0;
+L95:
+if (!(i < 10)) goto L254;
+mc = this[('conv' + i)];
+if (!(mc._x > 500)) goto L192;
+mc._x = (mc._x - 1000);
+L192:
+mc._x = (mc._x + (_parent.pizzaspeed + _parent.speedboost));
+i = ++i;
+goto L95;
+L254:
+
+## button 608 on(overUpToOverDown cond=0x4)
+if (!(_parent.ingredient == 'normalsauce')) goto L84;
+_parent.ingredient = 'none';
+goto L98;
+L84:
+_parent.ingredient = 'normalsauce';
+L98:
+
+## button 609 on(overUpToOverDown cond=0x4)
+if (!(_parent.ingredient == 'hotsauce')) goto L81;
+_parent.ingredient = 'none';
+goto L95;
+L81:
+_parent.ingredient = 'hotsauce';
+L95:
+
+## button 610 on(overUpToOverDown cond=0x4)
+if (!(_parent.ingredient == 'cheese')) goto L133;
+_parent.ingredient = 'none';
+goto L228;
+L133:
+_parent.ingredient = 'cheese';
+if (!(_parent.candyMODE == true)) goto L202;
+_parent.ingredients_sauces.gotoAndStop('candy');
+goto L228;
+L202:
+_parent.ingredients_sauces.gotoAndStop('normal');
+L228:
+
+## button 611 on(overUpToOverDown cond=0x4)
+if (!(_parent.ingredient == 'topping1')) goto L148;
+_parent.ingredient = 'none';
+goto L270;
+L148:
+_parent.ingredient = 'topping1';
+if (!(_parent.candyMODE == true)) goto L217;
+_parent.ingredients_sauces.gotoAndStop('candy');
+goto L243;
+L217:
+_parent.ingredients_sauces.gotoAndStop('normal');
+L243:
+_parent.toppingframe = (random(3) + 1);
+L270:
+
+## button 612 on(overUpToOverDown cond=0x4)
+if (!(_parent.ingredient == 'topping2')) goto L148;
+_parent.ingredient = 'none';
+goto L270;
+L148:
+_parent.ingredient = 'topping2';
+if (!(_parent.candyMODE == true)) goto L217;
+_parent.ingredients_sauces.gotoAndStop('candy');
+goto L243;
+L217:
+_parent.ingredients_sauces.gotoAndStop('normal');
+L243:
+_parent.toppingframe = (random(3) + 1);
+L270:
+
+## button 613 on(overUpToOverDown cond=0x4)
+if (!(_parent.ingredient == 'topping3')) goto L148;
+_parent.ingredient = 'none';
+goto L270;
+L148:
+_parent.ingredient = 'topping3';
+if (!(_parent.candyMODE == true)) goto L217;
+_parent.ingredients_sauces.gotoAndStop('candy');
+goto L243;
+L217:
+_parent.ingredients_sauces.gotoAndStop('normal');
+L243:
+_parent.toppingframe = (random(3) + 1);
+L270:
+
+## button 614 on(overUpToOverDown cond=0x4)
+if (!(_parent.ingredient == 'topping4')) goto L148;
+_parent.ingredient = 'none';
+goto L270;
+L148:
+_parent.ingredient = 'topping4';
+if (!(_parent.candyMODE == true)) goto L217;
+_parent.ingredients_sauces.gotoAndStop('candy');
+goto L243;
+L217:
+_parent.ingredients_sauces.gotoAndStop('normal');
+L243:
+_parent.toppingframe = (random(3) + 1);
+L270:
+
+## button 650 on(overDownToOverUp cond=0x8)
+gameOver._visible = true;
+quit = true;
+gameplay = false;
+getCoins(0);
+
+## main frame 3 PlaceObject2 depth 581 id 224 name 'emptymovieclip' onClipEvent(mouseDown)
+_parent.mouseisdown = true;
+
+## main frame 3 PlaceObject2 depth 581 id 224 name 'emptymovieclip' onClipEvent(mouseUp)
+_parent.mouseisdown = false;
+
+## main frame 4 DoAction
+function getCoins() {
+  r2 = new Object();
+  new Object();
+  r2.score = (coins * 10);
+  r2.coins = coins;
+  _root.showWindow('Game Over', r2);
+}
+stop()
+score_label.text = _root.LocaleText.getText('score_score');
+sold_label.text = _root.LocaleText.getText('score_sold');
+sales_label.text = _root.LocaleText.getText('score_sales');
+tips_label.text = _root.LocaleText.getText('score_tips');
+total_label.text = _root.LocaleText.getText('score_total');
+coins1_label.text = _root.LocaleText.getText('score_coins');
+coins2_label.text = _root.LocaleText.getText('score_coins');
+coins3_label.text = _root.LocaleText.getText('score_coins');
+ui_done.text = _root.LocaleText.getText('ui_done');
+pizzasmadeText.text = pizzasmade;
+scoreText.text = score;
+tipsText.text = tips;
+earningsText.text = coins;
+gameMODE = 'gameover';
+removeMovieClip('pizza');
+hand.gotoAndStop('none');
+threw = 1001;
+L960:
+if (!(threw < 1101)) goto L1036;
+this[('droppedtopping' + threw)].removeMovieClip();
+threw = (threw + 1);
+goto L960;
+L1036:
+_global.pizzatron_dl.stopGame(candyMODE);
+_global.pizzatron_dl.sendGameScore(candyMODE, 'lame', pizzasmade, coins);
+
+## frame 4 label 'endlame'
+
+## button 652 on(overDownToOverUp cond=0x8)
+gameOver._visible = true;
+getCoins(0);
+
+## button 667 on(overDownToOverUp cond=0x8)
+gameOver._visible = true;
+getCoins(0);
+
+## main frame 5 DoAction
+function getCoins() {
+  r2 = new Object();
+  new Object();
+  r2.score = (coins * 10);
+  r2.coins = coins;
+  _root.showWindow('Game Over', r2);
+}
+stop()
+score_label.text = _root.LocaleText.getText('score_score');
+sold_label.text = _root.LocaleText.getText('score_sold');
+sales_label.text = _root.LocaleText.getText('score_sales');
+tips_label.text = _root.LocaleText.getText('score_tips');
+total_label.text = _root.LocaleText.getText('score_total');
+coins1_label.text = _root.LocaleText.getText('score_coins');
+coins2_label.text = _root.LocaleText.getText('score_coins');
+coins3_label.text = _root.LocaleText.getText('score_coins');
+ui_done.text = _root.LocaleText.getText('ui_done');
+pizzasmadeText.text = pizzasmade;
+scoreText.text = score;
+tipsText.text = tips;
+earningsText.text = coins;
+gameMODE = 'gameover';
+removeMovieClip('pizza');
+hand.gotoAndStop('none');
+threw = 1001;
+L960:
+if (!(threw < 1101)) goto L1036;
+this[('droppedtopping' + threw)].removeMovieClip();
+threw = (threw + 1);
+goto L960;
+L1036:
+_global.pizzatron_dl.stopGame(candyMODE);
+_global.pizzatron_dl.sendGameScore(candyMODE, 'lose', pizzasmade, coins);
+
+## frame 5 label 'endlose'
+
+## button 670 on(overDownToOverUp cond=0x8)
+gameOver._visible = true;
+getCoins(0);
+
+## main frame 6 DoAction
+function getCoins() {
+  r2 = new Object();
+  new Object();
+  r2.score = (coins * 10);
+  r2.coins = coins;
+  _root.showWindow('Game Over', r2);
+}
+stop()
+score_label.text = _root.LocaleText.getText('score_score');
+sold_label.text = _root.LocaleText.getText('score_sold');
+sales_label.text = _root.LocaleText.getText('score_sales');
+tips_label.text = _root.LocaleText.getText('score_tips');
+total_label.text = _root.LocaleText.getText('score_total');
+coins1_label.text = _root.LocaleText.getText('score_coins');
+coins2_label.text = _root.LocaleText.getText('score_coins');
+coins3_label.text = _root.LocaleText.getText('score_coins');
+ui_done.text = _root.LocaleText.getText('ui_done');
+pizzasmadeText.text = pizzasmade;
+scoreText.text = score;
+tipsText.text = tips;
+earningsText.text = coins;
+gameMODE = 'gameover';
+removeMovieClip('pizza');
+hand.gotoAndStop('none');
+threw = 1001;
+L959:
+if (!(threw < 1101)) goto L1035;
+this[('droppedtopping' + threw)].removeMovieClip();
+threw = (threw + 1);
+goto L959;
+L1035:
+_global.pizzatron_dl.stopGame(candyMODE);
+_global.pizzatron_dl.sendGameScore(candyMODE, 'win', pizzasmade, coins);
+
+## frame 6 label 'endwin'
+
+## main frame 7 DoAction
+function getCoins() {
+  r2 = new Object();
+  new Object();
+  r2.score = (coins * 10);
+  r2.coins = coins;
+  _root.showWindow('Game Over', r2);
+}
+stop()
+perfectscore_label.text = _root.LocaleText.getText('score_perfectscore');
+sold_label.text = _root.LocaleText.getText('score_sold');
+sales_label.text = _root.LocaleText.getText('score_sales');
+tips_label.text = _root.LocaleText.getText('score_tips');
+total_label.text = _root.LocaleText.getText('score_total');
+coins1_label.text = _root.LocaleText.getText('score_coins');
+coins2_label.text = _root.LocaleText.getText('score_coins');
+coins3_label.text = _root.LocaleText.getText('score_coins');
+ui_done.text = _root.LocaleText.getText('ui_done');
+pizzasmadeText.text = pizzasmade;
+scoreText.text = score;
+tipsText.text = tips;
+earningsText.text = coins;
+gameMODE = 'gameover';
+removeMovieClip('pizza');
+hand.gotoAndStop('none');
+threw = 1001;
+L977:
+if (!(threw < 1101)) goto L1053;
+this[('droppedtopping' + threw)].removeMovieClip();
+threw = (threw + 1);
+goto L977;
+L1053:
+_global.pizzatron_dl.stopGame(candyMODE);
+_global.pizzatron_dl.sendGameScore(candyMODE, 'perfect', pizzasmade, coins);
+
+## frame 7 label 'endperfect'

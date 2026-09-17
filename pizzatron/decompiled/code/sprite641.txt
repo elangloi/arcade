@@ -1,0 +1,48 @@
+# sprite 641: 8 frames
+
+## sprite641 frame 1 DoAction
+stop()
+
+## frame 1 label 'none'
+
+## sprite641 frame 2 DoAction
+stop()
+_parent.chachingSound.start(0, 1);
+
+## frame 2 label 'perfect'
+
+## sprite641 frame 3 DoAction
+stop()
+_parent.chachingSound.start(0, 1);
+
+## frame 3 label 'combo10'
+
+## sprite641 frame 4 DoAction
+stop()
+_parent.chachingSound.start(0, 1);
+
+## frame 4 label 'combo15'
+
+## sprite641 frame 5 DoAction
+stop()
+_parent.chachingSound.start(0, 1);
+
+## frame 5 label 'combo20'
+
+## sprite641 frame 6 DoAction
+stop()
+_parent.chachingSound.start(0, 1);
+
+## frame 6 label 'combo25'
+
+## sprite641 frame 7 DoAction
+stop()
+_parent.chachingSound.start(0, 1);
+
+## frame 7 label 'combo30'
+
+## sprite641 frame 8 DoAction
+stop()
+_parent.chachingSound.start(0, 1);
+
+## frame 8 label 'combo35'

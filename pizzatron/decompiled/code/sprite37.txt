@@ -1,0 +1,41 @@
+# sprite 37: 8 frames
+
+## sprite37 frame 1 DoAction
+stop()
+
+## frame 1 label 'topping1'
+
+## sprite37 frame 2 DoAction
+stop()
+
+## frame 2 label 'topping2'
+
+## sprite37 frame 3 DoAction
+stop()
+
+## frame 3 label 'topping3'
+
+## sprite37 frame 4 DoAction
+stop()
+
+## frame 4 label 'topping4'
+
+## sprite37 frame 5 DoAction
+stop()
+
+## frame 5 label 'topping1candy'
+
+## sprite37 frame 6 DoAction
+stop()
+
+## frame 6 label 'topping2candy'
+
+## sprite37 frame 7 DoAction
+stop()
+
+## frame 7 label 'topping3candy'
+
+## sprite37 frame 8 DoAction
+stop()
+
+## frame 8 label 'topping4candy'

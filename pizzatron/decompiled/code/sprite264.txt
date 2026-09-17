@@ -1,0 +1,7 @@
+# sprite 264: 1 frames
+
+## sprite264 frame 1 DoAction
+var gameDirectory = com.clubpenguin.util.LocaleText.getGameDirectory();
+var localeDirectory = (('lang/' + com.clubpenguin.util.LocaleText.getLocale(com.clubpenguin.util.LocaleText.getLocaleID())) + '/');
+var loader = new MovieClipLoader();
+loader.loadClip(((gameDirectory + localeDirectory) + 'sauce.swf'), chocolatebottle);

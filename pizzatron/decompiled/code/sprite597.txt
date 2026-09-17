@@ -1,0 +1,12 @@
+# sprite 597: 2 frames
+
+## sprite597 frame 1 DoAction
+stop()
+
+## frame 1 label 'cheese'
+
+## sprite597 frame 2 DoAction
+stop()
+sprinkles_label.text = _root.LocaleText.getText('topping_sprinkles');
+
+## frame 2 label 'sprinkles'

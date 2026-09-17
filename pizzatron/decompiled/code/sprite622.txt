@@ -1,0 +1,7 @@
+# sprite 622: 17 frames
+
+## sprite622 frame 1 DoAction
+done_label.text = _root.LocaleText.getText('score_done');
+
+## sprite622 frame 17 DoAction
+_parent.gotoAndStop('none');

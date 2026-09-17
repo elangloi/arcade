@@ -1,0 +1,11 @@
+# sprite 599: 2 frames
+
+## sprite599 frame 1 DoAction
+stop()
+
+## frame 1 label 'shrimp'
+
+## sprite599 frame 2 DoAction
+stop()
+
+## frame 2 label 'chocolatechips'

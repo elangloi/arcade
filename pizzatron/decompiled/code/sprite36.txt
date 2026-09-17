@@ -1,0 +1,10 @@
+# sprite 36: 3 frames
+
+## sprite36 frame 1 DoAction
+stop()
+
+## sprite36 frame 2 DoAction
+stop()
+
+## sprite36 frame 3 DoAction
+stop()

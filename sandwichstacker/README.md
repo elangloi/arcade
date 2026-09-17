@@ -32,30 +32,24 @@ Query flags: `?mute=1` silences the game, `?debug=1` logs catches and misses to 
 | `original/` | `625-sandwich-stacker.swf` (the game) and a title-screen reference shot. |
 | `decompiled/code/` | The AVM1 bytecode of every frame, button and clip event, decompiled to readable pseudo-AS2 (`main.txt`, `spriteN.txt`). This is what `web/game.js` was ported from. |
 | `assets/` | `defs.svg` (every shape, text and font glyph as an SVG symbol), `movie.json` (main timeline + every sprite's per-frame display list, labels, edit-text fields, buttons, font metrics), `sounds/*.mp3`. |
-| `web/` | The game. `player.js` (timelines, display list, MovieClip/TextField/Button, colour transforms, sound, input), `game.js` (the ported game logic, keyed by the SWF's sprite ids and frame labels), `index.html`. |
-| `tools/` | The extraction pipeline. Python via `uv` (`.python-version` pins 3.12). |
+| `web/` | The game: `game.js` (the ported game logic, keyed by the SWF's sprite ids and frame labels) on the shared player in [`../flash/web/player.js`](../flash/web/player.js), and `index.html`. |
 
 ## Rebuilding from the original
 
-```bash
-cd tools
-uv run python extract.py     # art, timelines, texts, buttons, fonts, sounds -> ../assets
-uv run python dump_code.py   # AVM1 bytecode -> ../decompiled/code/*.txt
-```
+The toolkit lives in [`../flash/tools`](../flash/tools):
 
-- `swfraw.py` — raw SWF tag reader (PlaceObject2, DefineButton2, DefineEditText, clip events, ...).
-- `swfload.py` — loads the SWF with [pyswf](https://github.com/timknip/pyswf) (patched for Python 3
-  and this file) and exports the vector art to SVG.
-- `avm1.py` — a small AVM1 (Flash 6 ActionScript) decompiler used by `dump_code.py`.
-- `extract.py` — writes `assets/`. Fixes pyswf's glyph scale and applies each static text's own
-  matrix (pyswf drops it), which is what keeps the title and the multi-line screens aligned.
+```bash
+cd ../flash/tools
+uv run python extract.py --game ../../sandwichstacker     # art, timelines, texts, buttons, fonts, sounds -> assets/
+uv run python dump_code.py --game ../../sandwichstacker   # AVM1 bytecode -> decompiled/code/*.txt
+```
 
 ## Container
 
-`Dockerfile` builds an nginx image serving `web/` and `assets/`; the compose stack in `../compose`
-mounts it at `/lilo-and-stitch-sandwich-stacker/`.
+`Dockerfile` builds an nginx image serving `web/`, `assets/` and the shared player; the compose
+stack in `../compose` mounts it at `/lilo-and-stitch-sandwich-stacker/`. Build from the repo root:
 
 ```bash
-docker build -t arcade/sandwichstacker .
+docker build -f sandwichstacker/Dockerfile -t arcade/sandwichstacker .
 docker run --rm -p 8080:80 arcade/sandwichstacker   # http://localhost:8080/
 ```

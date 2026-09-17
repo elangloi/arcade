@@ -113,6 +113,16 @@
   .art.stack .bread   { left: 72%; top: -34px; animation-delay: 2.2s; height: 30px; }
   @keyframes fall { 0% { transform: translateY(0) rotate(-8deg); opacity: 0; } 8% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translateY(170px) rotate(10deg); opacity: 0; } }
   a.cab:hover .art.stack .reuben { transform: translateX(-40%) translateY(-6px); }
+  /* Pizzatron: the order screen, with the hot sauce bottle squirting beside it */
+  .art.pizza .order { left: 50%; top: 16px; height: 116px; transform: translateX(-58%); }
+  .art.pizza .sauce { right: 8%; bottom: 12px; height: 80px; transform-origin: 50% 100%; animation: squeeze 1.4s ease-in-out infinite; }
+  @keyframes squeeze { 0%, 100% { transform: rotate(-6deg) scaleY(1); } 50% { transform: rotate(4deg) scaleY(.92); } }
+  a.cab:hover .art.pizza .order { transform: translateX(-58%) translateY(-4px); }
+  /* Pizzatron: the order screen, with the hot sauce bottle squirting beside it */
+  .art.pizza .order { left: 50%; top: 14px; height: 118px; transform: translateX(-56%); }
+  .art.pizza .sauce { right: 10%; bottom: 10px; height: 78px; transform-origin: 50% 100%; animation: squeeze 1.4s ease-in-out infinite; }
+  @keyframes squeeze { 0%, 100% { transform: rotate(-6deg) scaleY(1); } 50% { transform: rotate(4deg) scaleY(.92); } }
+  a.cab:hover .art.pizza .order { transform: translateX(-56%) translateY(-4px); }
   .tag {
     display: block; margin: 10px 4px 0; padding: 5px 10px; border-radius: 10px; text-align: center;
     background: var(--navy-deep); color: var(--yellow);
@@ -190,6 +200,21 @@
         </span>
       </div>
       <span class="tag">Disney · 2003</span>
+      <div class="panel"><span class="stick"></span><span class="btns"><i></i><i></i><i></i></span></div>
+      <div class="coinslot"></div>
+    </div>
+  </a>
+
+  <a class="cab" href="/club-penguin-pizzatron/">
+    <div class="body">
+      <div class="marquee">Club Penguin<br>Pizzatron 3000</div>
+      <div class="screen">
+        <span class="art pizza">
+          <img class="order" src="img/pizzatron/order.svg" alt="A pizza order">
+          <img class="sauce" src="img/pizzatron/hotsauce.svg" alt="">
+        </span>
+      </div>
+      <span class="tag">Disney · 2007</span>
       <div class="panel"><span class="stick"></span><span class="btns"><i></i><i></i><i></i></span></div>
       <div class="coinslot"></div>
     </div>

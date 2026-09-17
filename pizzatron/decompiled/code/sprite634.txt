@@ -1,0 +1,8 @@
+# sprite 634: 17 frames
+
+## sprite634 frame 1 DoAction
+done_label.text = _root.LocaleText.getText('score_done');
+tip_label.text = ('+25 ' + _root.LocaleText.getText('score_tip'));
+
+## sprite634 frame 17 DoAction
+_parent.gotoAndStop('none');
