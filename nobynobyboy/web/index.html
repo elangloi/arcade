@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Noby Noby Boy</title>
+<style>
+  :root { --ink: #2a2440; --paper: #fff8ec; }
+  html, body { margin: 0; height: 100%; background: #9fd6ff; color: var(--ink); font: 15px/1.4 "Chalkboard SE", "Comic Sans MS", "Segoe Print", cursive; overflow: hidden; }
+  #c { display: block; width: 100vw; height: 100vh; }
+  /* HUD: BOY's length, hand-lettered on a little card */
+  #hud { position: fixed; top: 14px; left: 14px; background: var(--paper); border: 3px solid var(--ink); border-radius: 14px; padding: 8px 14px; box-shadow: 4px 4px 0 var(--ink); pointer-events: none; }
+  #hud .len { font-size: 30px; font-weight: 700; line-height: 1; }
+  #hud .len small { font-size: 14px; font-weight: 400; }
+  #hud .sub { font-size: 12px; opacity: .75; }
+  #toast { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); background: var(--paper); border: 3px solid var(--ink); border-radius: 999px; padding: 6px 16px; box-shadow: 3px 3px 0 var(--ink); opacity: 0; transition: opacity .3s; pointer-events: none; white-space: nowrap; }
+  #toast.show { opacity: 1; }
+  #hint { position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); font-size: 13px; color: #1d2a44; background: rgba(255,248,236,.85); border-radius: 999px; padding: 4px 14px; pointer-events: none; white-space: nowrap; }
+  /* overlays (the manual, the report to GIRL) */
+  .panel { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(40,30,70,.35); }
+  .panel.show { display: flex; }
+  .card { background: var(--paper); border: 4px solid var(--ink); border-radius: 22px; padding: 22px 28px; max-width: min(640px, 92vw); max-height: 88vh; overflow: auto; box-shadow: 8px 8px 0 var(--ink); }
+  .card h1 { margin: 0 0 6px; font-size: 30px; letter-spacing: .04em; }
+  .card h1 span { color: #ff6fae; }
+  .card p { margin: 6px 0; }
+  .card .key { display: inline-block; min-width: 1.6em; text-align: center; padding: 1px 7px; border: 2px solid var(--ink); border-radius: 8px; background: #fff; box-shadow: 2px 2px 0 var(--ink); font-weight: 700; margin: 2px 2px 2px 0; }
+  .card table { border-collapse: collapse; margin: 8px 0; }
+  .card td { padding: 4px 10px 4px 0; vertical-align: top; }
+  .card .btn { display: inline-block; margin-top: 10px; padding: 8px 18px; border: 3px solid var(--ink); border-radius: 14px; background: #ffd23f; box-shadow: 3px 3px 0 var(--ink); cursor: pointer; font: inherit; font-weight: 700; }
+  .card .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+  .bar { height: 18px; border: 3px solid var(--ink); border-radius: 999px; background: #fff; overflow: hidden; margin: 6px 0; }
+  .bar i { display: block; height: 100%; background: linear-gradient(90deg, #ff6fae, #ffd23f); width: 0; transition: width .6s; }
+  .planets { display: flex; justify-content: space-between; font-size: 12px; margin-top: 2px; }
+  .doodle { font-size: 12px; opacity: .7; }
+  #boycolor { display: inline-block; width: 1em; height: 1em; border-radius: 50%; background: #ff6fae; vertical-align: -.1em; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hud"><div class="len"><span id="len">0.0</span> <small>m</small></div><div class="sub">stretched: <span id="total">0.0</span> m &nbsp;·&nbsp; eaten: <span id="eaten">0</span></div></div>
+<div id="toast"></div>
+<div id="hint">WASD moves BOY's head · arrows move his butt · pull them apart to stretch · H for the manual</div>
+
+<div id="manual" class="panel">
+  <div class="card">
+    <h1>NOBY NOBY <span>BOY</span> — the manual</h1>
+    <p class="doodle">(a homage to Keita Takahashi's 2009 PS3 toy — no goals, no rules, no timer. Just noby noby.)</p>
+    <table>
+      <tr><td style="white-space:nowrap"><span class="key">W</span><span class="key">A</span><span class="key">S</span><span class="key">D</span></td><td>move BOY's <b>head</b> (left stick)</td></tr>
+      <tr><td style="white-space:nowrap"><span class="key">↑</span><span class="key">←</span><span class="key">↓</span><span class="key">→</span></td><td>move BOY's <b>butt</b> (right stick). Pull them apart and BOY stretches!</td></tr>
+      <tr><td><span class="key">Space</span></td><td>jump (L1)</td></tr>
+      <tr><td><span class="key">Shift</span></td><td>hold to float (R1)</td></tr>
+      <tr><td><span class="key">E</span></td><td>hold to <b>eat</b> whatever is in front of BOY's face (L2). Everything is food.</td></tr>
+      <tr><td><span class="key">Q</span></td><td>pop what BOY ate out of his butt (R2). It comes out fine.</td></tr>
+      <tr><td><span class="key">C</span> <span class="key">V</span></td><td>scroll the colours along BOY's body (D-pad)</td></tr>
+      <tr><td><span class="key">R</span></td><td><b>report</b> how far BOY stretched to GIRL (Start)</td></tr>
+      <tr><td><span class="key">N</span></td><td>go home and visit a new island</td></tr>
+      <tr><td style="white-space:nowrap">mouse drag · <span class="key">[</span> <span class="key">]</span></td><td>turn the camera</td></tr>
+    </table>
+    <p class="doodle">A gamepad works too, with the real buttons. Eating makes BOY stretchier. Falling off the island is fine — the house will have you back.</p>
+    <p class="doodle">Pop quiz: which button makes BOY jump? ……… correct! There are no wrong answers.</p>
+    <button class="btn" id="closeManual">okay!</button>
+  </div>
+</div>
+
+<div id="report" class="panel">
+  <div class="card">
+    <h1>Report to <span>GIRL</span></h1>
+    <p>BOY stretched <b><span id="rLen">0</span> m</b> since the last report.</p>
+    <p class="doodle">GIRL is very, very big. Every metre BOY stretches is a thousand kilometres for her.</p>
+    <p>GIRL is now <b><span id="gLen">0</span> km</b> long, stretching from Earth toward <b><span id="gNext">the Moon</span></b>.</p>
+    <div class="bar"><i id="gBar"></i></div>
+    <div class="planets"><span id="gFrom">Earth</span><span id="gTo">Moon · 384,400 km</span></div>
+    <p class="doodle" id="gNote"></p>
+    <button class="btn" id="closeReport">back to BOY</button>
+  </div>
+</div>
+
+<script type="module" src="./main.js"></script>
+</body>
+</html>

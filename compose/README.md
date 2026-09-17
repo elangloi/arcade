@@ -13,6 +13,7 @@ Then open `http://<host>/`. The proxy publishes port 80 (override with `ARCADE_H
 | `/teen-titans-battle-blitz/` | the `battleblitz` container (built from `../battleblitz/Dockerfile`) |
 | `/lilo-and-stitch-sandwich-stacker/` | the `sandwichstacker` container (built from `../sandwichstacker/Dockerfile`) |
 | `/club-penguin-pizzatron/` | the `pizzatron` container (built from `../pizzatron/Dockerfile`) |
+| `/noby-noby-boy/` | the `nobynobyboy` container (built from `../nobynobyboy/Dockerfile`) |
 
 ## Adding a game
 

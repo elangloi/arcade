@@ -18,6 +18,7 @@ services:
       - battleblitz
       - sandwichstacker
       - pizzatron
+      - nobynobyboy
 
   battleblitz:
     build: ../battleblitz
@@ -43,6 +44,14 @@ services:
       dockerfile: pizzatron/Dockerfile
     image: arcade/pizzatron:latest
     container_name: arcade-pizzatron
+    restart: unless-stopped
+    expose:
+      - "80"
+
+  nobynobyboy:
+    build: ../nobynobyboy
+    image: arcade/nobynobyboy:latest
+    container_name: arcade-nobynobyboy
     restart: unless-stopped
     expose:
       - "80"

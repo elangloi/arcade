@@ -118,6 +118,12 @@
   .art.pizza .sauce { right: 8%; bottom: 12px; height: 80px; transform-origin: 50% 100%; animation: squeeze 1.4s ease-in-out infinite; }
   @keyframes squeeze { 0%, 100% { transform: rotate(-6deg) scaleY(1); } 50% { transform: rotate(4deg) scaleY(.92); } }
   a.cab:hover .art.pizza .order { transform: translateX(-58%) translateY(-4px); }
+  /* Noby Noby Boy: BOY stretches on a little green island under a smiling sun */
+  .art.boy { background: linear-gradient(#5ec8ff 0 62%, #7ed957 62% 100%); }
+  .art.boy .sunny { position: absolute; right: 14px; top: 12px; width: 34px; height: 34px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 0 5px rgba(251,245,122,.35), 0 0 18px var(--yellow); }
+  .art.boy .theboy { left: 50%; bottom: 8px; width: 78%; transform: translateX(-50%); transform-origin: 50% 100%; animation: noby 3s ease-in-out infinite; }
+  @keyframes noby { 0%, 100% { transform: translateX(-50%) scaleX(1); } 50% { transform: translateX(-50%) scaleX(1.18); } }
+  .marquee small { display: block; font-size: .8rem; font-weight: 700; opacity: .75; }
   /* Pizzatron: the order screen, with the hot sauce bottle squirting beside it */
   .art.pizza .order { left: 50%; top: 14px; height: 118px; transform: translateX(-56%); }
   .art.pizza .sauce { right: 10%; bottom: 10px; height: 78px; transform-origin: 50% 100%; animation: squeeze 1.4s ease-in-out infinite; }
@@ -215,6 +221,21 @@
         </span>
       </div>
       <span class="tag">Disney · 2007</span>
+      <div class="panel"><span class="stick"></span><span class="btns"><i></i><i></i><i></i></span></div>
+      <div class="coinslot"></div>
+    </div>
+  </a>
+
+  <a class="cab" href="/noby-noby-boy/">
+    <div class="body">
+      <div class="marquee">Noby Noby Boy<br><small>a homage</small></div>
+      <div class="screen">
+        <span class="art boy">
+          <span class="sunny"></span>
+          <img class="theboy" src="img/nobynobyboy/boy.svg" alt="BOY">
+        </span>
+      </div>
+      <span class="tag">after Keita Takahashi · 2009</span>
       <div class="panel"><span class="stick"></span><span class="btns"><i></i><i></i><i></i></span></div>
       <div class="coinslot"></div>
     </div>
