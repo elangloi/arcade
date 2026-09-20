@@ -1,0 +1,16 @@
+{
+  "name": "arcade-multiplayer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Multiplayer arcade service: lobby, matchmaking and lockstep relay for Battle Blitz 2P",
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "PORT=8766 ASSETS_DIR=../battleblitz/assets DB_PATH=:memory: DEV=1 node server.js",
+    "test": "node --test test/"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

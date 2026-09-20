@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Battle Blitz 2P — lobby</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="back"><a href="./">&larr; multiplayer</a></nav>
+<header>
+  <h1>Battle Blitz <small style="font-size:.5em;color:var(--pink)">2P</small></h1>
+  <p class="sub"><span class="coin"></span><span id="subline">who's fighting?</span></p>
+</header>
+
+<div class="card">
+  <!-- 1. name -->
+  <section id="p-name" class="panelbox">
+    <h2>Player name</h2>
+    <p class="muted">Your name is only for this session — the other player sees it in the lobby and in the fight.</p>
+    <form class="row" id="nameForm">
+      <input type="text" id="name" maxlength="16" placeholder="e.g. Starfire4ever" autocomplete="off" autofocus>
+      <button class="btn go" type="submit">Find an opponent</button>
+    </form>
+    <p class="status" id="nameStatus"></p>
+  </section>
+
+  <!-- 2. queue -->
+  <section id="p-queue" class="panelbox" hidden>
+    <h2><span class="spinner"></span>Looking for an opponent…</h2>
+    <p>You are <b id="qpos">#1</b> in line. Keep this tab open — the fight starts here.</p>
+    <p class="row"><button class="btn ghost" id="cancelQueue">Cancel</button></p>
+  </section>
+
+  <!-- 3. pick -->
+  <section id="p-pick" class="panelbox" hidden>
+    <h2>Choose your fighter</h2>
+    <p id="pickHint">You're matched with <b id="oppName">?</b>. <b>Whoever clicks first picks their side</b> — the other player gets the opposite one.</p>
+    <div class="pick">
+      <div class="side" id="side-titan">
+        <h3>Titans <span class="who" id="who-titan"></span></h3>
+        <div class="roster" id="roster-titan"></div>
+      </div>
+      <div class="mid">
+        <div class="preview" id="preview"></div>
+        <div class="vs">VS</div>
+        <button class="btn go" id="lockBtn" disabled>Lock in</button>
+        <div class="status" id="pickStatus"></div>
+        <div class="timer" id="pickTimer"></div>
+        <button class="btn ghost" id="leavePick">Leave</button>
+      </div>
+      <div class="side" id="side-villain">
+        <h3>Villains <span class="who" id="who-villain"></span></h3>
+        <div class="roster" id="roster-villain"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. loading into the game -->
+  <section id="p-go" class="panelbox" hidden>
+    <h2><span class="spinner"></span>Fight!</h2>
+    <p>Loading the fight… if nothing happens, <a id="goLink" href="#">open the game</a>.</p>
+  </section>
+
+  <!-- messages -->
+  <section id="p-msg" class="panelbox" hidden>
+    <h2 id="msgTitle"></h2>
+    <p id="msgBody"></p>
+    <p class="row"><button class="btn" id="msgOk">Back to the lobby</button></p>
+  </section>
+</div>
+
+<footer>arrows move · down blocks · Z punch · X kick · combos summon</footer>
+<script type="module" src="lobby.js"></script>
+</body>
+</html>

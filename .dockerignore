@@ -7,3 +7,10 @@
 !pizzatron/web/
 !pizzatron/assets/
 !pizzatron/docker/
+!battleblitz/assets/
+!multiplayer/package.json
+!multiplayer/package-lock.json
+!multiplayer/server.js
+!multiplayer/lib/
+!multiplayer/web/
+!multiplayer/games/

@@ -6,9 +6,10 @@ Mirrors the compose stack's routes so the landing page and its links work as dep
   /lilo-and-stitch-sandwich-stacker/...      the repo (the game is at .../sandwichstacker/web/)
   /club-penguin-pizzatron/...                the repo (the game is at .../pizzatron/web/)
   /noby-noby-boy/web/                        nobynobyboy/web/
+  /arcade/multiplayer/...                    redirect to the Node dev server (npm --prefix multiplayer run dev)
 The repo folders are also served directly (e.g. /pizzatron/web/).
 """
-import sys, http.server, functools
+import os, sys, http.server, functools
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -21,6 +22,7 @@ GAMES = {
     '/noby-noby-boy': ('nobynobyboy', 'folder'),
 }
 LANDING = 'compose/nginx/html'
+MP_DEV_URL = os.environ.get('MP_DEV_URL', 'http://localhost:8766/arcade/multiplayer/')
 
 
 class H(http.server.SimpleHTTPRequestHandler):
@@ -31,6 +33,8 @@ class H(http.server.SimpleHTTPRequestHandler):
 
     def do_GET(self):
         path = self.path.split('?', 1)[0]
+        if path == '/arcade/multiplayer' or path.startswith('/arcade/multiplayer/'):
+            self.send_response(302); self.send_header('Location', MP_DEV_URL + path[len('/arcade/multiplayer/'):]); self.end_headers(); return
         for slug, (folder, layout) in GAMES.items():
             if path == slug or path == slug + '/':
                 target = f'{slug}/{folder}/web/' if layout == 'repo' else f'{slug}/web/'

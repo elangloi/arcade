@@ -124,6 +124,10 @@
   .art.boy .theboy { left: 50%; bottom: 8px; width: 78%; transform: translateX(-50%); transform-origin: 50% 100%; animation: noby 3s ease-in-out infinite; }
   @keyframes noby { 0%, 100% { transform: translateX(-50%) scaleX(1); } 50% { transform: translateX(-50%) scaleX(1.18); } }
   .marquee small { display: block; font-size: .8rem; font-weight: 700; opacity: .75; }
+  /* Multiplayer: Robin vs Jinx again, with a pulsing VS and two joysticks on the panel */
+  .art.blitz .vs { position: absolute; left: 50%; top: 34%; transform: translate(-50%, -50%) rotate(-8deg); font-weight: 900; font-size: 2rem; color: var(--yellow); text-shadow: 0 3px 0 var(--red-dark), 0 6px 12px rgba(0,0,0,.5); animation: vs 1s ease-in-out infinite alternate; }
+  @keyframes vs { from { transform: translate(-50%, -50%) rotate(-8deg) scale(1); } to { transform: translate(-50%, -50%) rotate(-8deg) scale(1.15); } }
+  .panel .stick + .stick { margin-left: 24px; }
   /* Pizzatron: the order screen, with the hot sauce bottle squirting beside it */
   .art.pizza .order { left: 50%; top: 14px; height: 118px; transform: translateX(-56%); }
   .art.pizza .sauce { right: 10%; bottom: 10px; height: 78px; transform-origin: 50% 100%; animation: squeeze 1.4s ease-in-out infinite; }
@@ -237,6 +241,23 @@
       </div>
       <span class="tag">after Keita Takahashi · 2009</span>
       <div class="panel"><span class="stick"></span><span class="btns"><i></i><i></i><i></i></span></div>
+      <div class="coinslot"></div>
+    </div>
+  </a>
+
+  <a class="cab" href="/arcade/multiplayer/">
+    <div class="body">
+      <div class="marquee">Multiplayer<br><small>Battle Blitz · 2P online</small></div>
+      <div class="screen">
+        <span class="art blitz">
+          <span class="floor"></span>
+          <img class="robin" src="img/battleblitz/robin.png" alt="Robin">
+          <span class="vs">VS</span>
+          <img class="jinx" src="img/battleblitz/jinx.png" alt="Jinx">
+        </span>
+      </div>
+      <span class="tag">find an opponent · pick a side</span>
+      <div class="panel"><span class="stick"></span><span class="stick"></span><span class="btns"><i></i><i></i><i></i></span></div>
       <div class="coinslot"></div>
     </div>
   </a>
