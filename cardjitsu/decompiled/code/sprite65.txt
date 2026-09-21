@@ -1,0 +1,13 @@
+# sprite 65: 6 frames
+
+## frame 1 label 'front'
+
+## frame 2 label 'disabled'
+
+## frame 3 label 'over'
+
+## frame 4 label 'pow'
+
+## frame 5 label 'back'
+
+## frame 6 label 'thumbnail'

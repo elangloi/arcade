@@ -15,6 +15,12 @@ function Art({ kind }: { kind: ArtKind }) {
       </span>)
     case 'pizza': return (
       <span className="art pizza"><img className="order" src="/img/pizzatron/order.svg" alt="A pizza order" /><img className="sauce" src="/img/pizzatron/hotsauce.svg" alt="" /></span>)
+    case 'cards': return (
+      <span className="art cards">
+        <span className="cardj c1"><img src="/img/cardjitsu/art6.svg" alt="" /><img className="el" src="/img/cardjitsu/elem1.svg" alt="fire" /></span>
+        <span className="cardj c2"><img src="/img/cardjitsu/art29.svg" alt="" /><img className="el" src="/img/cardjitsu/elem2.svg" alt="water" /></span>
+        <span className="cardj c3"><img src="/img/cardjitsu/art18.svg" alt="" /><img className="el" src="/img/cardjitsu/elem3.svg" alt="snow" /></span>
+      </span>)
     case 'boy': return (
       <span className="art boy"><span className="sunny" /><img className="theboy" src="/img/nobynobyboy/boy.svg" alt="BOY" /></span>)
   }

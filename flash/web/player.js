@@ -447,6 +447,19 @@ export class MovieClip {
     if (fn) fn(this);
   }
   removeMovieClip() { if (this.parent) this.parent.removeChild(this.depth); }
+  // AS2 swapDepths(n): move this clip to script depth n (whatever sat there moves to this clip's old depth)
+  swapDepths(depth) {
+    if (!this.parent) return;
+    const target = depth + SCRIPT_DEPTH, other = this.parent.children.get(target);
+    this.parent.children.delete(this.depth);
+    if (other) { this.parent.children.delete(target); other.depth = this.depth; this.parent.children.set(other.depth, other); }
+    this.depth = target; this.parent.children.set(target, this);
+    this.parent.reorder();
+  }
+  // AS2 Color.setTransform({ra, rb, ga, gb, ba, bb, aa, ab}): percentages + offsets
+  setTransform(t) {
+    this.applyCxform({ mul: [(t.ra ?? 100) / 100, (t.ga ?? 100) / 100, (t.ba ?? 100) / 100, (t.aa ?? 100) / 100], add: [t.rb ?? 0, t.gb ?? 0, t.bb ?? 0, t.ab ?? 0] });
+  }
   child(name) { return this[name]; }
   setText(varName, value) { for (const c of this.children.values()) if (c instanceof TextField && c.def.var.endsWith(varName)) c.setText(value); }
 

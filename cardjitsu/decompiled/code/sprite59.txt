@@ -1,0 +1,6 @@
+# sprite 59: 40 frames
+
+## frame 26 label 'poof'
+
+## sprite59 frame 40 DoAction
+stop()

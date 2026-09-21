@@ -1,0 +1,16 @@
+# sprite 112: 56 frames
+
+## frame 1 label 'zero'
+
+## sprite112 frame 2 DoAction
+stop()
+
+## frame 3 label 'down'
+
+## sprite112 frame 16 DoAction
+stop()
+
+## frame 42 label 'up'
+
+## sprite112 frame 52 DoAction
+stop()

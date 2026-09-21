@@ -140,7 +140,7 @@ def place_object2(body, swf_version=6, v3=False):
             elif t == 7: nc = r.u8(); r.p += nc * 5 + 19; names.append('gradientBevel')
         out['filters'] = names
     if flags2 & 0x02: out['blend'] = r.u8()
-    if flags2 & 0x04: r.u8()   # cache as bitmap
+    if flags2 & 0x04 and r.p < len(body): r.u8()   # cache as bitmap (Flash 9 files omit the byte when it's last)
     if flags2 & 0x20: out['visible'] = r.u8()
     if flags2 & 0x40: r.u32()  # background colour
     if flags & 0x80:

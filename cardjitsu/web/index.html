@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Card-Jitsu</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #111; color: #ddd; font: 14px system-ui, sans-serif; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+  #wrap { position: relative; width: min(1140px, 100vw); aspect-ratio: 760 / 480; }
+  #stage { width: 100%; height: 100%; background: #000; display: block; }
+  #status { min-height: 1.2em; color: #9a9; }
+  #help { color: #777; font-size: 12px; text-align: center; }
+  /* the dojo menu: the original's Sensei widget lived in the room, so this stands in for it */
+  #menu { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,.55); }
+  #menu[hidden] { display: none; }
+  #menu .card { background: #f4ead2; color: #3a2a12; border: 6px solid #6b4a1e; border-radius: 18px; padding: 22px 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,.6); max-width: 420px; }
+  #menu h1 { margin: 0 0 6px; font-size: 30px; letter-spacing: .04em; }
+  #menu p { margin: 6px 0; white-space: pre-line; }
+  #menu .belt { display: inline-block; margin: 6px 0 12px; padding: 4px 12px; border-radius: 999px; background: #6b4a1e; color: #f4ead2; font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  #menu input { font: inherit; font-weight: 700; padding: 6px 10px; border: 3px solid #6b4a1e; border-radius: 10px; width: 180px; text-align: center; text-transform: uppercase; }
+  #menu button { font: inherit; font-weight: 700; margin-top: 12px; padding: 10px 24px; border: 0; border-radius: 12px; background: #c0392b; color: #fff; cursor: pointer; box-shadow: 0 4px 0 #7e2419; }
+  #menu button:active { transform: translateY(3px); box-shadow: 0 1px 0 #7e2419; }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <svg id="stage" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>
+  <div id="menu" hidden>
+    <div class="card">
+      <h1>Card-Jitsu</h1>
+      <p id="menuText">I see fire in you.
+Do you seek to challenge me?
+I will not hold back.</p>
+      <span class="belt" id="beltLine">no belt</span><br>
+      <input id="name" maxlength="12" placeholder="your name" autocomplete="off">
+      <br><button id="play">Challenge the Sensei</button>
+    </div>
+  </div>
+</div>
+<div id="status">Loading…</div>
+<div id="help">Fire beats snow, snow beats water, water beats fire; same element, the higher number wins. Win three of one element in three colours, or one of each element in three colours.</div>
+<script type="module">
+  import { boot } from './game.js';
+  const $ = id => document.getElementById(id);
+  let name = 'Grasshopper'; try { name = localStorage.getItem('cardjitsu.name') || name; } catch (e) { }
+  $('name').value = name;
+  boot($('stage')).then(game => {
+    window.CJ = game;
+    $('status').textContent = '';
+    const showMenu = (text) => {
+      $('beltLine').textContent = game.BELT_NAMES[game.progress.belt] + (game.progress.belt < 9 ? ` · ${game.progress.pct}%` : '');
+      if (text) $('menuText').textContent = text;
+      $('menu').hidden = false;
+    };
+    showMenu();
+    $('play').addEventListener('click', () => {
+      name = $('name').value.trim() || 'Grasshopper';
+      try { localStorage.setItem('cardjitsu.name', name); } catch (e) { }
+      $('menu').hidden = true;
+      game.play(name).catch(e => { console.error(e); $('status').textContent = 'The dojo fell over: ' + e.message; });
+    });
+    game.onGameOver = r => showMenu((r.won ? 'Well done, grasshopper.\nYou have rocked the house.' : 'The gentle lotus\ncowers before the storm cloud.\nTrain, and try again.') + (r.beltLine ? '\n\n' + r.beltLine : ''));
+    game.onQuit = () => showMenu('Do you wish to hear\nthe instructions of the game\nagain, grasshopper?');
+  }).catch(e => { console.error(e); $('status').textContent = 'Failed to start: ' + e.message; });
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+# sprite 21: 3 frames
+
+## frame 1 label 'f'
+
+## frame 2 label 'w'
+
+## frame 3 label 's'

@@ -7,6 +7,9 @@
 !pizzatron/web/
 !pizzatron/assets/
 !pizzatron/docker/
+!cardjitsu/web/
+!cardjitsu/assets/
+!cardjitsu/docker/
 !battleblitz/assets/
 !multiplayer/package.json
 !multiplayer/package-lock.json

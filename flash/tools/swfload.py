@@ -21,6 +21,26 @@ import base64
 if not hasattr(base64, 'encodestring'):   # removed in Python 3.9; pyswf still calls it
     base64.encodestring = lambda b: base64.encodebytes(b).decode()
 
+# pyswf's JPEG3 (JPEG + alpha) export concatenates bytes onto a str; redo it with bytes
+def _patch_define_bits():
+    import struct
+    from io import BytesIO
+    from PIL import Image
+    from swf import export as _ex
+    from swf.tag import TagDefineBitsJPEG3
+    orig = _ex.SVGExporter.export_define_bits
+    def export_define_bits(self, tag):
+        if isinstance(tag, TagDefineBitsJPEG3):
+            tag.bitmapData.seek(0); tag.bitmapAlphaData.seek(0)
+            image = Image.open(tag.bitmapData).convert('RGB')
+            alpha = tag.bitmapAlphaData.read()
+            if len(alpha) == image.size[0] * image.size[1]:
+                image.putalpha(Image.frombytes('L', image.size, alpha))
+            return self.export_image(tag, image)
+        return orig(self, tag)
+    _ex.SVGExporter.export_define_bits = export_define_bits
+_patch_define_bits()
+
 def load():
     # pyswf misreads uncompressed (FWS) files; hand it a zlib-compressed copy instead
     import io, zlib

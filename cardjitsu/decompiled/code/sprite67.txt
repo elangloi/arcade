@@ -1,0 +1,7 @@
+# sprite 67: 16 frames
+
+## sprite67 frame 10 DoAction
+explosed();
+
+## sprite67 frame 16 DoAction
+explosed();

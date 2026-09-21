@@ -4,6 +4,7 @@ Mirrors the proxy's game routes; the Vite front end (npm --prefix frontend run d
   /teen-titans-battle-blitz/web/             battleblitz/web/
   /lilo-and-stitch-sandwich-stacker/...      the repo (the game is at .../sandwichstacker/web/)
   /club-penguin-pizzatron/...                the repo (the game is at .../pizzatron/web/)
+  /club-penguin-card-jitsu/...               the repo (the game is at .../cardjitsu/web/)
   /noby-noby-boy/web/                        nobynobyboy/web/
 The repo folders are also served directly (e.g. /pizzatron/web/).
 """
@@ -17,6 +18,7 @@ GAMES = {
     '/teen-titans-battle-blitz': ('battleblitz', 'folder'),
     '/lilo-and-stitch-sandwich-stacker': ('sandwichstacker', 'repo'),
     '/club-penguin-pizzatron': ('pizzatron', 'repo'),
+    '/club-penguin-card-jitsu': ('cardjitsu', 'repo'),
     '/noby-noby-boy': ('nobynobyboy', 'folder'),
 }
 

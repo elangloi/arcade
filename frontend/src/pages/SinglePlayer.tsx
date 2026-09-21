@@ -6,7 +6,7 @@ export default function SinglePlayer() {
   return (
     <>
       <Sprinkles />
-      <PageTitle title="Single player" sub="four cabinets · no waiting" />
+      <PageTitle title="Single player" sub="five cabinets · no waiting" />
       <CabinetGrid>{singlePlayer().map(g => <Cabinet key={g.slug} game={g} />)}</CabinetGrid>
     </>
   )

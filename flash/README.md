@@ -26,6 +26,8 @@ uv run python compose.py --game ../../pizzatron 272 5 hand.svg
    names and frame labels stay the original ones so the decompilation reads across.
 3. `index.html` boots it; a `Dockerfile` built from the repo root copies `flash/web/` next to the game.
 
+Player extras used by the ports: `swapDepths`, `setRGB`/`setTransform` (AS2 `Color`), `loadClip` (one clip per loaded SWF, which then owns that SWF's exports for `attachMovie`). The tools cope with Flash 9 AVM1 files too (DefineShape4, JPEG3 bitmaps, the PlaceObject3 cache-as-bitmap byte Flash 9 leaves out).
+
 Player behaviours that matter (learned the hard way): frame scripts run only on frame entry;
 once a script sets `_x`/`_xscale`/… the timeline stops driving that clip; script-created clips
 live above timeline depths; buttons fire on press or release per the SWF; non-selectable text

@@ -19,6 +19,7 @@ services:
       - battleblitz
       - sandwichstacker
       - pizzatron
+      - cardjitsu
       - nobynobyboy
       - multiplayer
 
@@ -46,6 +47,16 @@ services:
       dockerfile: pizzatron/Dockerfile
     image: arcade/pizzatron:latest
     container_name: arcade-pizzatron
+    restart: unless-stopped
+    expose:
+      - "80"
+
+  cardjitsu:
+    build:
+      context: ..
+      dockerfile: cardjitsu/Dockerfile
+    image: arcade/cardjitsu:latest
+    container_name: arcade-cardjitsu
     restart: unless-stopped
     expose:
       - "80"
