@@ -354,18 +354,30 @@ function fatal(title, body) {
 function buildOverlay() {
   const css = document.createElement('style');
   css.textContent = `
-    #mp { position: fixed; inset: 0; pointer-events: none; font: 14px/1.4 system-ui, sans-serif; color: #eee; }
-    #mp .bar { position: fixed; top: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 18px; align-items: center;
-               background: rgba(0,0,0,.55); border: 1px solid #444; border-radius: 999px; padding: 4px 14px; white-space: nowrap; }
-    #mp .bar .me { color: #9f9; } #mp .bar .opp { color: #f99; } #mp .bar .st { color: #ffd; min-width: 8em; text-align: center; } #mp .bar .rtt { color: #888; font-size: 12px; }
-    #mp .modal { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.55); pointer-events: auto; }
-    #mp .modal .box { background: #1b1b22; border: 2px solid #ff8fcf; border-radius: 14px; padding: 18px 24px; min-width: 300px; max-width: 460px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,.6); }
-    #mp .modal h2 { margin: 0 0 8px; color: #fbf57a; font-size: 22px; }
-    #mp .modal p { margin: 0 0 14px; color: #ddd; }
-    #mp .modal button { font: inherit; font-weight: 700; margin: 4px; padding: 8px 18px; border-radius: 10px; border: 0; background: #fbf57a; color: #2b2450; cursor: pointer; }
-    #mp .modal button.alt { background: #ff8fcf; }
-    #mp .modal button:disabled { opacity: .45; cursor: default; }
-    #mp .modal .spin { display: inline-block; width: 1em; height: 1em; border: 3px solid #ff8fcf; border-right-color: transparent; border-radius: 50%; animation: mpspin .8s linear infinite; vertical-align: -.15em; margin-right: .4em; }
+    #mp { position: fixed; inset: 0; pointer-events: none; font: 15px/1.4 "Fredoka", ui-rounded, "SF Pro Rounded", system-ui, sans-serif; color: #fff6e8;
+          --pink: #ff8fcf; --pink-dark: #e86fb3; --yellow: #fbf57a; --yellow-dark: #e5c94d; --navy-deep: #151747; --blue: #5566ff; --ink: #2b2450; --red: #ff5a72; --red-dark: #d93b57; --green: #7ed957; --green-dark: #52b32f; }
+    #mp .bar { position: fixed; top: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 14px; align-items: center;
+               background: var(--pink); color: var(--ink); border-radius: 999px; padding: 5px 16px; white-space: nowrap; font-weight: 700; font-size: .85rem; letter-spacing: .04em;
+               box-shadow: 0 4px 0 var(--pink-dark), 0 8px 16px rgba(0,0,0,.4); }
+    #mp .bar .me::before, #mp .bar .opp::before { content: ""; display: inline-block; width: .6em; height: .6em; border-radius: 50%; margin-right: .4em; vertical-align: .05em; }
+    #mp .bar .me::before { background: var(--green); } #mp .bar .opp::before { background: var(--red); }
+    #mp .bar .st { background: var(--yellow); border-radius: 999px; padding: 1px 12px; min-width: 7em; text-align: center; text-transform: uppercase; font-size: .75rem; letter-spacing: .08em; box-shadow: inset 0 -2px 0 var(--yellow-dark); }
+    #mp .bar .st:empty { display: none; }
+    #mp .bar .rtt { font-size: .7rem; opacity: .7; }
+    #mp .modal { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(21,23,71,.55); pointer-events: auto; }
+    #mp .modal .box { background: var(--pink); border-radius: 26px 26px 20px 20px; padding: 14px 14px 18px; min-width: 320px; max-width: 480px; text-align: center;
+                      box-shadow: 0 8px 0 var(--pink-dark), 0 24px 40px rgba(0,0,0,.5); animation: mppop .25s cubic-bezier(.34,1.56,.64,1); }
+    @keyframes mppop { from { transform: scale(.8); opacity: 0; } }
+    #mp .modal h2 { margin: 0; background: var(--yellow); color: var(--ink); border-radius: 14px; padding: 10px 14px 9px; font-size: 1.35rem; letter-spacing: .04em; box-shadow: inset 0 -4px 0 var(--yellow-dark); }
+    #mp .modal p { margin: 12px 6px; background: var(--navy-deep); color: #fff6e8; border-radius: 14px; padding: 12px 16px; font-weight: 500; }
+    #mp .modal p:empty { display: none; }
+    #mp .modal button { font: inherit; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; font-size: .85rem; margin: 4px; padding: 10px 20px; border-radius: 999px; border: 0;
+                        background: var(--yellow); color: var(--ink); cursor: pointer; box-shadow: 0 4px 0 var(--yellow-dark), 0 8px 14px rgba(0,0,0,.3); transition: transform .1s; }
+    #mp .modal button:hover { transform: translateY(-2px); }
+    #mp .modal button:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--yellow-dark); }
+    #mp .modal button.alt { background: var(--navy-deep); color: var(--pink); box-shadow: 0 4px 0 #0d0f30, 0 8px 14px rgba(0,0,0,.3); }
+    #mp .modal button:disabled { opacity: .5; cursor: default; transform: none; }
+    #mp .modal .spin { display: inline-block; width: .9em; height: .9em; border: 3px solid var(--ink); border-right-color: transparent; border-radius: 50%; animation: mpspin .8s linear infinite; vertical-align: -.1em; margin-right: .4em; }
     @keyframes mpspin { to { transform: rotate(360deg); } }
   `;
   document.head.appendChild(css);

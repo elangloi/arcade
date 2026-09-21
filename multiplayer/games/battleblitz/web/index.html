@@ -4,11 +4,20 @@
 <meta charset="utf-8">
 <title>Teen Titans: Battle Blitz — 2P</title>
 <style>
-  html, body { margin: 0; height: 100%; background: #111; color: #ddd; font: 14px system-ui, sans-serif; }
-  body { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
-  #stage { width: 1200px; height: 800px; max-width: 100vw; max-height: calc(100vw * 2 / 3); background: #000; image-rendering: pixelated; outline: none; }
-  #status { min-height: 1.2em; color: #9a9; }
-  #help { color: #777; font-size: 12px; text-align: center; }
+  @font-face { font-family: "Fredoka"; font-weight: 500; font-display: swap; src: url(../../../fonts/fredoka-500.woff2) format("woff2"); }
+  @font-face { font-family: "Fredoka"; font-weight: 700; font-display: swap; src: url(../../../fonts/fredoka-700.woff2) format("woff2"); }
+  :root { --navy: #1e2160; --navy-deep: #151747; --grid: #2a2e7a; --pink: #ff8fcf; --pink-dark: #e86fb3; --yellow: #fbf57a; --yellow-dark: #e5c94d; --cream: #fff6e8; --ink: #2b2450; }
+  html, body { margin: 0; height: 100%; color: var(--cream); font: 15px/1.4 "Fredoka", ui-rounded, "SF Pro Rounded", system-ui, sans-serif; }
+  body {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    background-color: var(--navy);
+    background-image: linear-gradient(var(--grid) 2px, transparent 2px), linear-gradient(90deg, var(--grid) 2px, transparent 2px);
+    background-size: 48px 48px; background-position: -1px -1px;
+  }
+  #stage { width: 1200px; height: 800px; max-width: 100vw; max-height: calc(100vw * 2 / 3); background: #000; image-rendering: pixelated; outline: none;
+           border: 6px solid var(--navy-deep); border-radius: 18px; box-shadow: 0 0 0 6px var(--pink), 0 12px 0 6px var(--pink-dark), 0 30px 40px rgba(0,0,0,.5); box-sizing: border-box; }
+  #status { min-height: 1.2em; color: var(--yellow); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; font-size: .8rem; }
+  #help { color: var(--pink); font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; text-align: center; }
 </style>
 </head>
 <body>

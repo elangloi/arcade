@@ -26,7 +26,8 @@ const S = {
 };
 
 // ---- panels ----
-function show(id) { for (const p of document.querySelectorAll('.panelbox')) p.hidden = p.id !== id; }
+const MARQUEE = { 'p-name': 'Player name', 'p-queue': 'Now serving', 'p-pick': 'Select your fighter', 'p-go': 'Fight!', 'p-msg': 'Game over' };
+function show(id) { for (const p of document.querySelectorAll('.panelbox')) p.hidden = p.id !== id; $('marquee').textContent = MARQUEE[id] || 'Battle Blitz'; }
 function message(title, body) { $('msgTitle').textContent = title; $('msgBody').textContent = body; show('p-msg'); $('subline').textContent = title; }
 
 // ---- session ----
@@ -211,10 +212,10 @@ $('nameForm').addEventListener('submit', ev => {
   send({ t: 'queue', game: 'battleblitz' });
   $('nameStatus').textContent = '';
 });
-$('cancelQueue').addEventListener('click', () => { send({ t: 'leave' }); show('p-name'); $('subline').textContent = "who's fighting?"; });
+$('cancelQueue').addEventListener('click', () => { send({ t: 'leave' }); show('p-name'); $('subline').textContent = 'two players · insert coin'; });
 $('lockBtn').addEventListener('click', () => { if (S.me.pick !== null) send({ t: 'lock', fighter: S.me.pick }); });
-$('leavePick').addEventListener('click', () => { send({ t: 'leave' }); stopTimer(); show('p-name'); $('subline').textContent = "who's fighting?"; });
-$('msgOk').addEventListener('click', () => { show('p-name'); $('subline').textContent = "who's fighting?"; });
+$('leavePick').addEventListener('click', () => { send({ t: 'leave' }); stopTimer(); show('p-name'); $('subline').textContent = 'two players · insert coin'; });
+$('msgOk').addEventListener('click', () => { show('p-name'); $('subline').textContent = 'two players · insert coin'; });
 
 (async function boot() {
   buildRosters();
