@@ -7,7 +7,7 @@
   "engines": { "node": ">=24" },
   "scripts": {
     "start": "node server.js",
-    "dev": "PORT=8766 ASSETS_DIR=../battleblitz/assets NAV_DIR=../compose/nginx/html/nav DB_PATH=:memory: DEV=1 node server.js",
+    "dev": "PORT=8766 ASSETS_DIR=../battleblitz/assets DB_PATH=:memory: DEV=1 node server.js",
     "test": "node --test test/"
   },
   "dependencies": {

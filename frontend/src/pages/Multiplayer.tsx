@@ -1,0 +1,25 @@
+import { useEffect, useState } from 'react'
+import { Cabinet, CabinetGrid, ComingSoon } from '@/components/Cabinet'
+import { PageTitle, Sprinkles } from '@/components/Deco'
+import { multiplayer } from '@/lib/games'
+import { stats } from '@/lib/mp'
+
+export default function Multiplayer() {
+  const [line, setLine] = useState('connecting…')
+  useEffect(() => {
+    let alive = true
+    const tick = () => stats().then(s => alive && setLine(`${s.online} online · ${s.queued} waiting · ${s.playing} fighting`)).catch(() => alive && setLine('offline'))
+    tick(); const h = setInterval(tick, 5000)
+    return () => { alive = false; clearInterval(h) }
+  }, [])
+  return (
+    <>
+      <Sprinkles />
+      <PageTitle title="Multiplayer" sub="two players · one cabinet each" />
+      <p className="relative z-10 -mt-4 mb-8 rounded-full bg-arcade-navy-deep px-3 py-1 text-xs font-bold uppercase tracking-[.08em] text-arcade-green">
+        <span className="mr-1.5 inline-block size-2 rounded-full bg-arcade-green shadow-[0_0_8px_var(--color-arcade-green)] blink" />{line}
+      </p>
+      <CabinetGrid>{multiplayer().map(g => <Cabinet key={g.slug} game={g} />)}<ComingSoon /></CabinetGrid>
+    </>
+  )
+}

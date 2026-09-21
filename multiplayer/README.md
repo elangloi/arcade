@@ -1,7 +1,7 @@
 # multiplayer — the online arcade
 
-One Node service behind `/arcade/multiplayer/`: the multiplayer landing page, the lobby, a JSON
-API, a matchmaking + lockstep WebSocket, a SQLite event log, and the game itself — a **fork** of
+One Node service behind `/arcade/multiplayer/`: a JSON API, a matchmaking + lockstep WebSocket, a
+SQLite event log, and the game itself — a **fork** of
 [`battleblitz/web`](../battleblitz/web) wired for two players. The single-player cabinet in
 `battleblitz/` is not touched by anything in here; its 39 MB of art and sound is copied into this
 image at build time instead of being duplicated in git.
@@ -13,8 +13,6 @@ lib/lobby.js              sessions, FIFO queue, match state machine, timers (pur
 lib/protocol.js           message validation + fighter tables
 lib/db.js                 node:sqlite: sessions, matches, events
 lib/static.js             tiny static server
-web/                      landing (index.html), lobby (lobby.html + lobby.js), style.css, fonts
-nav/                      not in git — the arcade-wide nav bar, COPY'd from compose/nginx/html/nav
 games/battleblitz/web/    the forked game: main.js, mp.js (lockstep client), runtime/, game/
 games/battleblitz/assets/ not in git — COPY'd from battleblitz/assets by the Dockerfile,
                           served from ASSETS_DIR (../battleblitz/assets) in dev
@@ -29,15 +27,18 @@ npm --prefix multiplayer run dev          # http://localhost:8766/arcade/multipl
 npm --prefix multiplayer test
 ```
 
-Open the lobby in two tabs (or two machines on the LAN), enter names, and the first two players
-in the queue are matched. In the compose stack it's built from the repo root:
+The lobby UI lives in the front end (`frontend/`, route `/multiplayer/battleblitz`); this service only
+serves the API, the socket and the 2P game page, which the shell shows in a frame. Open the lobby in two
+tabs (or two machines on the LAN), enter names, and the first two players in the queue are matched. In
+the compose stack it's built from the repo root:
 `docker build -f multiplayer/Dockerfile .`
 
 ## How a match works
 
 1. Tab opens → `POST api/session` → a UUID for this browser tab (kept in `sessionStorage`).
 2. Name → `hello` + `queue`. Two queued sessions become a match in state `picking`.
-3. Both tabs navigate to `games/battleblitz/web/?match=&session=`, which shows the game's **own
+3. Both tabs go to `/multiplayer/battleblitz/play?match=&session=`, which frames
+   `games/battleblitz/web/?match=&session=` — the game's **own
    fighter-select screen** (every fighter unlocked, the single-player buttons hidden). Clicking a
    portrait locks it in (`lock{fighter}`); the first click of the match claims that fighter's side
    (Titans for 1–5, villains for 6–10) and locks the opponent into the other — their screen flips to

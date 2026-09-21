@@ -1,19 +1,20 @@
 # Home arcade stack.
 #   docker compose up -d --build
 # The proxy is the only thing published; games are reached through it by path.
-# Add a game: build its image as a service here, then add a `location` block in
-# nginx/conf.d/arcade.conf and a card in nginx/html/index.html.
+# Add a game: build its image as a service here, add a `location` block in
+# nginx/conf.d/arcade.conf and register it in frontend/src/lib/games.ts.
 
 services:
+  # nginx + the React front end (frontend/), built from the repo root.
   proxy:
-    image: nginx:1.27-alpine
+    build:
+      context: ..
+      dockerfile: frontend/Dockerfile
+    image: arcade/proxy:latest
     container_name: arcade-proxy
     restart: unless-stopped
     ports:
       - "${ARCADE_HTTP_PORT:-80}:80"
-    volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d:ro
-      - ./nginx/html:/usr/share/nginx/html:ro
     depends_on:
       - battleblitz
       - sandwichstacker

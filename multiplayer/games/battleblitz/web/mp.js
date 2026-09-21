@@ -32,9 +32,12 @@ window.mp = mp;
 
 export async function install({ session, match, mute } = {}) {
   mp.session = session; mp.matchId = match;
-  mp.lobbyUrl = new URL('../../../lobby.html', location.href);
-  if (session) mp.lobbyUrl.searchParams.set('session', session);
+  // Back to the lobby: inside the arcade shell that's a message to the parent frame (see the
+  // front end's lib/bridge.ts); standalone it's the shell's lobby route.
+  mp.lobbyUrl = new URL('/multiplayer/battleblitz', location.href);
   if (mute) mp.lobbyUrl.searchParams.set('mute', '1');
+  mp.inShell = window.parent !== window;
+  if (mp.inShell) window.parent.postMessage({ type: 'arcade:ready', game: 'battleblitz-2p' }, location.origin);
   buildOverlay();
   patchGame();
   if (match === 'selftest') { mp.offline = true; mp.phase = 'free'; return; }
@@ -118,7 +121,7 @@ function startFight() {
   mp.local = new Map(); mp.remote = new Map(); mp.pending = []; mp.simFrame = 0;
   applyMatchGlobals();
   mp.phase = 'free';
-  mp.ui.me.textContent = `you · ${mp.side === 'titan' ? 'Titans' : 'villains'} · ${NAMES[mp.match[mp.side]]}`;
+  updateBar();
   setHelp('Arrows: move / jump · Down: block · Z: punch · X: kick · Esc: leave the match');
   setStatus('loading the fight…');
   G.g.goFrame = D.label('SCREEN_VERSUS');
@@ -187,6 +190,7 @@ function updateBar() {
   const myF = mp.side && mp.match?.[mp.side];
   mp.ui.opp.textContent = `${mp.opponent?.name ?? '?'} · ${sideName(mp.opponent?.side)}`;
   mp.ui.me.textContent = `you · ${sideName(mp.side)}${myF ? ' · ' + NAMES[myF] : ''}`;
+  postHud();
 }
 
 function onMessage(m) {
@@ -466,13 +470,17 @@ function leaveToLobby() {
   mp.leaving = true;
   send({ t: 'leave' });
   mp.phase = 'dead';
-  setTimeout(() => { location.href = mp.lobbyUrl.href; }, 50);
+  setTimeout(goLobby, 50);
+}
+function goLobby() {
+  if (mp.inShell) window.parent.postMessage({ type: 'arcade:navigate', to: 'lobby' }, location.origin);
+  else location.href = mp.lobbyUrl.href;
 }
 
 function fatal(title, body) {
   mp.phase = 'dead';
   D.pause();
-  modal('fatal', title, body, [['Back to lobby', () => { location.href = mp.lobbyUrl.href; }]]);
+  modal('fatal', title, body, [['Back to lobby', goLobby]]);
 }
 
 // ---------------------------------------------------------------- overlay UI
@@ -514,9 +522,15 @@ function buildOverlay() {
   document.addEventListener('visibilitychange', () => { if (mp.phase === 'lockstep' || mp.phase === 'waitReady' || mp.phase === 'select') send({ t: 'away', hidden: document.hidden }); });
   setInterval(() => { if (mp.ws && mp.ws.readyState === 1) send({ t: 'ping', ts: performance.now() }); }, 5000);
 }
-function setStatus(s) { if (mp.ui) mp.ui.status.textContent = s; }
-function setHelp(s) { const el = document.getElementById('help'); if (el) el.textContent = s; }
-function updateRtt() { if (mp.ui && mp.rtt != null) mp.ui.rtt.textContent = `${Math.round(mp.rtt)} ms · delay ${mp.delay}f`; }
+function setStatus(s) { if (mp.ui) { mp.ui.status.textContent = s; postHud(); } }
+function setHelp(s) { const el = document.getElementById('help'); if (el) el.textContent = s; postHud(); }
+function updateRtt() { if (mp.ui && mp.rtt != null) { mp.ui.rtt.textContent = `${Math.round(mp.rtt)} ms · delay ${mp.delay}f`; postHud(); } }
+// Inside the arcade shell the bar and the help line are drawn by the shell under the frame.
+function postHud() {
+  if (!mp.inShell || !mp.ui) return;
+  window.parent.postMessage({ type: 'arcade:hud', me: mp.ui.me.textContent, opp: mp.ui.opp.textContent, status: mp.ui.status.textContent,
+    rtt: mp.ui.rtt.textContent, help: document.getElementById('help')?.textContent ?? '' }, location.origin);
+}
 function modal(key, title, body, buttons) {
   hideModal(key);
   const el = document.createElement('div'); el.className = 'modal'; el.dataset.key = key;

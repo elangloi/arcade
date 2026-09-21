@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <title>Teen Titans: Battle Blitz — 2P</title>
 <style>
-  @font-face { font-family: "Fredoka"; font-weight: 500; font-display: swap; src: url(../../../fonts/fredoka-500.woff2) format("woff2"); }
-  @font-face { font-family: "Fredoka"; font-weight: 700; font-display: swap; src: url(../../../fonts/fredoka-700.woff2) format("woff2"); }
+  @font-face { font-family: "Fredoka"; font-weight: 500; font-display: swap; src: url(/fonts/fredoka-500.woff2) format("woff2"); }
+  @font-face { font-family: "Fredoka"; font-weight: 700; font-display: swap; src: url(/fonts/fredoka-700.woff2) format("woff2"); }
   :root { --navy: #1e2160; --navy-deep: #151747; --grid: #2a2e7a; --pink: #ff8fcf; --pink-dark: #e86fb3; --yellow: #fbf57a; --yellow-dark: #e5c94d; --cream: #fff6e8; --ink: #2b2450; }
   html, body { margin: 0; height: 100%; color: var(--cream); font: 15px/1.4 "Fredoka", ui-rounded, "SF Pro Rounded", system-ui, sans-serif; }
   body {
@@ -18,10 +18,14 @@
            border: 6px solid var(--navy-deep); border-radius: 18px; box-shadow: 0 0 0 6px var(--pink), 0 12px 0 6px var(--pink-dark), 0 30px 40px rgba(0,0,0,.5); box-sizing: border-box; }
   #status { min-height: 1.2em; color: var(--yellow); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; font-size: .8rem; }
   #help { color: var(--pink); font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; text-align: center; }
+  /* inside the arcade shell the frame is the bezel and the shell draws the bar + help line */
+  html.framed body { gap: 0; background: #000; }
+  html.framed #stage { border: 0; border-radius: 0; box-shadow: none; max-height: 100vh; }
+  html.framed #help, html.framed #status, html.framed #mp .bar { display: none; }
 </style>
+<script>if (window.parent !== window) document.documentElement.classList.add('framed');</script>
 </head>
 <body>
-<script src="/nav/nav.js" defer></script>
 <canvas id="stage" width="600" height="400" tabindex="0"></canvas>
 <div id="status">Loading…</div>
 <div id="help">Arrows: move / jump &nbsp;·&nbsp; Down: block &nbsp;·&nbsp; Z: punch &nbsp;·&nbsp; X: kick &nbsp;·&nbsp; Esc: leave the match</div>

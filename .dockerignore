@@ -12,6 +12,13 @@
 !multiplayer/package-lock.json
 !multiplayer/server.js
 !multiplayer/lib/
-!multiplayer/web/
 !multiplayer/games/
-!compose/nginx/html/nav/
+!compose/nginx/conf.d/
+!frontend/package.json
+!frontend/package-lock.json
+!frontend/index.html
+!frontend/vite.config.ts
+!frontend/tsconfig*.json
+!frontend/components.json
+!frontend/public/
+!frontend/src/

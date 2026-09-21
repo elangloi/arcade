@@ -1,0 +1,202 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* Fredoka (SIL OFL), self-hosted so the arcade works without the internet. */
+@font-face { font-family: "Fredoka"; font-weight: 500; font-display: swap; src: url(/fonts/fredoka-500.woff2) format("woff2"); }
+@font-face { font-family: "Fredoka"; font-weight: 700; font-display: swap; src: url(/fonts/fredoka-700.woff2) format("woff2"); }
+
+@custom-variant dark (&:is(.dark *));
+
+/* ---- the arcade palette, exposed both as shadcn tokens and as plain colours (bg-arcade-pink …) ---- */
+@theme inline {
+  --font-sans: "Fredoka", ui-rounded, "SF Pro Rounded", "Arial Rounded MT Bold", system-ui, sans-serif;
+  --font-heading: var(--font-sans);
+
+  --color-arcade-navy: #1e2160;
+  --color-arcade-navy-deep: #151747;
+  --color-arcade-grid: #2a2e7a;
+  --color-arcade-pink: #ff8fcf;
+  --color-arcade-pink-dark: #e86fb3;
+  --color-arcade-red: #ff5a72;
+  --color-arcade-red-dark: #d93b57;
+  --color-arcade-yellow: #fbf57a;
+  --color-arcade-yellow-dark: #e5c94d;
+  --color-arcade-blue: #5566ff;
+  --color-arcade-blue-dark: #3a46c8;
+  --color-arcade-green: #7ed957;
+  --color-arcade-green-dark: #52b32f;
+  --color-arcade-cream: #fff6e8;
+  --color-arcade-ink: #2b2450;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: #1e2160;
+  --foreground: #fff6e8;
+  --card: #151747;
+  --card-foreground: #fff6e8;
+  --popover: #fff6e8;
+  --popover-foreground: #2b2450;
+  --primary: #fbf57a;
+  --primary-foreground: #2b2450;
+  --secondary: #ff8fcf;
+  --secondary-foreground: #2b2450;
+  --muted: #2a2e7a;
+  --muted-foreground: #c9cdf5;
+  --accent: #ff8fcf;
+  --accent-foreground: #2b2450;
+  --destructive: #ff5a72;
+  --border: #2a2e7a;
+  --input: #151747;
+  --ring: #fbf57a;
+  --radius: 0.9rem;
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  html { @apply font-sans; color-scheme: dark; }
+  body {
+    @apply bg-background text-foreground min-h-screen;
+    background-image: linear-gradient(var(--color-arcade-grid) 2px, transparent 2px), linear-gradient(90deg, var(--color-arcade-grid) 2px, transparent 2px);
+    background-size: 48px 48px;
+    background-position: -1px -1px;
+  }
+  button:not(:disabled), [role="button"]:not(:disabled) { cursor: pointer; }
+}
+
+/* ---- arcade pieces that are easier as plain CSS than as utility soup ---- */
+@layer components {
+  .arcade-title {
+    @apply text-arcade-yellow leading-none tracking-[.06em] font-bold;
+    text-shadow: 0 4px 0 var(--color-arcade-yellow-dark), 0 8px 0 var(--color-arcade-red-dark), 0 12px 24px rgba(0,0,0,.45);
+  }
+  .arcade-btn {
+    @apply inline-flex items-center justify-center rounded-full font-bold uppercase tracking-[.06em] text-sm px-5 py-2.5 text-arcade-ink bg-arcade-yellow transition-transform;
+    box-shadow: 0 5px 0 var(--color-arcade-yellow-dark), 0 8px 14px rgba(0,0,0,.3);
+  }
+  .arcade-btn:hover { transform: translateY(-2px); }
+  .arcade-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--color-arcade-yellow-dark); }
+  .arcade-btn:disabled { opacity: .5; transform: none; cursor: default; }
+  .arcade-btn-go { @apply bg-arcade-green; box-shadow: 0 5px 0 var(--color-arcade-green-dark), 0 8px 14px rgba(0,0,0,.3); }
+  .arcade-btn-go:active { box-shadow: 0 1px 0 var(--color-arcade-green-dark); }
+  .arcade-btn-ghost { @apply bg-arcade-navy-deep text-arcade-pink; box-shadow: 0 5px 0 #0d0f30, 0 8px 14px rgba(0,0,0,.3); }
+  .arcade-btn-ghost:active { box-shadow: 0 1px 0 #0d0f30; }
+  .arcade-pill {
+    @apply inline-block rounded-full bg-arcade-pink text-arcade-ink font-bold uppercase tracking-[.08em] text-sm px-4 py-1.5;
+    box-shadow: 0 4px 0 var(--color-arcade-pink-dark);
+  }
+  .arcade-input {
+    @apply rounded-2xl border-4 border-arcade-navy-deep bg-arcade-cream text-arcade-ink font-bold text-lg tracking-[.06em] px-4 py-2.5 outline-none min-w-60;
+    box-shadow: inset 0 3px 0 rgba(0,0,0,.12);
+  }
+  .arcade-input:focus { border-color: var(--color-arcade-yellow); box-shadow: inset 0 3px 0 rgba(0,0,0,.12), 0 0 0 4px rgba(251,245,122,.35); }
+  .arcade-input::placeholder { color: #9a92b8; letter-spacing: 0; font-weight: 500; }
+  .coin { @apply inline-block rounded-full bg-arcade-yellow; box-shadow: inset -2px -2px 0 var(--color-arcade-yellow-dark); }
+  .blink { animation: blink 1.2s steps(2) infinite; }
+  .float { animation: float 6s ease-in-out infinite; }
+  .sway { animation: sway 4s ease-in-out infinite; transform-origin: 50% 0; }
+  .twinkle { animation: twinkle 1.6s ease-in-out infinite; }
+  .bounce-fighter { animation: bounce 1.1s ease-in-out infinite; }
+}
+
+/* ---- the cabinets (ported from the original landing page) ---- */
+.cab { display: block; color: inherit; text-decoration: none; position: relative; padding-top: 26px; transition: transform .18s cubic-bezier(.34,1.56,.64,1); }
+.cab:hover, .cab:focus-visible { transform: translateY(-8px) rotate(-1.2deg); outline: none; }
+.cab:nth-child(even):hover { transform: translateY(-8px) rotate(1.2deg); }
+.cab .body { background: var(--color-arcade-pink); border-radius: 26px 26px 18px 18px; padding: 14px 14px 18px; box-shadow: 0 8px 0 var(--color-arcade-pink-dark), 0 22px 30px rgba(0,0,0,.45); position: relative; }
+.cab .body::after { content: ""; position: absolute; left: 22px; right: 22px; bottom: -22px; height: 16px; background: var(--color-arcade-pink-dark); border-radius: 0 0 12px 12px; }
+.cab.soon .body { background: #8c86b8; box-shadow: 0 8px 0 #6d689a, 0 22px 30px rgba(0,0,0,.45); }
+.cab.soon .body::after { background: #6d689a; }
+.marquee { background: var(--color-arcade-yellow); color: var(--color-arcade-ink); border-radius: 14px; padding: 10px 12px 9px; text-align: center; font-weight: 700; font-size: 1.05rem; line-height: 1.15; letter-spacing: .02em; box-shadow: inset 0 -4px 0 var(--color-arcade-yellow-dark); position: relative; }
+.marquee small { display: block; font-size: .8rem; font-weight: 700; opacity: .75; }
+.marquee::before, .marquee::after { content: ""; position: absolute; top: -18px; width: 22px; height: 22px; border-radius: 50%; background: var(--color-arcade-red); box-shadow: inset -3px -3px 0 var(--color-arcade-red-dark); }
+.marquee::before { left: 12px; } .marquee::after { right: 12px; }
+.cab:hover .marquee::before, .cab:hover .marquee::after { background: var(--color-arcade-yellow); box-shadow: 0 0 14px var(--color-arcade-yellow); }
+.screen { margin: 12px 4px 0; background: var(--color-arcade-blue); border: 6px solid var(--color-arcade-navy-deep); border-radius: 16px; height: 170px; display: grid; place-items: center; position: relative; overflow: hidden; background-image: radial-gradient(circle at 50% 20%, rgba(255,255,255,.28), transparent 55%); }
+.screen::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(transparent 0 3px, rgba(0,0,0,.12) 3px 4px); }
+.screen .art { position: absolute; inset: 0; }
+.screen .art img { position: absolute; filter: drop-shadow(0 4px 0 rgba(0,0,0,.28)); transition: transform .25s; }
+.art.blitz .robin { left: 14%; bottom: 22px; height: 126px; }
+.art.blitz .jinx { right: 14%; bottom: 22px; height: 122px; }
+.art.blitz .floor { position: absolute; left: 0; right: 0; bottom: 18px; height: 4px; background: rgba(255,255,255,.35); border-radius: 2px; }
+.art.blitz .vs { position: absolute; left: 50%; top: 34%; transform: translate(-50%, -50%) rotate(-8deg); font-weight: 700; font-size: 2rem; color: var(--color-arcade-yellow); text-shadow: 0 3px 0 var(--color-arcade-red-dark), 0 6px 12px rgba(0,0,0,.5); animation: vs 1s ease-in-out infinite alternate; }
+.cab:hover .art.blitz .robin { transform: translateX(10px); }
+.cab:hover .art.blitz .jinx { transform: translateX(-10px); }
+.art.stack .reuben { left: 50%; bottom: 14px; height: 104px; transform: translateX(-40%); }
+.art.stack .ing { height: 26px; animation: fall 2.6s linear infinite; opacity: 0; }
+.art.stack .cheese { left: 22%; top: -30px; animation-delay: 0s; }
+.art.stack .tomato { left: 58%; top: -30px; animation-delay: .9s; height: 20px; }
+.art.stack .lettuce { left: 40%; top: -30px; animation-delay: 1.7s; height: 18px; }
+.art.stack .bread { left: 72%; top: -34px; animation-delay: 2.2s; height: 30px; }
+.cab:hover .art.stack .reuben { transform: translateX(-40%) translateY(-6px); }
+.art.pizza .order { left: 50%; top: 14px; height: 118px; transform: translateX(-56%); }
+.art.pizza .sauce { right: 10%; bottom: 10px; height: 78px; transform-origin: 50% 100%; animation: squeeze 1.4s ease-in-out infinite; }
+.cab:hover .art.pizza .order { transform: translateX(-56%) translateY(-4px); }
+.art.boy { background: linear-gradient(#5ec8ff 0 62%, #7ed957 62% 100%); }
+.art.boy .sunny { position: absolute; right: 14px; top: 12px; width: 34px; height: 34px; border-radius: 50%; background: var(--color-arcade-yellow); box-shadow: 0 0 0 5px rgba(251,245,122,.35), 0 0 18px var(--color-arcade-yellow); }
+.art.boy .theboy { left: 50%; bottom: 8px; width: 78%; transform: translateX(-50%); transform-origin: 50% 100%; animation: noby 3s ease-in-out infinite; }
+.art.soon { display: grid; place-items: center; align-content: center; gap: 6px; color: rgba(255,255,255,.55); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: .8rem; }
+.art.soon .zz { font-size: 1.6rem; color: var(--color-arcade-yellow); letter-spacing: .2em; animation: blink 2s steps(3) infinite; }
+.tag { display: block; margin: 10px 4px 0; padding: 5px 10px; border-radius: 10px; text-align: center; background: var(--color-arcade-navy-deep); color: var(--color-arcade-yellow); font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.panel { margin: 12px 4px 0; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; }
+.stick { width: 12px; height: 34px; background: var(--color-arcade-ink); border-radius: 6px; position: relative; margin-left: 10px; }
+.stick::before { content: ""; position: absolute; top: -18px; left: -9px; width: 30px; height: 30px; border-radius: 50%; background: var(--color-arcade-red); box-shadow: inset -4px -4px 0 var(--color-arcade-red-dark); }
+.panel .stick + .stick { margin-left: 24px; }
+.btns { display: flex; gap: 8px; }
+.btns i { width: 26px; height: 26px; border-radius: 50%; background: var(--color-arcade-yellow); box-shadow: inset -3px -3px 0 var(--color-arcade-yellow-dark); }
+.btns i:nth-child(2) { background: var(--color-arcade-blue); box-shadow: inset -3px -3px 0 var(--color-arcade-blue-dark); }
+.btns i:nth-child(3) { background: var(--color-arcade-red); box-shadow: inset -3px -3px 0 var(--color-arcade-red-dark); }
+.coinslot { margin: 14px auto 0; width: 54px; height: 10px; border-radius: 5px; background: var(--color-arcade-ink); box-shadow: inset 0 3px 0 rgba(0,0,0,.5); }
+
+/* the big lobby machine */
+.machine .body { background: var(--color-arcade-pink); border-radius: 30px 30px 20px 20px; padding: 16px 16px 20px; box-shadow: 0 10px 0 var(--color-arcade-pink-dark), 0 26px 40px rgba(0,0,0,.45); position: relative; }
+.machine .body::after { content: ""; position: absolute; left: 28px; right: 28px; bottom: -24px; height: 18px; background: var(--color-arcade-pink-dark); border-radius: 0 0 14px 14px; }
+.machine .marquee { font-size: 1.35rem; padding: 12px 16px 11px; }
+.machine .marquee::before, .machine .marquee::after { animation: blink 1.2s steps(2) infinite; background: var(--color-arcade-yellow); box-shadow: 0 0 14px var(--color-arcade-yellow); }
+.machine .marquee::after { animation-delay: .6s; }
+.machine .screen { height: auto; min-height: 300px; margin: 14px 6px 0; padding: 22px 26px; display: block; background-image: radial-gradient(circle at 50% 0%, rgba(255,255,255,.25), transparent 60%); }
+.machine .screen::after { z-index: 0; }
+.machine .screen > * { position: relative; z-index: 1; }
+.machine .panel { margin-top: 16px; padding: 0 20px; }
+.machine .btns i { width: 30px; height: 30px; }
+.machine .coinslot { margin-top: 16px; width: 70px; }
+
+/* the game frame: a pink bezel around whatever cabinet is playing */
+.frame { border: 6px solid var(--color-arcade-navy-deep); border-radius: 18px; box-shadow: 0 0 0 6px var(--color-arcade-pink), 0 12px 0 6px var(--color-arcade-pink-dark), 0 30px 40px rgba(0,0,0,.5); background: #000; overflow: hidden; }
+
+@keyframes blink { to { opacity: 0; } }
+@keyframes float { 0%, 100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-14px) rotate(6deg); } }
+@keyframes sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+@keyframes twinkle { 0%, 100% { transform: scale(1) rotate(0); } 50% { transform: scale(1.25) rotate(20deg); } }
+@keyframes vs { from { transform: translate(-50%, -50%) rotate(-8deg) scale(1); } to { transform: translate(-50%, -50%) rotate(-8deg) scale(1.15); } }
+@keyframes fall { 0% { transform: translateY(0) rotate(-8deg); opacity: 0; } 8% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translateY(170px) rotate(10deg); opacity: 0; } }
+@keyframes squeeze { 0%, 100% { transform: rotate(-6deg) scaleY(1); } 50% { transform: rotate(4deg) scaleY(.92); } }
+@keyframes noby { 0%, 100% { transform: translateX(-50%) scaleX(1); } 50% { transform: translateX(-50%) scaleX(1.18); } }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

@@ -8,7 +8,6 @@ export const config = {
   basePath: env('BASE_PATH', '/arcade/multiplayer').replace(/\/+$/, ''),   // prefix the proxy keeps in front of us
   dbPath: env('DB_PATH', '/tmp/arcade.db'),
   assetsDir: env('ASSETS_DIR', 'games/battleblitz/assets'),               // Battle Blitz art + sound (copied in at build time)
-  navDir: env('NAV_DIR', 'nav'),                                           // the arcade-wide nav bar script (copied in at build time)
   dev: env('DEV', '') === '1',
   logInputs: env('LOG_INPUTS', '') === '1',
   allowedOrigins: env('ALLOWED_ORIGINS', '').split(',').map(s => s.trim()).filter(Boolean),

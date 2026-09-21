@@ -1,15 +1,13 @@
-"""Dev server for the whole arcade (no caching, no Docker needed): python3 serve.py [port]
+"""Dev server for the game cabinets (no caching, no Docker needed): python3 serve.py [port]
 
-Mirrors the compose stack's routes so the landing page and its links work as deployed:
-  /                                          landing page (compose/nginx/html)
+Mirrors the proxy's game routes; the Vite front end (npm --prefix frontend run dev) proxies to it:
   /teen-titans-battle-blitz/web/             battleblitz/web/
   /lilo-and-stitch-sandwich-stacker/...      the repo (the game is at .../sandwichstacker/web/)
   /club-penguin-pizzatron/...                the repo (the game is at .../pizzatron/web/)
   /noby-noby-boy/web/                        nobynobyboy/web/
-  /arcade/multiplayer/...                    redirect to the Node dev server (npm --prefix multiplayer run dev)
 The repo folders are also served directly (e.g. /pizzatron/web/).
 """
-import os, sys, http.server, functools
+import sys, http.server, functools
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -21,8 +19,6 @@ GAMES = {
     '/club-penguin-pizzatron': ('pizzatron', 'repo'),
     '/noby-noby-boy': ('nobynobyboy', 'folder'),
 }
-LANDING = 'compose/nginx/html'
-MP_DEV_URL = os.environ.get('MP_DEV_URL', 'http://localhost:8766/arcade/multiplayer/')
 
 
 class H(http.server.SimpleHTTPRequestHandler):
@@ -33,8 +29,6 @@ class H(http.server.SimpleHTTPRequestHandler):
 
     def do_GET(self):
         path = self.path.split('?', 1)[0]
-        if path == '/arcade/multiplayer' or path.startswith('/arcade/multiplayer/'):
-            self.send_response(302); self.send_header('Location', MP_DEV_URL + path[len('/arcade/multiplayer/'):]); self.end_headers(); return
         for slug, (folder, layout) in GAMES.items():
             if path == slug or path == slug + '/':
                 target = f'{slug}/{folder}/web/' if layout == 'repo' else f'{slug}/web/'
@@ -42,9 +36,9 @@ class H(http.server.SimpleHTTPRequestHandler):
             if path.startswith(slug + '/'):
                 self.path = path[len(slug):] if layout == 'repo' else '/' + folder + path[len(slug):]
                 return super().do_GET()
-        # the landing page and its assets
-        if path == '/' or path.startswith('/img/') or path.startswith('/fonts/') or path.startswith('/nav/') or path == '/index.html':
-            self.path = '/' + LANDING + (path if path != '/' else '/index.html')
+        if path == '/':
+            self.send_response(200); self.send_header('Content-Type', 'text/plain'); self.end_headers()
+            self.wfile.write(b'game cabinets only - the arcade front end is at http://localhost:5173/ (npm --prefix frontend run dev)\n'); return
         return super().do_GET()
 
 

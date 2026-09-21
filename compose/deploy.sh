@@ -12,7 +12,7 @@ set -euo pipefail
 
 ARCADE_HOST="${ARCADE_HOST:-elizabeth@192.168.1.179}"
 REMOTE_DIR="${ARCADE_REMOTE_DIR:-~/arcade}"
-IMAGES=(arcade/battleblitz arcade/sandwichstacker arcade/pizzatron arcade/nobynobyboy arcade/multiplayer)
+IMAGES=(arcade/proxy arcade/battleblitz arcade/sandwichstacker arcade/pizzatron arcade/nobynobyboy arcade/multiplayer)
 
 cd "$(dirname "$0")"
 

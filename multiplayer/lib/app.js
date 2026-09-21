@@ -22,10 +22,8 @@ export function createApp(config) {
   });
 
   const serveStatic = makeStatic([
-    { url: '/', dir: path.join(ROOT, 'web') },
     { url: '/games/battleblitz/web/', dir: path.join(ROOT, 'games/battleblitz/web') },
     { url: '/games/battleblitz/assets/', dir: path.resolve(ROOT, config.assetsDir), immutable: true },
-    { url: '/nav/', dir: path.resolve(ROOT, config.navDir) },
   ]);
 
   const json = (res, code, body) => { res.writeHead(code, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }); res.end(JSON.stringify(body)); };
@@ -50,6 +48,7 @@ export function createApp(config) {
         return m ? json(res, 200, db.eventsFor(m)) : json(res, 400, { error: 'match=' });
       }
       if (p.startsWith('/api/')) return json(res, 404, { error: 'not found' });
+      if (p === '/' || p === '') return json(res, 200, { service: 'arcade-multiplayer', lobby: 'the arcade front end at /multiplayer', api: config.basePath + '/api', ws: config.basePath + '/ws' });
       if (await serveStatic(req, res, p)) return;
       res.writeHead(404, { 'Content-Type': 'text/plain' }); res.end('not found');
     } catch (e) {

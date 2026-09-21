@@ -40,7 +40,7 @@ test('http: healthz, stats, unknown session, static mounts', async () => {
   const stats = await (await fetch(`${origin}/arcade/multiplayer/api/stats`)).json();
   assert.deepEqual(Object.keys(stats).sort(), ['online', 'playing', 'queued']);
   assert.equal((await fetch(`${origin}/arcade/multiplayer/api/session/nope`)).status, 404);
-  assert.equal((await fetch(`${origin}/arcade/multiplayer/`)).status, 200);
+  assert.equal((await (await fetch(`${origin}/arcade/multiplayer/`)).json()).service, 'arcade-multiplayer');
   assert.equal((await fetch(`${origin}/`)).status, 200);                       // base path is optional (dev)
   const game = await fetch(`${origin}/arcade/multiplayer/games/battleblitz/web/`);
   assert.equal(game.status, 200);
