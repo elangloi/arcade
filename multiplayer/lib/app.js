@@ -25,6 +25,7 @@ export function createApp(config) {
     { url: '/', dir: path.join(ROOT, 'web') },
     { url: '/games/battleblitz/web/', dir: path.join(ROOT, 'games/battleblitz/web') },
     { url: '/games/battleblitz/assets/', dir: path.resolve(ROOT, config.assetsDir), immutable: true },
+    { url: '/nav/', dir: path.resolve(ROOT, config.navDir) },
   ]);
 
   const json = (res, code, body) => { res.writeHead(code, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }); res.end(JSON.stringify(body)); };

@@ -43,7 +43,7 @@ class H(http.server.SimpleHTTPRequestHandler):
                 self.path = path[len(slug):] if layout == 'repo' else '/' + folder + path[len(slug):]
                 return super().do_GET()
         # the landing page and its assets
-        if path == '/' or path.startswith('/img/') or path.startswith('/fonts/') or path == '/index.html':
+        if path == '/' or path.startswith('/img/') or path.startswith('/fonts/') or path.startswith('/nav/') or path == '/index.html':
             self.path = '/' + LANDING + (path if path != '/' else '/index.html')
         return super().do_GET()
 

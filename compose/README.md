@@ -32,6 +32,6 @@ First-time server setup: `curl -fsSL https://get.docker.com | sudo sh && sudo us
 1. Give the game a `Dockerfile` that serves it on port 80 with **relative** URLs (so it works under a path prefix). Flash ports build from the repo root (`context: ..`) so they can copy the shared `flash/web/player.js`.
 2. Add a service to `docker-compose.yml`.
 3. Add a `location /<slug>/` block to `nginx/conf.d/arcade.conf` (copy an existing one: `set $up_<service> http://<service>:80; rewrite ^/<slug>/(.*)$ /$1 break; proxy_pass $up_<service>;` — the variable + resolver means a rebuilt container is re-resolved without restarting the proxy).
-4. Add a card to `nginx/html/index.html`.
+4. Add a card to `nginx/html/index.html`, and put `<script src="/nav/nav.js" defer></script>` in the game's page so it gets the arcade nav bar (add the game to the list in `nginx/html/nav/nav.js`).
 
 Tunables: `MP_DIFFICULTY=1..3` (Battle Blitz 2P health tier; default 1) via the environment or a `.env` next to the compose file.

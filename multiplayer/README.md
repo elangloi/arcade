@@ -14,6 +14,7 @@ lib/protocol.js           message validation + fighter tables
 lib/db.js                 node:sqlite: sessions, matches, events
 lib/static.js             tiny static server
 web/                      landing (index.html), lobby (lobby.html + lobby.js), style.css, fonts
+nav/                      not in git — the arcade-wide nav bar, COPY'd from compose/nginx/html/nav
 games/battleblitz/web/    the forked game: main.js, mp.js (lockstep client), runtime/, game/
 games/battleblitz/assets/ not in git — COPY'd from battleblitz/assets by the Dockerfile,
                           served from ASSETS_DIR (../battleblitz/assets) in dev
@@ -36,11 +37,14 @@ in the queue are matched. In the compose stack it's built from the repo root:
 
 1. Tab opens → `POST api/session` → a UUID for this browser tab (kept in `sessionStorage`).
 2. Name → `hello` + `queue`. Two queued sessions become a match in state `picking`.
-3. **Both players see both rosters.** The first `pick` claims that fighter's side (Titans for 1–5,
-   villains for 6–10) and locks the opponent into the other side; later picks outside your side are
-   refused (`wrong_side`). Picks mirror live; `lock` from both → `fight`.
-4. Both tabs navigate to `games/battleblitz/web/?match=&session=`. The game jumps straight to the
-   versus screen, loads, and sends `ready`. When both are ready the server sends `start`.
+3. Both tabs navigate to `games/battleblitz/web/?match=&session=`, which shows the game's **own
+   fighter-select screen** (every fighter unlocked, the single-player buttons hidden). Clicking a
+   portrait locks it in (`lock{fighter}`); the first click of the match claims that fighter's side
+   (Titans for 1–5, villains for 6–10) and locks the opponent into the other — their screen flips to
+   the original's "play as villains" layout if needed. Picks mirror live; clicks outside your side are
+   refused (`wrong_side`). Instructions live under the frame, like the fight's key help.
+4. Both locked → `fight`: the game jumps to the versus screen, loads, and sends `ready`. When both
+   are ready the server sends `start`.
 5. **Deterministic lockstep.** Both browsers run the full game as "titan vs villain" (identical
    simulation); only key events cross the wire. Each frame's local key events are stamped with
    `frame + delay` (delay 2–6 frames, chosen from the lobby RTT) and relayed verbatim; a client only

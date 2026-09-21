@@ -18,7 +18,8 @@ const SUM_EVERY = 30;
 const STALL_OVERLAY_MS = 300;
 
 export const mp = {
-  phase: 'connecting',     // connecting | free | waitReady | lockstep | ended | dead
+  phase: 'connecting',     // connecting | select | free | waitReady | lockstep | ended | dead
+  matchState: null, sel: { mySide: null, myPick: null, myLocked: false, oppPick: null, oppLocked: false },
   session: null, matchId: null, side: null, match: null, opponent: null,
   ws: null, delay: 3, seed: 0,
   simFrame: 0, local: new Map(), remote: new Map(), pending: [],
@@ -45,10 +46,83 @@ export async function install({ session, match, mute } = {}) {
 export function begin() {
   if (mp.phase === 'dead') return;
   if (mp.offline) { setStatus('self test'); return; }
+  if (mp.matchState === 'picking') startSelect(); else startFight();
+}
+
+// ---------------------------------------------------------------- fighter select (the original screen, online)
+
+const SIDE_OF = id => (id <= 5 ? 'titan' : 'villain');
+const STAGE_LABEL = { 1: 'SCREEN_SELECTFIGHTER_ROBIN', 2: 'SCREEN_SELECTFIGHTER_RAVEN', 3: 'SCREEN_SELECTFIGHTER_CYBORG', 4: 'SCREEN_SELECTFIGHTER_STARFIRE',
+  5: 'SCREEN_SELECTFIGHTER_BEASTBOY', 6: 'SCREEN_SELECTFIGHTER_JINX', 7: 'SCREEN_SELECTFIGHTER_GIZMO', 8: 'SCREEN_SELECTFIGHTER_MAMMOTH',
+  9: 'SCREEN_SELECTFIGHTER_CINDERBLOCK', 10: 'SCREEN_SELECTFIGHTER_PLASMUS' };
+const SIDE_LABEL = { titan: 'the Titans', villain: 'the villains' };
+
+// Show the game's own SCREEN_SELECTFIGHTER with every fighter unlocked. Clicking a portrait locks it in
+// (and, for the first click of the match, claims that side). The opponent's pick is mirrored live.
+function startSelect() {
+  const g = G.g;
+  for (let i = 1; i <= g.FIGHTER_COUNT; i++) {
+    g.unlockedPlayers.setAt(i, 1); g.availablePlayers.setAt(i, 1); g.availableEnemies.setAt(i, 1);
+    for (let p = 1; p <= g.FIGHTER_COUNT; p++) g.unlockedEnemies.getAt(p).setAt(i, 1);
+  }
+  g.playMode = g.PLAYMODE_AS_TITANS;
+  g.playerID = g.titanID = 1; g.enemyID = g.villainID = 6;
+  mp.phase = 'select';
+  g.goFrame = D.label('SCREEN_SELECTFIGHTER');
+  selectHelp();
+}
+
+// Where the picks stand -> the screen's globals + the help line under the frame.
+function syncSelect() {
+  const g = G.g, sel = mp.sel;
+  const scr = g.main && g.main.screen;
+  if (!scr || !(scr instanceof game.Class_SelectFighterScreen)) return;
+  const mode = sel.mySide === 'villain' ? g.PLAYMODE_AS_VILLAINS : g.PLAYMODE_AS_TITANS;
+  if (g.playMode !== mode) scr.setPlayMode(mode);     // the original's "PLAY AS VILLAINS" swap
+  g.titanID = (sel.mySide === 'titan' ? sel.myPick : sel.oppPick) ?? 1;      // Robin / Jinx until someone picks
+  g.villainID = (sel.mySide === 'villain' ? sel.myPick : sel.oppPick) ?? 6;
+  g.playerID = mode === g.PLAYMODE_AS_TITANS ? g.titanID : g.villainID;
+  g.enemyID = mode === g.PLAYMODE_AS_TITANS ? g.villainID : g.titanID;
+  scr.jumpToCharacerStage();          // big figure on the left = playerID (via the frame label)
+  scr.setOpponent(g.enemyID);         // right figure, head, name/moves bar, tags
+  selectHelp();
+}
+
+function selectHelp() {
+  const sel = mp.sel, opp = mp.opponent?.name ?? 'your opponent';
+  let help, status;
+  if (sel.myLocked && sel.oppLocked) { help = 'Both fighters locked'; status = 'get ready…'; }
+  else if (sel.myLocked) { help = `You're ${NAMES[sel.myPick]} for ${SIDE_LABEL[sel.mySide]}`; status = `waiting for ${opp} to pick…`; }
+  else if (sel.mySide) { help = `${opp} took ${SIDE_LABEL[sel.mySide === 'titan' ? 'villain' : 'titan']} — click one of ${SIDE_LABEL[sel.mySide]} to lock in`; status = 'pick your fighter'; }
+  else { help = 'Click a fighter to lock in — the first click picks your side, the other player gets the opposite one'; status = 'pick your fighter'; }
+  setHelp(help); setStatus(status);
+}
+
+function canPick(id) {
+  return mp.phase === 'select' && !mp.sel.myLocked && (!mp.sel.mySide || SIDE_OF(id) === mp.sel.mySide);
+}
+
+function pickFighter(id) {
+  const g = G.g;
+  if (!canPick(id)) { g.main.audioMgr.playSound(g.assets.AUDIO.SFX_INTERFACE_MISCLICK, 60, g.SFX_EVENT_PRIORITY_LOW); return; }
+  g.main.audioMgr.playSound(g.assets.AUDIO.SFX_INTERFACE_MOUSEDOWNCHARACTERSWITCH, 100, g.SFX_EVENT_PRIORITY_LOW);
+  mp.sel.myLocked = true; mp.sel.myPick = id;   // optimistic; the server's `locked` confirms
+  if (!mp.sel.mySide) mp.sel.mySide = SIDE_OF(id);
+  send({ t: 'lock', fighter: id });
+  syncSelect();
+}
+
+// Both locked -> the server said `fight`: canonical globals and off to the versus screen.
+function startFight() {
+  hideModal('result'); hideModal('away');
+  mp.local = new Map(); mp.remote = new Map(); mp.pending = []; mp.simFrame = 0;
   applyMatchGlobals();
   mp.phase = 'free';
-  G.g.goFrame = D.label('SCREEN_VERSUS');
+  mp.ui.me.textContent = `you · ${mp.side === 'titan' ? 'Titans' : 'villains'} · ${NAMES[mp.match[mp.side]]}`;
+  setHelp('Arrows: move / jump · Down: block · Z: punch · X: kick · Esc: leave the match');
   setStatus('loading the fight…');
+  G.g.goFrame = D.label('SCREEN_VERSUS');
+  D.resume();
 }
 
 function applyMatchGlobals() {
@@ -92,11 +166,11 @@ function onWelcome(w, first) {
     if (v && v.rematchOf === mp.matchId) { mp.matchId = v.id; } else { fatal('No such match', 'This match is over. Back to the lobby to find a new one.'); return; }
   }
   mp.match = { titan: v.fighters.titan, villain: v.fighters.villain, seed: v.seed, delay: v.delay, difficulty: v.difficulty };
-  mp.side = v.side; mp.opponent = v.opponent; mp.delay = v.delay; mp.seed = v.seed;
-  mp.ui.opp.textContent = `${mp.opponent.name} · ${mp.opponent.side === 'titan' ? 'Titans' : 'villains'}`;
-  mp.ui.me.textContent = `you · ${mp.side === 'titan' ? 'Titans' : 'villains'} · ${NAMES[mp.match[mp.side]]}`;
+  mp.side = v.side; mp.opponent = v.opponent; mp.delay = v.delay; mp.seed = v.seed; mp.matchState = v.state;
+  mp.sel = { mySide: v.side, myPick: v.pick, myLocked: !!v.locked, oppPick: v.opponent.pick, oppLocked: !!v.opponent.locked };
+  updateBar();
   if (first) {
-    if (v.state !== 'loading' && v.state !== 'playing') { fatal('Match is over', `This match already ended (${v.state}).`); return; }
+    if (v.state !== 'picking' && v.state !== 'loading' && v.state !== 'playing') { fatal('Match is over', `This match already ended (${v.state}).`); return; }
     if (v.state === 'playing') { fatal('Match in progress', 'This fight is already running (was the page reloaded?). It counts as a forfeit — back to the lobby.'); send({ t: 'leave' }); return; }
     return;
   }
@@ -104,6 +178,15 @@ function onWelcome(w, first) {
   hideModal('reconnect');
   if (mp.phase === 'lockstep') send({ t: 'resume', have: highestFrame(mp.remote) });
   else if (mp.phase === 'waitReady') send({ t: 'ready' });
+  else if (mp.phase === 'select') { if (v.state === 'loading') { mp.match = { ...mp.match }; startFight(); } else syncSelect(); }
+}
+
+function updateBar() {
+  if (!mp.ui) return;
+  const sideName = s => (s === 'titan' ? 'Titans' : s === 'villain' ? 'villains' : 'no side yet');
+  const myF = mp.side && mp.match?.[mp.side];
+  mp.ui.opp.textContent = `${mp.opponent?.name ?? '?'} · ${sideName(mp.opponent?.side)}`;
+  mp.ui.me.textContent = `you · ${sideName(mp.side)}${myF ? ' · ' + NAMES[myF] : ''}`;
 }
 
 function onMessage(m) {
@@ -128,11 +211,27 @@ function onMessage(m) {
     case 'rematch_declined':
       modal('result', 'No rematch', `${mp.opponent.name} went back to the lobby.`, [['Back to lobby', leaveToLobby]]);
       break;
-    case 'fight':                 // a rematch
+    case 'sides':
+      mp.sel.mySide = m.titan === mp.session ? 'titan' : 'villain';
+      mp.side = mp.sel.mySide;
+      if (mp.opponent) mp.opponent.side = mp.side === 'titan' ? 'villain' : 'titan';
+      updateBar(); syncSelect();
+      break;
+    case 'picked':
+      if (m.session === mp.session) mp.sel.myPick = m.fighter; else mp.sel.oppPick = m.fighter;
+      syncSelect();
+      break;
+    case 'locked':
+      if (m.session === mp.session) { mp.sel.myLocked = true; mp.sel.myPick = m.fighter; }
+      else { mp.sel.oppLocked = true; mp.sel.oppPick = m.fighter; }
+      syncSelect();
+      break;
+    case 'fight':                 // both locked (first fight or a rematch)
       mp.matchId = m.matchId;
       mp.match = { titan: m.titan, villain: m.villain, seed: m.seed, delay: m.delay, difficulty: m.difficulty };
-      mp.side = m.side; mp.delay = m.delay; mp.seed = m.seed;
-      restartForRematch();
+      mp.side = m.side; mp.delay = m.delay; mp.seed = m.seed; mp.matchState = 'loading';
+      if (mp.opponent) mp.opponent.side = mp.side === 'titan' ? 'villain' : 'titan';
+      startFight();
       break;
     case 'opponent_away':
       if (m.hidden) modal('away', `${mp.opponent.name} is away`, m.reason === 'disconnected' ? 'Their connection dropped — waiting for them to come back…' : 'They switched tabs. The fight waits.', []);
@@ -177,6 +276,44 @@ function patchGame() {
     }
     origBranch.call(this);
   };
+
+  // The fighter select screen, online: Esc works there too, portraits lock in on click, and the
+  // single-player buttons (CONTROLS / FIGHT / PLAY AS VILLAINS) are hidden.
+  const SS = game.Class_SelectFighterScreen.prototype;
+  const origSelLoad = SS.load, origSelUnload = SS.unload, origSelUpdate = SS.update;
+  SS.load = function () { origSelLoad.call(this); G.g.main.keyMgr.addListener(mpListener); };
+  SS.unload = function () { G.g.main.keyMgr.removeListener(mpListener); D.sprite(41).visible = 1; origSelUnload.call(this); };
+  SS.update = function () {
+    origSelUpdate.call(this);
+    if (mp.phase !== 'select') return;
+    // The tag/portrait sprites only exist from the stage's label frame on; the original refreshes
+    // them once at stage init, which can land before they begin. Refresh on the label frame too.
+    if (this.screenStage >= 2 && D.frame === D.label(STAGE_LABEL[G.g.playerID])) {
+      this.updateSprites();
+      // villain stages draw the opponent's figure on the left from a beginSprite that can predate the pick
+      if (G.g.playMode === G.g.PLAYMODE_AS_VILLAINS) D.sprite(18).member = D.member('loop_figure_' + this.fighterNames.getAt(G.g.enemyID), 'select_screen');
+    }
+    D.sprite(41).visible = 0;   // the CONTROLS / FIGHT / PLAY AS VILLAINS button plate
+  };
+  for (const B of [game.Behavior_SelectScreenPlayerButton, game.Behavior_SelectScreenEnemyButton]) {
+    B.prototype.mouseEnter = function () {
+      if (!canPick(this.fighterID)) return;
+      D.sprite(this.fighterID + 50).visible = 1;
+      D.setCursor(280);
+      G.g.main.audioMgr.playSound(G.g.assets.AUDIO.SFX_INTERFACE_MOUSEOVERCHARACTERS, 75, G.g.SFX_EVENT_PRIORITY_LOW);
+    };
+    B.prototype.mouseDown = function () {
+      D.sprite(this.fighterID + 50).visible = 0;
+      D.setCursor(-1);
+      pickFighter(this.fighterID);
+    };
+  }
+  for (const B of [game.Behavior_SelectScreenFightButton, game.Behavior_SelectScreenControlButton,
+    game.Behavior_SelectScreenVillainsButton, game.Behavior_SelectScreenHeroesButton]) {
+    B.prototype.beginSprite = function () { D.sprite(this.spriteNum).visible = 0; };
+    B.prototype.endSprite = function () { D.sprite(this.spriteNum).visible = 1; };
+    B.prototype.mouseEnter = B.prototype.mouseLeave = B.prototype.mouseUp = B.prototype.mouseDown = function () {};
+  }
 
   D.runLoop = mpLoop;
 }
@@ -266,7 +403,7 @@ function mpLoop() {
       if (now - D.lastTick > 200) D.lastTick = now;
       try {
         if (mp.phase === 'lockstep') { if (!stepLockstep()) { D.lastTick = now; break; } }
-        else if (mp.phase === 'free') D.tick();
+        else if (mp.phase === 'free' || mp.phase === 'select') D.tick();
         else { D.lastTick = now; break; }          // waitReady / ended / connecting: hold the frame
       } catch (e) { console.error('tick failed at frame', D.frame, e); D.errors.push(String(e && e.stack || e)); }
       n++;
@@ -319,20 +456,9 @@ function onResult(r) {
   modal('result', title, body, buttons);
 }
 
-function restartForRematch() {
-  hideModal('result'); hideModal('away');
-  mp.local = new Map(); mp.remote = new Map(); mp.pending = []; mp.simFrame = 0;
-  applyMatchGlobals();                          // SCORE mutates villainID/enemyID; put the picks back
-  mp.phase = 'free';
-  mp.ui.me.textContent = `you · ${mp.side === 'titan' ? 'Titans' : 'villains'} · ${NAMES[mp.match[mp.side]]}`;
-  setStatus('rematch!');
-  G.g.goFrame = D.label('SCREEN_VERSUS');
-  D.resume();
-}
-
 function askLeave() {
   if (mp.phase === 'ended' || mp.phase === 'dead' || mp.offline) return;
-  modal('leave', 'Leave the match?', mp.phase === 'lockstep' ? 'Leaving now counts as a forfeit.' : 'Your opponent goes back to the lobby too.',
+  modal('leave', 'Leave the match?', mp.phase === 'lockstep' ? 'Leaving now counts as a forfeit.' : mp.phase === 'select' ? `${mp.opponent?.name ?? 'Your opponent'} goes back to the lobby too.` : 'Your opponent goes back to the lobby too.',
     [['Keep fighting', () => hideModal('leave')], ['Leave', leaveToLobby]]);
 }
 
@@ -385,10 +511,11 @@ function buildOverlay() {
   root.innerHTML = `<div class="bar"><span class="me">you</span><span class="st"></span><span class="opp">…</span><span class="rtt"></span></div>`;
   document.body.appendChild(root);
   mp.ui = { root, me: root.querySelector('.me'), opp: root.querySelector('.opp'), status: root.querySelector('.st'), rtt: root.querySelector('.rtt'), modals: {} };
-  document.addEventListener('visibilitychange', () => { if (mp.phase === 'lockstep' || mp.phase === 'waitReady') send({ t: 'away', hidden: document.hidden }); });
+  document.addEventListener('visibilitychange', () => { if (mp.phase === 'lockstep' || mp.phase === 'waitReady' || mp.phase === 'select') send({ t: 'away', hidden: document.hidden }); });
   setInterval(() => { if (mp.ws && mp.ws.readyState === 1) send({ t: 'ping', ts: performance.now() }); }, 5000);
 }
 function setStatus(s) { if (mp.ui) mp.ui.status.textContent = s; }
+function setHelp(s) { const el = document.getElementById('help'); if (el) el.textContent = s; }
 function updateRtt() { if (mp.ui && mp.rtt != null) mp.ui.rtt.textContent = `${Math.round(mp.rtt)} ms · delay ${mp.delay}f`; }
 function modal(key, title, body, buttons) {
   hideModal(key);

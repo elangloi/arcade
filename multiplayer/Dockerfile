@@ -16,6 +16,7 @@ COPY multiplayer/games/battleblitz/web/ ./games/battleblitz/web/
 # The forked client keeps the original's relative ../assets/ URLs; the art comes from the
 # untouched single-player folder at build time.
 COPY battleblitz/assets/ ./games/battleblitz/assets/
+COPY compose/nginx/html/nav/ ./nav/
 
 USER node
 EXPOSE 80
