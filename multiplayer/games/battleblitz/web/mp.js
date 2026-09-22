@@ -4,7 +4,7 @@
 // BOTH machines so the simulation is identical); only key events cross the wire, each stamped with
 // the frame it must be applied on (current frame + input delay). The local keyboard drives whichever
 // fighter this session locked in; the opponent's adapter is fed from their packets.
-import { G, PL, setRandomSource } from './runtime/lingo.js';
+import { G, PL, setRandomSource, point, rect, _add, _sub, _mul, _fdiv } from './runtime/lingo.js';
 import { D } from './runtime/director.js';
 import * as game from './game/classes.js';
 
@@ -292,11 +292,7 @@ function patchGame() {
     if (mp.phase !== 'select') return;
     // The tag/portrait sprites only exist from the stage's label frame on; the original refreshes
     // them once at stage init, which can land before they begin. Refresh on the label frame too.
-    if (this.screenStage >= 2 && D.frame === D.label(STAGE_LABEL[G.g.playerID])) {
-      this.updateSprites();
-      // villain stages draw the opponent's figure on the left from a beginSprite that can predate the pick
-      if (G.g.playMode === G.g.PLAYMODE_AS_VILLAINS) D.sprite(18).member = D.member('loop_figure_' + this.fighterNames.getAt(G.g.enemyID), 'select_screen');
-    }
+    if (this.screenStage >= 2 && D.frame === D.label(STAGE_LABEL[G.g.playerID])) this.updateSprites();
     D.sprite(41).visible = 0;   // the CONTROLS / FIGHT / PLAY AS VILLAINS button plate
   };
   for (const B of [game.Behavior_SelectScreenPlayerButton, game.Behavior_SelectScreenEnemyButton]) {
@@ -318,6 +314,27 @@ function patchGame() {
     B.prototype.endSprite = function () { D.sprite(this.spriteNum).visible = 1; };
     B.prototype.mouseEnter = B.prototype.mouseLeave = B.prototype.mouseUp = B.prototype.mouseDown = function () {};
   }
+
+  // The camera. Both machines simulate the titan as `player`, and the view rectangle feeds the
+  // simulation (projectiles die past its edges, summons aim at it), so that stays canonical.
+  // What's drawn, though, follows whoever this player is: the same weighting with the roles
+  // swapped for the villain side, used only by scenePosToStagePos (paint code).
+  const SC = game.Class_Scene.prototype;
+  const origSceneUpdate = SC.update;
+  SC.update = function () {
+    origSceneUpdate.call(this);
+    if (mp.side !== 'villain') { this.drawUpperLeft = this.viewUpperLeft; return; }
+    const mePos = _sub(this.game.enemy.getPos(), point(0, 100));
+    const otherPos = _sub(this.game.player.getPos(), point(0, 100));
+    let weight = 1.0 - (Math.abs(mePos.locH - otherPos.locH) - 300) / 600.0;
+    weight = Math.max(0.0, Math.min(1.0, weight));
+    const c = _fdiv(_add(mePos, _mul(otherPos, weight)), 1.0 + weight);
+    c.locH = Math.max(this.viewCenterMinX, Math.min(this.viewCenterMaxX, c.locH));
+    c.locV = Math.max(this.viewCenterMinY, Math.min(this.viewCenterMaxY, c.locV));
+    const r = _add(this.viewOriginRect, rect(c, c));
+    this.drawUpperLeft = point(r.left, r.top);
+  };
+  SC.scenePosToStagePos = function (p) { return _sub(p, this.drawUpperLeft || this.viewUpperLeft); };
 
   D.runLoop = mpLoop;
 }
