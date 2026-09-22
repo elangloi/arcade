@@ -169,9 +169,6 @@
 .cab:hover .art.cards .c1 { transform: translateX(-50%) translateX(-60px) rotate(-18deg) translateY(-6px); }
 .cab:hover .art.cards .c2 { transform: translateX(-50%) translateY(-16px); }
 .cab:hover .art.cards .c3 { transform: translateX(-50%) translateX(60px) rotate(18deg) translateY(-6px); }
-.art.boy { background: linear-gradient(#5ec8ff 0 62%, #7ed957 62% 100%); }
-.art.boy .sunny { position: absolute; right: 14px; top: 12px; width: 34px; height: 34px; border-radius: 50%; background: var(--color-arcade-yellow); box-shadow: 0 0 0 5px rgba(251,245,122,.35), 0 0 18px var(--color-arcade-yellow); }
-.art.boy .theboy { left: 50%; bottom: 8px; width: 78%; transform: translateX(-50%); transform-origin: 50% 100%; animation: noby 3s ease-in-out infinite; }
 .art.soon { display: grid; place-items: center; align-content: center; gap: 6px; color: rgba(255,255,255,.55); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: .8rem; }
 .art.soon .zz { font-size: 1.6rem; color: var(--color-arcade-yellow); letter-spacing: .2em; animation: blink 2s steps(3) infinite; }
 .tag { display: block; margin: 10px 4px 0; padding: 5px 10px; border-radius: 10px; text-align: center; background: var(--color-arcade-navy-deep); color: var(--color-arcade-yellow); font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -208,6 +205,5 @@
 @keyframes vs { from { transform: translate(-50%, -50%) rotate(-8deg) scale(1); } to { transform: translate(-50%, -50%) rotate(-8deg) scale(1.15); } }
 @keyframes fall { 0% { transform: translateY(0) rotate(-8deg); opacity: 0; } 8% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translateY(170px) rotate(10deg); opacity: 0; } }
 @keyframes squeeze { 0%, 100% { transform: rotate(-6deg) scaleY(1); } 50% { transform: rotate(4deg) scaleY(.92); } }
-@keyframes noby { 0%, 100% { transform: translateX(-50%) scaleX(1); } 50% { transform: translateX(-50%) scaleX(1.18); } }
 @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

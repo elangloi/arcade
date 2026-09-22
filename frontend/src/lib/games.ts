@@ -1,7 +1,7 @@
 // The arcade's catalogue. Every cabinet is a separate static app served behind the proxy; the
 // shell shows it inside a frame at its route. `mode` decides which menu it lives under.
 export type GameMode = 'single' | 'multi'
-export type ArtKind = 'blitz' | 'stack' | 'pizza' | 'cards' | 'boy' | 'blitz2p'
+export type ArtKind = 'blitz' | 'stack' | 'pizza' | 'cards' | 'blitz2p'
 
 export interface Game {
   slug: string          // route segment in the shell (/single/:slug, /multiplayer/:slug)
@@ -24,8 +24,6 @@ export const GAMES: Game[] = [
     src: '/club-penguin-pizzatron/pizzatron/web/', aspect: 1.3, help: 'Click an ingredient, drop it on the pizza · match the order before it leaves the belt' },
   { slug: 'cardjitsu', title: 'Club Penguin', subtitle: 'Card-Jitsu', tag: 'Disney · 2008', mode: 'single', art: 'cards',
     src: '/club-penguin-card-jitsu/cardjitsu/web/', aspect: 1.35, help: 'Click a card to play it · fire beats snow, snow beats water, water beats fire · same element: higher number wins' },
-  { slug: 'nobynobyboy', title: 'Noby Noby Boy', subtitle: 'a homage', tag: 'after Keita Takahashi · 2009', mode: 'single', art: 'boy',
-    src: '/noby-noby-boy/web/', aspect: 16 / 9, help: "WASD: BOY's head · arrows: his butt · E: eat · R: report to GIRL · H: manual" },
   { slug: 'battleblitz', title: 'Teen Titans', subtitle: 'Battle Blitz · 2P online', tag: 'Titans vs villains · best of 3', mode: 'multi', art: 'blitz2p',
     src: '/arcade/multiplayer/games/battleblitz/web/', help: 'Arrows: move / jump · Down: block · Z: punch · X: kick · Esc: leave the match' },
 ]

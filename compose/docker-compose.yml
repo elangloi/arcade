@@ -20,7 +20,6 @@ services:
       - sandwichstacker
       - pizzatron
       - cardjitsu
-      - nobynobyboy
       - multiplayer
 
   battleblitz:
@@ -61,13 +60,6 @@ services:
     expose:
       - "80"
 
-  nobynobyboy:
-    build: ../nobynobyboy
-    image: arcade/nobynobyboy:latest
-    container_name: arcade-nobynobyboy
-    restart: unless-stopped
-    expose:
-      - "80"
 
   # Node service: multiplayer landing + lobby + the online Battle Blitz fork + its WebSocket.
   # Built from the repo root so battleblitz/assets can be copied in read-only.

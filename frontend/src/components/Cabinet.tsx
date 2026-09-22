@@ -21,8 +21,6 @@ function Art({ kind }: { kind: ArtKind }) {
         <span className="cardj c2"><img src="/img/cardjitsu/art29.svg" alt="" /><img className="el" src="/img/cardjitsu/elem2.svg" alt="water" /></span>
         <span className="cardj c3"><img src="/img/cardjitsu/art18.svg" alt="" /><img className="el" src="/img/cardjitsu/elem3.svg" alt="snow" /></span>
       </span>)
-    case 'boy': return (
-      <span className="art boy"><span className="sunny" /><img className="theboy" src="/img/nobynobyboy/boy.svg" alt="BOY" /></span>)
   }
 }
 

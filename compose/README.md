@@ -25,7 +25,6 @@ First-time server setup: `curl -fsSL https://get.docker.com | sudo sh && sudo us
 | `/lilo-and-stitch-sandwich-stacker/` | the `sandwichstacker` container (built from `../sandwichstacker/Dockerfile`) |
 | `/club-penguin-pizzatron/` | the `pizzatron` container (built from `../pizzatron/Dockerfile`) |
 | `/club-penguin-card-jitsu/` | the `cardjitsu` container (built from `../cardjitsu/Dockerfile`) |
-| `/noby-noby-boy/` | the `nobynobyboy` container (built from `../nobynobyboy/Dockerfile`) |
 | `/arcade/multiplayer/` | the `multiplayer` Node container (built from the repo root with `../multiplayer/Dockerfile`; `/arcade/multiplayer/ws` is upgraded to a WebSocket) |
 
 ## Adding a game
