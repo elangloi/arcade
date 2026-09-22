@@ -293,6 +293,7 @@ export async function boot(svgEl) {
 
   // ---- the match ------------------------------------------------------------------------------
   const g = { p0: null, p1: null, round: 0, over: false, deck: [], quitting: false, playing: false };
+  if (DEBUG) window.cjg = g;   // poke at the match from the console with ?debug=1
   const msg = t => { main.tf_msg.text = t; };
   const nameFields = () => { main.tf_name0.text = g.p0.nickname.toUpperCase(); main.tf_name1.text = g.p1.nickname.toUpperCase(); };
   const draw = () => { if (!g.deck.length) g.deck = CARDS.slice().sort(() => Math.random() - 0.5); return new Card(g.deck.pop()); };

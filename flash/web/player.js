@@ -379,12 +379,27 @@ export class MovieClip {
     for (const c of this.children.values()) if (c.isMask && depth > c.depth && depth <= c.clipDepth) return c.el;
     return this.el;
   }
-  // keep SVG order by depth, routing masked children into their mask group
+  // keep SVG order by depth, routing masked children into their mask group. Only nodes that are
+  // actually out of place get moved: detaching and re-attaching an element under the mouse makes
+  // the browser drop the click and skip mouseleave.
   reorder() {
     const list = [...this.children.values()].sort((a, b) => a.depth - b.depth);
+    const wanted = new Map();   // container -> [elements in order]
     for (const c of list) {
       const container = c.isMask ? this.el : this.containerFor(c.depth);
-      if (c.el.parentNode !== container || c.el.nextSibling !== null) container.appendChild(c.el);
+      if (!wanted.has(container)) wanted.set(container, []);
+      wanted.get(container).push(c.el);
+    }
+    for (const [container, els] of wanted) {
+      const mine = new Set(els);
+      const current = [...container.childNodes].filter(n => mine.has(n));
+      for (let i = 0; i < els.length; i++) {
+        if (current[i] === els[i]) continue;
+        container.insertBefore(els[i], current[i] || null);
+        const j = current.indexOf(els[i]);
+        if (j >= 0) current.splice(j, 1);
+        current.splice(i, 0, els[i]);
+      }
     }
   }
 
