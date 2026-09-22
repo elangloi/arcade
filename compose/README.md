@@ -16,6 +16,27 @@ ARCADE_HOST=user@other-host compose/deploy.sh
 
 The server (`elizabeth@192.168.1.179`, Ubuntu 24.04, x86_64) only has Docker + Compose; nothing is built there. `deploy.sh` builds the images locally for `linux/amd64`, rsyncs this folder to `~/arcade/compose/` on the server, streams the images in with `docker save | ssh docker load` (there is no registry), and runs `docker compose up -d --no-build`. Rerun it after changing a game, the nginx config, or the front end.
 
+### Letting friends in from outside (Tailscale Funnel)
+
+The stack can join your Tailscale network as a node called `arcade` and publish itself at
+`https://arcade.<your-tailnet>.ts.net/` — HTTPS, no port forwarding, nothing installed on the
+server beyond Docker. It's the `tailscale` service behind the `public` profile:
+
+1. Sign in at <https://login.tailscale.com> (creates your tailnet), then: Settings → Keys → generate
+   an auth key; DNS → enable HTTPS certificates.
+2. `cp compose/.env.example compose/.env` and put the key in `TS_AUTHKEY` (`COMPOSE_PROFILES=public`
+   is already set there). `.env` is git-ignored; `deploy.sh` copies it to the server.
+3. `compose/deploy.sh` (or locally `docker compose up -d`). On first start the container asks the
+   admin console to allow Funnel — `docker compose logs tailscale` prints the link — approve it once.
+4. Send the URL. Anyone with it can play; it's a public link, so treat it like one.
+
+`tailscale/serve.json` is the serve/funnel config (port 443 → the nginx container). The node's state
+lives in the `tailscale-state` volume so its identity survives redeploys. To stop publishing: remove
+`COMPOSE_PROFILES` from `.env` and `docker compose --profile public down tailscale`.
+
+For a private alternative (friend installs Tailscale, you share the machine with them from the admin
+console) drop the `AllowFunnel` block from `serve.json`; the same URL then only works inside the tailnet.
+
 First-time server setup: `curl -fsSL https://get.docker.com | sudo sh && sudo usermod -aG docker $USER`, then log back in.
 
 | Path | Goes to |
