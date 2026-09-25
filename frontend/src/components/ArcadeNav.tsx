@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { ChevronDown, Gamepad2, Swords, Users } from 'lucide-react'
+import { ChevronDown, Gamepad2, Gift, Swords, Users } from 'lucide-react'
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator,
   DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger,
@@ -15,6 +15,7 @@ function crumbs(pathname: string): { label: string; to: string }[] {
   const [, section, slug, sub] = pathname.split('/')
   if (section === 'single') out.push({ label: 'Single player', to: '/single' })
   if (section === 'multiplayer') out.push({ label: 'Multiplayer', to: '/multiplayer' })
+  if (section === 'prizes') out.push({ label: 'Prize counter', to: '/prizes' })
   const g = GAMES.find(x => x.mode === (section === 'single' ? 'single' : 'multi') && x.slug === slug)
   if (g) out.push({ label: g.subtitle ? `${g.title} ${g.subtitle}` : g.title, to: routeFor(g) })
   if (g && sub === 'play') out.push({ label: 'Fight', to: pathname })
@@ -90,8 +91,12 @@ export function ArcadeNav() {
           </Link>
         )}
 
-        {/* tickets won this visit (lib/tickets.ts); tokens live in the cup on the left rail */}
+        {/* your tickets (lib/tickets.ts, kept in localStorage); tokens live in the pot on the left rail */}
         <TicketCounter />
+
+        <Link to="/prizes" className="flex h-9 shrink-0 items-center gap-1.5 rounded-full bg-arcade-navy-deep px-3 text-sm font-bold uppercase tracking-[.08em] text-arcade-yellow shadow-[inset_0_-3px_0_#0d0f30] outline-none transition-colors hover:bg-arcade-ink focus-visible:ring-3 focus-visible:ring-arcade-yellow/60">
+          <Gift className="size-4 text-arcade-pink" /><span className="hidden sm:inline">Prizes</span><span className="sr-only sm:hidden">Prize counter</span>
+        </Link>
       </div>
     </header>
   )

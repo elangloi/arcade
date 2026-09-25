@@ -1,5 +1,5 @@
-// Tickets: what the machines pay out when a round ends. Kept in memory for this tab only — a reload
-// starts you at zero. (Persisting them is the same move as coins: a server-side ledger.)
+// Tickets: what the machines pay out when a round ends. Kept in localStorage, so they're per browser
+// and survive a reload. Nobody's guarding them — editing localStorage buys you prizes, and that's fine.
 //
 // Games don't decide their own payout. They report what happened (`arcade:round` over the frame
 // bridge, see bridge.ts) and `ticketsFor` below turns that into tickets, so every rule is here.
@@ -47,22 +47,34 @@ export function ticketsFor(r: RoundResult): Payout {
   }
 }
 
-type Listener = (total: number, last: Payout) => void
+type Listener = (total: number, last: Payout) => void   // last.tickets < 0 for a spend
 
-class SessionTickets {
-  private total = 0
+const KEY = 'arcade.tickets.v1'
+
+class Tickets {
+  private total = (() => { try { return Math.max(0, Math.floor(Number(localStorage.getItem(KEY)) || 0)) } catch { return 0 } })()
+  private save() { try { localStorage.setItem(KEY, String(this.total)) } catch { /* private mode etc. */ } }
   private listeners = new Set<Listener>()
   balance() { return this.total }
   award(p: Payout) {
     if (!(p.tickets > 0)) return this.total
     this.total += Math.floor(p.tickets)
+    this.save()
     for (const fn of this.listeners) fn(this.total, p)
     return this.total
+  }
+  // Trading tickets in at the prize counter. False (and nothing spent) when the balance can't cover it.
+  spend(amount: number, reason: string) {
+    if (!(amount > 0) || amount > this.total) return false
+    this.total -= Math.floor(amount)
+    this.save()
+    for (const fn of this.listeners) fn(this.total, { game: 'prizes', tickets: -Math.floor(amount), reason })
+    return true
   }
   subscribe(fn: Listener) { this.listeners.add(fn); return () => { this.listeners.delete(fn) } }
 }
 
-export const tickets = new SessionTickets()
+export const tickets = new Tickets()
 
 // Runs the rules and credits the result. Unknown games (or malformed reports) pay nothing.
 export function awardRound(r: RoundResult): Payout | null {
