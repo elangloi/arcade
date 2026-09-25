@@ -1,17 +1,20 @@
 // A cabinet, playing: the game's own page inside a bezel, with the controls line under it.
-// The frame talks to the shell through lib/bridge.ts (navigation, the 2P HUD, and coins later).
+// The frame talks to the shell through lib/bridge.ts (navigation, the 2P HUD, round results for
+// tickets); a cabinet that can't talk gets a watcher instead (lib/watchers.ts, keyed by `watch`).
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { installBridge, type BridgeNav, type Hud } from '@/lib/bridge'
+import { watchRounds } from '@/lib/watchers'
 
 const NAV_ROUTES: Record<BridgeNav, string> = { home: '/', single: '/single', multiplayer: '/multiplayer', lobby: '/multiplayer/battleblitz' }
 
-export function GameFrame({ src, title, help, aspect = 1.45 }: { src: string; title: string; help?: string; aspect?: number }) {
+export function GameFrame({ src, title, help, aspect = 1.45, watch }: { src: string; title: string; help?: string; aspect?: number; watch?: string }) {
   const ref = useRef<HTMLIFrameElement>(null)
   const navigate = useNavigate()
   const [hud, setHud] = useState<Hud | null>(null)
   useEffect(() => installBridge(() => ref.current, { onNavigate: to => navigate(NAV_ROUTES[to] || '/'), onHud: setHud }), [navigate])
   useEffect(() => { ref.current?.focus() }, [src])
+  useEffect(() => (watch ? watchRounds(watch, ref.current) : undefined), [watch, src])
   return (
     <div className="relative z-10 flex w-full flex-col items-center gap-4">
       <div className="frame w-full max-w-5xl" style={{ aspectRatio: String(aspect) }}>

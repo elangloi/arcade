@@ -467,6 +467,11 @@ function onResult(r) {
   mp.phase = 'ended';
   hideModal('wait'); hideModal('away');
   const won = r.winner && r.winner === mp.side;
+  // the arcade shell pays out tickets for the match (frontend/src/lib/tickets.ts)
+  if (mp.inShell && mp.paidMatch !== mp.matchId) {
+    mp.paidMatch = mp.matchId;
+    window.parent.postMessage({ type: 'arcade:round', game: 'battleblitz-2p', won: !!won, reason: r.reason, draw: !r.winner }, location.origin);
+  }
   const title = r.reason === 'desync' ? 'Out of sync' : r.reason === 'forfeit' ? (won ? 'Win by forfeit' : 'Forfeit') : won ? 'You win!' : r.winner ? 'You lose' : 'Draw';
   const body = r.reason === 'desync'
     ? `The two games drifted apart at frame ${r.frame ?? '?'}, so this one doesn't count. (Both browsers should be the same engine for best results.)`

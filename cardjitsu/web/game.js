@@ -393,6 +393,8 @@ export async function boot(svgEl) {
     }
     const beltLine = progress.belt > before ? T('help_award_belt_earned').replace('%0', 'a ' + BELT_NAMES[progress.belt]) : '';
     g.playing = false;
+    // the arcade shell pays out tickets for the match (frontend/src/lib/tickets.ts)
+    if (window.parent !== window) window.parent.postMessage({ type: 'arcade:round', game: 'cardjitsu', won, beltUp: progress.belt > before }, location.origin);
     if (onGameOver) onGameOver({ won, belt: progress.belt, pct: progress.pct, beltLine, belts: BELT_NAMES });
   }
 

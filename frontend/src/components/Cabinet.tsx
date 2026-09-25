@@ -1,5 +1,9 @@
+import { useRef, type MouseEvent } from 'react'
 import { Link } from 'react-router-dom'
+import { useDrop } from 'react-dnd'
 import { routeFor, type ArtKind, type Game } from '@/lib/games'
+import { TOKEN, useTokens } from '@/lib/tokens'
+import { cn } from '@/lib/utils'
 
 function Art({ kind }: { kind: ArtKind }) {
   switch (kind) {
@@ -24,10 +28,25 @@ function Art({ kind }: { kind: ArtKind }) {
   }
 }
 
+// A machine takes a token either way: click it (a token flies over from the cup) or drop one on it.
+// Either way the token goes in the coin slot first and the game starts once it lands.
 export function Cabinet({ game }: { game: Game }) {
   const twoSticks = game.mode === 'multi'
+  const to = routeFor(game)
+  const ref = useRef<HTMLAnchorElement | null>(null)
+  const { insert } = useTokens()
+  const [{ armed, over }, drop] = useDrop(() => ({
+    accept: TOKEN,
+    drop: (_item, m) => { if (ref.current) insert({ cabinet: ref.current, to, from: m.getClientOffset() ?? undefined }) },
+    collect: m => ({ armed: m.canDrop(), over: m.isOver() }),
+  }), [insert, to])
+  const onClick = (e: MouseEvent) => {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || !ref.current) return   // new tab etc.: just a link
+    e.preventDefault()
+    insert({ cabinet: ref.current, to })
+  }
   return (
-    <Link className="cab" to={routeFor(game)}>
+    <Link ref={node => { ref.current = node; drop(node) }} className={cn('cab', armed && 'armed', over && 'over')} to={to} onClick={onClick}>
       <div className="body">
         <div className="marquee">{game.title}{game.subtitle && <><br />{game.mode === 'multi' ? <small>{game.subtitle}</small> : game.subtitle}</>}</div>
         <div className="screen"><Art kind={game.art} /></div>

@@ -5,8 +5,8 @@ import {
   DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { GAMES, routeFor, singlePlayer, multiplayer, type Game } from '@/lib/games'
-import { useCoins } from '@/lib/coins'
 import { Star } from './Deco'
+import { TicketCounter } from './TicketCounter'
 
 // Where are we? Turns the route into breadcrumbs for the bar.
 function crumbs(pathname: string): { label: string; to: string }[] {
@@ -34,7 +34,6 @@ function GameItem({ g }: { g: Game }) {
 export function ArcadeNav() {
   const { pathname } = useLocation()
   const trail = crumbs(pathname)
-  const balance = useCoins()
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 h-12 bg-arcade-pink text-arcade-ink shadow-[0_4px_0_var(--color-arcade-pink-dark),0_8px_18px_rgba(0,0,0,.35)]">
@@ -85,10 +84,8 @@ export function ArcadeNav() {
           </Link>
         )}
 
-        {/* the wallet: nobody earns coins yet, but the slot is wired (see lib/coins.ts) */}
-        <span title="Coins — coming soon" className="flex items-center gap-1.5 rounded-full bg-arcade-navy-deep px-3 py-1.5 text-xs font-bold tracking-[.08em] text-arcade-yellow shadow-[inset_0_-3px_0_#0d0f30]">
-          <span className="coin size-3 blink" /> {balance}
-        </span>
+        {/* tickets won this visit (lib/tickets.ts); tokens live in the cup on the left rail */}
+        <TicketCounter />
       </div>
     </header>
   )

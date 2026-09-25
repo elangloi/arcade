@@ -24,10 +24,17 @@ export async function boot(svgEl) {
   P.onFrame('main', 1, () => { main.gotoAndStop('Play'); });            // preloader: nothing to load
   P.onFrame('main', 10, () => main.stop());                              // title
   P.onFrame('main', 20, () => main.stop());                              // how to play
-  P.onFrame('main', 30, () => { main.score = 0; showScore(); });         // init (plays on to 'game')
+  // the arcade shell pays out tickets when a game ends (frontend/src/lib/tickets.ts)
+  let reported = false;
+  const reportRound = () => {
+    if (reported || window.parent === window) return;
+    reported = true;
+    window.parent.postMessage({ type: 'arcade:round', game: 'sandwichstacker', score: Number(main.score) || 0 }, location.origin);
+  };
+  P.onFrame('main', 30, () => { main.score = 0; showScore(); reported = false; });   // init (plays on to 'game')
   P.onFrame('main', 40, () => { main.stop(); showScore(); });            // game
   P.onFrame('main', 50, () => main.stop());                              // next level
-  P.onFrame('main', 60, () => main.stop());                              // game over
+  P.onFrame('main', 60, () => { main.stop(); reportRound(); });          // game over
   P.onFrame('main', 70, () => main.gotoAndStop('Play'));                 // score submission (Disney service) -> title
 
   // title buttons

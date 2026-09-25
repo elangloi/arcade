@@ -4,10 +4,12 @@
 //   game -> shell   arcade:ready                       the game booted (shell may reply with the balance)
 //                   arcade:navigate  { to }            'lobby' | 'home' | 'single' | 'multiplayer'
 //                   arcade:hud { me, opp, status, rtt, help }   text for the shell to show under the frame
+//                   arcade:round { game, … }           a round ended; the facts, not a payout (see tickets.ts)
 //                   arcade:coins:earn  { game, amount, reason }   (foundation — not credited from games yet)
 //                   arcade:coins:spend { game, amount, reason }
 //   shell -> game   arcade:coins:balance { balance }
 import { coins } from './coins'
+import { awardRound, type RoundResult } from './tickets'
 
 export type BridgeNav = 'lobby' | 'home' | 'single' | 'multiplayer'
 export interface BridgeMessage { type: string; [k: string]: unknown }
@@ -34,6 +36,9 @@ export function installBridge(frame: () => HTMLIFrameElement | null, { onNavigat
         break
       case 'arcade:hud':
         onHud?.(m as unknown as Hud)
+        break
+      case 'arcade:round':
+        awardRound(m as unknown as RoundResult)
         break
       case 'arcade:coins:earn':
       case 'arcade:coins:spend': {

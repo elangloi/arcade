@@ -419,6 +419,9 @@ export async function boot(svgEl) {
     for (let t = 1001; t < 1101; t++) if (main['droppedtopping' + t]) main['droppedtopping' + t].removeMovieClip();
     if (g.mySound) g.mySound.stop();
     dbg('game over', main._currentframe, 'made', g.pizzasmade, 'coins', g.coins);
+    // the arcade shell pays out tickets for the shift (frontend/src/lib/tickets.ts)
+    const ending = !(g.failures < 5) ? (g.pizzasmade > 1 ? 'lose' : 'lame') : (g.pizzasmade < 40 ? 'win' : 'perfect');
+    if (window.parent !== window) window.parent.postMessage({ type: 'arcade:round', game: 'pizzatron', pizzas: g.pizzasmade, ending }, location.origin);
   };
   for (const f of [4, 5, 6, 7]) P.onFrame('main', f, results);
 
