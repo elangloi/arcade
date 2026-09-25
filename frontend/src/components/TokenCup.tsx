@@ -10,45 +10,66 @@ export function Token({ className, style }: { className?: string; style?: CSSPro
   return <span className={cn('token', className)} style={style}><Star className="token-star" /></span>
 }
 
-// The pile showing over the rim (drawn, not draggable) — the live token sits on top of it.
-const PILE = [
-  { x: 36, y: 47, r: -18 }, { x: 58, y: 42, r: 10 }, { x: 82, y: 46, r: -6 }, { x: 104, y: 41, r: 16 }, { x: 124, y: 47, r: -12 },
-  { x: 48, y: 36, r: 22 }, { x: 72, y: 33, r: -14 }, { x: 96, y: 32, r: 8 }, { x: 116, y: 37, r: -20 },
+// The token pot: a round pink pot with a happy face, heaped with coins (each with a little face of
+// its own). Flat arcade palette, shaded the way the cabinets are — a darker pink on the far side.
+const INK = '#2b2450', PINK = '#ff8fcf', PINK_DARK = '#e86fb3', PINK_LIGHT = '#ffc6e6', RED = '#ff5a72'
+const YELLOW = '#fbf57a', YELLOW_DARK = '#e5c94d'
+
+// the heap: a back row and a front row, all inside the rim's opening (x 30..130 — the rim itself is
+// 20..140 and nothing hangs over it). The live token sits on top, see TokenCup.
+const HEAP = [
+  { x: 53, y: 41 }, { x: 71, y: 37 }, { x: 89, y: 37 }, { x: 107, y: 41 },
+  { x: 44, y: 53 }, { x: 62, y: 51 }, { x: 80, y: 50 }, { x: 98, y: 51 }, { x: 116, y: 53 },
 ]
+
+function HappyCoin({ x, y }: { x: number; y: number }) {
+  return (
+    <g transform={`translate(${x} ${y})`}>
+      <circle r="14" fill={YELLOW} stroke={YELLOW_DARK} strokeWidth="3" />
+      <circle r="9.5" fill="none" stroke={YELLOW_DARK} strokeWidth="1.2" opacity=".6" />
+      <circle cx="-4" cy="-1.5" r="1.6" fill={INK} /><circle cx="4" cy="-1.5" r="1.6" fill={INK} />
+      <path d="M-3 2.5 Q0 5.5 3 2.5" fill="none" stroke={INK} strokeWidth="1.4" strokeLinecap="round" />
+      <ellipse cx="-7" cy="2" rx="2" ry="1.2" fill={RED} opacity=".5" /><ellipse cx="7" cy="2" rx="2" ry="1.2" fill={RED} opacity=".5" />
+    </g>
+  )
+}
+
+const BODY = 'M32 70 C4 86 6 132 50 140 L110 140 C154 132 156 86 128 70 Z'
 
 function CupArt() {
   return (
-    <svg viewBox="0 0 160 170" className="block w-full" aria-hidden="true">
-      <defs>
-        <clipPath id="cup-body"><path d="M18 52 H142 L126 164 Q80 172 34 164 Z" /></clipPath>
-        <radialGradient id="tok" cx="40%" cy="35%" r="70%"><stop offset="0" stopColor="#fffbc2" /><stop offset=".55" stopColor="#fbf57a" /><stop offset="1" stopColor="#e5c94d" /></radialGradient>
-      </defs>
-      {/* the opening, then the heap of tokens in it */}
-      <ellipse cx="80" cy="52" rx="62" ry="12" fill="#2b2450" />
-      {PILE.map((t, i) => (
-        <g key={i} transform={`translate(${t.x} ${t.y}) rotate(${t.r})`}>
-          <ellipse rx="15" ry="9" fill="#e5c94d" transform="translate(0 2.5)" />
-          <ellipse rx="15" ry="9" fill="url(#tok)" stroke="#d4b43c" strokeWidth="1.5" />
-          <ellipse rx="10" ry="5.5" fill="none" stroke="#e5c94d" strokeWidth="1.5" />
-        </g>
-      ))}
-      {/* the cup: pink with candy stripes and a navy label */}
-      <path d="M18 52 H142 L126 164 Q80 172 34 164 Z" fill="#ff8fcf" />
-      <g clipPath="url(#cup-body)" fill="#e86fb3">
-        {[-60, -30, 0, 30, 60].map(o => <path key={o} d={`M${80 + o - 7} 50 L${80 + o * 0.8 - 5} 172 H${80 + o * 0.8 + 5} L${80 + o + 7} 50 Z`} />)}
-        <path d="M0 150 H160 V172 H0 Z" fill="#e86fb3" />
+    <svg viewBox="0 0 160 152" className="block w-full overflow-visible" aria-hidden="true">
+      <defs><clipPath id="pot-body"><path d={BODY} /></clipPath></defs>
+      <ellipse cx="80" cy="147" rx="54" ry="4" fill="#151747" opacity=".7" />
+      {/* feet */}
+      <ellipse cx="50" cy="140" rx="10" ry="7" fill={PINK_DARK} />
+      <ellipse cx="110" cy="140" rx="10" ry="7" fill={PINK_DARK} />
+      {HEAP.map((c, i) => <HappyCoin key={i} {...c} />)}
+      {/* the body: dark pink, with the lit side laid over it so a crescent of shade is left bottom-right */}
+      <path d={BODY} fill={PINK_DARK} />
+      <ellipse cx="72" cy="96" rx="68" ry="46" fill={PINK} clipPath="url(#pot-body)" />
+      <path d="M22 90 Q18 102 21 114" fill="none" stroke={PINK_LIGHT} strokeWidth="5" strokeLinecap="round" />
+      <circle cx="23" cy="123" r="2.6" fill={PINK_LIGHT} />
+      {/* the face */}
+      <g className="pot-eyes">
+        <circle cx="61" cy="100" r="5.5" fill={INK} /><circle cx="99" cy="100" r="5.5" fill={INK} />
+        <circle cx="63" cy="98" r="1.9" fill="#fff" /><circle cx="101" cy="98" r="1.9" fill="#fff" />
       </g>
-      <rect x="34" y="92" width="92" height="30" rx="9" fill="#151747" />
-      <text x="80" y="113" textAnchor="middle" fontSize="17" fontWeight="700" letterSpacing="2" fill="#fbf57a" fontFamily="Fredoka, ui-rounded, sans-serif">TOKENS</text>
-      {/* the front lip of the rim goes over the heap */}
-      <path d="M17 52 A63 12 0 0 0 143 52" fill="none" stroke="#e86fb3" strokeWidth="7" strokeLinecap="round" />
-      <path d="M17 50 A63 12 0 0 0 143 50" fill="none" stroke="#ffc2e4" strokeWidth="2" strokeLinecap="round" opacity=".7" />
+      <ellipse cx="50" cy="111" rx="6.5" ry="3.8" fill={RED} opacity=".55" />
+      <ellipse cx="110" cy="111" rx="6.5" ry="3.8" fill={RED} opacity=".55" />
+      <path d="M72 107 Q80 121 88 107 Z" fill={INK} stroke={INK} strokeWidth="2" strokeLinejoin="round" />
+      <ellipse cx="80" cy="115.5" rx="4.5" ry="2.6" fill={RED} />
+      {/* the rim, over the bottom of the heap */}
+      <rect x="20" y="58" width="120" height="15" rx="7.5" fill={PINK} />
+      <rect x="20" y="66" width="120" height="7" rx="3.5" fill={PINK_DARK} />
+      <rect x="20" y="58" width="120" height="11" rx="5.5" fill={PINK} />
+      <path d="M28 61.5 H112" stroke={PINK_LIGHT} strokeWidth="2.5" strokeLinecap="round" />
     </svg>
   )
 }
 
 export function TokenCup() {
-  const { cupRef, played, putBack } = useTokens()
+  const { cupRef, putBack } = useTokens()
   const [{ dragging }, drag, preview] = useDrag(() => ({
     type: TOKEN,
     item: {},
@@ -73,9 +94,6 @@ export function TokenCup() {
       </div>
       <p className="token-cup-caption mt-3 text-center text-[.68rem] font-bold uppercase leading-snug tracking-[.1em] text-arcade-pink">
         drag one to a machine<br /><span className="opacity-70">or click a machine</span>
-      </p>
-      <p className="token-cup-caption mx-auto mt-2 w-fit rounded-full bg-arcade-navy-deep px-3 py-1 text-[.68rem] font-bold uppercase tracking-[.1em] text-arcade-yellow shadow-[inset_0_-2px_0_#0d0f30]">
-        free play · {played} in
       </p>
     </div>
   )

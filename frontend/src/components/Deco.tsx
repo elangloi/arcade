@@ -1,5 +1,5 @@
 // Little decorations shared by the pages: the star, the heart, the claw, floating sprinkles.
-import type { SVGProps } from 'react'
+import type { CSSProperties, SVGProps } from 'react'
 
 export const Star = (p: SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" aria-hidden="true" {...p}><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z" fill="currentColor" /></svg>
@@ -21,14 +21,30 @@ export function Claw() {
   )
 }
 
+// The drifting stars and hearts behind the pages. Kept right of ~18vw so none of them sits on the
+// left rail (the claw, the marquee, the token pot).
+const SPRINKLES: { kind: 'star' | 'heart'; color: string; pos: CSSProperties; size: number; delay: number }[] = [
+  { kind: 'star', color: 'text-arcade-yellow', pos: { left: '22vw', top: '14vh' }, size: 26, delay: -2 },
+  { kind: 'heart', color: 'text-arcade-pink', pos: { right: '8vw', top: '24vh' }, size: 30, delay: -4 },
+  { kind: 'heart', color: 'text-arcade-red', pos: { left: '38vw', bottom: '8vh' }, size: 28, delay: -1 },
+  { kind: 'star', color: 'text-arcade-pink', pos: { right: '14vw', bottom: '16vh' }, size: 30, delay: -3 },
+  { kind: 'star', color: 'text-arcade-blue', pos: { left: '48vw', top: '32vh' }, size: 18, delay: -5 },
+  { kind: 'heart', color: 'text-arcade-yellow', pos: { right: '28vw', top: '9vh' }, size: 20, delay: -2.5 },
+  { kind: 'star', color: 'text-arcade-yellow', pos: { right: '4vw', top: '58vh' }, size: 22, delay: -1.5 },
+  { kind: 'heart', color: 'text-arcade-pink', pos: { left: '27vw', top: '56vh' }, size: 22, delay: -3.5 },
+  { kind: 'star', color: 'text-arcade-red', pos: { left: '64vw', bottom: '28vh' }, size: 16, delay: -0.5 },
+  { kind: 'heart', color: 'text-arcade-blue', pos: { right: '38vw', bottom: '5vh' }, size: 18, delay: -4.5 },
+  { kind: 'star', color: 'text-arcade-pink', pos: { left: '58vw', top: '6vh' }, size: 14, delay: -2.2 },
+  { kind: 'heart', color: 'text-arcade-red', pos: { right: '20vw', top: '42vh' }, size: 16, delay: -5.5 },
+]
+
 export function Sprinkles() {
-  const cls = 'float pointer-events-none fixed size-[30px] opacity-90'
   return (
     <>
-      <Star className={`${cls} text-arcade-yellow`} style={{ left: '6vw', top: '18vh', animationDelay: '-2s' }} />
-      <Heart className={`${cls} text-arcade-pink`} style={{ right: '8vw', top: '24vh', animationDelay: '-4s' }} />
-      <Heart className={`${cls} text-arcade-red`} style={{ left: '12vw', bottom: '12vh', animationDelay: '-1s' }} />
-      <Star className={`${cls} text-arcade-pink`} style={{ right: '14vw', bottom: '16vh', animationDelay: '-3s' }} />
+      {SPRINKLES.map((p, i) => {
+        const Shape = p.kind === 'star' ? Star : Heart
+        return <Shape key={i} className={`float pointer-events-none fixed opacity-90 ${p.color}`} style={{ ...p.pos, width: p.size, height: p.size, animationDelay: `${p.delay}s` }} />
+      })}
     </>
   )
 }

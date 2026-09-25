@@ -6,10 +6,6 @@ export default function Play() {
   const { slug } = useParams()
   const g = findGame('single', slug)
   if (!g) return <Navigate to="/single" replace />
-  return (
-    <>
-      <h1 className="arcade-title relative z-10 mb-5 text-3xl">{g.title}{g.subtitle ? ` · ${g.subtitle}` : ''}</h1>
-      <GameFrame src={g.src} title={`${g.title} ${g.subtitle ?? ''}`} help={g.help} aspect={g.aspect} watch={`single/${g.slug}`} />
-    </>
-  )
+  // no page title: the breadcrumbs already name the game, and the frame gets the height
+  return <GameFrame game={g} title={`${g.title} ${g.subtitle ?? ''}`} watch={`single/${g.slug}`} />
 }

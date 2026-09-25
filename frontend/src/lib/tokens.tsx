@@ -1,10 +1,10 @@
 // Tokens: the cup on the left rail. Put a token in a machine (click the machine, or drag a token onto
 // it) and it flies out of the cup, drops into the coin slot, and the machine starts.
 //
-// Free play for now: the cup never runs out, it just counts what you've spent this visit. The
-// drag-and-drop half is react-dnd (provider in App.tsx); this file is the part both halves share —
-// the flight animation, the clink, and the navigation once the token lands.
-import { createContext, useCallback, useContext, useMemo, useRef, useState, type ReactNode, type RefObject } from 'react'
+// Free play for now: the cup never runs out. The drag-and-drop half is react-dnd (provider in
+// App.tsx); this file is the part both halves share — the flight animation, the clink, and the
+// navigation once the token lands.
+import { createContext, useCallback, useContext, useMemo, useRef, type ReactNode, type RefObject } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export const TOKEN = 'token'   // react-dnd item type
@@ -13,7 +13,6 @@ type Point = { x: number; y: number }
 
 interface TokenApi {
   cupRef: RefObject<HTMLElement | null>   // the top token in the cup: where clicked tokens fly from
-  played: number
   insert(o: { cabinet: HTMLElement; to: string; from?: Point }): void
   putBack(from: Point | null): void        // a drag that missed every machine
 }
@@ -91,7 +90,6 @@ function clink() {
 export function TokenProvider({ children }: { children: ReactNode }) {
   const navigate = useNavigate()
   const cupRef = useRef<HTMLElement | null>(null)
-  const [played, setPlayed] = useState(0)
   const busy = useRef(false)
 
   const insert = useCallback<TokenApi['insert']>(({ cabinet, to, from }) => {
@@ -99,7 +97,6 @@ export function TokenProvider({ children }: { children: ReactNode }) {
     const slot = cabinet.querySelector('.coinslot')
     const start = from ?? centre(cupRef.current)
     const r = slot?.getBoundingClientRect()
-    setPlayed(n => n + 1)
     if (!r || !start || reducedMotion()) { clink(); navigate(to); return }
     busy.current = true
     cabinet.classList.add('inserting')
@@ -119,6 +116,6 @@ export function TokenProvider({ children }: { children: ReactNode }) {
     fly(from, home, 'cup')
   }, [])
 
-  const api = useMemo(() => ({ cupRef, played, insert, putBack }), [played, insert, putBack])
+  const api = useMemo(() => ({ cupRef, insert, putBack }), [insert, putBack])
   return <Ctx.Provider value={api}>{children}</Ctx.Provider>
 }

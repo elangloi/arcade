@@ -1,12 +1,13 @@
 import { Cabinet, CabinetGrid } from '@/components/Cabinet'
-import { PageTitle, Sprinkles } from '@/components/Deco'
+import { Sprinkles } from '@/components/Deco'
+import { RailSection, RailTitle } from '@/components/Rail'
 import { singlePlayer } from '@/lib/games'
 
 export default function SinglePlayer() {
   return (
     <>
       <Sprinkles />
-      <PageTitle title="Single player" sub="four cabinets · no waiting" />
+      <RailSection><RailTitle>Single player</RailTitle></RailSection>
       <CabinetGrid>{singlePlayer().map(g => <Cabinet key={g.slug} game={g} />)}</CabinetGrid>
     </>
   )

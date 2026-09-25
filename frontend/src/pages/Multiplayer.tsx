@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Cabinet, CabinetGrid, ComingSoon } from '@/components/Cabinet'
-import { PageTitle, Sprinkles } from '@/components/Deco'
+import { Sprinkles } from '@/components/Deco'
+import { RailSection, RailTitle } from '@/components/Rail'
 import { multiplayer } from '@/lib/games'
 import { stats } from '@/lib/mp'
 
@@ -15,10 +16,12 @@ export default function Multiplayer() {
   return (
     <>
       <Sprinkles />
-      <PageTitle title="Multiplayer" sub="two players · one cabinet each" />
-      <p className="relative z-10 -mt-4 mb-8 rounded-full bg-arcade-navy-deep px-3 py-1 text-xs font-bold uppercase tracking-[.08em] text-arcade-green">
-        <span className="mr-1.5 inline-block size-2 rounded-full bg-arcade-green shadow-[0_0_8px_var(--color-arcade-green)] blink" />{line}
-      </p>
+      <RailSection>
+        <RailTitle>Multiplayer</RailTitle>
+        <p className="rounded-2xl bg-arcade-navy-deep px-3 py-1.5 text-center text-[.68rem] font-bold uppercase leading-snug tracking-[.08em] whitespace-pre-line text-arcade-green">
+          <span className="mr-1.5 inline-block size-2 rounded-full bg-arcade-green shadow-[0_0_8px_var(--color-arcade-green)] blink" />{line.replaceAll(' · ', '\n')}
+        </p>
+      </RailSection>
       <CabinetGrid>{multiplayer().map(g => <Cabinet key={g.slug} game={g} />)}<ComingSoon /></CabinetGrid>
     </>
   )

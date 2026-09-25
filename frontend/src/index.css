@@ -214,15 +214,36 @@
 .token-grab .token { transition: transform .15s cubic-bezier(.34,1.56,.64,1); }
 .token-grab:hover .token { transform: scale(1.1) rotate(-10deg); }
 
-/* phones: the cup is a small floating cup in the corner; from md up it's the sticky left rail */
-.token-rail { position: fixed; left: 8px; bottom: 8px; z-index: 40; width: 96px; height: 110px; }
-.token-rail .token-cup { transform: scale(.6); transform-origin: 0 0; }
-.token-rail .token-cup-caption { display: none; }
+/* the left rail (App.tsx): on phones it's just a small cup floating in the corner; from md up it's a
+   column beside the machines with the claw + marquee stuck to the top and the cup stuck to the bottom */
+.arcade-rail { display: contents; }
+.rail-head { display: none; }
+.rail-cup { position: fixed; left: 8px; bottom: 8px; z-index: 40; width: 96px; height: 92px; }
+.rail-cup .token-cup { transform: scale(.6); transform-origin: 0 0; }
+.rail-cup .token-cup-caption { display: none; }
 @media (min-width: 48rem) {
-  .token-rail { position: static; width: 160px; height: auto; flex-shrink: 0; }
-  .token-rail .token-cup { transform: none; }
-  .token-rail .token-cup-caption { display: block; }
+  .arcade-rail { display: flex; flex-direction: column; justify-content: space-between; gap: 2rem; width: 160px; flex-shrink: 0; }
+  .rail-head { display: block; position: sticky; top: 4.5rem; }
+  .rail-cup { position: sticky; bottom: 1.5rem; z-index: auto; width: auto; height: auto; }
+  .rail-cup .token-cup { transform: none; }
+  .rail-cup .token-cup-caption { display: block; }
 }
+
+/* the rail beside a game that's playing: how-to-play, from md up (phones get it under the frame) */
+.play-rail { display: none; }
+@media (min-width: 48rem) { .play-rail { display: block; width: 13rem; flex-shrink: 0; } }
+
+/* keycaps in the how-to-play card: the cabinets' yellow buttons; mouse actions and long keys in pink */
+.keycap {
+  display: inline-flex; align-items: center; justify-content: center; gap: 3px; min-width: 1.75rem; height: 1.75rem; padding: 0 6px;
+  border-radius: 8px; background: var(--color-arcade-yellow); color: var(--color-arcade-ink);
+  font: 700 .75rem/1 var(--font-sans); letter-spacing: .02em; box-shadow: 0 3px 0 var(--color-arcade-yellow-dark);
+  translate: 0 -1px;
+}
+.keycap-wide { padding: 0 8px; text-transform: uppercase; font-size: .62rem; letter-spacing: .08em; background: var(--color-arcade-pink); box-shadow: 0 3px 0 var(--color-arcade-pink-dark); }
+
+/* the pot blinks now and then */
+.pot-eyes { transform-box: fill-box; transform-origin: center; animation: pot-blink 4.5s infinite; }
 
 /* a machine with a token on the way: slots light up while you hold one, the target glows, it clunks */
 .cab.armed .coinslot { animation: slot-ready 1s ease-in-out infinite; }
@@ -260,6 +281,7 @@
 @keyframes fall { 0% { transform: translateY(0) rotate(-8deg); opacity: 0; } 8% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translateY(170px) rotate(10deg); opacity: 0; } }
 @keyframes squeeze { 0%, 100% { transform: rotate(-6deg) scaleY(1); } 50% { transform: rotate(4deg) scaleY(.92); } }
 @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+@keyframes pot-blink { 0%, 92%, 100% { transform: none; } 95% { transform: scaleY(.12); } }
 @keyframes token-bob { 0%, 100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-6px) rotate(6deg); } }
 @keyframes slot-ready { 50% { box-shadow: inset 0 3px 0 rgba(0,0,0,.5), 0 0 0 3px rgba(251,245,122,.85), 0 0 16px rgba(251,245,122,.7); } }
 @keyframes clunk { 0% { transform: none; } 35% { transform: translateY(5px) scale(1.012, .985); } 70% { transform: translateY(-2px); } 100% { transform: none; } }

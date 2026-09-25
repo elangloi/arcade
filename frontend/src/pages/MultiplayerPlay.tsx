@@ -11,5 +11,5 @@ export default function MultiplayerPlay() {
   const src = new URL(g.src, location.origin)
   src.searchParams.set('match', match); src.searchParams.set('session', session)
   if (q.has('mute')) src.searchParams.set('mute', '1')
-  return <GameFrame src={src.pathname + src.search} title="Battle Blitz 2P" help={g.help} aspect={3 / 2} />
+  return <GameFrame game={g} src={src.pathname + src.search} title="Battle Blitz 2P" aspect={3 / 2} />
 }
